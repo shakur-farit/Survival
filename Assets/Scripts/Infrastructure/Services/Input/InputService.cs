@@ -10,8 +10,8 @@ namespace Infrastructure.Services.Input
 
 		public abstract Vector2 Axis { get; }
 
-		protected static Vector2 GetSimpleInputAxis() =>
-			new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
+		protected static Vector2 GetSimpleInputAxis() => 
+			new(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
 
 		public bool IsAttackButtonUp() => SimpleInput.GetButton(Button);
 	}
