@@ -1,6 +1,6 @@
-using System;
 using Infrastructure.Services.Input;
 using UnityEngine;
+using Zenject;
 
 namespace Hero
 {
@@ -8,13 +8,12 @@ namespace Hero
 	{
 		public float MovementSpeed;
 
-		private IInputService _inputService;
+		private InputService _inputService;
 		private Camera _camera;
 
-		private void Awake()
-		{
-			_inputService = new MobileInput();
-		}
+		[Inject]
+		private void Construct(InputService inputService) => 
+			_inputService = inputService;
 
 		private void Start() => 
 			_camera = Camera.main;
