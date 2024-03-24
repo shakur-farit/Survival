@@ -12,7 +12,6 @@ namespace Infrastructure.Services.StaticData
 		public void Load()
 		{
 			ForHero = Resources.Load<HeroStaticData>(HeroStaticData);
-			Debug.Log(ForHero);
 		}
 	}
 }
