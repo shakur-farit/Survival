@@ -1,4 +1,5 @@
 using Infrastructure.Services.Input;
+using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -9,14 +10,22 @@ namespace Hero
 		public float MovementSpeed;
 
 		private InputService _inputService;
+		private StaticDataService _staticDataService;
+
 		private Camera _camera;
 
 		[Inject]
-		private void Construct(InputService inputService) => 
+		private void Construct(InputService inputService, StaticDataService staticDataService)
+		{
 			_inputService = inputService;
+			_staticDataService = staticDataService;
+		}
 
-		private void Start() => 
+		private void Start()
+		{
+			MovementSpeed = _staticDataService.ForHero.MovementSpeed;
 			_camera = Camera.main;
+		}
 
 		private void Update()
 		{
