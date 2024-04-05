@@ -1,5 +1,4 @@
 using Infrastructure.Services.Factory;
-using Infrastructure.Services.StaticData;
 using Zenject;
 
 namespace Installers
@@ -8,12 +7,11 @@ namespace Installers
 	{
 		public override void InstallBindings()
 		{
-			RegisterServices();
-			RegisterGameFactory();
+			RegisterFactories();
 		}
 
-		private void RegisterServices() => 
-			Container.Bind<StaticDataService>().AsSingle();
+		private void RegisterFactories() => 
+			RegisterGameFactory();
 
 		private void RegisterGameFactory() => 
 			Container.Bind<GameFactory>().AsSingle();

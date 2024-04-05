@@ -1,5 +1,6 @@
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Input;
+using Infrastructure.Services.StaticData;
 using Zenject;
 
 namespace Installers
@@ -10,6 +11,7 @@ namespace Installers
 		{
 			RegisterInputService();
 			RegisterAssetsProvider();
+			RegisterStaticDataServices();
 		}
 
 		private void RegisterAssetsProvider() => 
@@ -17,5 +19,8 @@ namespace Installers
 
 		private void RegisterInputService() => 
 			Container.Bind<InputService>().AsSingle();
+
+		private void RegisterStaticDataServices() =>
+			Container.Bind<StaticDataService>().AsSingle();
 	}
 }

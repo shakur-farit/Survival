@@ -6,7 +6,6 @@ namespace Infrastructure.States
 	{
 		public void Enter()
 		{
-			Debug.Log("Enter Game");
 		}
 
 		public void Exit()
