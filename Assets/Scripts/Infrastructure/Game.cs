@@ -1,3 +1,5 @@
+using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.Factory;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States;
 
@@ -7,7 +9,7 @@ namespace Infrastructure
 	{
 		public GameStateMachine StateMachine;
 
-		public Game(StaticDataService staticDataService) => 
-			StateMachine = new GameStateMachine(staticDataService);
+		public Game(StaticDataService staticDataService, AssetsProvider assetsProvider, GameFactory gameFactory) => 
+			StateMachine = new GameStateMachine(staticDataService, assetsProvider, gameFactory);
 	}
 }

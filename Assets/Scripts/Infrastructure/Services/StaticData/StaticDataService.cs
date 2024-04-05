@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
 using StaticData;
 using UnityEngine;
 
@@ -5,13 +7,19 @@ namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService
 	{
-		private const string HeroStaticData = "StaticData/Hero Static Data";
+		private readonly AssetsProvider _assetsProvider;
+
+		public StaticDataService(AssetsProvider assetsProvider) => 
+			_assetsProvider = assetsProvider;
+
+		private const string HeroStaticDataAddress = "Hero Static Data";
 
 		public HeroStaticData ForHero { get; private set; }
 
-		public void Load()
-		{
-			ForHero = Resources.Load<HeroStaticData>(HeroStaticData);
-		}
+		public async Task Load() => 
+			ForHero = await _assetsProvider.Load<HeroStaticData>(HeroStaticDataAddress);
+
+		public async Task WarmUp() => 
+			await _assetsProvider.Load<HeroStaticData>(HeroStaticDataAddress);
 	}
 }

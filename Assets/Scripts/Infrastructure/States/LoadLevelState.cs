@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -6,16 +9,20 @@ namespace Infrastructure.States
 	{
 		private readonly GameFactory _gameFactory;
 		private readonly GameStateMachine _gameStateMachine;
+		private readonly AssetsProvider _assertsProvider;
 
-		public LoadLevelState(GameStateMachine gameStateMachine, GameFactory gameFactory)
+		public LoadLevelState(GameStateMachine gameStateMachine, GameFactory gameFactory, AssetsProvider assertsProvider)
 		{
 			_gameStateMachine = gameStateMachine;
 			_gameFactory = gameFactory;
+			_assertsProvider = assertsProvider;
 		}
 
-		public void Enter()
+		public async void Enter()
 		{
-			CreateGameObjects();
+			InitializeAddressables();
+
+			await CreateGameObjects();
 
 			EnterInGameLoopingState();
 		}
@@ -24,17 +31,21 @@ namespace Infrastructure.States
 		{
 		}
 
-		private void CreateGameObjects()
+		private void InitializeAddressables() => 
+			_assertsProvider.Initialize();
+
+		private async Task CreateGameObjects()
 		{
-			CreateHero();
-			CreateHud();
+			await CreateHero();
+			await CreateHud();
+
 		}
 
-		private void CreateHud() => 
-			_gameFactory.CreateHud();
+		private async Task CreateHud() => 
+			await _gameFactory.CreateHud();
 
-		private void CreateHero() => 
-			_gameFactory.CreateHero();
+		private async Task CreateHero() => 
+			await _gameFactory.CreateHero();
 
 		private void EnterInGameLoopingState() => 
 			_gameStateMachine.Enter<GameLoopingState>();

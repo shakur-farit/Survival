@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Infrastructure.Services.StaticData;
 
 namespace Infrastructure.States
@@ -13,20 +14,21 @@ namespace Infrastructure.States
 			_staticDataService = staticDataService;
 		}
 
-		public void Enter()
+		public async void Enter()
 		{
-			LoadStaticData();
-			EnterToGameLoopingState();
+			await LoadStaticData();
+			
+			EnterToLoadLevelState();
 		}
 
 		public void Exit()
 		{
 		}
 
-		private void LoadStaticData() => 
-			_staticDataService.Load();
+		private async Task LoadStaticData() => 
+			await _staticDataService.Load();
 
-		private void EnterToGameLoopingState() => 
+		private void EnterToLoadLevelState() => 
 			_gameStateMachine.Enter<LoadLevelState>();
 	}
 }
