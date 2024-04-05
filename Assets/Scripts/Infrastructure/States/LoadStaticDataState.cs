@@ -27,6 +27,6 @@ namespace Infrastructure.States
 			_staticDataService.Load();
 
 		private void EnterToGameLoopingState() => 
-			_gameStateMachine.Enter<GameLoopingState>();
+			_gameStateMachine.Enter<LoadLevelState>();
 	}
 }
