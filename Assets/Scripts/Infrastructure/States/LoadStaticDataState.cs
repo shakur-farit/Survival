@@ -18,7 +18,7 @@ namespace Infrastructure.States
 		{
 			await LoadStaticData();
 			
-			EnterToLoadLevelState();
+			EnterToLoadProgressState();
 		}
 
 		public void Exit()
@@ -28,7 +28,7 @@ namespace Infrastructure.States
 		private async Task LoadStaticData() => 
 			await _staticDataService.Load();
 
-		private void EnterToLoadLevelState() => 
-			_gameStateMachine.Enter<LoadLevelState>();
+		private void EnterToLoadProgressState() => 
+			_gameStateMachine.Enter<LoadProgressState>();
 	}
 }

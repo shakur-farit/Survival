@@ -1,5 +1,6 @@
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Input;
+using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using Zenject;
 
@@ -12,6 +13,7 @@ namespace Installers
 			RegisterInputService();
 			RegisterAssetsProvider();
 			RegisterStaticDataServices();
+			RegisterPersistentProgressServices();
 		}
 
 		private void RegisterAssetsProvider() => 
@@ -22,5 +24,8 @@ namespace Installers
 
 		private void RegisterStaticDataServices() =>
 			Container.Bind<StaticDataService>().AsSingle();
+
+		private void RegisterPersistentProgressServices() => 
+			Container.Bind<PersistentProgressService>().AsSingle();
 	}
 }

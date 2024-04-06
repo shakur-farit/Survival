@@ -1,11 +1,12 @@
 using Infrastructure.Services.Input;
+using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
 namespace Hero
 {
-	public class HeroMove : MonoBehaviour
+	public class HeroMover : MonoBehaviour
 	{
 		private float _movementSpeed;
 
@@ -13,12 +14,14 @@ namespace Hero
 		private StaticDataService _staticDataService;
 
 		private Camera _camera;
+		private PersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Construct(InputService inputService, StaticDataService staticDataService)
+		public void Construct(InputService inputService, StaticDataService staticDataService, PersistentProgressService persistentProgressService)
 		{
 			_inputService = inputService;
 			_staticDataService = staticDataService;
+			_persistentProgressService = persistentProgressService;
 		}
 
 		private void Start()
@@ -27,13 +30,18 @@ namespace Hero
 			_camera = Camera.main;
 		}
 
-		private void Update()
+		private void Update() => 
+			Move();
+
+		private void Move()
 		{
 			if (_inputService.Axis.sqrMagnitude > 0.001f)
 			{
 				Vector2 movementVector = _camera.transform.TransformDirection(_inputService.Axis);
 
 				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
+
+				_persistentProgressService.Progress.HeroData.HeroPosition = transform.position;
 			}
 		}
 	}
