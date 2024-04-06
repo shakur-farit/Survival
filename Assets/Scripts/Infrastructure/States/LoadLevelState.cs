@@ -1,7 +1,6 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
-using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -34,17 +33,17 @@ namespace Infrastructure.States
 		private void InitializeAddressables() => 
 			_assertsProvider.Initialize();
 
-		private async Task CreateGameObjects()
+		private async UniTask CreateGameObjects()
 		{
 			await CreateHero();
 			await CreateHud();
 
 		}
 
-		private async Task CreateHud() => 
+		private async UniTask CreateHud() => 
 			await _gameFactory.CreateHud();
 
-		private async Task CreateHero() => 
+		private async UniTask CreateHero() => 
 			await _gameFactory.CreateHero();
 
 		private void EnterInGameLoopingState() => 

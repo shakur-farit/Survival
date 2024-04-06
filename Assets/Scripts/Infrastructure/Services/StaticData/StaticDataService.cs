@@ -1,7 +1,6 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using StaticData;
-using UnityEngine;
 
 namespace Infrastructure.Services.StaticData
 {
@@ -16,10 +15,10 @@ namespace Infrastructure.Services.StaticData
 
 		public HeroStaticData ForHero { get; private set; }
 
-		public async Task Load() => 
+		public async UniTask Load() => 
 			ForHero = await _assetsProvider.Load<HeroStaticData>(HeroStaticDataAddress);
 
-		public async Task WarmUp() => 
+		public async UniTask WarmUp() => 
 			await _assetsProvider.Load<HeroStaticData>(HeroStaticDataAddress);
 	}
 }

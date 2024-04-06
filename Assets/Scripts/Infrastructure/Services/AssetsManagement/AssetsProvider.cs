@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Infrastructure.Services.AssetsManagement
@@ -23,7 +23,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public GameObject Instantiate(GameObject prefab) => 
 			_diContainer.InstantiatePrefab(prefab);
 
-		public async Task<T> Load<T>(string addressReference) where T : class
+		public async UniTask<T> Load<T>(string addressReference) where T : class
 		{
 			if (_completedCache.TryGetValue(addressReference, out AsyncOperationHandle completedHandle))
 				return completedHandle.Result as T;
