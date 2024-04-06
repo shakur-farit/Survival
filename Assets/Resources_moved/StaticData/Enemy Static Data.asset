@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6ac3ba23c837b459059a11c968333d, type: 3}
   m_Name: Enemy Static Data
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  MovementSpeed: 0
+  MovementSpeed: 1
