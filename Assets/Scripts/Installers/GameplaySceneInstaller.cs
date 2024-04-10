@@ -7,7 +7,7 @@ namespace Installers
 	{
 		public override void InstallBindings()
 		{
-			RegisterFactories();
+			//RegisterFactories();
 		}
 
 		private void RegisterFactories() => 

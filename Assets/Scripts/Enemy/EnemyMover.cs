@@ -7,10 +7,7 @@ namespace Enemy
 {
 	public class EnemyMover : MonoBehaviour
 	{
-		private Transform _target;
 		private float _movementSpeed;
-
-		private bool _isTargetNotNull;
 
 		private StaticDataService _staticDataService;
 		private PersistentProgressService _persistentProgressService;
@@ -22,33 +19,30 @@ namespace Enemy
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Awake() => 
+		private void Awake()
+		{
 			_movementSpeed = _staticDataService.ForEnemy.MovementSpeed;
-
-		private void Start() => 
-			_isTargetNotNull = _target != null;
+			Debug.Log(_staticDataService);
+		}
 
 		void Update() => 
 			Move();
 
 		private void Move()
 		{
-			if (_isTargetNotNull)
-			{
-				Vector2 targetPosition = _persistentProgressService.Progress.HeroData.HeroPosition;
-				Vector2 enemyPosition = transform.position;
+			Vector2 targetPosition = _persistentProgressService.Progress.HeroData.Position;
+			Vector2 enemyPosition = transform.position;
 
-				Vector2 direction = targetPosition - enemyPosition;
-				direction.Normalize();
+			Vector2 direction = targetPosition - enemyPosition;
+			direction.Normalize();
 
-				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-				enemyPosition = Vector2.MoveTowards(enemyPosition,
-					targetPosition, _movementSpeed * Time.deltaTime);
+			enemyPosition = Vector2.MoveTowards(enemyPosition,
+				targetPosition, _movementSpeed * Time.deltaTime);
 
-				transform.position = enemyPosition;
-				transform.rotation = Quaternion.Euler(Vector3.forward * angle);
-			}
+			transform.position = enemyPosition;
+			transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 		}
 	}
 }

@@ -37,16 +37,15 @@ namespace Infrastructure.States
 		private async UniTask CreateGameObjects()
 		{
 			await CreateHero();
-			await CreateEnemy();
+			await CreateSpawner();
 			await CreateHud();
-
 		}
 
 		private async UniTask CreateHero() => 
 			await _gameFactory.CreateHero();
 
-		private async UniTask CreateEnemy() => 
-			await _gameFactory.CreateEnemy();
+		private async UniTask CreateSpawner() => 
+			await _gameFactory.CreateSpawner();
 
 		private async UniTask CreateHud() => 
 			await _gameFactory.CreateHud();

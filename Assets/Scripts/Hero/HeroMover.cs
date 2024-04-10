@@ -41,7 +41,7 @@ namespace Hero
 
 				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
 
-				_persistentProgressService.Progress.HeroData.HeroPosition = transform.position;
+				_persistentProgressService.Progress.HeroData.Position = transform.position;
 			}
 		}
 	}

@@ -6,6 +6,6 @@ namespace Data
 	[Serializable]
 	public class HeroData
 	{
-		public Vector2 HeroPosition;
+		public Vector2 Position;
 	}
 }

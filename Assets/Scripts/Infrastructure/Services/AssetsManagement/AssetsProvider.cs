@@ -23,6 +23,9 @@ namespace Infrastructure.Services.AssetsManagement
 		public GameObject Instantiate(GameObject prefab) => 
 			_diContainer.InstantiatePrefab(prefab);
 
+		public GameObject Instantiate(GameObject prefab, Vector2 position) =>
+			_diContainer.InstantiatePrefab(prefab, position, Quaternion.identity, null);
+
 		public async UniTask<T> Load<T>(string addressReference) where T : class
 		{
 			if (_completedCache.TryGetValue(addressReference, out AsyncOperationHandle completedHandle))
