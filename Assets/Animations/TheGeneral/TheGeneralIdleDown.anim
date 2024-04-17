@@ -200,17 +200,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -892881270494569320, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -892881270494569320, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.1
-      value: {fileID: -3633265428083532034, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -3633265428083532034, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.2
-      value: {fileID: -5392825556684313947, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -5392825556684313947, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.3
-      value: {fileID: -7318419392901577592, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -7318419392901577592, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.4
       value: {fileID: 8429929484429276, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     attribute: m_Sprite
