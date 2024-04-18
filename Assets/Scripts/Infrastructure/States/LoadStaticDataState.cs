@@ -17,7 +17,9 @@ namespace Infrastructure.States
 		public async void Enter()
 		{
 			await LoadStaticData();
-			
+
+			SetupCharacter();
+
 			EnterToLoadProgressState();
 		}
 
@@ -27,6 +29,9 @@ namespace Infrastructure.States
 
 		private async Task LoadStaticData() => 
 			await _staticDataService.Load();
+
+		private void SetupCharacter() => 
+			_staticDataService.SetupDataForHero();
 
 		private void EnterToLoadProgressState() => 
 			_gameStateMachine.Enter<LoadProgressState>();

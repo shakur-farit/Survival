@@ -6,7 +6,7 @@ namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService
 	{
-		private const string HeroStaticDataAddress = "Hero Static Data";
+		private const string GeneralStaticDataAddress = "General Static Data";
 		private const string EnemyStaticDataAddress = "Enemy Static Data";
 
 		private readonly AssetsProvider _assetsProvider;
@@ -17,16 +17,23 @@ namespace Infrastructure.Services.StaticData
 		public HeroStaticData ForHero { get; private set; }
 		public EnemyStaticData ForEnemy { get; private set; }
 
+		private HeroStaticData _theGeneral;
+
 		public async UniTask Load()
 		{
-			ForHero = await _assetsProvider.Load<HeroStaticData>(HeroStaticDataAddress);
+			_theGeneral = await _assetsProvider.Load<HeroStaticData>(GeneralStaticDataAddress);
 			ForEnemy = await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
 		}
 
 		public async UniTask WarmUp()
 		{
-			await _assetsProvider.Load<HeroStaticData>(HeroStaticDataAddress);
+			await _assetsProvider.Load<HeroStaticData>(GeneralStaticDataAddress);
 			await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
+		}
+
+		public void SetupDataForHero()
+		{
+			ForHero = _theGeneral;
 		}
 	}
 }
