@@ -31,7 +31,7 @@ namespace Infrastructure.States
 			await _staticDataService.Load();
 
 		private void SetupCharacter() => 
-			_staticDataService.SetupDataForHero();
+			_staticDataService.SetupDataForCharacter();
 
 		private void EnterToLoadProgressState() => 
 			_gameStateMachine.Enter<LoadProgressState>();

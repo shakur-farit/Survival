@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
@@ -36,13 +35,13 @@ namespace Infrastructure.States
 
 		private async UniTask CreateGameObjects()
 		{
-			await CreateHero();
+			await CreateCharacter();
 			await CreateSpawner();
 			await CreateHud();
 		}
 
-		private async UniTask CreateHero() => 
-			await _gameFactory.CreateHero();
+		private async UniTask CreateCharacter() => 
+			await _gameFactory.CreateCharacter();
 
 		private async UniTask CreateSpawner() => 
 			await _gameFactory.CreateSpawner();

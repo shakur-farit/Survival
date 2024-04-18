@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56e18113df060e44e87ba9f64207051b, type: 3}
-  m_Name: General Static Data
+  m_Name: General Character Static Data
   m_EditorClassIdentifier: 
   MovementSpeed: 3
   BodySprite: {fileID: -892881270494569320, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}

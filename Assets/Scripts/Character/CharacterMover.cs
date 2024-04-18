@@ -4,9 +4,9 @@ using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Hero
+namespace Character
 {
-	public class HeroMover : MonoBehaviour
+	public class CharacterMover : MonoBehaviour
 	{
 		private float _movementSpeed;
 
@@ -26,7 +26,7 @@ namespace Hero
 
 		private void Start()
 		{
-			_movementSpeed = _staticDataService.ForHero.MovementSpeed;
+			_movementSpeed = _staticDataService.ForCharacter.MovementSpeed;
 			_camera = Camera.main;
 		}
 
@@ -41,7 +41,7 @@ namespace Hero
 
 				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
 
-				_persistentProgressService.Progress.HeroData.Position = transform.position;
+				_persistentProgressService.Progress.characterData.Position = transform.position;
 			}
 		}
 	}

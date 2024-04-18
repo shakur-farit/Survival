@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Data
 {
 	[Serializable]
-	public class HeroData
+	public class CharacterData
 	{
 		public Vector2 Position;
 	}

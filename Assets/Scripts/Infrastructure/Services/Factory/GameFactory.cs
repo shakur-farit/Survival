@@ -12,7 +12,7 @@ namespace Infrastructure.Services.Factory
 		public GameFactory(AssetsProvider assetsProvider) => 
 			_assetsProvider = assetsProvider;
 
-		public GameObject Hero { get; private set; }
+		public GameObject Character { get; private set; }
 		public GameObject Enemy { get; private set; }
 		public GameObject Hud { get; private set; }
 		public GameObject Spawner { get; private set; }
@@ -20,16 +20,16 @@ namespace Infrastructure.Services.Factory
 
 		public async UniTask WarmUp()
 		{
-			await _assetsProvider.Load<GameObject>(AssetsAddresses.HeroAddress);
+			await _assetsProvider.Load<GameObject>(AssetsAddresses.CharacterAddress);
 			await _assetsProvider.Load<GameObject>(AssetsAddresses.SpawnerAddress);
 			await _assetsProvider.Load<GameObject>(AssetsAddresses.EnemyAddress);
 			await _assetsProvider.Load<GameObject>(AssetsAddresses.HudAddress);
 		}
 
-		public async UniTask CreateHero()
+		public async UniTask CreateCharacter()
 		{
-			GameObject prefab = await _assetsProvider.Load<GameObject>(AssetsAddresses.HeroAddress);
-			Hero = _assetsProvider.Instantiate(prefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(AssetsAddresses.CharacterAddress);
+			Character = _assetsProvider.Instantiate(prefab);
 		}
 
 		public async UniTask CreateSpawner()

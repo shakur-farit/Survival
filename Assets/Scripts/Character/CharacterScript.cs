@@ -2,9 +2,9 @@ using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Hero
+namespace Character
 {
-	public class HeroScript : MonoBehaviour
+	public class CharacterScript : MonoBehaviour
 	{
 		public GameObject Body;
 		public GameObject Hand;
@@ -23,10 +23,10 @@ namespace Hero
 			Hand.TryGetComponent<SpriteRenderer>(out SpriteRenderer handSprite);
 			HandNoWeapon.TryGetComponent<SpriteRenderer>(out SpriteRenderer handNoWeaponSprite);
 
-			bodySprite.sprite = _staticDataService.ForHero.BodySprite;
-			animatorController.runtimeAnimatorController = _staticDataService.ForHero.Controller;
-			handSprite.sprite = _staticDataService.ForHero.HandSprite;
-			handNoWeaponSprite.sprite = _staticDataService.ForHero.HandSprite;
+			bodySprite.sprite = _staticDataService.ForCharacter.BodySprite;
+			animatorController.runtimeAnimatorController = _staticDataService.ForCharacter.Controller;
+			handSprite.sprite = _staticDataService.ForCharacter.HandSprite;
+			handNoWeaponSprite.sprite = _staticDataService.ForCharacter.HandSprite;
 		}
 	}
 }
