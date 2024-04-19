@@ -23,7 +23,7 @@ namespace Character
 
 		private void Start()
 		{
-			_movementSpeed = _persistentProgressService.Progress.characterData.CharacterStaticData.MovementSpeed;
+			_movementSpeed = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.MovementSpeed;
 			_camera = Camera.main;
 		}
 
@@ -32,13 +32,13 @@ namespace Character
 
 		private void Move()
 		{
-			if (_inputService.Axis.sqrMagnitude > 0.001f)
+			if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
 			{
 				Vector2 movementVector = _camera.transform.TransformDirection(_inputService.Axis);
 
 				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
 
-				_persistentProgressService.Progress.characterData.Position = transform.position;
+				_persistentProgressService.Progress.characterData.CurrentPosition = transform.position;
 			}
 		}
 	}

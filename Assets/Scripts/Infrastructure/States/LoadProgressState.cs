@@ -18,7 +18,7 @@ namespace Infrastructure.States
 		{
 			InitializeNewProgress();
 
-			EnterToLoadLevelState();
+			EnterToLoadSceneState();
 		}
 
 		public void Exit()
@@ -28,7 +28,7 @@ namespace Infrastructure.States
 		private void InitializeNewProgress() => 
 			_persistentProgressService.Progress = new Progress();
 
-		private void EnterToLoadLevelState() => 
-			_gameStateMachine.Enter<LoadLevelState>();
+		private void EnterToLoadSceneState() => 
+			_gameStateMachine.Enter<LoadSceneState>();
 	}
 }

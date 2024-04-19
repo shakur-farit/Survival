@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using StaticData;
@@ -18,19 +20,19 @@ namespace Infrastructure.Services.StaticData
 		public StaticDataService(AssetsProvider assetsProvider) => 
 			_assetsProvider = assetsProvider;
 
-		public CharacterStaticData ForGeneral { get; private set; }
-		public CharacterStaticData ForThief { get; private set; }
+		public List<CharacterStaticData> CharactersList { get; private set; } = new();
 
 		public EnemyStaticData ForEnemy { get; private set; }
 
 		public WeaponStaticData ForPistol { get; private set; }
 
+		private CharacterStaticData _forGeneral;
+		private CharacterStaticData _forThief;
 
 		public async UniTask Load()
 		{
-			ForGeneral = await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
-			ForThief = await _assetsProvider.Load<CharacterStaticData>(ThiefStaticDataAddress);
-		
+			await LoadCharactersStaticData();
+
 			ForEnemy = await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
 
 			ForPistol = await _assetsProvider.Load<WeaponStaticData>(PistolStaticData);
@@ -44,6 +46,14 @@ namespace Infrastructure.Services.StaticData
 			await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
 
 			await _assetsProvider.Load<WeaponStaticData>(PistolStaticData);
+		}
+
+		private async Task LoadCharactersStaticData()
+		{
+			_forGeneral = await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
+			CharactersList.Add(_forGeneral);
+			_forThief = await _assetsProvider.Load<CharacterStaticData>(ThiefStaticDataAddress);
+			CharactersList.Add(_forThief);
 		}
 	}
 }

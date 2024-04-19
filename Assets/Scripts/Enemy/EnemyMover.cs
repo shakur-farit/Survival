@@ -30,7 +30,7 @@ namespace Enemy
 
 		private void Move()
 		{
-			Vector2 targetPosition = _persistentProgressService.Progress.characterData.Position;
+			Vector2 targetPosition = _persistentProgressService.Progress.characterData.CurrentPosition;
 			Vector2 enemyPosition = transform.position;
 
 			Vector2 direction = targetPosition - enemyPosition;

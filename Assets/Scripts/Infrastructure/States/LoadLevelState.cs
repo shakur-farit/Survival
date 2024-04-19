@@ -3,7 +3,6 @@ using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
-using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -15,7 +14,8 @@ namespace Infrastructure.States
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly StaticDataService _staticDataService;
 
-		public LoadLevelState(GameStateMachine gameStateMachine, GameFactory gameFactory, AssetsProvider assertsProvider, PersistentProgressService persistentProgressService, StaticDataService staticDataService)
+		public LoadLevelState(GameStateMachine gameStateMachine, GameFactory gameFactory, AssetsProvider assertsProvider, 
+			PersistentProgressService persistentProgressService, StaticDataService staticDataService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_gameFactory = gameFactory;
@@ -26,19 +26,12 @@ namespace Infrastructure.States
 
 		public async void Enter()
 		{
-			InitializeAddressables();
-
 			await CreateGameObjects();
-
-			EnterInGameLoopingState();
 		}
 
 		public void Exit()
 		{
 		}
-
-		private void InitializeAddressables() => 
-			_assertsProvider.Initialize();
 
 		private async UniTask CreateGameObjects()
 		{
@@ -48,11 +41,9 @@ namespace Infrastructure.States
 		}
 
 		private async UniTask CreateCharacter()
-		{
-			_persistentProgressService.Progress.characterData.CharacterStaticData = _staticDataService.ForGeneral;
+		{ 
 			_persistentProgressService.Progress.weaponData.WeaponStaticData = _staticDataService.ForPistol;
-			
-			Debug.Log(_staticDataService.ForPistol);
+
 			await _gameFactory.CreateCharacter();
 		}
 
@@ -62,7 +53,5 @@ namespace Infrastructure.States
 		private async UniTask CreateHud() => 
 			await _gameFactory.CreateHud();
 
-		private void EnterInGameLoopingState() => 
-			_gameStateMachine.Enter<GameLoopingState>();
 	}
 }

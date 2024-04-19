@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Services.StaticData;
 
 namespace Infrastructure.States
@@ -25,7 +25,7 @@ namespace Infrastructure.States
 		{
 		}
 
-		private async Task LoadStaticData() => 
+		private async UniTask LoadStaticData() => 
 			await _staticDataService.Load();
 
 		private void EnterToLoadProgressState() => 

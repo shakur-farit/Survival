@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e18113df060e44e87ba9f64207051b, type: 3}
   m_Name: General Static Data
   m_EditorClassIdentifier: 
+  CharacterType: 1
   MovementSpeed: 3
-  BodySprite: {fileID: -892881270494569320, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
   HandSprite: {fileID: 21300000, guid: a8c352369ed75924d84743672d1ab512, type: 3}
   Controller: {fileID: 9100000, guid: e87ce176a15556c459b355908992b930, type: 2}

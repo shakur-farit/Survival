@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e18113df060e44e87ba9f64207051b, type: 3}
   m_Name: Thief Static Data
   m_EditorClassIdentifier: 
-  MovementSpeed: 4
-  BodySprite: {fileID: 0}
-  HandSprite: {fileID: 0}
-  Controller: {fileID: 0}
+  CharacterType: 2
+  MovementSpeed: 6
+  HandSprite: {fileID: 21300000, guid: fdff32e8dc92a49a38c60d52e4394ba7, type: 3}
+  Controller: {fileID: 9100000, guid: 3f018cebb641449a7a49950b93679bbc, type: 2}

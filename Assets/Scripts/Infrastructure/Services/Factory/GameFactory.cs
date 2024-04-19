@@ -41,15 +41,9 @@ namespace Infrastructure.Services.Factory
 
 			Character.TryGetComponent(out CharacterScript character);
 
-			character.Body.TryGetComponent(out SpriteRenderer bodySprite);
-			character.Body.TryGetComponent(out Animator animatorController);
-			character.Hand.TryGetComponent(out SpriteRenderer handSprite);
-			character.HandNoWeapon.TryGetComponent(out SpriteRenderer handNoWeaponSprite);
-
-			bodySprite.sprite = _persistentProgressService.Progress.characterData.CharacterStaticData.BodySprite;
-			animatorController.runtimeAnimatorController = _persistentProgressService.Progress.characterData.CharacterStaticData.Controller;
-			handSprite.sprite = _persistentProgressService.Progress.characterData.CharacterStaticData.HandSprite;
-			handNoWeaponSprite.sprite = _persistentProgressService.Progress.characterData.CharacterStaticData.HandSprite;
+			character.Animator.runtimeAnimatorController = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.Controller;
+			character.Hand.sprite = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.HandSprite;
+			character.HandNoWeapon.sprite = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.HandSprite;
 
 			Character.TryGetComponent(out WeaponScript weapon);
 

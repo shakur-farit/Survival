@@ -1,25 +1,34 @@
+using Cysharp.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.StaticData;
+using UI.Services.Factory;
 
 namespace Infrastructure.States
 {
 	public class WarmUpState : IState
 	{
 		private readonly GameStateMachine _gameStateMachine;
-		private readonly GameFactory _gameFactory;
 		private readonly StaticDataService _staticDataService;
+		private readonly AssetsProvider _assetsProvider;
+		private readonly GameFactory _gameFactory;
+		private readonly UIFactory _uiFactory;
 
-		public WarmUpState(GameStateMachine gameStateMachine, GameFactory gameFactory, StaticDataService staticDataService)
+		public WarmUpState(GameStateMachine gameStateMachine, StaticDataService staticDataService, AssetsProvider assetsProvider, 
+			GameFactory gameFactory, UIFactory uiFactory)
 		{
 			_gameStateMachine = gameStateMachine;
-			_gameFactory = gameFactory;
 			_staticDataService = staticDataService;
+			_assetsProvider = assetsProvider;
+			_gameFactory = gameFactory;
+			_uiFactory = uiFactory;
 		}
 
 		public async void Enter()
 		{
-			await _gameFactory.WarmUp();
-			await _staticDataService.WarmUp();
+			InitializeAssets();
+
+			await WarmUpAssets();
 
 			EnterInLoadStaticDataState();
 		}
@@ -27,6 +36,16 @@ namespace Infrastructure.States
 		public void Exit()
 		{
 		}
+
+		private async UniTask WarmUpAssets()
+		{
+			await _gameFactory.WarmUp();
+			await _uiFactory.WarmUp();
+			await _staticDataService.WarmUp();
+		}
+
+		private void InitializeAssets() => 
+			_assetsProvider.Initialize();
 
 		private void EnterInLoadStaticDataState() => 
 			_gameStateMachine.Enter<LoadStaticDataState>();

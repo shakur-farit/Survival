@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using StaticData;
 using UnityEngine;
 
@@ -7,7 +8,8 @@ namespace Data
 	[Serializable]
 	public class CharacterData
 	{
-		public CharacterStaticData CharacterStaticData;
-		public Vector2 Position;
+		public List<CharacterStaticData> CharactersList;
+		public CharacterStaticData CurrentCharacterStaticData;
+		public Vector2 CurrentPosition;
 	}
 }

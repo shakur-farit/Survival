@@ -6,5 +6,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public const string SpawnerAddress = "Spawner";
 		public const string EnemyAddress = "Enemy";
 		public const string HudAddress = "Hud";
+		public const string UIRoot = "UIRoot";
+		public const string MainMenuWindow= "MainMenuWindow";
 	}
 }

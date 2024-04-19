@@ -23,6 +23,9 @@ namespace Infrastructure.Services.AssetsManagement
 		public GameObject Instantiate(GameObject prefab) => 
 			_diContainer.InstantiatePrefab(prefab);
 
+		public GameObject Instantiate(GameObject prefab, Transform parent) => 
+			_diContainer.InstantiatePrefab(prefab, parent);
+
 		public GameObject Instantiate(GameObject prefab, Vector2 position) =>
 			_diContainer.InstantiatePrefab(prefab, position, Quaternion.identity, null);
 
