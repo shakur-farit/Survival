@@ -21,7 +21,7 @@ namespace Infrastructure.States
 				[typeof(WarmUpState)] = new WarmUpState(this, gameFactory,staticDataService),
 				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService),
 				[typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService),
-				[typeof(LoadLevelState)] = new LoadLevelState(this, gameFactory, assetsProvider),
+				[typeof(LoadLevelState)] = new LoadLevelState(this, gameFactory, assetsProvider,persistentProgressService, staticDataService),
 				[typeof(GameLoopingState)] = new GameLoopingState(),
 			};
 		}

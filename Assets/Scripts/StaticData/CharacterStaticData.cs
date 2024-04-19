@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Character Static Data", menuName = "Scriptable Object/Static Data/Character")]
+	[CreateAssetMenu(fileName = "Static Data", menuName = "Scriptable Object/Static Data/Character")]
 	public class CharacterStaticData : ScriptableObject
 	{
 		public float MovementSpeed;

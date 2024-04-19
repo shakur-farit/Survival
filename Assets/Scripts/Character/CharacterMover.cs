@@ -1,6 +1,5 @@
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -11,22 +10,20 @@ namespace Character
 		private float _movementSpeed;
 
 		private InputService _inputService;
-		private StaticDataService _staticDataService;
 
 		private Camera _camera;
 		private PersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Construct(InputService inputService, StaticDataService staticDataService, PersistentProgressService persistentProgressService)
+		public void Construct(InputService inputService, PersistentProgressService persistentProgressService)
 		{
 			_inputService = inputService;
-			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;
 		}
 
 		private void Start()
 		{
-			_movementSpeed = _staticDataService.ForCharacter.MovementSpeed;
+			_movementSpeed = _persistentProgressService.Progress.characterData.CharacterStaticData.MovementSpeed;
 			_camera = Camera.main;
 		}
 

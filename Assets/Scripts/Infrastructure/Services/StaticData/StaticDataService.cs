@@ -6,34 +6,44 @@ namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService
 	{
-		private const string GeneralStaticDataAddress = "General Character Static Data";
+		private const string GeneralStaticDataAddress = "General Static Data";
+		private const string ThiefStaticDataAddress = "Thief Static Data";
+		
 		private const string EnemyStaticDataAddress = "Enemy Static Data";
+
+		private const string PistolStaticData = "Pistol Static Data";
 
 		private readonly AssetsProvider _assetsProvider;
 
 		public StaticDataService(AssetsProvider assetsProvider) => 
 			_assetsProvider = assetsProvider;
 
-		public CharacterStaticData ForCharacter { get; private set; }
+		public CharacterStaticData ForGeneral { get; private set; }
+		public CharacterStaticData ForThief { get; private set; }
+
 		public EnemyStaticData ForEnemy { get; private set; }
 
-		private CharacterStaticData _theGeneral;
+		public WeaponStaticData ForPistol { get; private set; }
+
 
 		public async UniTask Load()
 		{
-			_theGeneral = await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
+			ForGeneral = await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
+			ForThief = await _assetsProvider.Load<CharacterStaticData>(ThiefStaticDataAddress);
+		
 			ForEnemy = await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
+
+			ForPistol = await _assetsProvider.Load<WeaponStaticData>(PistolStaticData);
 		}
 
 		public async UniTask WarmUp()
 		{
 			await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
-			await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
-		}
+			await _assetsProvider.Load<CharacterStaticData>(ThiefStaticDataAddress);
 
-		public void SetupDataForCharacter()
-		{
-			ForCharacter = _theGeneral;
+			await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
+
+			await _assetsProvider.Load<WeaponStaticData>(PistolStaticData);
 		}
 	}
 }

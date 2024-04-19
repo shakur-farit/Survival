@@ -1,6 +1,9 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
+using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -9,12 +12,16 @@ namespace Infrastructure.States
 		private readonly GameFactory _gameFactory;
 		private readonly GameStateMachine _gameStateMachine;
 		private readonly AssetsProvider _assertsProvider;
+		private readonly PersistentProgressService _persistentProgressService;
+		private readonly StaticDataService _staticDataService;
 
-		public LoadLevelState(GameStateMachine gameStateMachine, GameFactory gameFactory, AssetsProvider assertsProvider)
+		public LoadLevelState(GameStateMachine gameStateMachine, GameFactory gameFactory, AssetsProvider assertsProvider, PersistentProgressService persistentProgressService, StaticDataService staticDataService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_gameFactory = gameFactory;
 			_assertsProvider = assertsProvider;
+			_persistentProgressService = persistentProgressService;
+			_staticDataService = staticDataService;
 		}
 
 		public async void Enter()
@@ -40,8 +47,14 @@ namespace Infrastructure.States
 			await CreateHud();
 		}
 
-		private async UniTask CreateCharacter() => 
+		private async UniTask CreateCharacter()
+		{
+			_persistentProgressService.Progress.characterData.CharacterStaticData = _staticDataService.ForGeneral;
+			_persistentProgressService.Progress.weaponData.WeaponStaticData = _staticDataService.ForPistol;
+			
+			Debug.Log(_staticDataService.ForPistol);
 			await _gameFactory.CreateCharacter();
+		}
 
 		private async UniTask CreateSpawner() => 
 			await _gameFactory.CreateSpawner();
