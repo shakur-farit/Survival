@@ -48,13 +48,15 @@ namespace Infrastructure.Services.Factory
 
 			Character.TryGetComponent(out CharacterScript character);
 
-			character.Animator.runtimeAnimatorController = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.Controller;
-			character.Hand.sprite = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.HandSprite;
-			character.HandNoWeapon.sprite = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.HandSprite;
+			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData;
+
+			character.Animator.runtimeAnimatorController = currentCharacterStaticData.Controller;
+			character.Hand.sprite = currentCharacterStaticData.HandSprite;
+			character.HandNoWeapon.sprite = currentCharacterStaticData.HandSprite;
 
 			foreach (WeaponStaticData weapon in _staticDataService.WeaponsList)
 			{
-				if (weapon.Type == _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.DefaultWeapon)
+				if (weapon.Type == currentCharacterStaticData.DefaultWeapon)
 				{
 					_persistentProgressService.Progress.characterData.CurrentWeapon = weapon;
 
