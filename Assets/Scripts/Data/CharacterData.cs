@@ -9,5 +9,6 @@ namespace Data
 	{
 		public CharacterStaticData CurrentCharacterStaticData;
 		public Vector2 CurrentPosition;
+		public WeaponStaticData CurrentWeapon;
 	}
 }

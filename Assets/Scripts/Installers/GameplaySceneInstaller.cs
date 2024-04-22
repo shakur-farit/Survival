@@ -1,3 +1,4 @@
+using Ammo.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.StaticData;
@@ -21,6 +22,7 @@ namespace Installers
 		{
 			RegisterGameFactory();
 			RegisterUIFactory();
+			RegisterAmmoFactory();
 		}
 
 		private void RegisterAssetsProvider() =>
@@ -28,6 +30,9 @@ namespace Installers
 
 		private void RegisterStaticDataService() =>
 			Container.Bind<StaticDataService>().AsSingle();
+
+		private void RegisterAmmoFactory() => 
+			Container.Bind<AmmoFactory>().AsSingle();
 
 		private void RegisterWindowsService() => 
 			Container.Bind<WindowsService>().AsSingle();

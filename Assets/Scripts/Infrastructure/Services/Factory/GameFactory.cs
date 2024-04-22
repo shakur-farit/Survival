@@ -1,3 +1,4 @@
+using System.Net;
 using Character;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
@@ -5,7 +6,6 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
-using UnityEngine.XR;
 using Weapon;
 
 
@@ -17,17 +17,20 @@ namespace Infrastructure.Services.Factory
 		private readonly PersistentProgressService _persistentProgressService;
 		private readonly StaticDataService _staticDataService;
 
+		public GameObject Character { get; private set; }
+
+		public GameObject Enemy { get; private set; }
+
+		public GameObject Hud { get; private set; }
+
+		public GameObject Spawner { get; private set; }
+
 		public GameFactory(AssetsProvider assetsProvider, PersistentProgressService persistentProgressService, StaticDataService staticDataService)
 		{
 			_assetsProvider = assetsProvider;
 			_persistentProgressService = persistentProgressService;
 			_staticDataService = staticDataService;
 		}
-
-		public GameObject Character { get; private set; }
-		public GameObject Enemy { get; private set; }
-		public GameObject Hud { get; private set; }
-		public GameObject Spawner { get; private set; }
 
 
 		public async UniTask WarmUp()
@@ -53,7 +56,10 @@ namespace Infrastructure.Services.Factory
 			{
 				if (weapon.Type == _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.DefaultWeapon)
 				{
+					_persistentProgressService.Progress.characterData.CurrentWeapon = weapon;
+
 					Character.TryGetComponent(out WeaponScript defaultWeapon);
+
 					defaultWeapon.WeaponSpriteRenderer.sprite = weapon.Sprite;
 					defaultWeapon.WeaponShootPoint.position = weapon.ShootPoint;
 				}

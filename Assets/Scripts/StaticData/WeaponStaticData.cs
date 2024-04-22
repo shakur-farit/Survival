@@ -7,6 +7,7 @@ namespace StaticData
 	public class WeaponStaticData : ScriptableObject
 	{
 		public WeaponType Type;
+		public AmmoStaticData Ammo;
 		public Sprite Sprite;
 		public Vector2 ShootPoint;
 	}

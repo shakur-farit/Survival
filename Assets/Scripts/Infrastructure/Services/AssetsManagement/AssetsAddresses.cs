@@ -8,5 +8,6 @@ namespace Infrastructure.Services.AssetsManagement
 		public const string HudAddress = "Hud";
 		public const string UIRoot = "UIRoot";
 		public const string MainMenuWindow= "MainMenuWindow";
+		public const string AmmoAddress = "Ammo";
 	}
 }

@@ -1,3 +1,4 @@
+using Ammo.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
@@ -13,8 +14,9 @@ namespace Infrastructure
 		public GameStateMachine StateMachine;
 
 		public Game(StaticDataService staticDataService, AssetsProvider assetsProvider,
-			PersistentProgressService persistentProgressService, WindowsService windowsService, 
-			GameFactory gameFactory, UIFactory uiFactory) => 
-			StateMachine = new GameStateMachine(staticDataService, assetsProvider, persistentProgressService, windowsService, gameFactory, uiFactory);
+			PersistentProgressService persistentProgressService, WindowsService windowsService,
+			GameFactory gameFactory, UIFactory uiFactory, AmmoFactory ammoFactory) => 
+			StateMachine = new GameStateMachine(staticDataService, assetsProvider, persistentProgressService, 
+				windowsService, gameFactory, uiFactory, ammoFactory);
 	}
 }

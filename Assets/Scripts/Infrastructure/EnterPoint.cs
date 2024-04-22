@@ -1,3 +1,4 @@
+using Ammo.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
@@ -19,11 +20,12 @@ namespace Infrastructure
 		private WindowsService _windowsService;
 		private GameFactory _gameFactory;
 		private UIFactory _uiFactory;
+		private AmmoFactory _ammoFactory;
 
 		[Inject]
 		public void Constructor(StaticDataService staticData, AssetsProvider assetsProvider,
 			PersistentProgressService persistentProgressService, WindowsService windowsService, 
-			GameFactory gameFactory, UIFactory uiFactory)
+			GameFactory gameFactory, UIFactory uiFactory, AmmoFactory ammoFactory)
 		{
 			_staticDataService = staticData;
 			_assetsProvider = assetsProvider;
@@ -31,11 +33,13 @@ namespace Infrastructure
 			_windowsService = windowsService;
 			_gameFactory = gameFactory;
 			_uiFactory = uiFactory;
+			_ammoFactory = ammoFactory;
 		}
 
 		private void Awake()
 		{
-			_game = new Game(_staticDataService, _assetsProvider, _persistentProgressService, _windowsService, _gameFactory, _uiFactory);
+			_game = new Game(_staticDataService, _assetsProvider, _persistentProgressService, _windowsService, 
+				_gameFactory, _uiFactory, _ammoFactory);
 
 			_game.StateMachine.Enter<WarmUpState>();
 		}

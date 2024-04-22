@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Ammo.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
 using Infrastructure.Services.PersistentProgress;
@@ -14,12 +15,13 @@ namespace Infrastructure.States
 		private Dictionary<Type, IState> _statesDictionary;
 		private IState _activeState;
 
-		public GameStateMachine(StaticDataService staticDataService, AssetsProvider assetsProvider, PersistentProgressService persistentProgressService,
-			WindowsService windowsService, GameFactory gameFactory, UIFactory uiFactory)
+		public GameStateMachine(StaticDataService staticDataService, AssetsProvider assetsProvider,
+			PersistentProgressService persistentProgressService,
+			WindowsService windowsService, GameFactory gameFactory, UIFactory uiFactory, AmmoFactory ammoFactory)
 		{
 			_statesDictionary = new Dictionary<Type, IState>()
 			{
-				[typeof(WarmUpState)] = new WarmUpState(this, staticDataService, assetsProvider, gameFactory, uiFactory),
+				[typeof(WarmUpState)] = new WarmUpState(this, staticDataService, assetsProvider, gameFactory, uiFactory, ammoFactory),
 				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService),
 				[typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService),
 				[typeof(LoadSceneState)] = new LoadSceneState(this, assetsProvider, uiFactory),

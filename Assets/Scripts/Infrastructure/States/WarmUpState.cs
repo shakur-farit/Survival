@@ -1,3 +1,4 @@
+using Ammo.Factory;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
@@ -13,15 +14,17 @@ namespace Infrastructure.States
 		private readonly AssetsProvider _assetsProvider;
 		private readonly GameFactory _gameFactory;
 		private readonly UIFactory _uiFactory;
+		private readonly AmmoFactory _ammoFactory;
 
 		public WarmUpState(GameStateMachine gameStateMachine, StaticDataService staticDataService, AssetsProvider assetsProvider, 
-			GameFactory gameFactory, UIFactory uiFactory)
+			GameFactory gameFactory, UIFactory uiFactory, AmmoFactory ammoFactory)
 		{
 			_gameStateMachine = gameStateMachine;
 			_staticDataService = staticDataService;
 			_assetsProvider = assetsProvider;
 			_gameFactory = gameFactory;
 			_uiFactory = uiFactory;
+			_ammoFactory = ammoFactory;
 		}
 
 		public async void Enter()
@@ -41,6 +44,7 @@ namespace Infrastructure.States
 		{
 			await _gameFactory.WarmUp();
 			await _uiFactory.WarmUp();
+			await _ammoFactory.WarmUp();
 			await _staticDataService.WarmUp();
 		}
 

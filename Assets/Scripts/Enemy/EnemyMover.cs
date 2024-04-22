@@ -19,11 +19,8 @@ namespace Enemy
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Awake()
-		{
+		private void Awake() => 
 			_movementSpeed = _staticDataService.ForEnemy.MovementSpeed;
-			Debug.Log(_staticDataService);
-		}
 
 		void Update() => 
 			Move();
