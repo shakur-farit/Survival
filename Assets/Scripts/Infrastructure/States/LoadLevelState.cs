@@ -42,8 +42,6 @@ namespace Infrastructure.States
 
 		private async UniTask CreateCharacter()
 		{ 
-			_persistentProgressService.Progress.weaponData.WeaponStaticData = _staticDataService.ForPistol;
-
 			await _gameFactory.CreateCharacter();
 		}
 

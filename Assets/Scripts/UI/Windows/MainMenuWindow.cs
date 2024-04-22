@@ -37,10 +37,8 @@ namespace UI.Windows
 		private void SetCharacter(CharacterType type)
 		{
 			foreach (CharacterStaticData character in _staticDataService.CharactersList)
-				if(type == character.CharacterType)
+				if (type == character.CharacterType)
 					_persistentProgressService.Progress.characterData.CurrentCharacterStaticData = character;
-
-			Debug.Log(_persistentProgressService.Progress.characterData.CurrentCharacterStaticData);
 		}
 	}
 }

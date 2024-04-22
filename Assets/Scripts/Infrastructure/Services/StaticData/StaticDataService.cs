@@ -13,29 +13,34 @@ namespace Infrastructure.Services.StaticData
 		
 		private const string EnemyStaticDataAddress = "Enemy Static Data";
 
-		private const string PistolStaticData = "Pistol Static Data";
+		private const string PistolStaticDataAddress = "Pistol Static Data";
+		private const string ShotgunStaticDataAddress = "Shotgun Static Data";
 
 		private readonly AssetsProvider _assetsProvider;
+
 
 		public StaticDataService(AssetsProvider assetsProvider) => 
 			_assetsProvider = assetsProvider;
 
 		public List<CharacterStaticData> CharactersList { get; private set; } = new();
+		public List<WeaponStaticData> WeaponsList { get; private set; } = new();
 
 		public EnemyStaticData ForEnemy { get; private set; }
-
-		public WeaponStaticData ForPistol { get; private set; }
 
 		private CharacterStaticData _forGeneral;
 		private CharacterStaticData _forThief;
 
+		private WeaponStaticData _forPistol;
+		private WeaponStaticData _forShotgun;
+
+
 		public async UniTask Load()
 		{
-			await LoadCharactersStaticData();
+			await AddCharactersToList();
 
 			ForEnemy = await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
 
-			ForPistol = await _assetsProvider.Load<WeaponStaticData>(PistolStaticData);
+			await AddWeaponToList();
 		}
 
 		public async UniTask WarmUp()
@@ -45,15 +50,23 @@ namespace Infrastructure.Services.StaticData
 
 			await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
 
-			await _assetsProvider.Load<WeaponStaticData>(PistolStaticData);
+			await _assetsProvider.Load<WeaponStaticData>(PistolStaticDataAddress);
 		}
 
-		private async Task LoadCharactersStaticData()
+		private async Task AddCharactersToList()
 		{
 			_forGeneral = await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
 			CharactersList.Add(_forGeneral);
 			_forThief = await _assetsProvider.Load<CharacterStaticData>(ThiefStaticDataAddress);
 			CharactersList.Add(_forThief);
+		}
+
+		private async Task AddWeaponToList()
+		{
+			_forPistol = await _assetsProvider.Load<WeaponStaticData>(PistolStaticDataAddress);
+			WeaponsList.Add(_forPistol);
+			_forShotgun = await _assetsProvider.Load<WeaponStaticData>(ShotgunStaticDataAddress);
+			WeaponsList.Add(_forShotgun);
 		}
 	}
 }

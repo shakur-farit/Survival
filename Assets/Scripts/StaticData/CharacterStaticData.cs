@@ -1,5 +1,6 @@
 using Character;
 using UnityEngine;
+using Weapon;
 
 namespace StaticData
 {
@@ -7,6 +8,7 @@ namespace StaticData
 	public class CharacterStaticData : ScriptableObject
 	{
 		public CharacterType CharacterType;
+		public WeaponType DefaultWeapon;
 		public float MovementSpeed;
 		public Sprite HandSprite;
 		public RuntimeAnimatorController Controller;

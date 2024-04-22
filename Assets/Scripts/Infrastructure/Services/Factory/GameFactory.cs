@@ -2,6 +2,8 @@ using Character;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 using UnityEngine.XR;
 using Weapon;
@@ -13,11 +15,13 @@ namespace Infrastructure.Services.Factory
 	{
 		private readonly AssetsProvider _assetsProvider;
 		private readonly PersistentProgressService _persistentProgressService;
+		private readonly StaticDataService _staticDataService;
 
-		public GameFactory(AssetsProvider assetsProvider, PersistentProgressService persistentProgressService)
+		public GameFactory(AssetsProvider assetsProvider, PersistentProgressService persistentProgressService, StaticDataService staticDataService)
 		{
 			_assetsProvider = assetsProvider;
 			_persistentProgressService = persistentProgressService;
+			_staticDataService = staticDataService;
 		}
 
 		public GameObject Character { get; private set; }
@@ -45,10 +49,15 @@ namespace Infrastructure.Services.Factory
 			character.Hand.sprite = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.HandSprite;
 			character.HandNoWeapon.sprite = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.HandSprite;
 
-			Character.TryGetComponent(out WeaponScript weapon);
-
-			weapon.WeaponSpriteRenderer.sprite = _persistentProgressService.Progress.weaponData.WeaponStaticData.Sprite;
-			weapon.WeaponShootPoint.position = _persistentProgressService.Progress.weaponData.WeaponStaticData.ShootPoint;
+			foreach (WeaponStaticData weapon in _staticDataService.WeaponsList)
+			{
+				if (weapon.Type == _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.DefaultWeapon)
+				{
+					Character.TryGetComponent(out WeaponScript defaultWeapon);
+					defaultWeapon.WeaponSpriteRenderer.sprite = weapon.Sprite;
+					defaultWeapon.WeaponShootPoint.position = weapon.ShootPoint;
+				}
+			}
 		}
 
 		public async UniTask CreateSpawner()
