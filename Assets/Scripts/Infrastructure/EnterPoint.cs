@@ -41,7 +41,7 @@ namespace Infrastructure
 			_game = new Game(_staticDataService, _assetsProvider, _persistentProgressService, _windowsService, 
 				_gameFactory, _uiFactory, _ammoFactory);
 
-			_game.StateMachine.Enter<WarmUpState>();
+			_game.StateMachine.Enter<LoadStaticDataState>();
 		}
 	}
 }

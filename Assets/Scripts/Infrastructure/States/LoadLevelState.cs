@@ -1,28 +1,15 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Factory;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
 
 namespace Infrastructure.States
 {
 	public class LoadLevelState : IState
 	{
 		private readonly GameFactory _gameFactory;
-		private readonly GameStateMachine _gameStateMachine;
-		private readonly AssetsProvider _assertsProvider;
-		private readonly PersistentProgressService _persistentProgressService;
-		private readonly StaticDataService _staticDataService;
 
-		public LoadLevelState(GameStateMachine gameStateMachine, GameFactory gameFactory, AssetsProvider assertsProvider, 
-			PersistentProgressService persistentProgressService, StaticDataService staticDataService)
-		{
-			_gameStateMachine = gameStateMachine;
+
+		public LoadLevelState(GameFactory gameFactory) => 
 			_gameFactory = gameFactory;
-			_assertsProvider = assertsProvider;
-			_persistentProgressService = persistentProgressService;
-			_staticDataService = staticDataService;
-		}
 
 		public async void Enter()
 		{

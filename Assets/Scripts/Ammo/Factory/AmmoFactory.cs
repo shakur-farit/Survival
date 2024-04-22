@@ -27,7 +27,7 @@ namespace Ammo.Factory
 			GameObject prefab = await _assetsProvider.Load<GameObject>(AssetsAddresses.AmmoAddress);
 			Ammo = _assetsProvider.Instantiate(prefab, parent);
 
-			Ammo.TryGetComponent(out AmmoScript ammo);
+			Ammo.TryGetComponent(out AmmoMover ammo);
 
 			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.characterData.CurrentWeapon.Ammo;
 

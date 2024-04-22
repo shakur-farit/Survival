@@ -21,13 +21,12 @@ namespace Infrastructure.States
 		{
 			_statesDictionary = new Dictionary<Type, IState>()
 			{
-				[typeof(WarmUpState)] = new WarmUpState(this, staticDataService, assetsProvider, gameFactory, uiFactory, ammoFactory),
-				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService),
+				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService, assetsProvider, gameFactory, uiFactory, ammoFactory),
 				[typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService),
 				[typeof(LoadSceneState)] = new LoadSceneState(this, assetsProvider, uiFactory),
 				[typeof(MainMenuState)] = new MainMenuState(this, windowsService),
 				[typeof(GameLoopingState)] = new GameLoopingState(this),
-				[typeof(LoadLevelState)] = new LoadLevelState(this, gameFactory, assetsProvider,persistentProgressService, staticDataService),
+				[typeof(LoadLevelState)] = new LoadLevelState(gameFactory),
 			};
 		}
 

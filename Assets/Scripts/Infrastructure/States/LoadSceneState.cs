@@ -19,8 +19,6 @@ namespace Infrastructure.States
 
 		public async void Enter()
 		{
-			InitializeAddressables();
-
 			await CreateUIRoot();
 
 			EnterInMainMenuState();
@@ -32,9 +30,6 @@ namespace Infrastructure.States
 		public void Exit()
 		{
 		}
-
-		private void InitializeAddressables() =>
-			_assertsProvider.Initialize();
 
 		private void EnterInMainMenuState() => 
 			_gameStateMachine.Enter<MainMenuState>();

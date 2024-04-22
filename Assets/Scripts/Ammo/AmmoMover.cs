@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ammo
 {
-	public class AmmoScript : MonoBehaviour
+	public class AmmoMover : MonoBehaviour
 	{
 		public int Damage;
 		public float MovementSpeed;
@@ -12,5 +12,10 @@ namespace Ammo
 		{
 			transform.Translate(MovementSpeed, 0, 0);
 		}
+	}
+
+	public class Damage : MonoBehaviour
+	{
+
 	}
 }
