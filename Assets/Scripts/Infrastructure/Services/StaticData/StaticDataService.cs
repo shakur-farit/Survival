@@ -10,7 +10,7 @@ namespace Infrastructure.Services.StaticData
 	{
 		private const string GeneralStaticDataAddress = "General Static Data";
 		private const string ThiefStaticDataAddress = "Thief Static Data";
-		
+
 		private const string EnemyStaticDataAddress = "Enemy Static Data";
 
 		private const string PistolStaticDataAddress = "Pistol Static Data";
@@ -19,7 +19,7 @@ namespace Infrastructure.Services.StaticData
 		private readonly AssetsProvider _assetsProvider;
 
 
-		public StaticDataService(AssetsProvider assetsProvider) => 
+		public StaticDataService(AssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
 
 		public List<CharacterStaticData> CharactersList { get; private set; } = new();
