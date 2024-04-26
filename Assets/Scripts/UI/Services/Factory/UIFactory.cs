@@ -1,8 +1,8 @@
+using Assets.Scripts.Infrastructure.Services.AssetsManagement;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.AssetsManagement;
 using UnityEngine;
 
-namespace UI.Services.Factory
+namespace Assets.Scripts.UI.Services.Factory
 {
 	public class UIFactory
 	{

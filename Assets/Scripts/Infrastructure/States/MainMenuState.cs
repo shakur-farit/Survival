@@ -1,7 +1,7 @@
-using UI.Services.Windows;
-using UI.Windows;
+using Assets.Scripts.UI.Services.Windows;
+using Assets.Scripts.UI.Windows;
 
-namespace Infrastructure.States
+namespace Assets.Scripts.Infrastructure.States
 {
 	public class MainMenuState : IState
 	{

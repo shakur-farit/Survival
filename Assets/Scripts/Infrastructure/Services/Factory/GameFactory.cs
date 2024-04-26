@@ -1,15 +1,13 @@
-using System.Net;
-using Character;
+using Assets.Scripts.Character;
+using Assets.Scripts.Infrastructure.Services.AssetsManagement;
+using Assets.Scripts.Infrastructure.Services.PersistentProgress;
+using Assets.Scripts.Infrastructure.Services.StaticData;
+using Assets.Scripts.StaticData;
+using Assets.Scripts.Weapon;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
-using StaticData;
 using UnityEngine;
-using Weapon;
 
-
-namespace Infrastructure.Services.Factory
+namespace Assets.Scripts.Infrastructure.Services.Factory
 {
 	public class GameFactory
 	{

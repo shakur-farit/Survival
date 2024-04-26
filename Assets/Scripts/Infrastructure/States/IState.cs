@@ -1,4 +1,4 @@
-namespace Infrastructure.States
+namespace Assets.Scripts.Infrastructure.States
 {
 	public interface IState
 	{

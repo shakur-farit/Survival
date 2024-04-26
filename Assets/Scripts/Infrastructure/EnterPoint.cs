@@ -1,47 +1,29 @@
-using Ammo.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.Factory;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
-using Infrastructure.States;
-using UI.Services.Factory;
-using UI.Services.Windows;
+using Assets.Scripts.Infrastructure.States;
 using UnityEngine;
 using Zenject;
 
-namespace Infrastructure
+namespace Assets.Scripts.Infrastructure
 {
 	public class EnterPoint : MonoBehaviour
 	{
+		private GameStateMachine _gameStateMachine;
+		private StatesFactory _statesFactory;
 		private Game _game;
-		private StaticDataService _staticDataService;
-		private AssetsProvider _assetsProvider;
-		private PersistentProgressService _persistentProgressService;
-		private WindowsService _windowsService;
-		private GameFactory _gameFactory;
-		private UIFactory _uiFactory;
-		private AmmoFactory _ammoFactory;
+
 
 		[Inject]
-		public void Constructor(StaticDataService staticData, AssetsProvider assetsProvider,
-			PersistentProgressService persistentProgressService, WindowsService windowsService, 
-			GameFactory gameFactory, UIFactory uiFactory, AmmoFactory ammoFactory)
+		public void Constructor(GameStateMachine gameStateMachine, StatesFactory statesFactory)
 		{
-			_staticDataService = staticData;
-			_assetsProvider = assetsProvider;
-			_persistentProgressService = persistentProgressService;
-			_windowsService = windowsService;
-			_gameFactory = gameFactory;
-			_uiFactory = uiFactory;
-			_ammoFactory = ammoFactory;
+			_gameStateMachine = gameStateMachine;
+			_statesFactory = statesFactory;
 		}
 
 		private void Awake()
 		{
-			_game = new Game(_staticDataService, _assetsProvider, _persistentProgressService, _windowsService, 
-				_gameFactory, _uiFactory, _ammoFactory);
+			_game = new Game(_gameStateMachine, _statesFactory);
 
-			_game.StateMachine.Enter<LoadStaticDataState>();
+			_game.StartGameStateMachine();
+			DontDestroyOnLoad(this);
 		}
 	}
 }

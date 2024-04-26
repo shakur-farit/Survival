@@ -1,10 +1,10 @@
+using Assets.Scripts.Infrastructure.Services.AssetsManagement;
+using Assets.Scripts.Infrastructure.Services.PersistentProgress;
+using Assets.Scripts.StaticData;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.PersistentProgress;
-using StaticData;
 using UnityEngine;
 
-namespace Ammo.Factory
+namespace Assets.Scripts.Ammo.Factory
 {
 	public class AmmoFactory
 	{

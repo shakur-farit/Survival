@@ -1,8 +1,8 @@
-using Character;
+using Assets.Scripts.Character;
+using Assets.Scripts.Weapon;
 using UnityEngine;
-using Weapon;
 
-namespace StaticData
+namespace Assets.Scripts.StaticData
 {
 	[CreateAssetMenu(fileName = "Static Data", menuName = "Scriptable Object/Static Data/Character")]
 	public class CharacterStaticData : ScriptableObject

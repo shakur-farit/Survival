@@ -1,4 +1,4 @@
-namespace UI.Windows
+namespace Assets.Scripts.UI.Windows
 {
 	public enum WindowType
 	{

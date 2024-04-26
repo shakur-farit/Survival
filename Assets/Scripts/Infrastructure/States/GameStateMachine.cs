@@ -1,35 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Ammo.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.Factory;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
-using UI.Services.Factory;
-using UI.Services.Windows;
 
-namespace Infrastructure.States
+namespace Assets.Scripts.Infrastructure.States
 {
 	public class GameStateMachine
 	{
-		private Dictionary<Type, IState> _statesDictionary;
+		private Dictionary<Type, IState> _statesDictionary = new();
 		private IState _activeState;
-
-		public GameStateMachine(StaticDataService staticDataService, AssetsProvider assetsProvider,
-			PersistentProgressService persistentProgressService,
-			WindowsService windowsService, GameFactory gameFactory, UIFactory uiFactory, AmmoFactory ammoFactory)
-		{
-			_statesDictionary = new Dictionary<Type, IState>()
-			{
-				[typeof(LoadStaticDataState)] = new LoadStaticDataState(this, staticDataService, assetsProvider, gameFactory, uiFactory, ammoFactory),
-				[typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService),
-				[typeof(LoadSceneState)] = new LoadSceneState(this, assetsProvider, uiFactory),
-				[typeof(MainMenuState)] = new MainMenuState(this, windowsService),
-				[typeof(GameLoopingState)] = new GameLoopingState(this),
-				[typeof(LoadLevelState)] = new LoadLevelState(gameFactory),
-			};
-		}
-
 
 		public void Enter<TState>() where TState : IState
 		{
@@ -38,5 +15,8 @@ namespace Infrastructure.States
 			_activeState = state;
 			state.Enter();
 		}
+
+		public void RegisterState<TState>(TState state) where TState : IState=>
+			_statesDictionary.Add(typeof(TState), state);
 	}
 }

@@ -1,8 +1,8 @@
+using Assets.Scripts.UI.Services.Factory;
+using Assets.Scripts.UI.Windows;
 using Cysharp.Threading.Tasks;
-using UI.Services.Factory;
-using UI.Windows;
 
-namespace UI.Services.Windows
+namespace Assets.Scripts.UI.Services.Windows
 {
 	public class WindowsService
 	{

@@ -1,6 +1,6 @@
 using System;
 
-namespace Data
+namespace Assets.Scripts.Data
 {
 	[Serializable]
 	public class Progress

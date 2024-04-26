@@ -1,4 +1,4 @@
-namespace Infrastructure.Services.AssetsManagement
+namespace Assets.Scripts.Infrastructure.Services.AssetsManagement
 {
 	public class AssetsAddresses
 	{

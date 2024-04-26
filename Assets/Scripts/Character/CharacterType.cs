@@ -1,4 +1,4 @@
-namespace Character
+namespace Assets.Scripts.Character
 {
 	public enum CharacterType
 	{

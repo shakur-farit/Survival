@@ -1,22 +1,29 @@
-using Ammo.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.Factory;
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
-using Infrastructure.States;
-using UI.Services.Factory;
-using UI.Services.Windows;
+using Assets.Scripts.Infrastructure.States;
 
-namespace Infrastructure
+namespace Assets.Scripts.Infrastructure
 {
 	public class Game
 	{
-		public GameStateMachine StateMachine;
+		private readonly GameStateMachine _gameStateMachine;
+		private readonly StatesFactory _statesFactory;
 
-		public Game(StaticDataService staticDataService, AssetsProvider assetsProvider,
-			PersistentProgressService persistentProgressService, WindowsService windowsService,
-			GameFactory gameFactory, UIFactory uiFactory, AmmoFactory ammoFactory) => 
-			StateMachine = new GameStateMachine(staticDataService, assetsProvider, persistentProgressService, 
-				windowsService, gameFactory, uiFactory, ammoFactory);
+		public Game(GameStateMachine gameStateMachine, StatesFactory statesFactory)
+		{
+			_gameStateMachine = gameStateMachine;
+			_statesFactory = statesFactory;
+		}
+			
+
+		public void StartGameStateMachine()
+		{
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadStaticDataState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadSceneState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<GameLoopingState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadLevelState>());
+
+			_gameStateMachine.Enter<LoadStaticDataState>();
+		}
 	}
 }

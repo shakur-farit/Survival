@@ -1,9 +1,9 @@
-using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
+using Assets.Scripts.Infrastructure.Services.PersistentProgress;
+using Assets.Scripts.Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Enemy
+namespace Assets.Scripts.Enemy
 {
 	public class EnemyMover : MonoBehaviour
 	{

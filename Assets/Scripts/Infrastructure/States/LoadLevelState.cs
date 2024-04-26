@@ -1,7 +1,7 @@
+using Assets.Scripts.Infrastructure.Services.Factory;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.Factory;
 
-namespace Infrastructure.States
+namespace Assets.Scripts.Infrastructure.States
 {
 	public class LoadLevelState : IState
 	{

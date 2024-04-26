@@ -1,12 +1,12 @@
-using Ammo.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.Factory;
-using Infrastructure.Services.StaticData;
-using UI.Services.Factory;
-using UI.Services.Windows;
+using Assets.Scripts.Ammo.Factory;
+using Assets.Scripts.Infrastructure.Services.AssetsManagement;
+using Assets.Scripts.Infrastructure.Services.Factory;
+using Assets.Scripts.Infrastructure.Services.StaticData;
+using Assets.Scripts.UI.Services.Factory;
+using Assets.Scripts.UI.Services.Windows;
 using Zenject;
 
-namespace Installers
+namespace Assets.Scripts.Installers
 {
 	public class GameplaySceneInstaller : MonoInstaller
 	{

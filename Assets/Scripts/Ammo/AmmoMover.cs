@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Ammo
+namespace Assets.Scripts.Ammo
 {
 	public class AmmoMover : MonoBehaviour
 	{

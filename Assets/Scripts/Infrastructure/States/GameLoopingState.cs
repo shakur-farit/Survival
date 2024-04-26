@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Infrastructure.States
+namespace Assets.Scripts.Infrastructure.States
 {
 	public class GameLoopingState : IState
 	{

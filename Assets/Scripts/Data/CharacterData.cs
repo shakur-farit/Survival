@@ -1,8 +1,8 @@
 using System;
-using StaticData;
+using Assets.Scripts.StaticData;
 using UnityEngine;
 
-namespace Data
+namespace Assets.Scripts.Data
 {
 	[Serializable]
 	public class CharacterData

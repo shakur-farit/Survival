@@ -1,9 +1,12 @@
 using System;
 
-public static class StaticEventsHandler
+namespace Assets.Scripts
 {
-	public static event Action OnGameStarted;
+	public static class StaticEventsHandler
+	{
+		public static event Action OnGameStarted;
 
-	public static void CallGameStartedEvent() => 
-		OnGameStarted?.Invoke();
+		public static void CallGameStartedEvent() => 
+			OnGameStarted?.Invoke();
+	}
 }

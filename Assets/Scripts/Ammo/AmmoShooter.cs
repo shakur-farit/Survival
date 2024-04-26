@@ -1,9 +1,9 @@
 using System.Collections;
-using Ammo.Factory;
+using Assets.Scripts.Ammo.Factory;
 using UnityEngine;
 using Zenject;
 
-namespace Ammo
+namespace Assets.Scripts.Ammo
 {
 	public class AmmoShooter : MonoBehaviour
 	{

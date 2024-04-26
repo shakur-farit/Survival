@@ -1,9 +1,9 @@
-using Infrastructure.Services.Factory;
-using Infrastructure.Services.Randomizer;
+using Assets.Scripts.Infrastructure.Services.Factory;
+using Assets.Scripts.Infrastructure.Services.Randomizer;
 using UnityEngine;
 using Zenject;
 
-namespace Spawn
+namespace Assets.Scripts.Spawn
 {
 	public class Spawner : MonoBehaviour
 	{
