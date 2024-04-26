@@ -1,6 +1,7 @@
 using Assets.Scripts.Infrastructure.Services.Input;
 using Assets.Scripts.Infrastructure.Services.PersistentProgress;
 using Assets.Scripts.Infrastructure.Services.Randomizer;
+using Assets.Scripts.Infrastructure.States;
 using Zenject;
 
 namespace Assets.Scripts.Installers
@@ -12,7 +13,11 @@ namespace Assets.Scripts.Installers
 			RegisterInputService();
 			RegisterPersistentProgressServices();
 			RegisterRandomizer();
+			RegisterGameStateMachine();
 		}
+
+		private void RegisterGameStateMachine() => 
+			Container.Bind<GameStateMachine>().AsSingle();
 
 		private void RegisterInputService() =>
 			Container.Bind<InputService>().AsSingle();
