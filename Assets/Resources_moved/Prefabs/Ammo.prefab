@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829985761953955059}
   - component: {fileID: 8917602126094848502}
-  - component: {fileID: 3155470701467957097}
+  - component: {fileID: 1564749175262534872}
   m_Layer: 0
   m_Name: Ammo
   m_TagString: Untagged
@@ -153,7 +153,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3155470701467957097
+--- !u!114 &1564749175262534872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6539570766999889727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0f03a732df46040af896fe541d87f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b0d886c71f1f784d8808b3c069ee97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
