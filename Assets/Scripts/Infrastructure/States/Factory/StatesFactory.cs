@@ -7,7 +7,7 @@ namespace Assets.Scripts.Infrastructure.States
 		private IInstantiator _instantiator;
 
 		public StatesFactory(IInstantiator instantiator) =>
-			this._instantiator = instantiator;
+			_instantiator = instantiator;
 
 		public TState Create<TState>() where TState : IState =>
 			_instantiator.Instantiate<TState>();
