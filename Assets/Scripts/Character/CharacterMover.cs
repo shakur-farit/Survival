@@ -37,8 +37,6 @@ namespace Character
 				Vector2 movementVector = _camera.transform.TransformDirection(_inputService.Axis);
 
 				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
-
-				_persistentProgressService.Progress.characterData.CurrentPosition = transform.position;
 			}
 		}
 	}
