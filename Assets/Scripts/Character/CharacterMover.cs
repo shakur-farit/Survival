@@ -1,9 +1,9 @@
-using Assets.Scripts.Infrastructure.Services.Input;
-using Assets.Scripts.Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Input;
+using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Character
+namespace Character
 {
 	public class CharacterMover : MonoBehaviour
 	{

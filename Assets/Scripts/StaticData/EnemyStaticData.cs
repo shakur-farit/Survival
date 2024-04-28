@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Assets.Scripts.StaticData
+namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Enemy Static Data", menuName = "Scriptable Object/Static Data/Enemy")]
+	[CreateAssetMenu(fileName = "EnemyPrefab Static Data", menuName = "Scriptable Object/Static Data/EnemyPrefab")]
 	public class EnemyStaticData : ScriptableObject
 	{
 		public float MovementSpeed;

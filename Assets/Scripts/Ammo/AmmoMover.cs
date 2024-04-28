@@ -1,20 +1,28 @@
+using Infrastructure.Services.PersistentProgress;
+using StaticData;
 using UnityEngine;
+using Zenject;
 
-namespace Assets.Scripts.Ammo
+namespace Ammo
 {
 	public class AmmoMover : MonoBehaviour
 	{
-		public int Damage;
-		public float MovementSpeed;
+		private float _movementSpeed;
 
-		private void Update()
+		private PersistentProgressService _persistentProgressService;
+
+		[Inject]
+		public void Constructor(PersistentProgressService persistentProgressService) => 
+			_persistentProgressService = persistentProgressService;
+
+		private void Start()
 		{
-			transform.Translate(MovementSpeed, 0, 0);
+			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.characterData.CurrentWeapon.Ammo;
+
+			_movementSpeed = currentWeaponAmmo.MovementSpeed;
 		}
-	}
 
-	public class Damage : MonoBehaviour
-	{
-
+		private void Update() => 
+			transform.Translate(_movementSpeed, 0, 0);
 	}
 }

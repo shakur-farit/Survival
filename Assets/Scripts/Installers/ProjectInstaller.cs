@@ -1,10 +1,10 @@
-using Assets.Scripts.Infrastructure.Services.Input;
-using Assets.Scripts.Infrastructure.Services.PersistentProgress;
-using Assets.Scripts.Infrastructure.Services.Randomizer;
-using Assets.Scripts.Infrastructure.States;
+using Infrastructure.Services.Input;
+using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Randomizer;
+using Infrastructure.States.StateMachine;
 using Zenject;
 
-namespace Assets.Scripts.Installers
+namespace Installers
 {
 	public class ProjectInstaller : MonoInstaller
 	{

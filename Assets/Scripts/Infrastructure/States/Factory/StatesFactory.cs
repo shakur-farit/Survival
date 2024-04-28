@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Assets.Scripts.Infrastructure.States
+namespace Infrastructure.States.Factory
 {
 	public class StatesFactory
 	{

@@ -1,14 +1,15 @@
-using Assets.Scripts.Infrastructure.States;
+using Infrastructure.States;
+using Infrastructure.States.Factory;
+using Infrastructure.States.StateMachine;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Infrastructure
+namespace Infrastructure
 {
 	public class EnterPoint : MonoBehaviour
 	{
 		private GameStateMachine _gameStateMachine;
 		private StatesFactory _statesFactory;
-		private Game _game;
 
 
 		[Inject]
@@ -20,10 +21,22 @@ namespace Assets.Scripts.Infrastructure
 
 		private void Awake()
 		{
-			_game = new Game(_gameStateMachine, _statesFactory);
+			StartGameStateMachine();
 
-			_game.StartGameStateMachine();
 			DontDestroyOnLoad(this);
+		}
+
+		private void StartGameStateMachine()
+		{
+			_gameStateMachine.RegisterState(_statesFactory.Create<WarmUpState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadStaticDataState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadSceneState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<GameLoopingState>());
+			_gameStateMachine.RegisterState(_statesFactory.Create<LoadLevelState>());
+
+			_gameStateMachine.Enter<WarmUpState>();
 		}
 	}
 }

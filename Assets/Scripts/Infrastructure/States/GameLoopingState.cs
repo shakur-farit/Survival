@@ -1,4 +1,6 @@
-namespace Assets.Scripts.Infrastructure.States
+using Infrastructure.States.StateMachine;
+
+namespace Infrastructure.States
 {
 	public class GameLoopingState : IState
 	{

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Assets.Scripts.StaticData
+namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Static Data", menuName = "Scriptable Object/Static Data/Ammo")]
+	[CreateAssetMenu(fileName = "Static Data", menuName = "Scriptable Object/Static Data/AmmoPrefab")]
 	public class AmmoStaticData : ScriptableObject
 	{
 		public int Damage;

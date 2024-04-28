@@ -1,37 +1,34 @@
-using Assets.Scripts.Infrastructure.Services.AssetsManagement;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.Services.Factory
+namespace UI.Services.Factory
 {
 	public class UIFactory
 	{
 		private readonly AssetsProvider _assetsProvider;
+		private readonly ObjectCreatorService _objectsCreator;
 
-		public UIFactory(AssetsProvider assetsProvider) => 
+		public UIFactory(AssetsProvider assetsProvider, ObjectCreatorService objectsCreator)
+		{
 			_assetsProvider = assetsProvider;
+			_objectsCreator = objectsCreator;
+		}
 
 		public GameObject UIRoot { get; private set; }
 		public GameObject MainMenuWindow { get; private set; }
 
 
-		public async UniTask WarmUp()
-		{
-			await _assetsProvider.Load<GameObject>(AssetsAddresses.UIRoot);
-			await _assetsProvider.Load<GameObject>(AssetsAddresses.MainMenuWindow);
-		}
-
-
 		public async UniTask CreateUIRoot()
 		{
-			GameObject prefab = await _assetsProvider.Load<GameObject>(AssetsAddresses.UIRoot);
-			UIRoot = _assetsProvider.Instantiate(prefab);
+			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
+			UIRoot = _objectsCreator.Instantiate(reference.UIRootPrefab);
 		}
 
 		public async UniTask CreateMainMenuWindow()
 		{
-			GameObject prefab = await _assetsProvider.Load<GameObject>(AssetsAddresses.MainMenuWindow);
-			MainMenuWindow = _assetsProvider.Instantiate(prefab, UIRoot.transform);
+			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
+			MainMenuWindow = _objectsCreator.Instantiate(reference.MainMenuWindowPrefab, UIRoot.transform);
 		}
 
 		public void DestroyMainMenuWindow() => 

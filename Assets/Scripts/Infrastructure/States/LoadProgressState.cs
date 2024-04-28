@@ -1,7 +1,8 @@
-using Assets.Scripts.Data;
-using Assets.Scripts.Infrastructure.Services.PersistentProgress;
+using Data;
+using Infrastructure.Services.PersistentProgress;
+using Infrastructure.States.StateMachine;
 
-namespace Assets.Scripts.Infrastructure.States
+namespace Infrastructure.States
 {
 	public class LoadProgressState : IState
 	{

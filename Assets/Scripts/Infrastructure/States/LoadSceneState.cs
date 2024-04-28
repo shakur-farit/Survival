@@ -1,8 +1,9 @@
-using Assets.Scripts.Infrastructure.Services.AssetsManagement;
-using Assets.Scripts.UI.Services.Factory;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
+using Infrastructure.States.StateMachine;
+using UI.Services.Factory;
 
-namespace Assets.Scripts.Infrastructure.States
+namespace Infrastructure.States
 {
 	public class LoadSceneState : IState
 	{

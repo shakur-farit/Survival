@@ -1,6 +1,6 @@
-using Assets.Scripts.Data;
+using Data;
 
-namespace Assets.Scripts.Infrastructure.Services.PersistentProgress
+namespace Infrastructure.Services.PersistentProgress
 {
 	public class PersistentProgressService
 	{

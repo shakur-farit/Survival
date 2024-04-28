@@ -1,38 +1,30 @@
-using Assets.Scripts.Infrastructure.Services.AssetsManagement;
-using Assets.Scripts.Infrastructure.Services.PersistentProgress;
-using Assets.Scripts.StaticData;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.PersistentProgress;
+using StaticData;
 using UnityEngine;
 
-namespace Assets.Scripts.Ammo.Factory
+namespace Ammo.Factory
 {
 	public class AmmoFactory
 	{
-		private readonly AssetsProvider _assetsProvider;
-		private readonly PersistentProgressService _persistentProgressService;
-
 		public GameObject Ammo { get; private set; }
 
-		public AmmoFactory(AssetsProvider assetsProvider, PersistentProgressService persistentProgressService)
+		private readonly AssetsProvider _assetsProvider;
+		private readonly PersistentProgressService _persistentProgressService;
+		private readonly ObjectCreatorService _objectsCreator;
+
+		public AmmoFactory(AssetsProvider assetsProvider, PersistentProgressService persistentProgressService, ObjectCreatorService objectsCreator)
 		{
 			_assetsProvider = assetsProvider;
 			_persistentProgressService = persistentProgressService;
+			_objectsCreator = objectsCreator;
 		}
-
-		public async UniTask WarmUp() => 
-			await _assetsProvider.Load<GameObject>(AssetsAddresses.AmmoAddress);
 
 		public async UniTask CreateAmmo(Transform parent)
 		{
-			GameObject prefab = await _assetsProvider.Load<GameObject>(AssetsAddresses.AmmoAddress);
-			Ammo = _assetsProvider.Instantiate(prefab, parent);
-
-			Ammo.TryGetComponent(out AmmoMover ammo);
-
-			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.characterData.CurrentWeapon.Ammo;
-
-			ammo.Damage = currentWeaponAmmo.Damage;
-			ammo.MovementSpeed = currentWeaponAmmo.MovementSpeed;
+			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
+			Ammo = _objectsCreator.Instantiate(reference.AmmoPrefab, parent);
 		}
 	}
 }

@@ -1,14 +1,12 @@
 using System;
-using Assets.Scripts.StaticData;
-using UnityEngine;
+using StaticData;
 
-namespace Assets.Scripts.Data
+namespace Data
 {
 	[Serializable]
 	public class CharacterData
 	{
 		public CharacterStaticData CurrentCharacterStaticData;
-		public Vector2 CurrentPosition;
 		public WeaponStaticData CurrentWeapon;
 	}
 }

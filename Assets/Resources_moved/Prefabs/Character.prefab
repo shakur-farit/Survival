@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 8173200150968427659}
   - component: {fileID: 6514956025599437399}
   - component: {fileID: 3462600473983923906}
-  - component: {fileID: 7952359316690262458}
+  - component: {fileID: 8152230782425536593}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -343,8 +343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 848134825718536704}
-  Hand: {fileID: 4288739608410875299}
-  HandNoWeapon: {fileID: 1536107770253181898}
 --- !u!114 &3462600473983923906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,28 +356,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponSpriteRenderer: {fileID: 3100151591007234152}
-  WeaponShootPoint: {fileID: 8586382567303437777}
---- !u!95 &7952359316690262458
-Animator:
-  serializedVersion: 5
+--- !u!114 &8152230782425536593
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2287838410393570457}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e87ce176a15556c459b355908992b930, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff96392ce21cdb4792b00959006ecf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponShootPoint: {fileID: 8586382567303437777}
 --- !u!1 &4786878243438039511
 GameObject:
   m_ObjectHideFlags: 0

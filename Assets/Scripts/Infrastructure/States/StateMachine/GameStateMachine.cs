@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.Infrastructure.States
+namespace Infrastructure.States.StateMachine
 {
 	public class GameStateMachine
 	{

@@ -1,9 +1,9 @@
 using System.Collections;
-using Assets.Scripts.Ammo.Factory;
+using Ammo.Factory;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Ammo
+namespace Ammo
 {
 	public class AmmoShooter : MonoBehaviour
 	{
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Ammo
 			yield return new WaitForSeconds(3);
 		}
 
-		private async void CreateAmmo() => 
+		private async void CreateAmmo() =>
 			await _ammoFactory.CreateAmmo(transform);
 	}
 }

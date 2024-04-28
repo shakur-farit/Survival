@@ -1,19 +1,22 @@
-using Assets.Scripts.Ammo.Factory;
-using Assets.Scripts.Infrastructure.Services.AssetsManagement;
-using Assets.Scripts.Infrastructure.Services.Factory;
-using Assets.Scripts.Infrastructure.Services.StaticData;
-using Assets.Scripts.Infrastructure.States;
-using Assets.Scripts.UI.Services.Factory;
-using Assets.Scripts.UI.Services.Windows;
+using Ammo.Factory;
+using Character.Factory;
+using Enemy;
+using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.StaticData;
+using Infrastructure.States.Factory;
+using Spawn;
+using UI.Services.Factory;
+using UI.Services.Windows;
 using Zenject;
 
-namespace Assets.Scripts.Installers
+namespace Installers
 {
 	public class GameplaySceneInstaller : MonoInstaller
 	{
 		public override void InstallBindings()
 		{
 			RegisterFactories();
+			RegisterObjectsCreator();
 			RegisterAssetsProvider();
 			RegisterStaticDataService();
 			RegisterWindowsService();
@@ -22,7 +25,10 @@ namespace Assets.Scripts.Installers
 		private void RegisterFactories()
 		{
 			RegisterStatesFactory();
-			RegisterGameFactory();
+			RegisterCharacterFactory();
+			RegisterEnemyFactory();
+			RegisterSpawnerFactory();
+			RegisterHUDFactory();
 			RegisterUIFactory();
 			RegisterAmmoFactory();
 		}
@@ -30,8 +36,17 @@ namespace Assets.Scripts.Installers
 		private void RegisterStatesFactory() => 
 			Container.Bind<StatesFactory>().AsSingle();
 
-		private void RegisterGameFactory() => 
-			Container.Bind<GameFactory>().AsSingle();
+		private void RegisterCharacterFactory() => 
+			Container.Bind<CharacterFactory>().AsSingle();
+
+		private void RegisterEnemyFactory() => 
+			Container.Bind<EnemyFactory>().AsSingle();
+
+		private void RegisterSpawnerFactory() => 
+			Container.Bind<SpawnerFactory>().AsSingle();
+
+		private void RegisterHUDFactory() => 
+			Container.Bind<HUDFactory>().AsSingle();
 
 		private void RegisterUIFactory() => 
 			Container.Bind<UIFactory>().AsSingle();
@@ -41,6 +56,9 @@ namespace Assets.Scripts.Installers
 
 		private void RegisterStaticDataService() =>
 			Container.Bind<StaticDataService>().AsSingle();
+
+		private void RegisterObjectsCreator() => 
+			Container.Bind<ObjectCreatorService>().AsSingle();
 
 		private void RegisterAssetsProvider() =>
 			Container.Bind<AssetsProvider>().AsSingle();

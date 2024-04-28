@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Assets.Scripts.Infrastructure.Services.AssetsManagement;
-using Assets.Scripts.StaticData;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
+using StaticData;
 
-namespace Assets.Scripts.Infrastructure.Services.StaticData
+namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService
 	{

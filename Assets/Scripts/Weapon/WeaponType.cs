@@ -1,4 +1,4 @@
-namespace Assets.Scripts.Weapon
+namespace Weapon
 {
 	public enum WeaponType
 	{

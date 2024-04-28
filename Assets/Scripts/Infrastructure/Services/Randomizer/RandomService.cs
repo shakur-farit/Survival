@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Infrastructure.Services.Randomizer
+namespace Infrastructure.Services.Randomizer
 {
 	public class RandomService
 	{

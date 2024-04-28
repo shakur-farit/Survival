@@ -1,15 +1,22 @@
-using Assets.Scripts.Infrastructure.Services.Factory;
+using Character.Factory;
 using Cysharp.Threading.Tasks;
+using Spawn;
 
-namespace Assets.Scripts.Infrastructure.States
+namespace Infrastructure.States
 {
 	public class LoadLevelState : IState
 	{
-		private readonly GameFactory _gameFactory;
+		private readonly CharacterFactory _characterFactory;
+		private readonly SpawnerFactory _spawnerFactory;
+		private readonly HUDFactory _hudFactory;
 
 
-		public LoadLevelState(GameFactory gameFactory) => 
-			_gameFactory = gameFactory;
+		public LoadLevelState(CharacterFactory characterFactory, SpawnerFactory spawnerFactory, HUDFactory hudFactory)
+		{
+			_characterFactory = characterFactory;
+			_spawnerFactory = spawnerFactory;
+			_hudFactory = hudFactory;
+		}
 
 		public async void Enter()
 		{
@@ -24,19 +31,17 @@ namespace Assets.Scripts.Infrastructure.States
 		{
 			await CreateCharacter();
 			await CreateSpawner();
-			await CreateHud();
+			await CreateHUD();
 		}
 
-		private async UniTask CreateCharacter()
-		{ 
-			await _gameFactory.CreateCharacter();
-		}
+		private async UniTask CreateCharacter() => 
+			await _characterFactory.CreateCharacter();
 
-		private async UniTask CreateSpawner() => 
-			await _gameFactory.CreateSpawner();
+		private async UniTask CreateSpawner() =>
+			await _spawnerFactory.CreateSpawner();
 
-		private async UniTask CreateHud() => 
-			await _gameFactory.CreateHud();
+		private async UniTask CreateHUD() =>
+			await _hudFactory.CreateHUD();
 
 	}
 }

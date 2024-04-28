@@ -1,19 +1,20 @@
-using Assets.Scripts.Infrastructure.Services.Factory;
-using Assets.Scripts.Infrastructure.Services.Randomizer;
+using Character.Factory;
+using Enemy;
+using Infrastructure.Services.Randomizer;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Spawn
+namespace Spawn
 {
 	public class Spawner : MonoBehaviour
 	{
 		private RandomService _randomService;
-		private GameFactory _gameFactory;
+		private EnemyFactory _enemyFactory;
 
 		[Inject]
-		public void Constructor(GameFactory gameFactory, RandomService randomService)
+		public void Constructor(EnemyFactory enemyFactory, RandomService randomService)
 		{
-			_gameFactory = gameFactory;
+			_enemyFactory = enemyFactory;
 			_randomService = randomService;
 		}
 
@@ -24,7 +25,7 @@ namespace Assets.Scripts.Spawn
 		{
 			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(10f, 10f));
 
-			await _gameFactory.CreateEnemy(randomPosition);
+			await _enemyFactory.CreateEnemy(randomPosition);
 		}
 	}
 }

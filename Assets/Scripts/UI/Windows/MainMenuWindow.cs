@@ -1,12 +1,12 @@
-using Assets.Scripts.Character;
-using Assets.Scripts.Infrastructure.Services.PersistentProgress;
-using Assets.Scripts.Infrastructure.Services.StaticData;
-using Assets.Scripts.StaticData;
+using Character;
+using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Scripts.UI.Windows
+namespace UI.Windows
 {
 	public class MainMenuWindow : MonoBehaviour
 	{

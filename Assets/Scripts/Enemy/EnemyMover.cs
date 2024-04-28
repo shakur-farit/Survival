@@ -1,33 +1,41 @@
-using Assets.Scripts.Infrastructure.Services.PersistentProgress;
-using Assets.Scripts.Infrastructure.Services.StaticData;
+using Character.Factory;
+using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Enemy
+namespace Enemy
 {
 	public class EnemyMover : MonoBehaviour
 	{
 		private float _movementSpeed;
+		private GameObject _target;
 
 		private StaticDataService _staticDataService;
 		private PersistentProgressService _persistentProgressService;
+		private CharacterFactory _characterFactory;
 
 		[Inject]
-		public void Constructor(StaticDataService staticDataService, PersistentProgressService persistentProgressService)
+		public void Constructor(StaticDataService staticDataService, PersistentProgressService persistentProgressService,
+			CharacterFactory characterFactory)
 		{
 			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;
+			_characterFactory = characterFactory;
 		}
 
-		private void Awake() => 
+		private void Awake()
+		{
 			_movementSpeed = _staticDataService.ForEnemy.MovementSpeed;
+			_target = _characterFactory.Character;
+		}
 
 		void Update() => 
 			Move();
 
 		private void Move()
 		{
-			Vector2 targetPosition = _persistentProgressService.Progress.characterData.CurrentPosition;
+			Vector2 targetPosition = _target.transform.position;
 			Vector2 enemyPosition = transform.position;
 
 			Vector2 direction = targetPosition - enemyPosition;
