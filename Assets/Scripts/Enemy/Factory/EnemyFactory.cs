@@ -1,8 +1,9 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
-namespace Enemy
+namespace Enemy.Factory
 {
 	public class EnemyFactory
 	{
@@ -20,7 +21,8 @@ namespace Enemy
 		public async UniTask CreateEnemy(Vector2 position)
 		{
 			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			Enemy = _objectCreator.Instantiate(reference.EnemyPrefab, position);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.EnemyAddress);
+			Enemy = _objectCreator.Instantiate(prefab, position);
 		}
 	}
 }

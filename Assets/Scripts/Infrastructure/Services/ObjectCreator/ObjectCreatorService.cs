@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace Infrastructure.Services.AssetsManagement
+namespace Infrastructure.Services.ObjectCreator
 {
 	public class ObjectCreatorService
 	{

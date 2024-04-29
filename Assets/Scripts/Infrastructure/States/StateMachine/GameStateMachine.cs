@@ -5,7 +5,7 @@ namespace Infrastructure.States.StateMachine
 {
 	public class GameStateMachine
 	{
-		private Dictionary<Type, IState> _statesDictionary = new();
+		private readonly Dictionary<Type, IState> _statesDictionary = new();
 		private IState _activeState;
 
 		public void Enter<TState>() where TState : IState

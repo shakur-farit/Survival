@@ -1,6 +1,7 @@
 using Character.Factory;
 using Cysharp.Threading.Tasks;
-using Spawn;
+using HUD.Factory;
+using Spawn.Factory;
 
 namespace Infrastructure.States
 {

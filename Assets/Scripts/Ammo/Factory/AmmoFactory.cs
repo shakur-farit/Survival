@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.PersistentProgress;
-using StaticData;
+using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace Ammo.Factory
@@ -11,20 +10,22 @@ namespace Ammo.Factory
 		public GameObject Ammo { get; private set; }
 
 		private readonly AssetsProvider _assetsProvider;
-		private readonly PersistentProgressService _persistentProgressService;
 		private readonly ObjectCreatorService _objectsCreator;
 
-		public AmmoFactory(AssetsProvider assetsProvider, PersistentProgressService persistentProgressService, ObjectCreatorService objectsCreator)
+		public AmmoFactory(AssetsProvider assetsProvider, ObjectCreatorService objectsCreator)
 		{
 			_assetsProvider = assetsProvider;
-			_persistentProgressService = persistentProgressService;
 			_objectsCreator = objectsCreator;
 		}
 
 		public async UniTask CreateAmmo(Transform parent)
 		{
 			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			Ammo = _objectsCreator.Instantiate(reference.AmmoPrefab, parent);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.AmmoAddress);
+
+			Ammo = _objectsCreator.Instantiate(prefab, parent);
+
+			Ammo.transform.SetParent(null);
 		}
 	}
 }

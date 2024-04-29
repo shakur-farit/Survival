@@ -1,8 +1,9 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
-namespace Spawn
+namespace Spawn.Factory
 {
 	public class SpawnerFactory
 	{
@@ -20,7 +21,8 @@ namespace Spawn
 		public async UniTask CreateSpawner()
 		{
 			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			Spawner = _objectsCreator.Instantiate(reference.SpawnerPrefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.MainMenuWindowAddress);
+			Spawner = _objectsCreator.Instantiate(prefab);
 		}
 	}
 }

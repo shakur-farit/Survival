@@ -1,5 +1,4 @@
-using Character.Factory;
-using Enemy;
+using Enemy.Factory;
 using Infrastructure.Services.Randomizer;
 using UnityEngine;
 using Zenject;

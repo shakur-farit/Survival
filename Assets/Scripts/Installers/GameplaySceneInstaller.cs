@@ -1,24 +1,22 @@
 using Ammo.Factory;
 using Character.Factory;
-using Enemy;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.StaticData;
+using Enemy.Factory;
+using HUD.Factory;
+using Infrastructure.Services.ObjectCreator;
 using Infrastructure.States.Factory;
-using Spawn;
+using Spawn.Factory;
 using UI.Services.Factory;
 using UI.Services.Windows;
 using Zenject;
 
 namespace Installers
 {
-	public class GameplaySceneInstaller : MonoInstaller
+	public class GamePlaySceneInstaller : MonoInstaller
 	{
 		public override void InstallBindings()
 		{
 			RegisterFactories();
 			RegisterObjectsCreator();
-			RegisterAssetsProvider();
-			RegisterStaticDataService();
 			RegisterWindowsService();
 		}
 
@@ -54,14 +52,8 @@ namespace Installers
 		private void RegisterAmmoFactory() => 
 			Container.Bind<AmmoFactory>().AsSingle();
 
-		private void RegisterStaticDataService() =>
-			Container.Bind<StaticDataService>().AsSingle();
-
 		private void RegisterObjectsCreator() => 
 			Container.Bind<ObjectCreatorService>().AsSingle();
-
-		private void RegisterAssetsProvider() =>
-			Container.Bind<AssetsProvider>().AsSingle();
 
 		private void RegisterWindowsService() => 
 			Container.Bind<WindowsService>().AsSingle();

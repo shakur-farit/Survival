@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c02317d39503c44aa17b32be8cc56e6, type: 3}
   m_Name: AssetsReference
   m_EditorClassIdentifier: 
-  Character: {fileID: 2287838410393570457, guid: 1b0d59a5750eaf145a34d98a24e3d439, type: 3}
-  Enemy: {fileID: 5438004444555498043, guid: 9ff1b620a2d4834469927338bd631e0a, type: 3}
-  Ammo: {fileID: 6539570766999889727, guid: 5369d1fbca813774ca914809aef0ec4d, type: 3}
-  Spawner: {fileID: 1510024019952278293, guid: f6e445c0785c8ab4499b0dffcba8a817, type: 3}
-  HUD: {fileID: 6094012963840429800, guid: 3b3937a2c36a12b48a417daa499a69ef, type: 3}
-  UIRoot: {fileID: 1641174255769479364, guid: cda24eefa79f92b43b175573e88175a8, type: 3}
-  MainMenuWindow: {fileID: 731944184819309819, guid: d0a4c4ea236351c45a4af7c503258735, type: 3}
+  CharacterAddress: Character
+  EnemyAddress: Enemy
+  AmmoAddress: Ammo
+  SpawnerAddress: Spawner
+  HUDAddress: HUD
+  UIRootAddress: UIRoot
+  MainMenuWindowAddress: MainMenuWindow

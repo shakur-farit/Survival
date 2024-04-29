@@ -1,8 +1,9 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
-namespace Character.Factory
+namespace HUD.Factory
 {
 	public class HUDFactory
 	{
@@ -20,7 +21,8 @@ namespace Character.Factory
 		public async UniTask CreateHUD()
 		{
 			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			HUD = _objectsCreator.Instantiate(reference.HUDPrefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.HUDAddress);
+			HUD = _objectsCreator.Instantiate(prefab);
 		}
 	}
 }

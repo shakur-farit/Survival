@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.AssetsManagement;
 using Infrastructure.States.StateMachine;
 using UI.Services.Factory;
 
@@ -8,13 +7,11 @@ namespace Infrastructure.States
 	public class LoadSceneState : IState
 	{
 		private readonly GameStateMachine _gameStateMachine;
-		private readonly AssetsProvider _assertsProvider;
 		private readonly UIFactory _uiFactory;
 
-		public LoadSceneState(GameStateMachine gameStateMachine, AssetsProvider assertsProvider, UIFactory uiFactory)
+		public LoadSceneState(GameStateMachine gameStateMachine, UIFactory uiFactory)
 		{
 			_gameStateMachine = gameStateMachine;
-			_assertsProvider = assertsProvider;
 			_uiFactory = uiFactory;
 		}
 

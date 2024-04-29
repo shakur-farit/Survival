@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace UI.Services.Factory
@@ -22,13 +23,15 @@ namespace UI.Services.Factory
 		public async UniTask CreateUIRoot()
 		{
 			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			UIRoot = _objectsCreator.Instantiate(reference.UIRootPrefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.UIRootAddress);
+			UIRoot = _objectsCreator.Instantiate(prefab);
 		}
 
 		public async UniTask CreateMainMenuWindow()
 		{
 			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			MainMenuWindow = _objectsCreator.Instantiate(reference.MainMenuWindowPrefab, UIRoot.transform);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.MainMenuWindowAddress);
+			MainMenuWindow = _objectsCreator.Instantiate(prefab, UIRoot.transform);
 		}
 
 		public void DestroyMainMenuWindow() => 

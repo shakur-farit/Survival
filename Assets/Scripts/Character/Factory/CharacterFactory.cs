@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace Character.Factory
@@ -20,7 +21,8 @@ namespace Character.Factory
 		public async UniTask CreateCharacter()
 		{
 			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			Character = _objectCreator.Instantiate(reference.CharacterPrefab);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.CharacterAddress);
+			Character = _objectCreator.Instantiate(prefab);
 		}
 	}
 }

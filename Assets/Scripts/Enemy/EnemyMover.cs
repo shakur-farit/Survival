@@ -1,5 +1,4 @@
 using Character.Factory;
-using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
@@ -12,15 +11,12 @@ namespace Enemy
 		private GameObject _target;
 
 		private StaticDataService _staticDataService;
-		private PersistentProgressService _persistentProgressService;
 		private CharacterFactory _characterFactory;
 
 		[Inject]
-		public void Constructor(StaticDataService staticDataService, PersistentProgressService persistentProgressService,
-			CharacterFactory characterFactory)
+		public void Constructor(StaticDataService staticDataService, CharacterFactory characterFactory)
 		{
 			_staticDataService = staticDataService;
-			_persistentProgressService = persistentProgressService;
 			_characterFactory = characterFactory;
 		}
 

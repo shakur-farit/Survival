@@ -1,4 +1,5 @@
 using Character;
+using Events;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
@@ -16,12 +17,15 @@ namespace UI.Windows
 
 		private StaticDataService _staticDataService;
 		private PersistentProgressService _persistentProgressService;
+		private IGamePlayEvents _eventer;
+
 
 		[Inject]
-		public void Constructor(StaticDataService staticDataService, PersistentProgressService persistentProgressService)
+		public void Constructor(StaticDataService staticDataService, PersistentProgressService persistentProgressService, IGamePlayEvents eventer)
 		{
 			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;
+			_eventer = eventer;
 		}
 
 		private void Start()
@@ -32,7 +36,7 @@ namespace UI.Windows
 		}
 
 		private void StartGame() => 
-			StaticEventsHandler.CallGameStartedEvent();
+			_eventer.CallGameStartedEvent();
 
 		private void SetCharacter(CharacterType type)
 		{
