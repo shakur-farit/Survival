@@ -15,13 +15,13 @@ namespace UI.Windows
 		public Button SetGeneralButton;
 		public Button SetThiefButton;
 
-		private StaticDataService _staticDataService;
-		private PersistentProgressService _persistentProgressService;
+		private IStaticDataService _staticDataService;
+		private IPersistentProgressService _persistentProgressService;
 		private IGamePlayEvents _eventer;
 
 
 		[Inject]
-		public void Constructor(StaticDataService staticDataService, PersistentProgressService persistentProgressService, IGamePlayEvents eventer)
+		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService, IGamePlayEvents eventer)
 		{
 			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;

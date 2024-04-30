@@ -7,11 +7,11 @@ namespace Spawn
 {
 	public class Spawner : MonoBehaviour
 	{
-		private RandomService _randomService;
-		private EnemyFactory _enemyFactory;
+		private IRandomService _randomService;
+		private IEnemyFactory _enemyFactory;
 
 		[Inject]
-		public void Constructor(EnemyFactory enemyFactory, RandomService randomService)
+		public void Constructor(IEnemyFactory enemyFactory, IRandomService randomService)
 		{
 			_enemyFactory = enemyFactory;
 			_randomService = randomService;

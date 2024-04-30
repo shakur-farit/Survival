@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Ammo.Factory;
 using UnityEngine;
@@ -7,25 +8,28 @@ namespace Ammo
 {
 	public class AmmoShooter : MonoBehaviour
 	{
-		private AmmoFactory _ammoFactory;
+		private IAmmoFactory _ammoFactory;
 
 		[Inject]
-		public void Constructor(AmmoFactory ammoFactory) => 
+		public void Constructor(IAmmoFactory ammoFactory) => 
 			_ammoFactory = ammoFactory;
 
-		private void Start() => 
+		private void Update() => 
 			Shoot();
 
 		private void Shoot()
 		{
-			StartCoroutine(ShootRoutine());
+			if (Input.GetMouseButtonDown(0))
+			{
+				CreateAmmo();
+			}
 		}
+
 
 		private IEnumerator ShootRoutine()
 		{
-			CreateAmmo();
-
 			yield return new WaitForSeconds(3);
+			CreateAmmo();
 		}
 
 		private async void CreateAmmo() =>

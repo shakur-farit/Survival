@@ -8,12 +8,12 @@ namespace Infrastructure
 {
 	public class EnterPoint : MonoBehaviour
 	{
-		private GameStateMachine _gameStateMachine;
-		private StatesFactory _statesFactory;
+		private IGameStateMachine _gameStateMachine;
+		private IStatesFactory _statesFactory;
 
 
 		[Inject]
-		public void Constructor(GameStateMachine gameStateMachine, StatesFactory statesFactory)
+		public void Constructor(IGameStateMachine gameStateMachine, IStatesFactory statesFactory)
 		{
 			_gameStateMachine = gameStateMachine;
 			_statesFactory = statesFactory;

@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Infrastructure.Services.ObjectCreator
 {
-	public class ObjectCreatorService
+	public class ObjectCreatorService : IObjectCreatorService
 	{
 		private readonly IInstantiator _instantiator;
 

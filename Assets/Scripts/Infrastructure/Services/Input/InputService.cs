@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Infrastructure.Services.Input
 {
-	public class InputService
+	public class InputService : IInputService
 	{
 		private const string Horizontal = "Horizontal";
 		private const string Vertical = "Vertical";

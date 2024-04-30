@@ -10,11 +10,11 @@ namespace Enemy
 		private float _movementSpeed;
 		private GameObject _target;
 
-		private StaticDataService _staticDataService;
-		private CharacterFactory _characterFactory;
+		private IStaticDataService _staticDataService;
+		private ICharacterFactory _characterFactory;
 
 		[Inject]
-		public void Constructor(StaticDataService staticDataService, CharacterFactory characterFactory)
+		public void Constructor(IStaticDataService staticDataService, ICharacterFactory characterFactory)
 		{
 			_staticDataService = staticDataService;
 			_characterFactory = characterFactory;

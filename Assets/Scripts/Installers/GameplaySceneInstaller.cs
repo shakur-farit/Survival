@@ -32,30 +32,30 @@ namespace Installers
 		}
 
 		private void RegisterStatesFactory() => 
-			Container.Bind<StatesFactory>().AsSingle();
+			Container.BindInterfacesAndSelfTo<StatesFactory>().AsSingle();
 
 		private void RegisterCharacterFactory() => 
-			Container.Bind<CharacterFactory>().AsSingle();
+			Container.BindInterfacesAndSelfTo<CharacterFactory>().AsSingle();
 
 		private void RegisterEnemyFactory() => 
-			Container.Bind<EnemyFactory>().AsSingle();
+			Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle();
 
 		private void RegisterSpawnerFactory() => 
-			Container.Bind<SpawnerFactory>().AsSingle();
+			Container.BindInterfacesAndSelfTo<SpawnerFactory>().AsSingle();
 
 		private void RegisterHUDFactory() => 
-			Container.Bind<HUDFactory>().AsSingle();
+			Container.BindInterfacesAndSelfTo<HUDFactory>().AsSingle();
 
 		private void RegisterUIFactory() => 
-			Container.Bind<UIFactory>().AsSingle();
+			Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle();
 
 		private void RegisterAmmoFactory() => 
-			Container.Bind<AmmoFactory>().AsSingle();
+			Container.BindInterfacesAndSelfTo<AmmoFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
-			Container.Bind<ObjectCreatorService>().AsSingle();
+			Container.BindInterfacesAndSelfTo<ObjectCreatorService>().AsSingle();
 
 		private void RegisterWindowsService() => 
-			Container.Bind<WindowsService>().AsSingle();
+			Container.BindInterfacesAndSelfTo<WindowsService>().AsSingle();
 	}
 }

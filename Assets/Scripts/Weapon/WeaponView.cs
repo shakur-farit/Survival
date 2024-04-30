@@ -10,11 +10,11 @@ namespace Weapon
 	{
 		public SpriteRenderer WeaponSpriteRenderer;
 
-		private PersistentProgressService _persistentProgressService;
-		private StaticDataService _staticDataService;
+		private IPersistentProgressService _persistentProgressService;
+		private IStaticDataService _staticDataService;
 
 		[Inject]
-		public void Constructor(PersistentProgressService persistentProgressService, StaticDataService staticDataService)
+		public void Constructor(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
 		{
 			_persistentProgressService = persistentProgressService;
 			_staticDataService = staticDataService;

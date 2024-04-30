@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace HUD.Factory
 {
-	public class HUDFactory
+	public class HUDFactory : IHUDFactory
 	{
 		public GameObject HUD { private set; get; }
 
-		private readonly AssetsProvider _assetsProvider;
-		private readonly ObjectCreatorService _objectsCreator;
+		private readonly IAssetsProvider _assetsProvider;
+		private readonly IObjectCreatorService _objectsCreator;
 
-		public HUDFactory(AssetsProvider assetsProvider, ObjectCreatorService objectsCreator)
+		public HUDFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator)
 		{
 			_assetsProvider = assetsProvider;
 			_objectsCreator = objectsCreator;

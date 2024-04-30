@@ -7,11 +7,11 @@ namespace Infrastructure.States
 {
 	public class WarmUpState : IState
 	{
-		private readonly AssetsProvider _assetsProvider;
-		private readonly StaticDataService _staticDataService;
-		private readonly GameStateMachine _gameStateMachine;
+		private readonly IAssetsProvider _assetsProvider;
+		private readonly IStaticDataService _staticDataService;
+		private readonly IGameStateMachine _gameStateMachine;
 
-		public WarmUpState(AssetsProvider assetsProvider, StaticDataService staticDataService, GameStateMachine gameStateMachine)
+		public WarmUpState(IAssetsProvider assetsProvider, IStaticDataService staticDataService, IGameStateMachine gameStateMachine)
 		{
 			_assetsProvider = assetsProvider;
 			_staticDataService = staticDataService;

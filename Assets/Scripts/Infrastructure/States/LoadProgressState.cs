@@ -6,10 +6,10 @@ namespace Infrastructure.States
 {
 	public class LoadProgressState : IState
 	{
-		private readonly GameStateMachine _gameStateMachine;
-		private readonly PersistentProgressService _persistentProgressService;
+		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IPersistentProgressService _persistentProgressService;
 
-		public LoadProgressState(GameStateMachine gameStateMachine, PersistentProgressService persistentProgressService)
+		public LoadProgressState(IGameStateMachine gameStateMachine, IPersistentProgressService persistentProgressService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_persistentProgressService = persistentProgressService;

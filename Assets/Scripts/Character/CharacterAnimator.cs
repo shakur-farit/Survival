@@ -9,10 +9,10 @@ namespace Character
 	{
 		public Animator Animator;
 
-		private static PersistentProgressService _persistentProgressService;
+		private static IPersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Constructor(PersistentProgressService  persistentProgressService) =>
+		public void Constructor(IPersistentProgressService  persistentProgressService) =>
 			_persistentProgressService = persistentProgressService;
 
 		private void Start()

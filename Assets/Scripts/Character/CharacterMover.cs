@@ -9,13 +9,13 @@ namespace Character
 	{
 		private float _movementSpeed;
 
-		private InputService _inputService;
-
 		private Camera _camera;
-		private PersistentProgressService _persistentProgressService;
+
+		private IInputService _inputService;
+		private IPersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Construct(InputService inputService, PersistentProgressService persistentProgressService)
+		public void Construct(IInputService inputService, IPersistentProgressService persistentProgressService)
 		{
 			_inputService = inputService;
 			_persistentProgressService = persistentProgressService;

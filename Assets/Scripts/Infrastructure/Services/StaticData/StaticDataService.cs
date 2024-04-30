@@ -6,7 +6,7 @@ using StaticData;
 
 namespace Infrastructure.Services.StaticData
 {
-	public class StaticDataService
+	public class StaticDataService : IStaticDataService
 	{
 		private const string GeneralStaticDataAddress = "General Static Data";
 		private const string ThiefStaticDataAddress = "Thief Static Data";
@@ -18,21 +18,18 @@ namespace Infrastructure.Services.StaticData
 
 		private readonly AssetsProvider _assetsProvider;
 
+		private CharacterStaticData _forGeneral;
+		private CharacterStaticData _forThief;
+		
+		private WeaponStaticData _forPistol;
+		private WeaponStaticData _forShotgun;
+		
+		public List<CharacterStaticData> CharactersList { get; private set; } = new();
+		public List<WeaponStaticData> WeaponsList { get; private set; } = new();
+		public EnemyStaticData ForEnemy { get; private set; }
 
 		public StaticDataService(AssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
-
-		public List<CharacterStaticData> CharactersList { get; private set; } = new();
-		public List<WeaponStaticData> WeaponsList { get; private set; } = new();
-
-		public EnemyStaticData ForEnemy { get; private set; }
-
-		private CharacterStaticData _forGeneral;
-		private CharacterStaticData _forThief;
-
-		private WeaponStaticData _forPistol;
-		private WeaponStaticData _forShotgun;
-
 
 		public async UniTask Load()
 		{

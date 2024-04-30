@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace UI.Services.Factory
 {
-	public class UIFactory
+	public class UIFactory : IUIFactory
 	{
-		private readonly AssetsProvider _assetsProvider;
-		private readonly ObjectCreatorService _objectsCreator;
+		private readonly IAssetsProvider _assetsProvider;
+		private readonly IObjectCreatorService _objectsCreator;
 
-		public UIFactory(AssetsProvider assetsProvider, ObjectCreatorService objectsCreator)
+		public UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator)
 		{
 			_assetsProvider = assetsProvider;
 			_objectsCreator = objectsCreator;

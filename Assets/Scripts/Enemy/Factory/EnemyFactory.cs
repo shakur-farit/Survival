@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Enemy.Factory
 {
-	public class EnemyFactory
+	public class EnemyFactory : IEnemyFactory
 	{
-		private readonly AssetsProvider _assetsProvider;
-		private readonly ObjectCreatorService _objectCreator;
+		private readonly IAssetsProvider _assetsProvider;
+		private readonly IObjectCreatorService _objectCreator;
 
 		public GameObject Enemy { get; private set; }
 
-		public EnemyFactory(AssetsProvider assetsProvider, ObjectCreatorService objectCreator)
+		public EnemyFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectCreator)
 		{
 			_assetsProvider = assetsProvider;
 			_objectCreator = objectCreator;

@@ -7,12 +7,12 @@ namespace Infrastructure.States
 {
 	public class MainMenuState : IState
 	{
-		private readonly GameStateMachine _gameStateMachine;
-		private readonly WindowsService _windowsService;
+		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IWindowsService _windowsService;
 		private readonly IGamePlayEvents _eventer;
 
 
-		public MainMenuState(GameStateMachine gameStateMachine, WindowsService windowsService, IGamePlayEvents eventer)
+		public MainMenuState(IGameStateMachine gameStateMachine, IWindowsService windowsService, IGamePlayEvents eventer)
 		{
 			_gameStateMachine = gameStateMachine;
 			_windowsService = windowsService;

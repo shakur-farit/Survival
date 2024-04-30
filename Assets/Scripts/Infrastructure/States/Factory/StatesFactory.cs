@@ -2,7 +2,7 @@ using Zenject;
 
 namespace Infrastructure.States.Factory
 {
-	public class StatesFactory
+	public class StatesFactory : IStatesFactory
 	{
 		private IInstantiator _instantiator;
 

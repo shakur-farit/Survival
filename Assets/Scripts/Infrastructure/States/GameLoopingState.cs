@@ -4,9 +4,9 @@ namespace Infrastructure.States
 {
 	public class GameLoopingState : IState
 	{
-		private readonly GameStateMachine _gameStateMachine;
+		private readonly IGameStateMachine _gameStateMachine;
 
-		public GameLoopingState(GameStateMachine gameStateMachine) => 
+		public GameLoopingState(IGameStateMachine gameStateMachine) => 
 			_gameStateMachine = gameStateMachine;
 
 		public void Enter() => 

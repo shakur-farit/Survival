@@ -5,7 +5,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Infrastructure.Services.AssetsManagement
 {
-	public class AssetsProvider
+	public class AssetsProvider : IAssetsProvider
 	{
 		private readonly Dictionary<string, AsyncOperationHandle> _completedCache = new();
 		private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = new();

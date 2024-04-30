@@ -4,11 +4,11 @@ using UI.Windows;
 
 namespace UI.Services.Windows
 {
-	public class WindowsService
+	public class WindowsService : IWindowsService
 	{
-		private readonly UIFactory _uiFactory;
+		private readonly IUIFactory _uiFactory;
 
-		public WindowsService(UIFactory uiFactory) => 
+		public WindowsService(IUIFactory uiFactory) => 
 			_uiFactory = uiFactory;
 
 		public async UniTask Open(WindowType type)

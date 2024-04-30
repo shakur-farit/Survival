@@ -6,10 +6,10 @@ namespace Infrastructure.States
 {
 	public class LoadStaticDataState : IState
 	{
-		private readonly GameStateMachine _gameStateMachine;
-		private readonly StaticDataService _staticDataService;
+		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IStaticDataService _staticDataService;
 
-		public LoadStaticDataState(GameStateMachine gameStateMachine, StaticDataService staticDataService)
+		public LoadStaticDataState(IGameStateMachine gameStateMachine, IStaticDataService staticDataService)
 		{
 			_gameStateMachine = gameStateMachine;
 			_staticDataService = staticDataService;

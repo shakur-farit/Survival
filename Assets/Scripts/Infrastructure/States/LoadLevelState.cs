@@ -7,12 +7,12 @@ namespace Infrastructure.States
 {
 	public class LoadLevelState : IState
 	{
-		private readonly CharacterFactory _characterFactory;
-		private readonly SpawnerFactory _spawnerFactory;
-		private readonly HUDFactory _hudFactory;
+		private readonly ICharacterFactory _characterFactory;
+		private readonly ISpawnerFactory _spawnerFactory;
+		private readonly IHUDFactory _hudFactory;
 
 
-		public LoadLevelState(CharacterFactory characterFactory, SpawnerFactory spawnerFactory, HUDFactory hudFactory)
+		public LoadLevelState(ICharacterFactory characterFactory, ISpawnerFactory spawnerFactory, IHUDFactory hudFactory)
 		{
 			_characterFactory = characterFactory;
 			_spawnerFactory = spawnerFactory;

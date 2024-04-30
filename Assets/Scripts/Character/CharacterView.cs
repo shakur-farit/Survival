@@ -10,10 +10,10 @@ namespace Character
 		public SpriteRenderer Hand;
 		public SpriteRenderer HandNoWeapon;
 
-		private PersistentProgressService _persistentProgressService;
+		private IPersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Constructor(PersistentProgressService persistentProgressService) =>
+		public void Constructor(IPersistentProgressService persistentProgressService) =>
 			_persistentProgressService = persistentProgressService;
 
 

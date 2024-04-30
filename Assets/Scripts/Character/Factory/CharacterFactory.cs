@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Character.Factory
 {
-	public class CharacterFactory
+	public class CharacterFactory : ICharacterFactory
 	{
-		private readonly AssetsProvider _assetsProvider;
-		private readonly ObjectCreatorService _objectCreator;
+		private readonly IAssetsProvider _assetsProvider;
+		private readonly IObjectCreatorService _objectCreator;
 
 		public GameObject Character { get; private set; }
 
-		public CharacterFactory(AssetsProvider assetsProvider, ObjectCreatorService objectCreator)
+		public CharacterFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectCreator)
 		{
 			_assetsProvider = assetsProvider;
 			_objectCreator = objectCreator;

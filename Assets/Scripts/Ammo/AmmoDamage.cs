@@ -9,10 +9,10 @@ namespace Ammo
 	{
 		private int _damage;
 
-		private PersistentProgressService _persistentProgressService;
+		private IPersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Constructor(PersistentProgressService persistentProgressService) =>
+		public void Constructor(IPersistentProgressService persistentProgressService) =>
 			_persistentProgressService = persistentProgressService;
 
 

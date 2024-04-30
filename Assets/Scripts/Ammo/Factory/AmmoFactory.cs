@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Ammo.Factory
 {
-	public class AmmoFactory
+	public class AmmoFactory : IAmmoFactory
 	{
 		public GameObject Ammo { get; private set; }
 
-		private readonly AssetsProvider _assetsProvider;
-		private readonly ObjectCreatorService _objectsCreator;
+		private readonly IAssetsProvider _assetsProvider;
+		private readonly IObjectCreatorService _objectsCreator;
 
-		public AmmoFactory(AssetsProvider assetsProvider, ObjectCreatorService objectsCreator)
+		public AmmoFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator)
 		{
 			_assetsProvider = assetsProvider;
 			_objectsCreator = objectsCreator;
