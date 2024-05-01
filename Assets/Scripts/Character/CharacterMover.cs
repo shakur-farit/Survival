@@ -23,7 +23,7 @@ namespace Character
 
 		private void Start()
 		{
-			_movementSpeed = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData.MovementSpeed;
+			_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MovementSpeed;
 			_camera = Camera.main;
 		}
 

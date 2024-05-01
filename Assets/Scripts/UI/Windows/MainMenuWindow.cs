@@ -42,7 +42,7 @@ namespace UI.Windows
 		{
 			foreach (CharacterStaticData character in _staticDataService.CharactersList)
 				if (type == character.CharacterType)
-					_persistentProgressService.Progress.characterData.CurrentCharacterStaticData = character;
+					_persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData = character;
 		}
 	}
 }

@@ -5,6 +5,6 @@ namespace Data
 	[Serializable]
 	public class Progress
 	{
-		public CharacterData characterData = new();
+		public CharacterData CharacterData = new();
 	}
 }

@@ -18,7 +18,7 @@ namespace Ammo
 
 		private void Start()
 		{
-			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.characterData.CurrentWeapon.Ammo;
+			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo;
 
 			_damage = currentWeaponAmmo.Damage;
 		}

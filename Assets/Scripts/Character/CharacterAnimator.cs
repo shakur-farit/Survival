@@ -17,7 +17,7 @@ namespace Character
 
 		private void Start()
 		{
-			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData;
+			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData;
 
 			Animator.runtimeAnimatorController = currentCharacterStaticData.Controller;
 		}

@@ -19,7 +19,7 @@ namespace Character
 
 		private void Start()
 		{
-			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.characterData.CurrentCharacterStaticData;
+			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData;
 
 			Hand.sprite = currentCharacterStaticData.HandSprite;
 			HandNoWeapon.sprite = currentCharacterStaticData.HandSprite;

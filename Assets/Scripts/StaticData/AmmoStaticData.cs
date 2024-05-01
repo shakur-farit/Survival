@@ -7,5 +7,6 @@ namespace StaticData
 	{
 		public int Damage;
 		public float MovementSpeed;
+		public float Dealy;
 	}
 }

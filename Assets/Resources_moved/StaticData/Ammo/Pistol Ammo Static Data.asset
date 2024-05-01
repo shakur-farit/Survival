@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Pistol Ammo Static Data
   m_EditorClassIdentifier: 
   Damage: 0
-  MovementSpeed: 0.01
+  MovementSpeed: 0.1
+  Dealy: 0.3
