@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using UI.Services.Factory;
+using Infrastructure.Services.Factories.UI;
 using UI.Windows;
 
 namespace UI.Services.Windows

@@ -9,7 +9,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string EnemyAddress;
 		public string AmmoAddress;
 		public string SpawnerAddress;
-		public string HUDAddress;
+		public string HudAddress;
 		public string UIRootAddress;
 		public string MainMenuWindowAddress;
 	}

@@ -16,6 +16,6 @@ MonoBehaviour:
   EnemyAddress: Enemy
   AmmoAddress: Ammo
   SpawnerAddress: Spawner
-  HUDAddress: HUD
+  HudAddress: Hud
   UIRootAddress: UIRoot
   MainMenuWindowAddress: MainMenuWindow

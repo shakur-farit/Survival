@@ -1,11 +1,11 @@
-using Ammo.Factory;
-using Character.Factory;
-using Enemy.Factory;
-using HUD.Factory;
+using Infrastructure.Services.Factories.Ammo;
+using Infrastructure.Services.Factories.Character;
+using Infrastructure.Services.Factories.Enemy;
+using Infrastructure.Services.Factories.Hud;
+using Infrastructure.Services.Factories.Spawner;
+using Infrastructure.Services.Factories.States;
+using Infrastructure.Services.Factories.UI;
 using Infrastructure.Services.ObjectCreator;
-using Infrastructure.States.Factory;
-using Spawn.Factory;
-using UI.Services.Factory;
 using UI.Services.Windows;
 using Zenject;
 
@@ -32,30 +32,30 @@ namespace Installers
 		}
 
 		private void RegisterStatesFactory() => 
-			Container.BindInterfacesAndSelfTo<StatesFactory>().AsSingle();
+			Container.Bind<IStatesFactory>().To<StatesFactory>().AsSingle();
 
 		private void RegisterCharacterFactory() => 
-			Container.BindInterfacesAndSelfTo<CharacterFactory>().AsSingle();
+			Container.Bind<ICharacterFactory>().To<CharacterFactory>().AsSingle();
 
 		private void RegisterEnemyFactory() => 
-			Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle();
+			Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
 
 		private void RegisterSpawnerFactory() => 
-			Container.BindInterfacesAndSelfTo<SpawnerFactory>().AsSingle();
+			Container.Bind<ISpawnerFactory>().To<SpawnerFactory>().AsSingle();
 
 		private void RegisterHUDFactory() => 
-			Container.BindInterfacesAndSelfTo<HUDFactory>().AsSingle();
+			Container.Bind<IHudFactory>().To<HudFactory>().AsSingle();
 
 		private void RegisterUIFactory() => 
-			Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle();
+			Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
 
 		private void RegisterAmmoFactory() => 
-			Container.BindInterfacesAndSelfTo<AmmoFactory>().AsSingle();
+			Container.Bind<IAmmoFactory>().To<AmmoFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
-			Container.BindInterfacesAndSelfTo<ObjectCreatorService>().AsSingle();
+			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();
 
 		private void RegisterWindowsService() => 
-			Container.BindInterfacesAndSelfTo<WindowsService>().AsSingle();
+			Container.Bind<IWindowsService>().To<WindowsService>().AsSingle();
 	}
 }

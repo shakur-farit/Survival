@@ -21,9 +21,8 @@ namespace Infrastructure.States
 		public async void Enter()
 		{
 			InitializeAssets();
-
+			CleanUp();
 			await WarmUpAssets();
-
 			EnterToLoadStaticDataState();
 		}
 
@@ -39,6 +38,10 @@ namespace Infrastructure.States
 			await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
 			await _staticDataService.WarmUp();
 		}
+
+		private void CleanUp() => 
+			_assetsProvider.CleanUp();
+
 		private void EnterToLoadStaticDataState() =>
 			_gameStateMachine.Enter<LoadStaticDataState>();
 	}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Infrastructure.Services.Input
 {
@@ -6,10 +7,16 @@ namespace Infrastructure.Services.Input
 	{
 		private const string Horizontal = "Horizontal";
 		private const string Vertical = "Vertical";
+		private Vector2 _moveVector;
 
 		public  Vector2 Axis => GetSimpleInputAxis();
 
-		private static Vector2 GetSimpleInputAxis() => 
-			new(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
+		private Vector2 GetSimpleInputAxis()
+		{
+			//return new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
+			return default; //new Vector2(_moveVector.x, _moveVector.y);
+		}
+
+		
 	}
 }

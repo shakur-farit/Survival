@@ -1,4 +1,5 @@
-using Enemy.Factory;
+using Infrastructure.Services.Factories;
+using Infrastructure.Services.Factories.Enemy;
 using Infrastructure.Services.Randomizer;
 using UnityEngine;
 using Zenject;
@@ -24,7 +25,7 @@ namespace Spawn
 		{
 			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(10f, 10f));
 
-			await _enemyFactory.CreateEnemy(randomPosition);
+			await _enemyFactory.Create(randomPosition);
 		}
 	}
 }

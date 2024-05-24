@@ -23,24 +23,24 @@ namespace Installers
 		}
 
 		private void RegisterGameStateMachine() => 
-			Container.BindInterfacesAndSelfTo<GameStateMachine>().AsSingle();
+			Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
 
 		private void RegisterInputService() =>
-			Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
+			Container.Bind<IInputService>().To<InputService>().AsSingle();
 
 		private void RegisterPersistentProgressServices() =>
-			Container.BindInterfacesAndSelfTo<PersistentProgressService>().AsSingle();
+			Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();
 
 		private void RegisterAssetsProvider() =>
 			Container.BindInterfacesAndSelfTo<AssetsProvider>().AsSingle();
 
 		private void RegisterStaticDataService() =>
-			Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
+			Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
 
 		private void RegisterRandomizer() =>
-			Container.BindInterfacesAndSelfTo<RandomService>().AsSingle();
+			Container.Bind<IRandomService>().To<RandomService>().AsSingle();
 
 		private void RegisterEventer() => 
-			Container.BindInterfacesAndSelfTo<Eventer>().AsSingle();
+			Container.Bind<IGamePlayEvents>().To<Eventer>().AsSingle();
 	}
 }

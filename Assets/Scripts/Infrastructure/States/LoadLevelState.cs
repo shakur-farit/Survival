@@ -1,7 +1,7 @@
-using Character.Factory;
 using Cysharp.Threading.Tasks;
-using HUD.Factory;
-using Spawn.Factory;
+using Infrastructure.Services.Factories.Character;
+using Infrastructure.Services.Factories.Hud;
+using Infrastructure.Services.Factories.Spawner;
 
 namespace Infrastructure.States
 {
@@ -9,10 +9,10 @@ namespace Infrastructure.States
 	{
 		private readonly ICharacterFactory _characterFactory;
 		private readonly ISpawnerFactory _spawnerFactory;
-		private readonly IHUDFactory _hudFactory;
+		private readonly IHudFactory _hudFactory;
 
 
-		public LoadLevelState(ICharacterFactory characterFactory, ISpawnerFactory spawnerFactory, IHUDFactory hudFactory)
+		public LoadLevelState(ICharacterFactory characterFactory, ISpawnerFactory spawnerFactory, IHudFactory hudFactory)
 		{
 			_characterFactory = characterFactory;
 			_spawnerFactory = spawnerFactory;
@@ -32,17 +32,17 @@ namespace Infrastructure.States
 		{
 			await CreateCharacter();
 			await CreateSpawner();
-			await CreateHUD();
+			await CreateHud();
 		}
 
 		private async UniTask CreateCharacter() => 
-			await _characterFactory.CreateCharacter();
+			await _characterFactory.Create();
 
 		private async UniTask CreateSpawner() =>
-			await _spawnerFactory.CreateSpawner();
+			await _spawnerFactory.Create();
 
-		private async UniTask CreateHUD() =>
-			await _hudFactory.CreateHUD();
+		private async UniTask CreateHud() =>
+			await _hudFactory.Create();
 
 	}
 }

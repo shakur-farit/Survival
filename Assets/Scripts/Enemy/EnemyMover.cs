@@ -1,4 +1,5 @@
-using Character.Factory;
+using Infrastructure.Services.Factories;
+using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;

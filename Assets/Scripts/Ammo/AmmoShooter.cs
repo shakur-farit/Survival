@@ -1,5 +1,6 @@
 using System.Collections;
-using Ammo.Factory;
+using Infrastructure.Services.Factories;
+using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
@@ -38,6 +39,6 @@ namespace Ammo
 		}
 
 		private async void CreateAmmo() =>
-			await _ammoFactory.CreateAmmo(transform);
+			await _ammoFactory.Create(transform);
 	}
 }
