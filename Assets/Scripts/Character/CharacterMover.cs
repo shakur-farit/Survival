@@ -34,6 +34,7 @@ namespace Character
 		{
 			if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
 			{
+				Debug.Log(_inputService.Axis);
 				Vector2 movementVector = _camera.transform.TransformDirection(_inputService.Axis);
 
 				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
