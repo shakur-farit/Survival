@@ -3,20 +3,51 @@ using UnityEngine.InputSystem;
 
 namespace Infrastructure.Services.Input
 {
-	public class InputService : IInputService
+	public class InputService : IMovementInputService, IAimInputService
 	{
-		private const string Horizontal = "Horizontal";
-		private const string Vertical = "Vertical";
-		private Vector2 _moveVector;
+		private readonly CharacterInput _input;
 
-		public  Vector2 Axis => GetSimpleInputAxis();
+		private InputAction _moveAction;
+		private InputAction _aimAction;
 
-		private Vector2 GetSimpleInputAxis()
+		private Vector2 _moveInput;
+		private Vector2 _aimInput;
+
+		public  Vector2 MovementAxis => GetMovementInputAxis();
+		public Vector2 AimAxis => GetAimInputAxis();
+
+		public InputService(CharacterInput input) => 
+			_input = input;
+
+		public void OnEnable() => 
+			_input.Enable();
+
+		public void OnDisable() => 
+			_input.Disable();
+
+		public void RegisterMovementInputAction()
 		{
-			//return new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
-			return default; //new Vector2(_moveVector.x, _moveVector.y);
+			_moveAction = _input.Player.Move;
+
+			_moveAction.performed += context => _moveInput = context.ReadValue<Vector2>();
+			_moveAction.canceled += context => _moveInput = Vector2.zero;
 		}
 
-		
+		public void RegisterAimInputAction()
+		{
+			_aimAction = _input.Player.Aim;
+
+			_aimAction.performed += context => _aimInput = context.ReadValue<Vector2>();
+			_aimAction.canceled += context => _aimInput = Vector2.zero;
+		}
+
+		private Vector2 GetMovementInputAxis() => 
+			new(_moveInput.x, _moveInput.y);
+
+		private Vector2 GetAimInputAxis()
+		{
+			Debug.Log($"{_aimInput.x} / {_moveInput.x}");
+			return new Vector2(_aimInput.x, _aimInput.y);
+		}
 	}
 }

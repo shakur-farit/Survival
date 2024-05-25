@@ -1,3 +1,4 @@
+using System;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -9,36 +10,42 @@ namespace Character
 	{
 		private float _movementSpeed;
 
-		private Camera _camera;
-
-		private IInputService _inputService;
+		private IMovementInputService _movementInputService;
 		private IPersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Construct(IInputService inputService, IPersistentProgressService persistentProgressService)
+		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService)
 		{
-			_inputService = inputService;
+			_movementInputService = movementInputService;
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Start()
-		{
-			_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MovementSpeed;
-			_camera = Camera.main;
-		}
+		private void OnEnable() =>
+			_movementInputService.OnEnable();
 
-		private void Update() => 
+		private void OnDestroy() =>
+			_movementInputService.OnDisable();
+
+		private void Awake() => 
+			_movementInputService.RegisterMovementInputAction();
+
+		private void Start() => 
+			SetupMovementSpeed();
+
+		private void FixedUpdate() => 
 			Move();
 
 		private void Move()
 		{
-			if (_inputService.Axis.sqrMagnitude > Constants.Epsilon)
+			if (_movementInputService.MovementAxis.sqrMagnitude > Constants.Epsilon)
 			{
-				Debug.Log(_inputService.Axis);
-				Vector2 movementVector = _camera.transform.TransformDirection(_inputService.Axis);
-
-				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
+				Vector2 movementVector = transform.TransformDirection(_movementInputService.MovementAxis);
+				movementVector.Normalize();
+				transform.Translate(new Vector2(movementVector.x, movementVector.y) * (_movementSpeed * Time.deltaTime));
 			}
 		}
+
+		private void SetupMovementSpeed() => 
+			_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MovementSpeed;
 	}
 }

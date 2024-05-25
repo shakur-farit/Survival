@@ -25,8 +25,11 @@ namespace Installers
 		private void RegisterGameStateMachine() => 
 			Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
 
-		private void RegisterInputService() =>
-			Container.Bind<IInputService>().To<InputService>().AsSingle();
+		private void RegisterInputService()
+		{
+			Container.Bind<CharacterInput>().AsSingle();
+			Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
+		}
 
 		private void RegisterPersistentProgressServices() =>
 			Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();

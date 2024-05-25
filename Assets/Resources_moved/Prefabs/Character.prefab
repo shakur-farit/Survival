@@ -409,6 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 263007942131066340}
+  - component: {fileID: 6305372218424452076}
   m_Layer: 0
   m_Name: WeaponRotationPoint
   m_TagString: Untagged
@@ -434,6 +435,18 @@ Transform:
   - {fileID: 8586382567303437777}
   m_Father: {fileID: 3756928866371259729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6305372218424452076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786878243438039511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa573341b52da248af0e59b91fe88b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4882292481519136488
 GameObject:
   m_ObjectHideFlags: 0
