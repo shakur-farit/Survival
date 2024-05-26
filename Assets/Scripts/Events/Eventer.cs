@@ -2,11 +2,15 @@ using System;
 
 namespace Events
 {
-	public class Eventer : IGamePlayEvents
+	public class Eventer : IGamePlayEvents, IMouseButtonClickEvent
 	{
-		public event Action OnGameStarted;
+		public event Action GameStarted;
+		public event Action MouseButtonClicked;
 
 		public void CallGameStartedEvent() => 
-			OnGameStarted?.Invoke();
+			GameStarted?.Invoke();
+
+		public void CallMouseButtonClickedEvent() => 
+			MouseButtonClicked?.Invoke();
 	}
 }

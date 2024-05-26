@@ -21,7 +21,7 @@ namespace Infrastructure.States
 
 		public async void Enter()
 		{
-			_eventer.OnGameStarted += EnterInGameLoopingState;
+			_eventer.GameStarted += EnterInGameLoopingState;
 
 			await _windowsService.Open(WindowType.MainMenuWindow);
 		}
@@ -30,7 +30,7 @@ namespace Infrastructure.States
 		{
 			_windowsService.Close(WindowType.MainMenuWindow);
 
-			_eventer.OnGameStarted -= EnterInGameLoopingState;
+			_eventer.GameStarted -= EnterInGameLoopingState;
 		}
 
 		private void EnterInGameLoopingState() => 

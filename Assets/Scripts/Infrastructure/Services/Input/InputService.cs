@@ -44,10 +44,7 @@ namespace Infrastructure.Services.Input
 		private Vector2 GetMovementInputAxis() => 
 			new(_moveInput.x, _moveInput.y);
 
-		private Vector2 GetAimInputAxis()
-		{
-			Debug.Log($"{_aimInput.x} / {_moveInput.x}");
-			return new Vector2(_aimInput.x, _aimInput.y);
-		}
+		private Vector2 GetAimInputAxis() => 
+			new(_aimInput.x, _aimInput.y);
 	}
 }

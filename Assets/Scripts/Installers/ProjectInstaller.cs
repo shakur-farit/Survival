@@ -44,6 +44,6 @@ namespace Installers
 			Container.Bind<IRandomService>().To<RandomService>().AsSingle();
 
 		private void RegisterEventer() => 
-			Container.Bind<IGamePlayEvents>().To<Eventer>().AsSingle();
+			Container.BindInterfacesAndSelfTo<Eventer>().AsSingle();
 	}
 }

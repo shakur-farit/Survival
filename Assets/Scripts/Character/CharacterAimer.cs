@@ -1,11 +1,10 @@
-using System;
 using Infrastructure.Services.Input;
 using UnityEngine;
 using Zenject;
 
 namespace Character
 {
-	public class CharacterAim : MonoBehaviour
+	public class CharacterAimer : MonoBehaviour
 	{
 		private IAimInputService _aimInput;
 
@@ -28,7 +27,10 @@ namespace Character
 		private void Aim()
 		{
 			Vector2 aimVector = _aimInput.AimAxis;
-			Debug.Log(aimVector);
+
+			float angleRadians = Mathf.Atan2(aimVector.y, aimVector.x);
+			float angleDegree = angleRadians * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.AngleAxis(angleDegree, Vector3.forward);
 		}
 	}
 }

@@ -4,7 +4,7 @@ namespace Events
 {
 	public interface IGamePlayEvents
 	{
-		event Action OnGameStarted;
+		event Action GameStarted;
 		void CallGameStartedEvent();
 	}
 }
