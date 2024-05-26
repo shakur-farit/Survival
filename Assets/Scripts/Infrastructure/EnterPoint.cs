@@ -1,4 +1,3 @@
-using Infrastructure.Services.Factories;
 using Infrastructure.Services.Factories.States;
 using Infrastructure.States;
 using Infrastructure.States.StateMachine;
@@ -9,35 +8,42 @@ namespace Infrastructure
 {
 	public class EnterPoint : MonoBehaviour
 	{
-		private IGameStateMachine _gameStateMachine;
+		private IGameStateRegistrar _gameStatesRegistrar;
+		private IGameStateSwitcher _gameStatesSwitcher;
 		private IStatesFactory _statesFactory;
 
-
 		[Inject]
-		public void Constructor(IGameStateMachine gameStateMachine, IStatesFactory statesFactory)
+		public void Constructor(IGameStateRegistrar gameStatesRegistrar, IStatesFactory statesFactory,
+			IGameStateSwitcher gameStatesSwitcher)
 		{
-			_gameStateMachine = gameStateMachine;
+			_gameStatesRegistrar = gameStatesRegistrar;
+			_gameStatesSwitcher = gameStatesSwitcher;
 			_statesFactory = statesFactory;
 		}
 
 		private void Awake()
 		{
-			StartGameStateMachine();
+			StartStateMachine();
 
 			DontDestroyOnLoad(this);
 		}
 
-		private void StartGameStateMachine()
+		private void StartStateMachine()
 		{
-			_gameStateMachine.RegisterState(_statesFactory.Create<WarmUpState>());
-			_gameStateMachine.RegisterState(_statesFactory.Create<LoadStaticDataState>());
-			_gameStateMachine.RegisterState(_statesFactory.Create<LoadProgressState>());
-			_gameStateMachine.RegisterState(_statesFactory.Create<LoadSceneState>());
-			_gameStateMachine.RegisterState(_statesFactory.Create<MainMenuState>());
-			_gameStateMachine.RegisterState(_statesFactory.Create<GameLoopingState>());
-			_gameStateMachine.RegisterState(_statesFactory.Create<LoadLevelState>());
+			RegisterGameStates();
 
-			_gameStateMachine.Enter<WarmUpState>();
+			_gameStatesSwitcher.SwitchState<WarmUpState>();
+		}
+
+		private void RegisterGameStates()
+		{
+			_gameStatesRegistrar.RegisterState(_statesFactory.Create<WarmUpState>());
+			_gameStatesRegistrar.RegisterState(_statesFactory.Create<LoadStaticDataState>());
+			_gameStatesRegistrar.RegisterState(_statesFactory.Create<LoadProgressState>());
+			_gameStatesRegistrar.RegisterState(_statesFactory.Create<LoadSceneState>());
+			_gameStatesRegistrar.RegisterState(_statesFactory.Create<MainMenuState>());
+			_gameStatesRegistrar.RegisterState(_statesFactory.Create<GameLoopingState>());
+			_gameStatesRegistrar.RegisterState(_statesFactory.Create<LoadLevelState>());
 		}
 	}
 }

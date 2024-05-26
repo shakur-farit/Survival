@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Infrastructure.States;
 
-namespace Infrastructure.States.StateMachine
+namespace Character.States.StateMachine
 {
-	public class GameStateMachine : IGameStateSwitcher, IGameStateRegistrar
+	public class CharacterStatesMachine : ICharacterStatesRegistrar, ICharacterStatesSwitcher
 	{
 		private readonly Dictionary<Type, IState> _statesDictionary = new();
 		private IState _activeState;

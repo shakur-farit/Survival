@@ -6,12 +6,12 @@ namespace Infrastructure.States
 {
 	public class LoadStaticDataState : IState
 	{
-		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IGameStateSwitcher _gameStateSwitcher;
 		private readonly IStaticDataService _staticDataService;
 
-		public LoadStaticDataState(IGameStateMachine gameStateMachine, IStaticDataService staticDataService)
+		public LoadStaticDataState(IGameStateSwitcher gameStateSwitcher, IStaticDataService staticDataService)
 		{
-			_gameStateMachine = gameStateMachine;
+			_gameStateSwitcher = gameStateSwitcher;
 			_staticDataService = staticDataService;
 		}
 
@@ -30,6 +30,6 @@ namespace Infrastructure.States
 			await _staticDataService.Load();
 
 		private void EnterToLoadProgressState() => 
-			_gameStateMachine.Enter<LoadProgressState>();
+			_gameStateSwitcher.SwitchState<LoadProgressState>();
 	}
 }

@@ -6,12 +6,12 @@ namespace Infrastructure.States
 {
 	public class LoadSceneState : IState
 	{
-		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IGameStateSwitcher _gameStateSwitcher;
 		private readonly IUIFactory _uiFactory;
 
-		public LoadSceneState(IGameStateMachine gameStateMachine, IUIFactory uiFactory)
+		public LoadSceneState(IGameStateSwitcher gameStateSwitcher, IUIFactory uiFactory)
 		{
-			_gameStateMachine = gameStateMachine;
+			_gameStateSwitcher = gameStateSwitcher;
 			_uiFactory = uiFactory;
 		}
 
@@ -30,6 +30,6 @@ namespace Infrastructure.States
 		}
 
 		private void EnterInMainMenuState() => 
-			_gameStateMachine.Enter<MainMenuState>();
+			_gameStateSwitcher.SwitchState<MainMenuState>();
 	}
 }

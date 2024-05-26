@@ -9,13 +9,13 @@ namespace Infrastructure.States
 	{
 		private readonly IAssetsProvider _assetsProvider;
 		private readonly IStaticDataService _staticDataService;
-		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IGameStateSwitcher _gameStateSwitcher;
 
-		public WarmUpState(IAssetsProvider assetsProvider, IStaticDataService staticDataService, IGameStateMachine gameStateMachine)
+		public WarmUpState(IAssetsProvider assetsProvider, IStaticDataService staticDataService, IGameStateSwitcher gameStateSwitcher)
 		{
 			_assetsProvider = assetsProvider;
 			_staticDataService = staticDataService;
-			_gameStateMachine = gameStateMachine;
+			_gameStateSwitcher = gameStateSwitcher;
 		}
 
 		public async void Enter()
@@ -43,6 +43,6 @@ namespace Infrastructure.States
 			_assetsProvider.CleanUp();
 
 		private void EnterToLoadStaticDataState() =>
-			_gameStateMachine.Enter<LoadStaticDataState>();
+			_gameStateSwitcher.SwitchState<LoadStaticDataState>();
 	}
 }

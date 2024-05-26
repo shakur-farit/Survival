@@ -6,12 +6,12 @@ namespace Infrastructure.States
 {
 	public class LoadProgressState : IState
 	{
-		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IGameStateSwitcher _gameStateSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
 
-		public LoadProgressState(IGameStateMachine gameStateMachine, IPersistentProgressService persistentProgressService)
+		public LoadProgressState(IGameStateSwitcher gameStateSwitcher, IPersistentProgressService persistentProgressService)
 		{
-			_gameStateMachine = gameStateMachine;
+			_gameStateSwitcher = gameStateSwitcher;
 			_persistentProgressService = persistentProgressService;
 		}
 
@@ -30,6 +30,6 @@ namespace Infrastructure.States
 			_persistentProgressService.Progress = new Progress();
 
 		private void EnterToLoadSceneState() => 
-			_gameStateMachine.Enter<LoadSceneState>();
+			_gameStateSwitcher.SwitchState<LoadSceneState>();
 	}
 }

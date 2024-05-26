@@ -7,14 +7,14 @@ namespace Infrastructure.States
 {
 	public class MainMenuState : IState
 	{
-		private readonly IGameStateMachine _gameStateMachine;
+		private readonly IGameStateSwitcher _gameStateSwitcher;
 		private readonly IWindowsService _windowsService;
 		private readonly IGamePlayEvents _eventer;
 
 
-		public MainMenuState(IGameStateMachine gameStateMachine, IWindowsService windowsService, IGamePlayEvents eventer)
+		public MainMenuState(IGameStateSwitcher gameStateSwitcher, IWindowsService windowsService, IGamePlayEvents eventer)
 		{
-			_gameStateMachine = gameStateMachine;
+			_gameStateSwitcher = gameStateSwitcher;
 			_windowsService = windowsService;
 			_eventer = eventer;
 		}
@@ -34,6 +34,6 @@ namespace Infrastructure.States
 		}
 
 		private void EnterInGameLoopingState() => 
-			_gameStateMachine.Enter<GameLoopingState>();
+			_gameStateSwitcher.SwitchState<GameLoopingState>();
 	}
 }

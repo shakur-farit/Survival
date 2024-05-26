@@ -6,27 +6,27 @@ namespace Character
 {
 	public class CharacterAimer : MonoBehaviour
 	{
-		private IAimInputService _aimInput;
+		private IAimInputService _aimInputService;
 
 		[Inject]
 		public void Constructor(IAimInputService aimInput) => 
-			_aimInput		= aimInput;
+			_aimInputService	= aimInput;
 
 		private void OnEnable() => 
-			_aimInput.OnEnable();
+			_aimInputService.OnEnable();
 
 		private void OnDisable() => 
-			_aimInput.OnDisable();
+			_aimInputService.OnDisable();
 
 		private void Awake() => 
-			_aimInput.RegisterAimInputAction();
+			_aimInputService.RegisterAimInputAction();
 
 		private void FixedUpdate() => 
 			Aim();
 
 		private void Aim()
 		{
-			Vector2 aimVector = _aimInput.AimAxis;
+			Vector2 aimVector = _aimInputService.AimAxis;
 
 			float angleRadians = Mathf.Atan2(aimVector.y, aimVector.x);
 			float angleDegree = angleRadians * Mathf.Rad2Deg;

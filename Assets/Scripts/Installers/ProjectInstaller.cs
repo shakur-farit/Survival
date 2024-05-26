@@ -18,12 +18,14 @@ namespace Installers
 			RegisterAssetsProvider();
 			RegisterStaticDataService();
 			RegisterRandomizer();
-			RegisterGameStateMachine();
+			RegisterStateMachines();
 			RegisterEventer();
 		}
 
-		private void RegisterGameStateMachine() => 
-			Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
+		private void RegisterStateMachines()
+		{
+			Container.BindInterfacesAndSelfTo<GameStateMachine>().AsSingle();
+		}
 
 		private void RegisterInputService()
 		{
