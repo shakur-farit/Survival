@@ -1,17 +1,17 @@
 using Data;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
 	public class LoadProgressState : IState
 	{
-		private readonly IGameStateSwitcher _gameStateSwitcher;
+		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
 
-		public LoadProgressState(IGameStateSwitcher gameStateSwitcher, IPersistentProgressService persistentProgressService)
+		public LoadProgressState(IGameStatesSwitcher gameStatesSwitcher, IPersistentProgressService persistentProgressService)
 		{
-			_gameStateSwitcher = gameStateSwitcher;
+			_gameStatesSwitcher = gameStatesSwitcher;
 			_persistentProgressService = persistentProgressService;
 		}
 
@@ -30,6 +30,6 @@ namespace Infrastructure.States
 			_persistentProgressService.Progress = new Progress();
 
 		private void EnterToLoadSceneState() => 
-			_gameStateSwitcher.SwitchState<LoadSceneState>();
+			_gameStatesSwitcher.SwitchState<LoadSceneState>();
 	}
 }

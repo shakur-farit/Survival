@@ -1,7 +1,11 @@
-using Character.States.StateMachine;
+using Character.States.Aim;
+using Character.States.Motion;
+using Character.States.StatesMachine;
+using Character.States.StatesMachine.Aim;
+using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Factories.States;
 using Infrastructure.States;
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 using UnityEngine;
 using Zenject;
 
@@ -9,19 +13,22 @@ namespace Infrastructure
 {
 	public class EnterPoint : MonoBehaviour
 	{
-		private IGameStateRegistrar _gameStatesRegistrar;
-		private IGameStateSwitcher _gameStatesSwitcher;
+		private IGameStatesRegistrar _gameStatesRegistrar;
+		private IGameStatesSwitcher _gameStatesSwitcher;
 		private IStatesFactory _statesFactory;
-		private ICharacterStatesRegistrar _characterStatesRegistrar;
+		private ICharacterMotionStatesRegistrar _characterMotionStatesRegistrar;
+		private ICharacterAimStatesRegistrar _characterAimStatesRegistrar;
 
 		[Inject]
-		public void Constructor(IGameStateRegistrar gameStatesRegistrar, IStatesFactory statesFactory,
-			IGameStateSwitcher gameStatesSwitcher, ICharacterStatesRegistrar characterStatesRegistrar)
+		public void Constructor(IGameStatesRegistrar gameStatesRegistrar, IStatesFactory statesFactory,
+			IGameStatesSwitcher gameStatesSwitcher, ICharacterMotionStatesRegistrar characterMotionStatesRegistrar,
+			ICharacterAimStatesRegistrar characterAimStatesMachine)
 		{
 			_gameStatesRegistrar = gameStatesRegistrar;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_statesFactory = statesFactory;
-			_characterStatesRegistrar	= characterStatesRegistrar;
+			_characterMotionStatesRegistrar	= characterMotionStatesRegistrar;
+			_characterAimStatesRegistrar = characterAimStatesMachine;
 		}
 
 		private void Awake()
@@ -57,8 +64,11 @@ namespace Infrastructure
 
 		private void RegisterCharacterStates()
 		{
-			_characterStatesRegistrar.RegisterState(_statesFactory.Create<IdleState>());
-			_characterStatesRegistrar.RegisterState(_statesFactory.Create<MoveState>());
+			_characterMotionStatesRegistrar.RegisterState(_statesFactory.Create<IdlingState>());
+			_characterMotionStatesRegistrar.RegisterState(_statesFactory.Create<MovingState>());
+
+			_characterAimStatesRegistrar.RegisterState(_statesFactory.Create<AimUpState>());
+			_characterAimStatesRegistrar.RegisterState(_statesFactory.Create<AimDownState>());
 		}
 	}
 }

@@ -10,18 +10,19 @@ namespace Character
 	public class CharacterMover : MonoBehaviour
 	{
 		private float _movementSpeed;
+		private bool _isMove;
 
 		private IMovementInputService _movementInputService;
 		private IPersistentProgressService _persistentProgressService;
-		private ICharacterMoveEvent _characterMoveEvent;
+		private ICharacterMotionEvent _characterMotionEvent;
 
 		[Inject]
 		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService,
-			ICharacterMoveEvent characterMoveEvent)
+			ICharacterMotionEvent characterMotionEvent)
 		{
 			_movementInputService = movementInputService;
 			_persistentProgressService = persistentProgressService;
-			_characterMoveEvent = characterMoveEvent;
+			_characterMotionEvent = characterMotionEvent;
 		}
 
 		private void OnEnable() =>
@@ -46,8 +47,21 @@ namespace Character
 				Vector2 movementVector = transform.TransformDirection(_movementInputService.MovementAxis);
 				movementVector.Normalize();
 				transform.Translate(new Vector2(movementVector.x, movementVector.y) * (_movementSpeed * Time.deltaTime));
-				_characterMoveEvent.CallCharacterStartedMove();
+
+				if(_isMove == false)
+					SwitchCharacterState();
 			}
+			else
+			{
+				if(_isMove)
+					SwitchCharacterState();
+			}
+		}
+
+		private void SwitchCharacterState()
+		{
+			_characterMotionEvent.CallCharacterMotionSwitchedEvent();
+			_isMove = !_isMove;
 		}
 
 		private void SetupMovementSpeed() => 

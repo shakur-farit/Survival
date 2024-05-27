@@ -1,12 +1,12 @@
-using Character;
-using Character.States.StateMachine;
+using Character.States.StatesMachine.Aim;
+using Character.States.StatesMachine.Motion;
 using Events;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 using Zenject;
 
 namespace Installers
@@ -20,14 +20,15 @@ namespace Installers
 			RegisterAssetsProvider();
 			RegisterStaticDataService();
 			RegisterRandomizer();
-			RegisterStateMachines();
+			RegisterStatesMachines();
 			RegisterEventer();
 		}
 
-		private void RegisterStateMachines()
+		private void RegisterStatesMachines()
 		{
-			Container.BindInterfacesAndSelfTo<GameStateMachine>().AsSingle();
-			Container.BindInterfacesAndSelfTo<CharacterStatesMachine>().AsSingle();
+			Container.BindInterfacesAndSelfTo<GameStatesMachine>().AsSingle();
+			Container.BindInterfacesAndSelfTo<CharacterMotionStatesMachine>().AsSingle();
+			Container.BindInterfacesAndSelfTo<CharacterAimStatesMachine>().AsSingle();
 		}
 
 		private void RegisterInputService()

@@ -1,19 +1,19 @@
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
 	public class GameLoopingState : IState
 	{
-		private readonly IGameStateSwitcher _gameStateSwitcher;
+		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 
-		public GameLoopingState(IGameStateSwitcher gameStateSwitcher) => 
-			_gameStateSwitcher = gameStateSwitcher;
+		public GameLoopingState(IGameStatesSwitcher gameStatesSwitcher) => 
+			_gameStatesSwitcher = gameStatesSwitcher;
 
 		public void Enter() => 
 			EnterInLoadLevelState();
 
 		private void EnterInLoadLevelState() => 
-			_gameStateSwitcher.SwitchState<LoadLevelState>();
+			_gameStatesSwitcher.SwitchState<LoadLevelState>();
 
 		public void Exit()
 		{

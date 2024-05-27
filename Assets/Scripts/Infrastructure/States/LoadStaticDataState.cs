@@ -1,17 +1,17 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.StaticData;
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
 	public class LoadStaticDataState : IState
 	{
-		private readonly IGameStateSwitcher _gameStateSwitcher;
+		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IStaticDataService _staticDataService;
 
-		public LoadStaticDataState(IGameStateSwitcher gameStateSwitcher, IStaticDataService staticDataService)
+		public LoadStaticDataState(IGameStatesSwitcher gameStatesSwitcher, IStaticDataService staticDataService)
 		{
-			_gameStateSwitcher = gameStateSwitcher;
+			_gameStatesSwitcher = gameStatesSwitcher;
 			_staticDataService = staticDataService;
 		}
 
@@ -30,6 +30,6 @@ namespace Infrastructure.States
 			await _staticDataService.Load();
 
 		private void EnterToLoadProgressState() => 
-			_gameStateSwitcher.SwitchState<LoadProgressState>();
+			_gameStatesSwitcher.SwitchState<LoadProgressState>();
 	}
 }

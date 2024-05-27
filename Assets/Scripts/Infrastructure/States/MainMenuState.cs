@@ -1,5 +1,5 @@
 using Events;
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 using UI.Services.Windows;
 using UI.Windows;
 
@@ -7,14 +7,14 @@ namespace Infrastructure.States
 {
 	public class MainMenuState : IState
 	{
-		private readonly IGameStateSwitcher _gameStateSwitcher;
+		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IWindowsService _windowsService;
 		private readonly IGamePlayEvents _eventer;
 
 
-		public MainMenuState(IGameStateSwitcher gameStateSwitcher, IWindowsService windowsService, IGamePlayEvents eventer)
+		public MainMenuState(IGameStatesSwitcher gameStatesSwitcher, IWindowsService windowsService, IGamePlayEvents eventer)
 		{
-			_gameStateSwitcher = gameStateSwitcher;
+			_gameStatesSwitcher = gameStatesSwitcher;
 			_windowsService = windowsService;
 			_eventer = eventer;
 		}
@@ -34,6 +34,6 @@ namespace Infrastructure.States
 		}
 
 		private void EnterInGameLoopingState() => 
-			_gameStateSwitcher.SwitchState<GameLoopingState>();
+			_gameStatesSwitcher.SwitchState<GameLoopingState>();
 	}
 }

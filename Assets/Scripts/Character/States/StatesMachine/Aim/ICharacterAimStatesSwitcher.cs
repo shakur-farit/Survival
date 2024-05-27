@@ -1,8 +1,8 @@
 using Infrastructure.States;
 
-namespace Character.States.StateMachine
+namespace Character.States.StatesMachine.Aim
 {
-	public interface ICharacterStatesSwitcher
+	public interface ICharacterAimStatesSwitcher
 	{
 		void SwitchState<TState>() where TState : IState;
 	}

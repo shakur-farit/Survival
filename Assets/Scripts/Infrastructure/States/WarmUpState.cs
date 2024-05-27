@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.StaticData;
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
@@ -9,13 +9,13 @@ namespace Infrastructure.States
 	{
 		private readonly IAssetsProvider _assetsProvider;
 		private readonly IStaticDataService _staticDataService;
-		private readonly IGameStateSwitcher _gameStateSwitcher;
+		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 
-		public WarmUpState(IAssetsProvider assetsProvider, IStaticDataService staticDataService, IGameStateSwitcher gameStateSwitcher)
+		public WarmUpState(IAssetsProvider assetsProvider, IStaticDataService staticDataService, IGameStatesSwitcher gameStatesSwitcher)
 		{
 			_assetsProvider = assetsProvider;
 			_staticDataService = staticDataService;
-			_gameStateSwitcher = gameStateSwitcher;
+			_gameStatesSwitcher = gameStatesSwitcher;
 		}
 
 		public async void Enter()
@@ -43,6 +43,6 @@ namespace Infrastructure.States
 			_assetsProvider.CleanUp();
 
 		private void EnterToLoadStaticDataState() =>
-			_gameStateSwitcher.SwitchState<LoadStaticDataState>();
+			_gameStatesSwitcher.SwitchState<LoadStaticDataState>();
 	}
 }

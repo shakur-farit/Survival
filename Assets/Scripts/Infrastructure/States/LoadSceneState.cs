@@ -1,17 +1,17 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.UI;
-using Infrastructure.States.StateMachine;
+using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
 	public class LoadSceneState : IState
 	{
-		private readonly IGameStateSwitcher _gameStateSwitcher;
+		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IUIFactory _uiFactory;
 
-		public LoadSceneState(IGameStateSwitcher gameStateSwitcher, IUIFactory uiFactory)
+		public LoadSceneState(IGameStatesSwitcher gameStatesSwitcher, IUIFactory uiFactory)
 		{
-			_gameStateSwitcher = gameStateSwitcher;
+			_gameStatesSwitcher = gameStatesSwitcher;
 			_uiFactory = uiFactory;
 		}
 
@@ -30,6 +30,6 @@ namespace Infrastructure.States
 		}
 
 		private void EnterInMainMenuState() => 
-			_gameStateSwitcher.SwitchState<MainMenuState>();
+			_gameStatesSwitcher.SwitchState<MainMenuState>();
 	}
 }

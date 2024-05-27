@@ -1,4 +1,3 @@
-using Character.States.StateMachine;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Enemy;

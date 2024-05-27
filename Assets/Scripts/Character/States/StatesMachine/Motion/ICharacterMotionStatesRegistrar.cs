@@ -1,8 +1,8 @@
 using Infrastructure.States;
 
-namespace Character.States.StateMachine
+namespace Character.States.StatesMachine.Motion
 {
-	public interface ICharacterStatesRegistrar
+	public interface ICharacterMotionStatesRegistrar
 	{
 		void RegisterState<TState>(TState state) where TState : IState;
 	}
