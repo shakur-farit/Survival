@@ -1,4 +1,5 @@
 using System;
+using Events;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -12,12 +13,15 @@ namespace Character
 
 		private IMovementInputService _movementInputService;
 		private IPersistentProgressService _persistentProgressService;
+		private ICharacterMoveEvent _characterMoveEvent;
 
 		[Inject]
-		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService)
+		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService,
+			ICharacterMoveEvent characterMoveEvent)
 		{
 			_movementInputService = movementInputService;
 			_persistentProgressService = persistentProgressService;
+			_characterMoveEvent = characterMoveEvent;
 		}
 
 		private void OnEnable() =>
@@ -42,6 +46,7 @@ namespace Character
 				Vector2 movementVector = transform.TransformDirection(_movementInputService.MovementAxis);
 				movementVector.Normalize();
 				transform.Translate(new Vector2(movementVector.x, movementVector.y) * (_movementSpeed * Time.deltaTime));
+				_characterMoveEvent.CallCharacterStartedMove();
 			}
 		}
 

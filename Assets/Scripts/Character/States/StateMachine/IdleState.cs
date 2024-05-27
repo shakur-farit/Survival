@@ -1,5 +1,4 @@
-using System;
-using Infrastructure.Services.Input;
+using Events;
 using Infrastructure.States;
 using UnityEngine;
 
@@ -7,30 +6,27 @@ namespace Character.States.StateMachine
 {
 	public class IdleState : IState
 	{
-		private readonly IAimInputService _aimInputService;
+		private CharacterAnimator _characterAnimator;
+		private readonly ICharacterMoveEvent _characterMoveEvent;
+		private readonly ICharacterStatesSwitcher _characterStatesSwitcher;
 
-		public IdleState(IAimInputService aimInputService)
+		public IdleState(ICharacterMoveEvent characterMoveEvent, ICharacterStatesSwitcher characterStatesSwitcher)
 		{
-			_aimInputService = aimInputService;
+			_characterMoveEvent = characterMoveEvent;
+			_characterStatesSwitcher = characterStatesSwitcher;
 		}
 
 		public void Enter()
 		{
-			float angleDegree = GetAngleDegree();
-
-		}
-
-		private float GetAngleDegree()
-		{
-			Vector2 aimVector = _aimInputService.AimAxis;
-
-			float angleRadians = Mathf.Atan2(aimVector.y, aimVector.x);
-			return angleRadians * Mathf.Rad2Deg;
+			Debug.Log(GetType());
+			_characterMoveEvent.CharacterStartedMove += EnterInMoveState;
 		}
 
 		public void Exit()
 		{
-			throw new NotImplementedException();
 		}
+
+		private void EnterInMoveState() => 
+			_characterStatesSwitcher.SwitchState<MoveState>();
 	}
 }

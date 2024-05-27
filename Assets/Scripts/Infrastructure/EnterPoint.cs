@@ -1,3 +1,4 @@
+using Character.States.StateMachine;
 using Infrastructure.Services.Factories.States;
 using Infrastructure.States;
 using Infrastructure.States.StateMachine;
@@ -11,14 +12,16 @@ namespace Infrastructure
 		private IGameStateRegistrar _gameStatesRegistrar;
 		private IGameStateSwitcher _gameStatesSwitcher;
 		private IStatesFactory _statesFactory;
+		private ICharacterStatesRegistrar _characterStatesRegistrar;
 
 		[Inject]
 		public void Constructor(IGameStateRegistrar gameStatesRegistrar, IStatesFactory statesFactory,
-			IGameStateSwitcher gameStatesSwitcher)
+			IGameStateSwitcher gameStatesSwitcher, ICharacterStatesRegistrar characterStatesRegistrar)
 		{
 			_gameStatesRegistrar = gameStatesRegistrar;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_statesFactory = statesFactory;
+			_characterStatesRegistrar	= characterStatesRegistrar;
 		}
 
 		private void Awake()
@@ -30,9 +33,15 @@ namespace Infrastructure
 
 		private void StartStateMachine()
 		{
-			RegisterGameStates();
+			RegisterStates();
 
 			_gameStatesSwitcher.SwitchState<WarmUpState>();
+		}
+
+		private void RegisterStates()
+		{
+			RegisterGameStates();
+			RegisterCharacterStates();
 		}
 
 		private void RegisterGameStates()
@@ -44,6 +53,12 @@ namespace Infrastructure
 			_gameStatesRegistrar.RegisterState(_statesFactory.Create<MainMenuState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.Create<GameLoopingState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.Create<LoadLevelState>());
+		}
+
+		private void RegisterCharacterStates()
+		{
+			_characterStatesRegistrar.RegisterState(_statesFactory.Create<IdleState>());
+			_characterStatesRegistrar.RegisterState(_statesFactory.Create<MoveState>());
 		}
 	}
 }

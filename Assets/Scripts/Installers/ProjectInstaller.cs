@@ -1,3 +1,5 @@
+using Character;
+using Character.States.StateMachine;
 using Events;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Input;
@@ -25,6 +27,7 @@ namespace Installers
 		private void RegisterStateMachines()
 		{
 			Container.BindInterfacesAndSelfTo<GameStateMachine>().AsSingle();
+			Container.BindInterfacesAndSelfTo<CharacterStatesMachine>().AsSingle();
 		}
 
 		private void RegisterInputService()
