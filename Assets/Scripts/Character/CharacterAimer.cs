@@ -21,7 +21,7 @@ namespace Character
 		private float _angleDegree;
 
 		private bool AimUp => _angleDegree > 80 && _angleDegree < 110;
-		private bool AimRight => (_angleDegree > -160 && _angleDegree < -20);
+		private bool AimRight => _angleDegree > -20 && _angleDegree < 80;
 		private bool AimLeft => _angleDegree > 110 && _angleDegree < 230;
 		private bool AimDown => _angleDegree > -160 && _angleDegree < -20;
 
