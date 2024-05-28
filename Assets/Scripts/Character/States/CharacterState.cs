@@ -17,25 +17,20 @@ namespace Character.States
 		{
 			Debug.Log(GetType());
 			InitCharacterAnimator();
-			SubscribeEvent();
 			StartAnimation();
 		}
 
-		public void Exit()
-		{
+		public void Exit() => 
 			StopAnimation();
-			UnsubscribeEvent();
-		}
-
-		protected abstract void SubscribeEvent();
-
-		protected abstract void UnsubscribeEvent();
 
 		protected abstract void StartAnimation();
 
 		protected abstract void StopAnimation();
 
-		private void InitCharacterAnimator() =>
-			CharacterAnimator = _characterFactory.Character.GetComponent<CharacterAnimator>();
+		private void InitCharacterAnimator()
+		{
+			if (_characterFactory.Character.TryGetComponent(out CharacterAnimator animator))
+				CharacterAnimator = animator;
+		}
 	}
 }

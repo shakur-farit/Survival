@@ -3,17 +3,17 @@ using Infrastructure.Services.Factories.Character;
 
 namespace Character.States.Aim
 {
-	public class AimUpState : AimState
+	public class AimUpRightState : AimState
 	{
-		public AimUpState(ICharacterFactory characterFactory, ICharacterAimStatesSwitcher characterAimStatesSwitcher) : 
+		public AimUpRightState(ICharacterFactory characterFactory, ICharacterAimStatesSwitcher characterAimStatesSwitcher) :
 			base(characterFactory, characterAimStatesSwitcher)
 		{
 		}
 
 		protected override void StartAnimation() =>
-			CharacterAnimator.StartAimUp();
+			CharacterAnimator.StartAimUpRight();
 
 		protected override void StopAnimation() =>
-			CharacterAnimator.StopAimUp();
+			CharacterAnimator.StopAimUpRight();
 	}
 }

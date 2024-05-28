@@ -1,5 +1,7 @@
 using System;
-using Events;
+using System.Collections.Generic;
+using Character.States.Motion;
+using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -14,57 +16,77 @@ namespace Character
 
 		private IMovementInputService _movementInputService;
 		private IPersistentProgressService _persistentProgressService;
-		private ICharacterMotionEvent _characterMotionEvent;
+		private ICharacterMotionStatesSwitcher _characterMotionSwitcher;
+
+		private Dictionary<Func<bool>, Action> _stateActions;
 
 		[Inject]
 		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService,
-			ICharacterMotionEvent characterMotionEvent)
+				ICharacterMotionStatesSwitcher characterMotionStatesSwitcher)
 		{
 			_movementInputService = movementInputService;
 			_persistentProgressService = persistentProgressService;
-			_characterMotionEvent = characterMotionEvent;
+			_characterMotionSwitcher = characterMotionStatesSwitcher;
 		}
 
-		private void OnEnable() =>
+		private void OnEnable() => 
 			_movementInputService.OnEnable();
 
-		private void OnDestroy() =>
+		private void OnDestroy() => 
 			_movementInputService.OnDisable();
 
 		private void Awake() => 
 			_movementInputService.RegisterMovementInputAction();
 
-		private void Start() => 
+		private void Start()
+		{
 			SetupMovementSpeed();
+
+			InitializeStateActions();
+		}
 
 		private void FixedUpdate() => 
 			Move();
 
+		private void InitializeStateActions()
+		{
+			_stateActions = new Dictionary<Func<bool>, Action>
+			{
+				{ () => _movementInputService.MovementAxis.sqrMagnitude > Constants.Epsilon && !_isMove, 
+					SwitchCharacterState<MovingState> },
+				{ () => _movementInputService.MovementAxis.sqrMagnitude <= Constants.Epsilon && _isMove, 
+					SwitchCharacterState<IdlingState> }
+			};
+		}
+
 		private void Move()
 		{
-			if (_movementInputService.MovementAxis.sqrMagnitude > Constants.Epsilon)
-			{
-				Vector2 movementVector = transform.TransformDirection(_movementInputService.MovementAxis);
-				movementVector.Normalize();
-				transform.Translate(new Vector2(movementVector.x, movementVector.y) * (_movementSpeed * Time.deltaTime));
+			Vector2 movementAxis = _movementInputService.MovementAxis;
 
-				if(_isMove == false)
-					SwitchCharacterState();
-			}
-			else
+			if (movementAxis.sqrMagnitude > Constants.Epsilon)
 			{
-				if(_isMove)
-					SwitchCharacterState();
+				Vector2 movementVector = transform.TransformDirection(movementAxis);
+				movementVector.Normalize();
+				transform.Translate(movementVector * (_movementSpeed * Time.deltaTime));
+			}
+
+			foreach (KeyValuePair<Func<bool>, Action> stateAction in _stateActions)
+			{
+				if (stateAction.Key.Invoke())
+				{
+					stateAction.Value.Invoke();
+					break;
+				}
 			}
 		}
 
-		private void SwitchCharacterState()
+		private void SwitchCharacterState<T>() where T : MotionState
 		{
-			_characterMotionEvent.CallCharacterMotionSwitchedEvent();
+			_characterMotionSwitcher.SwitchState<T>();
 			_isMove = !_isMove;
 		}
 
-		private void SetupMovementSpeed() => 
-			_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MovementSpeed;
+		private void SetupMovementSpeed() =>
+				_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MovementSpeed;
 	}
 }

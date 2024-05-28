@@ -1,7 +1,8 @@
 using Character.States.Aim;
 using Character.States.StatesMachine.Aim;
-using Events;
 using Infrastructure.Services.Input;
+using System.Collections.Generic;
+using Infrastructure.States;
 using UnityEngine;
 using Zenject;
 
@@ -10,30 +11,21 @@ namespace Character
 	public class CharacterAimer : MonoBehaviour
 	{
 		private IAimInputService _aimInputService;
-		private ICharacterAimEvent _characterAimEvent;
 		private ICharacterAimStatesSwitcher _characterAimStatesSwitcher;
-
-		private bool _isDown;
-		private bool _isUp;
-		private bool _isLeft;
-		private bool _isRight;
 
 		private float _angleDegree;
 
-		private bool AimUp => _angleDegree > 80 && _angleDegree < 110;
-		private bool AimRight => _angleDegree > -20 && _angleDegree < 80;
-		private bool AimLeft => _angleDegree > 110 && _angleDegree < 230;
-		private bool AimDown => _angleDegree > -160 && _angleDegree < -20;
+		private Dictionary<string, AimStateInfo> _aimStates;
+		private string _currentState;
 
 		[Inject]
-		public void Constructor(IAimInputService aimInput, ICharacterAimEvent characterAimEvent, ICharacterAimStatesSwitcher characterAimStatesSwitcher)
+		public void Constructor(IAimInputService aimInput, ICharacterAimStatesSwitcher characterAimStatesSwitcher)
 		{
 			_aimInputService = aimInput;
-			_characterAimEvent = characterAimEvent;
 			_characterAimStatesSwitcher = characterAimStatesSwitcher;
 		}
 
-		private void OnEnable() => 
+		private void OnEnable() =>
 			_aimInputService.OnEnable();
 
 		private void OnDisable() => 
@@ -42,13 +34,46 @@ namespace Character
 		private void Awake() => 
 			_aimInputService.RegisterAimInputAction();
 
-		private void FixedUpdate() => 
-			Aim();
+		private void Start() => 
+			InitializeAimStates();
+
+		private void FixedUpdate() => Aim();
+
+		private void InitializeAimStates()
+		{
+			_aimStates = new Dictionary<string, AimStateInfo>
+			{
+				{ "Up", CreateAimStateInfo<AimUpState>("Up", 67f, 112f) },
+				{ "UpLeft", CreateAimStateInfo<AimUpLeftState>("UpLeft", 112f, 158f) },
+				{ "UpRight", CreateAimStateInfo<AimUpRightState>("UpRight", 22f, 67f) },
+				{ "Left", CreateAimStateInfo<AimLeftState>("Left", 158f, 180f) },
+				{ "LeftNegative", CreateAimStateInfo<AimLeftState>("Left", -180f, -135f) },
+				{ "Down", CreateAimStateInfo<AimDownState>("Down", -135f, -45f) },
+				{ "Right", CreateAimStateInfo<AimRightState>("Right", -45f, 0f) },
+				{ "RightPositive", CreateAimStateInfo<AimRightState>("Right", 0f, 22f) }
+			};
+		}
+
+		private AimStateInfo CreateAimStateInfo<TState>(string stateName, float minAngle, float maxAngle) where TState : IState
+		{
+			return new AimStateInfo
+			{
+				StateName = stateName,
+				MinAngle = minAngle,
+				MaxAngle = maxAngle,
+				SwitchStateAction = () => SwitchState<TState>(stateName)
+			};
+		}
+
+		private void SwitchState<TState>(string stateName) where TState : IState
+		{
+			_characterAimStatesSwitcher.SwitchState<TState>();
+			_currentState = stateName;
+		}
 
 		private void Aim()
 		{
 			Vector2 aimVector = _aimInputService.AimAxis;
-
 			_angleDegree = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.AngleAxis(_angleDegree, Vector3.forward);
 
@@ -57,29 +82,22 @@ namespace Character
 
 		private void EnterInSuitableState()
 		{
-			if (AimUp && _isUp == false)
-				SwitchAimState<AimUpState>(ref _isUp);
-			else if (AimLeft && _isLeft == false)
-				SwitchAimState<AimLeftState>(ref _isLeft);
-			else if (AimDown && _isDown == false)
-				SwitchAimState<AimDownState>(ref _isDown);
-			else if (AimRight && _isRight == false)
-				SwitchAimState<AimRightState>(ref _isRight);
+			foreach (var stateInfo in _aimStates.Values)
+			{
+				if (IsInAngleRange(_angleDegree, stateInfo.MinAngle, stateInfo.MaxAngle) && _currentState != stateInfo.StateName)
+				{
+					stateInfo.SwitchStateAction();
+					break;
+				}
+			}
 		}
 
-		private void SwitchAimState<T>(ref bool directionFlag) where T : AimState
+		private bool IsInAngleRange(float angle, float min, float max)
 		{
-			_characterAimStatesSwitcher.SwitchState<T>();
-			ResetFlags();
-			directionFlag = true;
-		}
-
-		private void ResetFlags()
-		{
-			_isUp = false;
-			_isDown = false;
-			_isLeft = false;
-			_isRight = false;
+			if (min < max)
+				return angle >= min && angle <= max;
+			
+			return angle >= min || angle <= max;
 		}
 	}
 }

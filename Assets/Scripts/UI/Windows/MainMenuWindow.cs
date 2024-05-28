@@ -19,7 +19,6 @@ namespace UI.Windows
 		private IPersistentProgressService _persistentProgressService;
 		private IGamePlayEvents _eventer;
 
-
 		[Inject]
 		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService, IGamePlayEvents eventer)
 		{
@@ -35,8 +34,11 @@ namespace UI.Windows
 			SetThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
 		}
 
-		private void StartGame() => 
-			_eventer.CallGameStartedEvent();
+		private void StartGame()
+		{
+			if(_persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData != null)
+				_eventer.CallGameStartedEvent();
+		}
 
 		private void SetCharacter(CharacterType type)
 		{

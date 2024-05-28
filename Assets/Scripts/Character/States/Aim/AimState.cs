@@ -6,15 +6,10 @@ namespace Character.States.Aim
 {
 	public abstract class AimState : CharacterState
 	{
-		protected readonly ICharacterAimEvent CharacterAimEvent;
 		protected readonly ICharacterAimStatesSwitcher CharacterAimStatesSwitcher;
 
-		protected AimState(ICharacterFactory characterFactory, ICharacterAimEvent characterAimEvent, 
-			ICharacterAimStatesSwitcher characterAimStatesSwitcher) : 
-			base(characterFactory)
-		{
-			CharacterAimEvent = characterAimEvent;
+		protected AimState(ICharacterFactory characterFactory, ICharacterAimStatesSwitcher characterAimStatesSwitcher) : 
+			base(characterFactory) =>
 			CharacterAimStatesSwitcher = characterAimStatesSwitcher;
-		}
 	}
 }
