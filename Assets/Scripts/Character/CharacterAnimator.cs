@@ -1,8 +1,5 @@
-using System;
-using Character.States;
 using Character.States.Aim;
 using Character.States.Motion;
-using Character.States.StatesMachine;
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.PersistentProgress;
@@ -61,6 +58,18 @@ namespace Character
 
 		public void StartAimUp() => _animator.SetBool(_aimUp, true);
 		public void StopAimUp() => _animator.SetBool(_aimUp, false);
+
+		public void StartAimUpRight() => _animator.SetBool(_aimUpRight, true);
+		public void StopAimUpRight() => _animator.SetBool(_aimUpRight, false);
+
+		public void StartAimUpLeft() => _animator.SetBool(_aimUpLeft, true);
+		public void StopAimUpLeft() => _animator.SetBool(_aimUpLeft, false);
+
+		public void StartAimRight() => _animator.SetBool(_aimRight, true);
+		public void StopAimRight() => _animator.SetBool(_aimRight, false);
+
+		public void StartAimLeft() => _animator.SetBool(_aimLeft, true);
+		public void StopAimLeft() => _animator.SetBool(_aimLeft, false);
 
 		public void StartAimDown() => _animator.SetBool(_aimDown, true);
 		public void StopAimDown() => _animator.SetBool(_aimDown, false);

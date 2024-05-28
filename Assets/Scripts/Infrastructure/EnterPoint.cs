@@ -68,6 +68,8 @@ namespace Infrastructure
 			_characterMotionStatesRegistrar.RegisterState(_statesFactory.Create<MovingState>());
 
 			_characterAimStatesRegistrar.RegisterState(_statesFactory.Create<AimUpState>());
+			_characterAimStatesRegistrar.RegisterState(_statesFactory.Create<AimRightState>());
+			_characterAimStatesRegistrar.RegisterState(_statesFactory.Create<AimLeftState>());
 			_characterAimStatesRegistrar.RegisterState(_statesFactory.Create<AimDownState>());
 		}
 	}

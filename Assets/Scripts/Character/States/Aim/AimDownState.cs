@@ -24,7 +24,9 @@ namespace Character.States.Aim
 		protected override void StopAnimation() =>
 			CharacterAnimator.StopAimDown();
 
-		private void SwitchState() =>
-			CharacterAimStatesSwitcher.SwitchState<AimUpState>();
+		private void SwitchState()
+		{
+			//CharacterAimStatesSwitcher.SwitchState<AimUpState>();
+		}
 	}
 }

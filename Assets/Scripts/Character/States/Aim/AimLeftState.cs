@@ -4,9 +4,9 @@ using Infrastructure.Services.Factories.Character;
 
 namespace Character.States.Aim
 {
-	public class AimUpState : AimState
+	public class AimLeftState : AimState
 	{
-		public AimUpState(ICharacterFactory characterFactory, ICharacterAimEvent characterAimEvent, 
+		public AimLeftState(ICharacterFactory characterFactory, ICharacterAimEvent characterAimEvent, 
 			ICharacterAimStatesSwitcher characterAimStatesSwitcher) : 
 			base(characterFactory, characterAimEvent, characterAimStatesSwitcher)
 		{
@@ -19,14 +19,14 @@ namespace Character.States.Aim
 			CharacterAimEvent.CharacterAimSwitched -= SwitchState;
 
 		protected override void StartAnimation() =>
-			CharacterAnimator.StartAimUp();
+			CharacterAnimator.StartAimLeft();
 
 		protected override void StopAnimation() =>
-			CharacterAnimator.StopAimUp();
+			CharacterAnimator.StopAimLeft();
 
 		private void SwitchState()
 		{
-			//CharacterAimStatesSwitcher.SwitchState<AimDownState>();
+			//CharacterAimStatesSwitcher.SwitchState<AimUpState>();
 		}
 	}
 }
