@@ -10,6 +10,8 @@ namespace StaticData
 		public CharacterType CharacterType;
 		public WeaponType DefaultWeapon;
 		public float MovementSpeed;
+		public int StartHealth;
+		public int MaxHealth;
 		public Sprite HandSprite;
 		public RuntimeAnimatorController Controller;
 	}

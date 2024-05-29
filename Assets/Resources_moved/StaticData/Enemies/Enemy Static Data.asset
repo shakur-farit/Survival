@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Enemy Static Data
   m_EditorClassIdentifier: 
   MovementSpeed: 1
+  CurrentHealth: 3
+  MaxHealth: 3
+  Damage: 3
