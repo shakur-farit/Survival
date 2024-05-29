@@ -1,39 +1,29 @@
-using System;
 using Infrastructure.Services.StaticData;
 using Logic.Health;
 using UnityEngine;
+using Zenject;
 
 namespace Enemy
 {
 	public class EnemyHealth : MonoBehaviour, IHealth
 	{
-		private IStaticDataService _staticDataService;
-		public float Current { get; private set; }
-		public float Max { get; private set; }
+		private float _current;
 
+		private IStaticDataService _staticDataService;
+
+		[Inject]
 		public void Constructor(IStaticDataService staticDataService) => 
 			_staticDataService = staticDataService;
 
-		private void Awake()
-		{
-			Current = _staticDataService.ForEnemy.CurrentHealth;
-			Max = _staticDataService.ForEnemy.MaxHealth;
-		}
+		private void Awake() => 
+			_current = _staticDataService.ForEnemy.CurrentHealth;
 
 		public void TakeDamage(float damage)
 		{
-			if(Current <= 0)
+			if(_current <= 0)
 				return;
 
-			Current -= damage;
-		}
-
-		public void AddHealth(float value)
-		{
-			Current += value;
-
-			if(Current > Max) 
-				Current = Max;
+			_current -= damage;
 		}
 	}
 }

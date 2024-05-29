@@ -1,6 +1,8 @@
+using System;
 using Character;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
+using Zenject;
 
 namespace Enemy
 {
@@ -10,18 +12,26 @@ namespace Enemy
 
 		private int _damage;
 
+		[Inject]
 		public void Constructor(IStaticDataService staticDataService) => 
 			_staticDataService = staticDataService;
 
-		private void Awake() => 
+		private void Awake()
+		{
 			_damage = _staticDataService.ForEnemy.Damage;
+			Debug.Log(_damage);
+		}
 
-		private void OnCollisionEnter2D(Collision2D other)
+		private void OnTriggerEnter2D(Collider2D other) => 
+			TryDealDamage(other);
+
+		private void OnTriggerStay2D(Collider2D other) => 
+			TryDealDamage(other);
+
+		private void TryDealDamage(Collider2D other)
 		{
 			if (other.gameObject.TryGetComponent(out CharacterHealth characterHealth))
-			{
 				DealDamage(characterHealth);
-			}
 		}
 
 		private void DealDamage(CharacterHealth characterHealth) => 

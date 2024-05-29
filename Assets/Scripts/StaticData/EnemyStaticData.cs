@@ -7,7 +7,6 @@ namespace StaticData
 	{
 		public float MovementSpeed;
 		public float CurrentHealth;
-		public float MaxHealth;
 		public int Damage;
 	}
 }

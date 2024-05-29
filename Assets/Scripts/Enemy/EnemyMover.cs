@@ -26,11 +26,14 @@ namespace Enemy
 			_target = _characterFactory.Character;
 		}
 
-		void Update() => 
+		private void Update() => 
 			Move();
 
 		private void Move()
 		{
+			if (_target == null)
+				return;
+
 			Vector2 targetPosition = _target.transform.position;
 			Vector2 enemyPosition = transform.position;
 
