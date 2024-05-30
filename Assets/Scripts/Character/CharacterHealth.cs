@@ -7,8 +7,8 @@ namespace Character
 {
 	public class CharacterHealth : MonoBehaviour, IHealthAddable
 	{
-		private float _current;
-		private float _max;
+		private int _current;
+		private int _max;
 
 		private IPersistentProgressService _persistentProgressService;
 		private ICharacterDeath _characterDeath;

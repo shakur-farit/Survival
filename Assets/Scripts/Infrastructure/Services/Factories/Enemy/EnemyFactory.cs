@@ -21,10 +21,10 @@ namespace Infrastructure.Services.Factories.Enemy
 			Debug.Log(_enemy.GetInstanceID());
 		}
 
-		public void Destroy()
+		public void Destroy(GameObject gameObject)
 		{
 			Debug.Log(_enemy.GetInstanceID());
-			Object.Destroy(_enemy);
+			Object.Destroy(gameObject);
 		}
 	}
 }

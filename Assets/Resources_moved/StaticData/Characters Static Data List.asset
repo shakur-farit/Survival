@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b7e85346cb06484bb8f7356d00f8fb1, type: 3}
-  m_Name: Weapons Static Data List
+  m_Script: {fileID: 11500000, guid: cab97145e2e2aa84fb16ba99dd80d163, type: 3}
+  m_Name: Characters Static Data List
   m_EditorClassIdentifier: 
-  WeaponsList: []
+  CharactersList:
+  - {fileID: 11400000, guid: f2e70028255f04b4d895b1256f5df770, type: 2}
+  - {fileID: 11400000, guid: 75764342d7d85514288cd2ebeb5bd279, type: 2}

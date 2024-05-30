@@ -1,5 +1,6 @@
 using Infrastructure.Services.Factories.Enemy;
 using UnityEngine;
+using Zenject;
 
 namespace Enemy
 {
@@ -7,10 +8,11 @@ namespace Enemy
 	{
 		private IEnemyFactory _enemyFactory;
 
+		[Inject]
 		public void Constructor(IEnemyFactory enemyFactory) => 
 			_enemyFactory = enemyFactory;
 
-		public void Die() => 
-			_enemyFactory.Destroy();
+		public void Die(GameObject gameObject) => 
+			_enemyFactory.Destroy(gameObject);
 	}
 }

@@ -22,7 +22,7 @@ namespace Enemy
 
 		private void Awake()
 		{
-			_movementSpeed = _staticDataService.ForEnemy.MovementSpeed;
+			_movementSpeed = _staticDataService.EnemiesStaticDataList.EnemiesList[0].MovementSpeed;
 			_target = _characterFactory.Character;
 		}
 

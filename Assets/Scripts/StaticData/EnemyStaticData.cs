@@ -6,7 +6,7 @@ namespace StaticData
 	public class EnemyStaticData : ScriptableObject
 	{
 		public float MovementSpeed;
-		public float CurrentHealth;
+		public int CurrentHealth;
 		public int Damage;
 	}
 }

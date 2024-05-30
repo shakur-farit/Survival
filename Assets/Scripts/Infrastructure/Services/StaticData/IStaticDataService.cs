@@ -8,7 +8,7 @@ namespace Infrastructure.Services.StaticData
 	{
 		CharactersStaticDataList CharactersStaticDataList { get; }
 		WeaponsStaticDataList WeaponsStaticDataList { get; }
-		EnemyStaticData ForEnemy { get; }
+		EnemiesStaticDataList EnemiesStaticDataList { get; }
 		UniTask Load();
 		UniTask WarmUp();
 	}

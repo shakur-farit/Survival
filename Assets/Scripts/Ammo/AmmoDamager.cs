@@ -25,8 +25,6 @@ namespace Ammo
 
 			_damage = currentWeaponAmmo.Damage;
 			_isEnemy = currentWeaponAmmo.IsEnemy;
-
-			Debug.Log(_isEnemy);
 		}
 
 		private void OnTriggerEnter2D(Collider2D other) => 
@@ -34,14 +32,10 @@ namespace Ammo
 
 		private void DealDamage(Collider2D other)
 		{
-
 			if (_isEnemy && other.gameObject.TryGetComponent(out CharacterHealth characterHealth))
 				characterHealth.TakeDamage(_damage);
 			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
-			{
-				Debug.Log("Deal damage to enemy");
 				enemyHealth.TakeDamage(_damage);
-			}
 		}
 	}
 }

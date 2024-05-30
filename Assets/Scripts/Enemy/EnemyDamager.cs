@@ -16,7 +16,7 @@ namespace Enemy
 			_staticDataService = staticDataService;
 
 		private void Awake() => 
-			_damage = _staticDataService.ForEnemy.Damage;
+			_damage = _staticDataService.EnemiesStaticDataList.EnemiesList[0].Damage;
 
 		private void OnTriggerEnter2D(Collider2D other) => 
 			TryDealDamage(other);

@@ -18,13 +18,15 @@ namespace Spawn
 			_randomService = randomService;
 		}
 
-		private void Start() => 
-			SpawnEnemy();
+		private void Start()
+		{
+			for (int i = 0; i < 2; i++) 
+				SpawnEnemy();
+		}
 
 		private async void SpawnEnemy()
 		{
 			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(10f, 10f));
-
 			await _enemyFactory.Create(randomPosition);
 		}
 	}

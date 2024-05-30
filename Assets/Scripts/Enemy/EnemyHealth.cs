@@ -7,7 +7,7 @@ namespace Enemy
 {
 	public class EnemyHealth : MonoBehaviour, IHealth
 	{
-		private float _current;
+		private int _current;
 
 		private IStaticDataService _staticDataService;
 		private IEnemyDeath _enemyDeath;
@@ -20,7 +20,7 @@ namespace Enemy
 		}
 
 		private void Awake() => 
-			_current = _staticDataService.ForEnemy.CurrentHealth;
+			_current = _staticDataService.EnemiesStaticDataList.EnemiesList[0].CurrentHealth;
 
 		public void TakeDamage(int damage)
 		{
@@ -30,7 +30,7 @@ namespace Enemy
 			_current -= damage;
 
 			if( _current <= 0 )
-				_enemyDeath.Die();
+				_enemyDeath.Die(gameObject);
 		}
 	}
 }
