@@ -1,5 +1,3 @@
-using System;
-using Events;
 using Infrastructure.Services.PersistentProgress;
 using Logic.Health;
 using UnityEngine;
@@ -13,13 +11,13 @@ namespace Character
 		private float _max;
 
 		private IPersistentProgressService _persistentProgressService;
-		private ICharacterEvents _characterEvent;
+		private ICharacterDeath _characterDeath;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService progressService, ICharacterEvents characterEvents)
+		public void Constructor(IPersistentProgressService progressService, ICharacterDeath characterDeath)
 		{
 			_persistentProgressService = progressService;
-			_characterEvent = characterEvents;
+			_characterDeath = characterDeath;
 		}
 
 		private void Awake()
@@ -28,7 +26,7 @@ namespace Character
 			_max = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MaxHealth;
 		}
 
-		public void TakeDamage(float damage)
+		public void TakeDamage(int damage)
 		{
 			if(_current <= 0)
 				return;
@@ -38,13 +36,14 @@ namespace Character
 			if (_current < 0)
 			{
 				_current = 0;
-				_characterEvent.CallCharacterDeadEvent();
+
+				_characterDeath.Die();
 			}
 
 			Debug.Log($"Deal {damage} damage. Current health is {_current}");
 		}
 
-		public void AddHealth(float value)
+		public void AddHealth(int value)
 		{
 			_current += value;
 

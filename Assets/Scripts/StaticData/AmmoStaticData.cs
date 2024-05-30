@@ -8,5 +8,6 @@ namespace StaticData
 		public int Damage;
 		public float MovementSpeed;
 		public float Dealy;
+		public bool IsEnemy;
 	}
 }

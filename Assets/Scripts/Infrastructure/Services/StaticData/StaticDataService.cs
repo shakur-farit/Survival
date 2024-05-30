@@ -7,63 +7,36 @@ using StaticData;
 namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService : IStaticDataService
-	{
-		private const string GeneralStaticDataAddress = "General Static Data";
-		private const string ThiefStaticDataAddress = "Thief Static Data";
-
+	{ 
+		private const string CharactersStaticDataListAddress = "Characters Static Data List";
+		private const string WeaponsStaticDataListAddress = "Weapons Static Data List";
 		private const string EnemyStaticDataAddress = "Enemy Static Data";
 
-		private const string PistolStaticDataAddress = "Pistol Static Data";
-		private const string ShotgunStaticDataAddress = "Shotgun Static Data";
+		private readonly IAssetsProvider _assetsProvider;
 
-		private readonly AssetsProvider _assetsProvider;
-
-		private CharacterStaticData _forGeneral;
-		private CharacterStaticData _forThief;
-		
-		private WeaponStaticData _forPistol;
-		private WeaponStaticData _forShotgun;
-		
-		public List<CharacterStaticData> CharactersList { get; private set; } = new();
-		public List<WeaponStaticData> WeaponsList { get; private set; } = new();
+		public CharactersStaticDataList CharactersStaticDataList { get; private set; }
+		public WeaponsStaticDataList WeaponsStaticDataList { get; private set; }
 		public EnemyStaticData ForEnemy { get; private set; }
 
-		public StaticDataService(AssetsProvider assetsProvider) =>
+		public StaticDataService(IAssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
 
 		public async UniTask Load()
 		{
-			await AddCharactersToList();
+			CharactersStaticDataList = await _assetsProvider.Load<CharactersStaticDataList>(CharactersStaticDataListAddress);
 
 			ForEnemy = await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
 
-			await AddWeaponToList();
+			WeaponsStaticDataList = await _assetsProvider.Load<WeaponsStaticDataList>(WeaponsStaticDataListAddress);
 		}
 
 		public async UniTask WarmUp()
 		{
-			await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
-			await _assetsProvider.Load<CharacterStaticData>(ThiefStaticDataAddress);
+			await _assetsProvider.Load<CharactersStaticDataList>(CharactersStaticDataListAddress);
 
 			await _assetsProvider.Load<EnemyStaticData>(EnemyStaticDataAddress);
 
-			await _assetsProvider.Load<WeaponStaticData>(PistolStaticDataAddress);
-		}
-
-		private async Task AddCharactersToList()
-		{
-			_forGeneral = await _assetsProvider.Load<CharacterStaticData>(GeneralStaticDataAddress);
-			CharactersList.Add(_forGeneral);
-			_forThief = await _assetsProvider.Load<CharacterStaticData>(ThiefStaticDataAddress);
-			CharactersList.Add(_forThief);
-		}
-
-		private async Task AddWeaponToList()
-		{
-			_forPistol = await _assetsProvider.Load<WeaponStaticData>(PistolStaticDataAddress);
-			WeaponsList.Add(_forPistol);
-			_forShotgun = await _assetsProvider.Load<WeaponStaticData>(ShotgunStaticDataAddress);
-			WeaponsList.Add(_forShotgun);
+			await _assetsProvider.Load<WeaponsStaticDataList>(WeaponsStaticDataListAddress);
 		}
 	}
 }

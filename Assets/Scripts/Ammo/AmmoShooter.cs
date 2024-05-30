@@ -24,8 +24,8 @@ namespace Ammo
 		private void Awake() => 
 			_delay = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Dealy;
 
-		//private void Start() => 
-		//	Shoot();
+		private void Start() =>
+			Shoot();
 
 		private void Shoot() => 
 			StartCoroutine(ShootRoutine());

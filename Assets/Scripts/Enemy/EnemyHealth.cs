@@ -10,20 +10,27 @@ namespace Enemy
 		private float _current;
 
 		private IStaticDataService _staticDataService;
+		private IEnemyDeath _enemyDeath;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService) => 
+		public void Constructor(IStaticDataService staticDataService, IEnemyDeath enemyDeath)
+		{
 			_staticDataService = staticDataService;
+			_enemyDeath = enemyDeath;
+		}
 
 		private void Awake() => 
 			_current = _staticDataService.ForEnemy.CurrentHealth;
 
-		public void TakeDamage(float damage)
+		public void TakeDamage(int damage)
 		{
 			if(_current <= 0)
 				return;
 
 			_current -= damage;
+
+			if( _current <= 0 )
+				_enemyDeath.Die();
 		}
 	}
 }

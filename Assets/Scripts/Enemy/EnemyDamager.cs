@@ -1,4 +1,3 @@
-using System;
 using Character;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -6,7 +5,7 @@ using Zenject;
 
 namespace Enemy
 {
-	public class Damager : MonoBehaviour
+	public class EnemyDamager : MonoBehaviour
 	{
 		private IStaticDataService _staticDataService;
 
@@ -16,11 +15,8 @@ namespace Enemy
 		public void Constructor(IStaticDataService staticDataService) => 
 			_staticDataService = staticDataService;
 
-		private void Awake()
-		{
+		private void Awake() => 
 			_damage = _staticDataService.ForEnemy.Damage;
-			Debug.Log(_damage);
-		}
 
 		private void OnTriggerEnter2D(Collider2D other) => 
 			TryDealDamage(other);

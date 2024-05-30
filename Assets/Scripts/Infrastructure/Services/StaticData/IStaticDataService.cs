@@ -6,8 +6,8 @@ namespace Infrastructure.Services.StaticData
 {
 	public interface IStaticDataService
 	{
-		List<CharacterStaticData> CharactersList { get; }
-		List<WeaponStaticData> WeaponsList { get; }
+		CharactersStaticDataList CharactersStaticDataList { get; }
+		WeaponsStaticDataList WeaponsStaticDataList { get; }
 		EnemyStaticData ForEnemy { get; }
 		UniTask Load();
 		UniTask WarmUp();

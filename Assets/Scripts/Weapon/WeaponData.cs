@@ -22,7 +22,7 @@ namespace Weapon
 
 		private void Awake()
 		{
-			foreach (WeaponStaticData weapon in _staticDataService.WeaponsList)
+			foreach (WeaponStaticData weapon in _staticDataService.WeaponsStaticDataList.WeaponsList)
 			{
 				if (weapon.Type == _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.DefaultWeapon)
 				{

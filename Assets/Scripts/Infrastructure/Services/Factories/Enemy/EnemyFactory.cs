@@ -18,9 +18,13 @@ namespace Infrastructure.Services.Factories.Enemy
 		{
 			AssetsReference reference = await InitReference();
 			_enemy = await CreateObject(reference.EnemyAddress, position);
+			Debug.Log(_enemy.GetInstanceID());
 		}
 
-		public void Destroy() => 
+		public void Destroy()
+		{
+			Debug.Log(_enemy.GetInstanceID());
 			Object.Destroy(_enemy);
+		}
 	}
 }

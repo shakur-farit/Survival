@@ -1,6 +1,5 @@
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.States;
-using UnityEngine;
 
 namespace Character.States
 {
@@ -15,7 +14,6 @@ namespace Character.States
 
 		public void Enter()
 		{
-			Debug.Log(GetType());
 			InitCharacterAnimator();
 			StartAnimation();
 		}

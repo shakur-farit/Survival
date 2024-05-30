@@ -11,9 +11,9 @@ namespace UI.Windows
 {
 	public class MainMenuWindow : MonoBehaviour
 	{
-		public Button PlayButton;
-		public Button SetGeneralButton;
-		public Button SetThiefButton;
+		[SerializeField] private Button _playButton;
+		[SerializeField] private Button _setGeneralButton;
+		[SerializeField] private Button _setThiefButton;
 
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
@@ -29,9 +29,9 @@ namespace UI.Windows
 
 		private void Start()
 		{
-			PlayButton.onClick.AddListener(StartGame);
-			SetGeneralButton.onClick.AddListener(() => SetCharacter(CharacterType.TheGeneral));
-			SetThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
+			_playButton.onClick.AddListener(StartGame);
+			_setGeneralButton.onClick.AddListener(() => SetCharacter(CharacterType.TheGeneral));
+			_setThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
 		}
 
 		private void StartGame()
@@ -42,7 +42,7 @@ namespace UI.Windows
 
 		private void SetCharacter(CharacterType type)
 		{
-			foreach (CharacterStaticData character in _staticDataService.CharactersList)
+			foreach (CharacterStaticData character in _staticDataService.CharactersStaticDataList.CharactersList)
 				if (type == character.CharacterType)
 					_persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData = character;
 		}

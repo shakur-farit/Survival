@@ -1,10 +1,11 @@
 using Character;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Weapon;
 
 namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Static Data", menuName = "Scriptable Object/Static Data/CharacterPrefab")]
+	[CreateAssetMenu(fileName = "Static Data", menuName = "Scriptable Object/Static Data/Character")]
 	public class CharacterStaticData : ScriptableObject
 	{
 		public CharacterType CharacterType;
