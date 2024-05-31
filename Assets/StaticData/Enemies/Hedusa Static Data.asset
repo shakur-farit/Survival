@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b60bfd23feef2c4eb3da531cd257546, type: 3}
-  m_Name: Enemies Static Data List
+  m_Script: {fileID: 11500000, guid: 7a6ac3ba23c837b459059a11c968333d, type: 3}
+  m_Name: Hedusa Static Data
   m_EditorClassIdentifier: 
-  EnemiesList:
-  - {fileID: 11400000, guid: 4aec57a78e8701b4ab2cd07b3da0255e, type: 2}
-  - {fileID: 11400000, guid: 20eb24d2f3bed344db0b30f41fcd92b9, type: 2}
+  Type: 1
+  Sprite: {fileID: -8023197995696302144, guid: a53e0a6238da01b4a9189f65aeb58998, type: 3}
+  MovementSpeed: 2
+  CurrentHealth: 3
+  Damage: 3

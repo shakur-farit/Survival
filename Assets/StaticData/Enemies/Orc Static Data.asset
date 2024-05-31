@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a6ac3ba23c837b459059a11c968333d, type: 3}
-  m_Name: Enemy Static Data
+  m_Name: Orc Static Data
   m_EditorClassIdentifier: 
+  Type: 2
+  Sprite: {fileID: 8614703209417225712, guid: 4a49f6d6d5594ae48bafa9d9a279031f, type: 3}
   MovementSpeed: 1
-  CurrentHealth: 3
-  MaxHealth: 3
+  CurrentHealth: 4
   Damage: 3

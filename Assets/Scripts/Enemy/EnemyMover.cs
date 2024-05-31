@@ -1,3 +1,4 @@
+using System;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
@@ -40,13 +41,13 @@ namespace Enemy
 			Vector2 direction = targetPosition - enemyPosition;
 			direction.Normalize();
 
-			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+			//float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
 			enemyPosition = Vector2.MoveTowards(enemyPosition,
 				targetPosition, _movementSpeed * Time.deltaTime);
 
 			transform.position = enemyPosition;
-			transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+			//transform.rotation = Quaternion.Euler(Vector3.forward * angle);
 		}
 	}
 }

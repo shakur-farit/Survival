@@ -2,7 +2,7 @@ using System;
 
 namespace Events
 {
-	public class Eventer : IGamePlayEvents, ICharacterEvents
+	public class Eventer : IGamePlayEvents
 	{
 		public event Action GameStarted;
 

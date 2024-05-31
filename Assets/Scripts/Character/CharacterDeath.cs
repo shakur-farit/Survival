@@ -1,5 +1,4 @@
 using Infrastructure.Services.Factories.Character;
-using UnityEngine;
 using Zenject;
 
 namespace Character
