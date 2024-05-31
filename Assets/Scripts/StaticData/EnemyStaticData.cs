@@ -1,4 +1,4 @@
-using Enemy;
+using EnemyLogic;
 using UnityEngine;
 
 namespace StaticData

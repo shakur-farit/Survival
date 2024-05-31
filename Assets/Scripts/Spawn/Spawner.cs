@@ -1,4 +1,5 @@
-using Infrastructure.Services.Factories;
+using System.Collections.Generic;
+using EnemyLogic;
 using Infrastructure.Services.Factories.Enemy;
 using Infrastructure.Services.Randomizer;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Spawn
 		private IRandomService _randomService;
 		private IEnemyFactory _enemyFactory;
 
+		private Dictionary<EnemyType, int> _enemiesOnLevel;
+		private List<EnemyType> _enemies;
+
 		[Inject]
 		public void Constructor(IEnemyFactory enemyFactory, IRandomService randomService)
 		{
@@ -18,16 +22,37 @@ namespace Spawn
 			_randomService = randomService;
 		}
 
-		private void Start()
+		private void Awake()
 		{
-			for (int i = 0; i < 2; i++) 
-				SpawnEnemy();
+			_enemiesOnLevel = new Dictionary<EnemyType, int>()
+			{
+				{ EnemyType.Medusa, 3},
+				{ EnemyType.Orc, 1}
+			};
 		}
 
-		private async void SpawnEnemy()
+		private void Start()
+		{
+			_enemies = new List<EnemyType>();
+
+			foreach (KeyValuePair<EnemyType, int> keyValuePair in _enemiesOnLevel)
+			{
+				for (int i = 0; i < keyValuePair.Value; i++) 
+					_enemies.Add(keyValuePair.Key);
+			}
+
+			foreach (EnemyType enemyType in _enemies) 
+				SpawnEnemy(enemyType);
+		}
+
+		private async void SpawnEnemy(EnemyType enemyType)
 		{
 			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(10f, 10f));
-			await _enemyFactory.Create(randomPosition);
+			GameObject enemyObject =  await _enemyFactory.Create(randomPosition);
+
+			if(enemyObject.TryGetComponent(out Enemy enemy))
+				enemy.Initialize(enemyType);
+
 		}
 	}
 }

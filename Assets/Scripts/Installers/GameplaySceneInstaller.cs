@@ -1,5 +1,5 @@
 using Character;
-using Enemy;
+using EnemyLogic;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Enemy;
@@ -8,7 +8,6 @@ using Infrastructure.Services.Factories.Spawner;
 using Infrastructure.Services.Factories.States;
 using Infrastructure.Services.Factories.UI;
 using Infrastructure.Services.ObjectCreator;
-using Logic.Death;
 using UI.Services.Windows;
 using Zenject;
 
@@ -22,6 +21,7 @@ namespace Installers
 			RegisterObjectsCreator();
 			RegisterWindowsService();
 			RegisterDeath();
+			RegisterMediators();
 		}
 
 		private void RegisterFactories()
@@ -34,6 +34,9 @@ namespace Installers
 			RegisterUIFactory();
 			RegisterAmmoFactory();
 		}
+
+		private void RegisterMediators() => 
+			Container.Bind<IEnemyMediator>().To<EnemyMediator>().AsSingle();
 
 		private void RegisterDeath()
 		{

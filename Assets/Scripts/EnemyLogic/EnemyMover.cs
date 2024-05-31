@@ -1,10 +1,9 @@
-using System;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Enemy
+namespace EnemyLogic
 {
 	public class EnemyMover : MonoBehaviour
 	{

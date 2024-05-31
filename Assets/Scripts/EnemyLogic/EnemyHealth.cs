@@ -3,7 +3,7 @@ using Logic.Health;
 using UnityEngine;
 using Zenject;
 
-namespace Enemy
+namespace EnemyLogic
 {
 	public class EnemyHealth : MonoBehaviour, IHealth
 	{

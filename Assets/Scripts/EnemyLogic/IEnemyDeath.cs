@@ -1,7 +1,6 @@
-using Logic.Death;
 using UnityEngine;
 
-namespace Enemy
+namespace EnemyLogic
 {
 	public interface IEnemyDeath
 	{

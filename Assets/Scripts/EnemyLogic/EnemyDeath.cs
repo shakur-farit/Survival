@@ -2,7 +2,7 @@ using Infrastructure.Services.Factories.Enemy;
 using UnityEngine;
 using Zenject;
 
-namespace Enemy
+namespace EnemyLogic
 {
 	public class EnemyDeath : IEnemyDeath
 	{

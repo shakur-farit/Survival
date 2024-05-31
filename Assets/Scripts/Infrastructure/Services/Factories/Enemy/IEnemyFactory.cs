@@ -5,7 +5,7 @@ namespace Infrastructure.Services.Factories.Enemy
 {
 	public interface IEnemyFactory
 	{
-		UniTask Create(Vector2 position);
+		UniTask<GameObject> Create(Vector2 position);
 		void Destroy(GameObject gameObject);
 	}
 }

@@ -1,4 +1,4 @@
-namespace Enemy
+namespace EnemyLogic
 {
 	public enum EnemyType
 	{

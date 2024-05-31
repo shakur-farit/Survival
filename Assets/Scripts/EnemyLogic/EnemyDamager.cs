@@ -3,7 +3,7 @@ using Infrastructure.Services.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Enemy
+namespace EnemyLogic
 {
 	public class EnemyDamager : MonoBehaviour
 	{

@@ -1,5 +1,5 @@
 using Character;
-using Enemy;
+using EnemyLogic;
 using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using UnityEngine;
