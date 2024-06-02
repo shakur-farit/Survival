@@ -22,7 +22,7 @@ namespace EnemyLogic
 			foreach (EnemyStaticData enemyStaticData in _staticDataService.EnemiesStaticDataList.EnemiesList)
 			{
 				if(enemyStaticData.Type == enemyType)
-					_mediator.InitializeEnemy(enemyStaticData);
+					_mediator.Initialize(enemyStaticData);
 			}
 		}
 	}

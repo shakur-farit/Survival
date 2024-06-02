@@ -9,6 +9,7 @@ using Infrastructure.Services.Factories.States;
 using Infrastructure.Services.Factories.UI;
 using Infrastructure.Services.ObjectCreator;
 using UI.Services.Windows;
+using UI.Windows;
 using Zenject;
 
 namespace Installers
@@ -35,8 +36,11 @@ namespace Installers
 			RegisterAmmoFactory();
 		}
 
-		private void RegisterMediators() => 
+		private void RegisterMediators()
+		{
+			Container.BindInterfacesAndSelfTo<CharacterMediator>().AsSingle();
 			Container.BindInterfacesAndSelfTo<EnemyMediator>().AsSingle();
+		}
 
 		private void RegisterDeath()
 		{

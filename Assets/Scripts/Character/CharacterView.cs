@@ -1,5 +1,5 @@
-using Infrastructure.Services.PersistentProgress;
 using StaticData;
+using UI.Windows;
 using UnityEngine;
 using Zenject;
 
@@ -10,19 +10,19 @@ namespace Character
 		public SpriteRenderer Hand;
 		public SpriteRenderer HandNoWeapon;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ICharacterViewMediator _mediator;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) =>
-			_persistentProgressService = persistentProgressService;
+		public void Constructor(ICharacterViewMediator mediator) =>
+			_mediator = mediator;
 
+		private void Awake() => 
+			_mediator.RegisterView(this);
 
-		private void Start()
+		public void SetupSprite(CharacterStaticData staticData)
 		{
-			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData;
-
-			Hand.sprite = currentCharacterStaticData.HandSprite;
-			HandNoWeapon.sprite = currentCharacterStaticData.HandSprite;
+			Hand.sprite = staticData.HandSprite;
+			HandNoWeapon.sprite = staticData.HandSprite;
 		}
 	}
 }

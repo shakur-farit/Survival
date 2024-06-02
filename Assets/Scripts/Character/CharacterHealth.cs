@@ -39,8 +39,6 @@ namespace Character
 
 				_characterDeath.Die();
 			}
-
-			Debug.Log($"Deal {damage} damage. Current health is {_current}");
 		}
 
 		public void AddHealth(int value)

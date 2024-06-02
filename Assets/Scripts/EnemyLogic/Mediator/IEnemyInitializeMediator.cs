@@ -4,6 +4,6 @@ namespace EnemyLogic
 {
 	public interface IEnemyInitializeMediator
 	{
-		void InitializeEnemy(EnemyStaticData enemyStaticData);
+		void Initialize(EnemyStaticData enemyStaticData);
 	}
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using Infrastructure.Services.Factories;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -24,8 +23,8 @@ namespace Ammo
 		private void Awake() => 
 			_delay = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Dealy;
 
-		private void Start() =>
-			Shoot();
+		//private void Start() =>
+		//	Shoot();
 
 		private void Shoot() => 
 			StartCoroutine(ShootRoutine());
