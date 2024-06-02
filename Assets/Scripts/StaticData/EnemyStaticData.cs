@@ -8,6 +8,7 @@ namespace StaticData
 	{
 		public EnemyType Type;
 		public Sprite Sprite;
+		public RuntimeAnimatorController Animator;
 		public float MovementSpeed;
 		public int CurrentHealth;
 		public int Damage;

@@ -36,7 +36,7 @@ namespace Installers
 		}
 
 		private void RegisterMediators() => 
-			Container.Bind<IEnemyMediator>().To<EnemyMediator>().AsSingle();
+			Container.BindInterfacesAndSelfTo<EnemyMediator>().AsSingle();
 
 		private void RegisterDeath()
 		{

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7566889708115939246}
   - component: {fileID: 5241945053856362886}
+  - component: {fileID: 1448632814092989399}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1448632814092989399
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043731351018429605}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5438004444555498043
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,6 +120,7 @@ GameObject:
   - component: {fileID: 9215054179346678720}
   - component: {fileID: 3189399949160812306}
   - component: {fileID: 1960426555796915219}
+  - component: {fileID: 5573391244941828018}
   - component: {fileID: 9002416077000420868}
   - component: {fileID: 5136235159686654517}
   m_Layer: 0
@@ -135,7 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e8e08d37ca54441a3e646edc6c0feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyView: {fileID: 1960426555796915219}
 --- !u!114 &3415406307422229037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +207,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BodySpriteRenderer: {fileID: 5241945053856362886}
+--- !u!114 &5573391244941828018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438004444555498043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c6bc2ce7f5fb445bf996dc92211cec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1448632814092989399}
 --- !u!70 &9002416077000420868
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

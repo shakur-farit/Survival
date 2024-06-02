@@ -7,13 +7,13 @@ namespace EnemyLogic
 {
 	public class Enemy : MonoBehaviour
 	{
-		private IEnemyMediator _mediator;
+		private IEnemyInitializeMediator _mediator;
 		private IStaticDataService _staticDataService;
 
 		[Inject]
-		public void Constructor(IEnemyMediator mediator, IStaticDataService staticDataService)
+		public void Constructor(IEnemyInitializeMediator initializeMediator, IStaticDataService staticDataService)
 		{
-			_mediator = mediator;
+			_mediator = initializeMediator;
 			_staticDataService = staticDataService;
 		}
 

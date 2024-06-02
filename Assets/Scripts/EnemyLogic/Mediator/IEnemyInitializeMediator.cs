@@ -2,9 +2,8 @@ using StaticData;
 
 namespace EnemyLogic
 {
-	public interface IEnemyMediator
+	public interface IEnemyInitializeMediator
 	{
-		void RegisterView(EnemyView view);
 		void InitializeEnemy(EnemyStaticData enemyStaticData);
 	}
 }

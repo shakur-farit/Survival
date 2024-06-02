@@ -1,5 +1,5 @@
 using Character;
-using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -7,16 +7,19 @@ namespace EnemyLogic
 {
 	public class EnemyDamager : MonoBehaviour
 	{
-		private IStaticDataService _staticDataService;
+		private IEnemyDamagerMediator _mediator;
 
 		private int _damage;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService) => 
-			_staticDataService = staticDataService;
+		public void Constructor(IEnemyDamagerMediator mediator) =>
+			_mediator = mediator;
 
-		private void Awake() => 
-			_damage = _staticDataService.EnemiesStaticDataList.EnemiesList[0].Damage;
+		private void Awake() =>
+			_mediator.RegisterDamager(this);
+
+		public void InitializeDamage(EnemyStaticData enemyStaticData) => 
+			_damage = enemyStaticData.Damage;
 
 		private void OnTriggerEnter2D(Collider2D other) => 
 			TryDealDamage(other);

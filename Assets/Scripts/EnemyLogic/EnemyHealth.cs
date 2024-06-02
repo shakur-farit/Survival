@@ -1,5 +1,5 @@
-using Infrastructure.Services.StaticData;
 using Logic.Health;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -9,18 +9,18 @@ namespace EnemyLogic
 	{
 		private int _current;
 
-		private IStaticDataService _staticDataService;
+		private IEnemyHealthMediator _mediator;
 		private IEnemyDeath _enemyDeath;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService, IEnemyDeath enemyDeath)
+		public void Constructor(IEnemyHealthMediator mediator, IEnemyDeath enemyDeath)
 		{
-			_staticDataService = staticDataService;
+			_mediator = mediator;
 			_enemyDeath = enemyDeath;
 		}
 
 		private void Awake() => 
-			_current = _staticDataService.EnemiesStaticDataList.EnemiesList[0].CurrentHealth;
+			_mediator.RegisterHealth(this);
 
 		public void TakeDamage(int damage)
 		{
@@ -32,5 +32,8 @@ namespace EnemyLogic
 			if( _current <= 0 )
 				_enemyDeath.Die(gameObject);
 		}
+
+		public void InitializeHealth(EnemyStaticData enemyStaticData) => 
+			_current = enemyStaticData.CurrentHealth;
 	}
 }

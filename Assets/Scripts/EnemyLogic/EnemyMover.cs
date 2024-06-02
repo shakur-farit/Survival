@@ -1,5 +1,6 @@
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -10,21 +11,24 @@ namespace EnemyLogic
 		private float _movementSpeed;
 		private GameObject _target;
 
-		private IStaticDataService _staticDataService;
 		private ICharacterFactory _characterFactory;
+		private IEnemySpeedMediator _mediator;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService, ICharacterFactory characterFactory)
+		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator)
 		{
-			_staticDataService = staticDataService;
 			_characterFactory = characterFactory;
+			_mediator = mediator;
 		}
 
 		private void Awake()
 		{
-			_movementSpeed = _staticDataService.EnemiesStaticDataList.EnemiesList[0].MovementSpeed;
+			_mediator.RegisterMover(this);
 			_target = _characterFactory.Character;
 		}
+
+		public void InitializeSpeed(EnemyStaticData staticData) => 
+			_movementSpeed = staticData.MovementSpeed;
 
 		private void Update() => 
 			Move();

@@ -8,10 +8,10 @@ namespace EnemyLogic
 	{
 		[SerializeField] private SpriteRenderer BodySpriteRenderer;
 
-		private IEnemyMediator _mediator;
+		private IEnemyViewMediator _mediator;
 
 		[Inject]
-		public void Constructor(IEnemyMediator mediator) => 
+		public void Constructor(IEnemyViewMediator mediator) => 
 			_mediator = mediator;
 
 		private void Awake() => 
