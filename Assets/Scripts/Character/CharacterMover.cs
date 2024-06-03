@@ -6,6 +6,7 @@ using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
+using Utility;
 using Zenject;
 
 namespace Character
