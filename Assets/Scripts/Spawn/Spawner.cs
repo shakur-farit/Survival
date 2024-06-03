@@ -52,6 +52,12 @@ namespace Spawn
 
 			if (enemyObject.TryGetComponent(out Enemy enemy))
 				enemy.Initialize(enemyType);
+
+			if (enemyObject.TryGetComponent(out EnemyAnimator animator))
+			{
+				animator.StartMoving();
+				animator.StartAimDown();
+			}
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace EnemyLogic
 		private void Awake() =>
 			_mediator.RegisterDamager(this);
 
-		public void InitializeDamage(EnemyStaticData enemyStaticData) => 
+		public void SetupDamage(EnemyStaticData enemyStaticData) => 
 			_damage = enemyStaticData.Damage;
 
 		private void OnTriggerEnter2D(Collider2D other) => 

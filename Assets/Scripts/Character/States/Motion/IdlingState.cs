@@ -1,12 +1,11 @@
-using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Factories.Character;
 
 namespace Character.States.Motion
 {
-	public class IdlingState : MotionState
+	public class IdlingState : CharacterState
 	{
-		public IdlingState(ICharacterFactory characterFactory, ICharacterMotionStatesSwitcher characterMotionStatesSwitcher) : 
-			base(characterFactory, characterMotionStatesSwitcher)
+		public IdlingState(ICharacterFactory characterFactory) : 
+			base(characterFactory)
 		{
 		}
 

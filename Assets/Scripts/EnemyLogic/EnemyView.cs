@@ -18,7 +18,7 @@ namespace EnemyLogic
 		private void Awake() => 
 			_mediator.RegisterView(this);
 
-		public void InitializeSprite(EnemyStaticData enemyStaticData) => 
+		public void SetupSprite(EnemyStaticData enemyStaticData) => 
 			BodySpriteRenderer.sprite = enemyStaticData.Sprite;
 	}
 }

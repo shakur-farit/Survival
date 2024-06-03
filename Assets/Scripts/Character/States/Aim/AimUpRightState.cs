@@ -1,12 +1,11 @@
-using Character.States.StatesMachine.Aim;
 using Infrastructure.Services.Factories.Character;
 
 namespace Character.States.Aim
 {
-	public class AimUpRightState : AimState
+	public class AimUpRightState : CharacterState
 	{
-		public AimUpRightState(ICharacterFactory characterFactory, ICharacterAimStatesSwitcher characterAimStatesSwitcher) :
-			base(characterFactory, characterAimStatesSwitcher)
+		public AimUpRightState(ICharacterFactory characterFactory) :
+			base(characterFactory)
 		{
 		}
 

@@ -28,7 +28,7 @@ namespace EnemyLogic
 		private void Awake() => 
 			_mediator.RegisterAnimator(this);
 
-		public void InitializeAnimator(EnemyStaticData staticData) => 
+		public void SetupAnimator(EnemyStaticData staticData) => 
 			_animator.runtimeAnimatorController = staticData.Animator;
 
 		public void StartIdling() => _animator.SetBool(_isIdling, true);

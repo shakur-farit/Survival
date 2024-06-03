@@ -1,16 +1,15 @@
-using Infrastructure.Services.Factories.Enemy;
+using EnemyLogic.Mediator;
 using Infrastructure.States;
 
 namespace EnemyLogic.States.StateMachine
 {
-	public abstract class EnemyState : IState
+	public abstract class EnemyAimState : IState
 	{
 		protected EnemyAnimator EnemyAnimator;
+		private readonly IEnemyAnimatorMediator _mediator;
 
-		private readonly IEnemyFactory _enemyFactory;
-
-		protected EnemyState(IEnemyFactory enemyFactory) =>
-			_enemyFactory = enemyFactory;
+		protected EnemyAimState(IEnemyAnimatorMediator mediator) => 
+			_mediator = mediator;
 
 		public void Enter()
 		{
@@ -25,9 +24,7 @@ namespace EnemyLogic.States.StateMachine
 
 		protected abstract void StopAnimation();
 
-		private void SetEnemyAnimator()
-		{
-			
-		}
+		private void SetEnemyAnimator() => 
+			EnemyAnimator = _mediator.Animator;
 	}
 }

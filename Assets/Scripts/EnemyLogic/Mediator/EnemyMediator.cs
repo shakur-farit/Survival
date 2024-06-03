@@ -9,7 +9,8 @@ namespace EnemyLogic.Mediator
 		private EnemyHealth _health;
 		private EnemyMover _mover;
 		private EnemyDamager _damager;
-		private EnemyAnimator _animator;
+
+		public EnemyAnimator Animator { get; private set; }
 
 		public void RegisterView(EnemyView view) =>
 			_view = view;
@@ -24,15 +25,15 @@ namespace EnemyLogic.Mediator
 			_damager = damager;
 
 		public void RegisterAnimator(EnemyAnimator animator) => 
-			_animator = animator;
+			Animator = animator;
 
 		public void Initialize(EnemyStaticData enemyStaticData)
 		{
-			_view.InitializeSprite(enemyStaticData);
-			_health.InitializeHealth(enemyStaticData);
-			_mover.InitializeSpeed(enemyStaticData);
-			_damager.InitializeDamage(enemyStaticData);
-			_animator.InitializeAnimator(enemyStaticData);
+			_view.SetupSprite(enemyStaticData);
+			_health.SetupHealth(enemyStaticData);
+			_mover.SetupSpeed(enemyStaticData);
+			_damager.SetupDamage(enemyStaticData);
+			Animator.SetupAnimator(enemyStaticData);
 		}
 	}
 }

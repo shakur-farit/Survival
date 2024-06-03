@@ -1,6 +1,5 @@
 using EnemyLogic.Mediator;
 using Infrastructure.Services.Factories.Character;
-using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -11,28 +10,34 @@ namespace EnemyLogic
 	{
 		private float _movementSpeed;
 		private GameObject _target;
+		private EnemyAnimator _animator;
 
 		private ICharacterFactory _characterFactory;
-		private IEnemySpeedMediator _mediator;
+		private IEnemySpeedMediator _speedMediator;
+		private IEnemyAnimatorMediator _animatorMediator;
 
 		[Inject]
-		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator)
+		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator, 
+			IEnemyAnimatorMediator animatorMediator)
 		{
 			_characterFactory = characterFactory;
-			_mediator = mediator;
+			_speedMediator = mediator;
+			_animatorMediator = animatorMediator;
 		}
 
 		private void Awake()
 		{
-			_mediator.RegisterMover(this);
+			_speedMediator.RegisterMover(this);
 			_target = _characterFactory.Character;
-		}
+			_animator = _animatorMediator.Animator;
 
-		public void InitializeSpeed(EnemyStaticData staticData) => 
-			_movementSpeed = staticData.MovementSpeed;
+		}
 
 		private void Update() => 
 			Move();
+
+		public void SetupSpeed(EnemyStaticData staticData) => 
+			_movementSpeed = staticData.MovementSpeed;
 
 		private void Move()
 		{

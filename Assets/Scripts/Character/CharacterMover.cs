@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Character.States;
 using Character.States.Motion;
 using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Input;
@@ -80,7 +81,7 @@ namespace Character
 			}
 		}
 
-		private void SwitchCharacterState<T>() where T : MotionState
+		private void SwitchCharacterState<T>() where T : CharacterState
 		{
 			_characterMotionSwitcher.SwitchState<T>();
 			_isMove = !_isMove;

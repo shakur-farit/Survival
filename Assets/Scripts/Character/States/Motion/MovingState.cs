@@ -1,12 +1,11 @@
-using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Factories.Character;
 
 namespace Character.States.Motion
 {
-	public class MovingState : MotionState
+	public class MovingState : CharacterState
 	{
-		public MovingState(ICharacterFactory characterFactory, ICharacterMotionStatesSwitcher characterMotionStatesSwitcher) : 
-			base(characterFactory, characterMotionStatesSwitcher)
+		public MovingState(ICharacterFactory characterFactory) :
+			base(characterFactory)
 		{
 		}
 

@@ -34,7 +34,7 @@ namespace EnemyLogic
 				_enemyDeath.Die(gameObject);
 		}
 
-		public void InitializeHealth(EnemyStaticData enemyStaticData) => 
+		public void SetupHealth(EnemyStaticData enemyStaticData) => 
 			_current = enemyStaticData.CurrentHealth;
 	}
 }
