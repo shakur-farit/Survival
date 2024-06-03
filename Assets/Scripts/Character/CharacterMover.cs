@@ -87,6 +87,6 @@ namespace Character
 		}
 
 		private void SetupMovementSpeed() =>
-				_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MovementSpeed;
+				_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacter.MovementSpeed;
 	}
 }

@@ -39,7 +39,7 @@ namespace Character
 
 		private void Awake()
 		{
-			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData;
+			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.CharacterData.CurrentCharacter;
 
 			_animator.runtimeAnimatorController = currentCharacterStaticData.Controller;
 		}

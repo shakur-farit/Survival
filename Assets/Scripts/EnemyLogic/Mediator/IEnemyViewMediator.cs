@@ -1,4 +1,4 @@
-namespace EnemyLogic
+namespace EnemyLogic.Mediator
 {
 	public interface IEnemyViewMediator
 	{

@@ -14,7 +14,7 @@ namespace Character.States
 
 		public void Enter()
 		{
-			InitCharacterAnimator();
+			SetupCharacterAnimator();
 			StartAnimation();
 		}
 
@@ -25,7 +25,7 @@ namespace Character.States
 
 		protected abstract void StopAnimation();
 
-		private void InitCharacterAnimator()
+		private void SetupCharacterAnimator()
 		{
 			if (_characterFactory.Character.TryGetComponent(out CharacterAnimator animator))
 				CharacterAnimator = animator;

@@ -1,4 +1,5 @@
 using Character;
+using EnemyLogic.Mediator;
 using StaticData;
 using UnityEngine;
 using Zenject;

@@ -18,16 +18,14 @@ namespace UI.Windows
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
 		private IGamePlayEvents _eventer;
-		private ICharacterInitializeMediator _characterMediator;
 
 		[Inject]
 		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService,
-			IGamePlayEvents eventer, ICharacterInitializeMediator characterMediator)
+			IGamePlayEvents eventer)
 		{
 			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;
 			_eventer = eventer;
-			_characterMediator = characterMediator;
 		}
 
 		private void Start()
@@ -39,7 +37,7 @@ namespace UI.Windows
 
 		private void StartGame()
 		{
-			if(_persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData != null)
+			if(_persistentProgressService.Progress.CharacterData.CurrentCharacter != null)
 				_eventer.CallGameStartedEvent();
 		}
 
@@ -47,8 +45,7 @@ namespace UI.Windows
 		{
 			foreach (CharacterStaticData character in _staticDataService.CharactersStaticDataList.CharactersList)
 				if (type == character.CharacterType)
-					//_persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData = character;
-					_characterMediator.Initialize(character);
+					_persistentProgressService.Progress.CharacterData.CurrentCharacter = character;
 		}
 	}
 }

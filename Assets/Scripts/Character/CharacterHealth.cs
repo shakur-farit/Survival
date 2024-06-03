@@ -22,8 +22,8 @@ namespace Character
 
 		private void Awake()
 		{
-			_current = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.StartHealth;
-			_max = _persistentProgressService.Progress.CharacterData.CurrentCharacterStaticData.MaxHealth;
+			_current = _persistentProgressService.Progress.CharacterData.CurrentCharacter.StartHealth;
+			_max = _persistentProgressService.Progress.CharacterData.CurrentCharacter.MaxHealth;
 		}
 
 		public void TakeDamage(int damage)

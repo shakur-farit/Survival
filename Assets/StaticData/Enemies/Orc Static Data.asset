@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   Sprite: {fileID: 8614703209417225712, guid: 4a49f6d6d5594ae48bafa9d9a279031f, type: 3}
-  Animator: {fileID: 0}
+  Animator: {fileID: 9100000, guid: cf2b002105910e04a8f79c160b4602a0, type: 2}
   MovementSpeed: 1
   CurrentHealth: 4
   Damage: 0

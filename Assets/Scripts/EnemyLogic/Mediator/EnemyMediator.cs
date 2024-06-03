@@ -1,6 +1,6 @@
 using StaticData;
 
-namespace EnemyLogic
+namespace EnemyLogic.Mediator
 {
 	public class EnemyMediator : IEnemyInitializeMediator, IEnemyViewMediator, 
 		IEnemyHealthMediator, IEnemySpeedMediator, IEnemyDamagerMediator, IEnemyAnimatorMediator

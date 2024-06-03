@@ -1,5 +1,6 @@
 using Character;
 using EnemyLogic;
+using EnemyLogic.Mediator;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Enemy;
@@ -38,7 +39,6 @@ namespace Installers
 
 		private void RegisterMediators()
 		{
-			Container.BindInterfacesAndSelfTo<CharacterMediator>().AsSingle();
 			Container.BindInterfacesAndSelfTo<EnemyMediator>().AsSingle();
 		}
 
