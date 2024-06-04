@@ -5,7 +5,7 @@ using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
-	public class WarmUpState : IState
+	public class WarmUpState : IGameState
 	{
 		private readonly IAssetsProvider _assetsProvider;
 		private readonly IStaticDataService _staticDataService;

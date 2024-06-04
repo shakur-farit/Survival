@@ -4,7 +4,7 @@ using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
-	public class LoadStaticDataState : IState
+	public class LoadStaticDataState : IGameState
 	{
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IStaticDataService _staticDataService;

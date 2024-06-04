@@ -4,7 +4,7 @@ using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
-	public class LoadSceneState : IState
+	public class LoadSceneState : IGameState
 	{
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IUIFactory _uiFactory;

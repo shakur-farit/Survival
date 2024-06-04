@@ -1,6 +1,6 @@
 namespace EnemyLogic.States
 {
-	public class AimRightState : EnemyAimState
+	public class EnemyAimRightState : EnemyState
 	{
 		protected override void StartAnimation(EnemyAnimator enemyAnimator) => 
 			enemyAnimator.StartAimRight();

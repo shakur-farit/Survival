@@ -1,34 +1,18 @@
-using Infrastructure.Services.Factories.Character;
-using Infrastructure.States;
+using Character.States.StatesMachine.Motion;
+using UnityEngine;
 
 namespace Character.States
 {
-	public abstract class CharacterState : IState
+	public abstract class CharacterState : ICharacterAnimatorState
 	{
-		protected CharacterAnimator CharacterAnimator;
+		public void Enter(CharacterAnimator characterAnimator) => 
+			StartAnimation(characterAnimator);
 
-		private readonly ICharacterFactory _characterFactory;
+		public void Exit(CharacterAnimator characterAnimator) => 
+			StopAnimation(characterAnimator);
 
-		protected CharacterState(ICharacterFactory characterFactory) => 
-			_characterFactory = characterFactory;
+		protected abstract void StartAnimation(CharacterAnimator characterAnimator);
 
-		public void Enter()
-		{
-			SetupCharacterAnimator();
-			StartAnimation();
-		}
-
-		public void Exit() => 
-			StopAnimation();
-
-		protected abstract void StartAnimation();
-
-		protected abstract void StopAnimation();
-
-		private void SetupCharacterAnimator()
-		{
-			if (_characterFactory.Character.TryGetComponent(out CharacterAnimator animator))
-				CharacterAnimator = animator;
-		}
+		protected abstract void StopAnimation(CharacterAnimator characterAnimator);
 	}
 }

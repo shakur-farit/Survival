@@ -4,7 +4,7 @@ using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
-	public class LoadProgressState : IState
+	public class LoadProgressState : IGameState
 	{
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;

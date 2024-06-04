@@ -1,5 +1,3 @@
-using Infrastructure.States;
-
 namespace EnemyLogic.States.StateMachine
 {
 	public interface IEnemyAimStatesSwitcher

@@ -2,7 +2,7 @@ using Character.States.Aim;
 using Character.States.StatesMachine.Aim;
 using Infrastructure.Services.Input;
 using System.Collections.Generic;
-using Infrastructure.States;
+using Character.States.StatesMachine.Motion;
 using UnityEngine;
 using Zenject;
 
@@ -13,10 +13,9 @@ namespace Character
 		private IAimInputService _aimInputService;
 		private ICharacterAimStatesSwitcher _characterAimStatesSwitcher;
 
-		private float _angleDegree;
-
 		private Dictionary<string, AimStateInfo> _aimStates;
 		private string _currentState;
+		private CharacterAnimator _characterAnimator;
 
 		[Inject]
 		public void Constructor(IAimInputService aimInput, ICharacterAimStatesSwitcher characterAimStatesSwitcher)
@@ -31,8 +30,12 @@ namespace Character
 		private void OnDisable() => 
 			_aimInputService.OnDisable();
 
-		private void Awake() => 
+		private void Awake()
+		{
 			_aimInputService.RegisterAimInputAction();
+
+			_characterAnimator = gameObject.GetComponentInParent<CharacterAnimator>();
+		}
 
 		private void Start() => 
 			InitializeAimStates();
@@ -43,18 +46,18 @@ namespace Character
 		{
 			_aimStates = new Dictionary<string, AimStateInfo>
 			{
-				{ "Up", CreateAimStateInfo<AimUpState>("Up", 67f, 112f) },
-				{ "UpLeft", CreateAimStateInfo<AimUpLeftState>("UpLeft", 112f, 158f) },
-				{ "UpRight", CreateAimStateInfo<AimUpRightState>("UpRight", 22f, 67f) },
-				{ "Left", CreateAimStateInfo<AimLeftState>("Left", 158f, 180f) },
-				{ "LeftNegative", CreateAimStateInfo<AimLeftState>("Left", -180f, -135f) },
-				{ "Down", CreateAimStateInfo<AimDownState>("Down", -135f, -45f) },
-				{ "Right", CreateAimStateInfo<AimRightState>("Right", -45f, 0f) },
-				{ "RightPositive", CreateAimStateInfo<AimRightState>("Right", 0f, 22f) }
+				{ "Up", CreateAimStateInfo<CharacterAimUpState>("Up", 67f, 112f) },
+				{ "UpLeft", CreateAimStateInfo<CharacterAimUpLeftState>("UpLeft", 112f, 158f) },
+				{ "UpRight", CreateAimStateInfo<CharacterAimUpRightState>("UpRight", 22f, 67f) },
+				{ "Left", CreateAimStateInfo<CharacterAimLeftState>("Left", 158f, 180f) },
+				{ "LeftNegative", CreateAimStateInfo<CharacterAimLeftState>("Left", -180f, -135f) },
+				{ "Down", CreateAimStateInfo<CharacterAimDownState>("Down", -135f, -45f) },
+				{ "Right", CreateAimStateInfo<CharacterAimRightState>("Right", -45f, 0f) },
+				{ "RightPositive", CreateAimStateInfo<CharacterAimRightState>("Right", 0f, 22f) }
 			};
 		}
 
-		private AimStateInfo CreateAimStateInfo<TState>(string stateName, float minAngle, float maxAngle) where TState : IState
+		private AimStateInfo CreateAimStateInfo<TState>(string stateName, float minAngle, float maxAngle) where TState : ICharacterAnimatorState
 		{
 			return new AimStateInfo
 			{
@@ -65,26 +68,26 @@ namespace Character
 			};
 		}
 
-		private void SwitchState<TState>(string stateName) where TState : IState
+		private void SwitchState<TState>(string stateName) where TState : ICharacterAnimatorState
 		{
-			_characterAimStatesSwitcher.SwitchState<TState>();
+			_characterAimStatesSwitcher.SwitchState<TState>(_characterAnimator);
 			_currentState = stateName;
 		}
 
 		private void Aim()
 		{
 			Vector2 aimVector = _aimInputService.AimAxis;
-			_angleDegree = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.AngleAxis(_angleDegree, Vector3.forward);
+			float angleDegree = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.AngleAxis(angleDegree, Vector3.forward);
 
-			EnterInSuitableState();
+			EnterInSuitableState(angleDegree);
 		}
 
-		private void EnterInSuitableState()
+		private void EnterInSuitableState(float angleDegree)
 		{
 			foreach (var stateInfo in _aimStates.Values)
 			{
-				if (IsInAngleRange(_angleDegree, stateInfo.MinAngle, stateInfo.MaxAngle) && _currentState != stateInfo.StateName)
+				if (IsInAngleRange(angleDegree, stateInfo.MinAngle, stateInfo.MaxAngle) && _currentState != stateInfo.StateName)
 				{
 					stateInfo.SwitchStateAction();
 					break;

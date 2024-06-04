@@ -2,7 +2,7 @@ using Infrastructure.States.StatesMachine;
 
 namespace Infrastructure.States
 {
-	public class GameLoopingState : IState
+	public class GameLoopingState : IGameState
 	{
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 

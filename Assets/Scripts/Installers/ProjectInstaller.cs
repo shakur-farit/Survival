@@ -1,5 +1,6 @@
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
+using EnemyLogic.States.StateMachine;
 using Events;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Input;
@@ -29,6 +30,7 @@ namespace Installers
 			Container.BindInterfacesAndSelfTo<GameStatesMachine>().AsSingle();
 			Container.BindInterfacesAndSelfTo<CharacterMotionStatesMachine>().AsSingle();
 			Container.BindInterfacesAndSelfTo<CharacterAimStatesMachine>().AsSingle();
+			Container.BindInterfacesAndSelfTo<EnemyAimStateMachine>().AsSingle();
 		}
 
 		private void RegisterInputService()

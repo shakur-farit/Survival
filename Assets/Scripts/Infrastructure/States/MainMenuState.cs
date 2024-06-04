@@ -5,7 +5,7 @@ using UI.Windows;
 
 namespace Infrastructure.States
 {
-	public class MainMenuState : IState
+	public class MainMenuState : IGameState
 	{
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IWindowsService _windowsService;

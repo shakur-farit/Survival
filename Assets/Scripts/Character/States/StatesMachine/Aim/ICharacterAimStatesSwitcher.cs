@@ -1,9 +1,9 @@
-using Infrastructure.States;
+using Character.States.StatesMachine.Motion;
 
 namespace Character.States.StatesMachine.Aim
 {
 	public interface ICharacterAimStatesSwitcher
 	{
-		void SwitchState<TState>() where TState : IState;
+		void SwitchState<TState>(CharacterAnimator characterAnimator) where TState : ICharacterAnimatorState;
 	}
 }

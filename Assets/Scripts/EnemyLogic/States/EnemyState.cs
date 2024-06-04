@@ -1,6 +1,6 @@
 namespace EnemyLogic.States
 {
-	public abstract class EnemyAimState : IEnemyAnimatorState
+	public abstract class EnemyState : IEnemyAnimatorState
 	{
 		public void Enter(EnemyAnimator enemyAnimator) => 
 			StartAnimation(enemyAnimator);

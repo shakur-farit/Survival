@@ -1,7 +1,3 @@
-using Character.States.Aim;
-using Character.States.Motion;
-using Character.States.StatesMachine.Aim;
-using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using UnityEngine;
@@ -24,30 +20,16 @@ namespace Character
 		private readonly int _aimDown = Animator.StringToHash("aimDown");
 
 		private IPersistentProgressService _persistentProgressService;
-		private ICharacterMotionStatesSwitcher _characterMotionStateSwitcher;
-		private ICharacterAimStatesSwitcher _characterAimStatesSwitcher;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService,
-			ICharacterMotionStatesSwitcher characterMotionStateSwitcher,
-			ICharacterAimStatesSwitcher characterAimStatesMachine)
-		{
+		public void Constructor(IPersistentProgressService persistentProgressService) => 
 			_persistentProgressService = persistentProgressService;
-			_characterMotionStateSwitcher = characterMotionStateSwitcher;
-			_characterAimStatesSwitcher = characterAimStatesMachine;
-		}
 
 		private void Awake()
 		{
 			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.CharacterData.CurrentCharacter;
 
 			_animator.runtimeAnimatorController = currentCharacterStaticData.Controller;
-		}
-
-		private void Start()
-		{
-			_characterMotionStateSwitcher.SwitchState<IdlingState>();
-			_characterAimStatesSwitcher.SwitchState<AimDownState>();
 		}
 
 		public void StartIdling() => _animator.SetBool(_isIdling, true);

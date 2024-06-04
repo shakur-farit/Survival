@@ -5,7 +5,7 @@ using Infrastructure.Services.Factories.Spawner;
 
 namespace Infrastructure.States
 {
-	public class LoadLevelState : IState
+	public class LoadLevelState : IGameState
 	{
 		private readonly ICharacterFactory _characterFactory;
 		private readonly ISpawnerFactory _spawnerFactory;

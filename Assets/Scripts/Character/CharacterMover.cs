@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Character.States;
 using Character.States.Motion;
 using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Input;
@@ -21,6 +20,7 @@ namespace Character
 		private ICharacterMotionStatesSwitcher _characterMotionSwitcher;
 
 		private Dictionary<Func<bool>, Action> _stateActions;
+		private CharacterAnimator _characterAnimator;
 
 		[Inject]
 		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService,
@@ -37,8 +37,13 @@ namespace Character
 		private void OnDestroy() => 
 			_movementInputService.OnDisable();
 
-		private void Awake() => 
+		private void Awake()
+		{
 			_movementInputService.RegisterMovementInputAction();
+
+			if (gameObject.TryGetComponent(out CharacterAnimator characterAnimator))
+				_characterAnimator = characterAnimator;
+		}
 
 		private void Start()
 		{
@@ -55,9 +60,9 @@ namespace Character
 			_stateActions = new Dictionary<Func<bool>, Action>
 			{
 				{ () => _movementInputService.MovementAxis.sqrMagnitude > Constants.Epsilon && !_isMove, 
-					SwitchCharacterState<MovingState> },
+					SwitchCharacterState<CharacterMovingState> },
 				{ () => _movementInputService.MovementAxis.sqrMagnitude <= Constants.Epsilon && _isMove, 
-					SwitchCharacterState<IdlingState> }
+					SwitchCharacterState<CharacterIdlingState> }
 			};
 		}
 
@@ -82,9 +87,9 @@ namespace Character
 			}
 		}
 
-		private void SwitchCharacterState<T>() where T : CharacterState
+		private void SwitchCharacterState<T>() where T : ICharacterAnimatorState
 		{
-			_characterMotionSwitcher.SwitchState<T>();
+			_characterMotionSwitcher.SwitchState<T>(_characterAnimator);
 			_isMove = !_isMove;
 		}
 

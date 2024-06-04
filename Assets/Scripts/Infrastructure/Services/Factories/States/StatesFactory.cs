@@ -1,3 +1,5 @@
+using Character.States.StatesMachine.Motion;
+using EnemyLogic.States;
 using Infrastructure.States;
 using Zenject;
 
@@ -10,7 +12,13 @@ namespace Infrastructure.Services.Factories.States
 		public StatesFactory(IInstantiator instantiator) =>
 			_instantiator = instantiator;
 
-		public TState Create<TState>() where TState : IState =>
+		public TState CreateGameStates<TState>() where TState : IGameState =>
+			_instantiator.Instantiate<TState>();
+
+		public TState CreateCharacterStates<TState>() where TState : ICharacterAnimatorState => 
+			_instantiator.Instantiate<TState>();
+
+		public TState CreateEnemyStates<TState>() where TState : IEnemyAnimatorState => 
 			_instantiator.Instantiate<TState>();
 	}
 }
