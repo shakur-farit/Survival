@@ -1,4 +1,6 @@
+using EnemyLogic.States.StateMachine;
 using StaticData;
+using UnityEngine;
 
 namespace EnemyLogic.Mediator
 {
@@ -9,8 +11,7 @@ namespace EnemyLogic.Mediator
 		private EnemyHealth _health;
 		private EnemyMover _mover;
 		private EnemyDamager _damager;
-
-		public EnemyAnimator Animator { get; private set; }
+		private EnemyAnimator _animator;
 
 		public void RegisterView(EnemyView view) =>
 			_view = view;
@@ -25,7 +26,7 @@ namespace EnemyLogic.Mediator
 			_damager = damager;
 
 		public void RegisterAnimator(EnemyAnimator animator) => 
-			Animator = animator;
+			_animator = animator;
 
 		public void Initialize(EnemyStaticData enemyStaticData)
 		{
@@ -33,7 +34,7 @@ namespace EnemyLogic.Mediator
 			_health.SetupHealth(enemyStaticData);
 			_mover.SetupSpeed(enemyStaticData);
 			_damager.SetupDamage(enemyStaticData);
-			Animator.SetupAnimator(enemyStaticData);
+			_animator.SetupAnimator(enemyStaticData);
 		}
 	}
 }

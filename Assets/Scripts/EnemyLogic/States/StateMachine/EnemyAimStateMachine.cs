@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace EnemyLogic.States.StateMachine
 {
-	public class EnemyAimStateMachine : IEnemyAimStatesSwitcher, IEnemyAimStatesRegister
+	public class EnemyAimStateMachine : MonoBehaviour, IEnemyAimStatesSwitcher, IEnemyAimStatesRegister
 	{
 		private readonly Dictionary<Type, IEnemyAnimatorState> _statesDictionary = new();
 		private IEnemyAnimatorState _activeState;

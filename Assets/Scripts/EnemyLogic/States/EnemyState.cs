@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace EnemyLogic.States
 {
 	public abstract class EnemyState : IEnemyAnimatorState
@@ -5,7 +7,7 @@ namespace EnemyLogic.States
 		public void Enter(EnemyAnimator enemyAnimator) => 
 			StartAnimation(enemyAnimator);
 
-		public void Exit(EnemyAnimator enemyAnimator) =>
+		public void Exit(EnemyAnimator enemyAnimator) => 
 			StopAnimation(enemyAnimator);
 
 		protected abstract void StartAnimation(EnemyAnimator enemyAnimator);

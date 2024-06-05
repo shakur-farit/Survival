@@ -30,7 +30,7 @@ namespace Installers
 			Container.BindInterfacesAndSelfTo<GameStatesMachine>().AsSingle();
 			Container.BindInterfacesAndSelfTo<CharacterMotionStatesMachine>().AsSingle();
 			Container.BindInterfacesAndSelfTo<CharacterAimStatesMachine>().AsSingle();
-			Container.BindInterfacesAndSelfTo<EnemyAimStateMachine>().AsSingle();
+			Container.BindInterfacesAndSelfTo<EnemyAimStateMachine>().AsTransient();
 		}
 
 		private void RegisterInputService()

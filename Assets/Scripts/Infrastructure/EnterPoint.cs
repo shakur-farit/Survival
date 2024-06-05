@@ -19,19 +19,17 @@ namespace Infrastructure
 		private IStatesFactory _statesFactory;
 		private ICharacterMotionStatesRegistrar _characterMotionStatesRegistrar;
 		private ICharacterAimStatesRegistrar _characterAimStatesRegistrar;
-		private IEnemyAimStatesRegister _enemyAimStatesRegistrar;
 
 		[Inject]
 		public void Constructor(IGameStatesRegistrar gameStatesRegistrar, IStatesFactory statesFactory,
 			IGameStatesSwitcher gameStatesSwitcher, ICharacterMotionStatesRegistrar characterMotionStatesRegistrar,
-			ICharacterAimStatesRegistrar characterAimStatesMachine, IEnemyAimStatesRegister enemyAimStatesRegister)
+			ICharacterAimStatesRegistrar characterAimStatesMachine)
 		{
 			_gameStatesRegistrar = gameStatesRegistrar;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_statesFactory = statesFactory;
 			_characterMotionStatesRegistrar	= characterMotionStatesRegistrar;
 			_characterAimStatesRegistrar = characterAimStatesMachine;
-			_enemyAimStatesRegistrar = enemyAimStatesRegister;
 		}
 
 		private void Awake()
@@ -52,7 +50,6 @@ namespace Infrastructure
 		{
 			RegisterGameStates();
 			RegisterCharacterStates();
-			RegisterEnemyStates();
 		}
 
 		private void RegisterGameStates()
@@ -77,16 +74,6 @@ namespace Infrastructure
 			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimRightState>());
 			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimLeftState>());
 			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimDownState>());
-		}
-
-		private void RegisterEnemyStates()
-		{
-			_enemyAimStatesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpState>());
-			_enemyAimStatesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpRightState>());
-			_enemyAimStatesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpLeftState>());
-			_enemyAimStatesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimRightState>());
-			_enemyAimStatesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimLeftState>());
-			_enemyAimStatesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimDownState>());
 		}
 	}
 }

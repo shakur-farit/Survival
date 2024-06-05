@@ -23,18 +23,23 @@ namespace EnemyLogic
 		private string _currentState;
 
 		[Inject]
-		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator, IEnemyAimStatesSwitcher statesSwitcher)
+		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator)
 		{
 			_characterFactory = characterFactory;
 			_speedMediator = mediator;
-			_statesSwitcher = statesSwitcher;
 		}
 
 		private void Awake()
 		{
 			_speedMediator.RegisterMover(this);
 			_target = _characterFactory.Character;
-			_enemyAnimator = gameObject.GetComponent<EnemyAnimator>();
+
+			if(TryGetComponent(out EnemyAnimator animator))
+				_enemyAnimator = animator;
+
+			if(TryGetComponent(out IEnemyAimStatesSwitcher statesSwitcher))
+				_statesSwitcher = statesSwitcher;
+
 			InitializeAimStates();
 		}
 
