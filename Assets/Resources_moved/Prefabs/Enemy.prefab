@@ -172,6 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bac7dc0402d40c4e972d51dd587f35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyAnimator: {fileID: 5573391244941828018}
+  stateMachine: {fileID: 1934964853315321957}
 --- !u!114 &9215054179346678720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b796a4042d4354db42231f49c18992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateMachine: {fileID: 1934964853315321957}
 --- !u!114 &1934964853315321957
 MonoBehaviour:
   m_ObjectHideFlags: 0

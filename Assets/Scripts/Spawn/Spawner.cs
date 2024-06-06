@@ -26,7 +26,7 @@ namespace Spawn
 		{
 			_enemiesOnLevel = new Dictionary<EnemyType, int>()
 			{
-				{ EnemyType.Medusa, 1},
+				{ EnemyType.Medusa, 3},
 				{ EnemyType.Orc, 1}
 			};
 		}

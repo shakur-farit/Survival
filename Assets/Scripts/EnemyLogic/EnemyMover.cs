@@ -11,6 +11,11 @@ namespace EnemyLogic
 {
 	public class EnemyMover : MonoBehaviour
 	{
+		[SerializeField] private EnemyAnimator _enemyAnimator;
+		[SerializeField] private EnemyAimStateMachine stateMachine;
+
+		private IEnemyAimStatesSwitcher _statesSwitcher;
+
 		private float _movementSpeed;
 		private GameObject _target;
 
@@ -18,8 +23,6 @@ namespace EnemyLogic
 		private IEnemySpeedMediator _speedMediator;
 
 		private Dictionary<string, AimStateInfo> _aimStates;
-		private IEnemyAimStatesSwitcher _statesSwitcher;
-		private EnemyAnimator _enemyAnimator;
 		private string _currentState;
 
 		[Inject]
@@ -33,12 +36,7 @@ namespace EnemyLogic
 		{
 			_speedMediator.RegisterMover(this);
 			_target = _characterFactory.Character;
-
-			if(TryGetComponent(out EnemyAnimator animator))
-				_enemyAnimator = animator;
-
-			if(TryGetComponent(out IEnemyAimStatesSwitcher statesSwitcher))
-				_statesSwitcher = statesSwitcher;
+			_statesSwitcher = stateMachine;
 
 			InitializeAimStates();
 		}

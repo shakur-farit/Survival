@@ -1,13 +1,17 @@
+using System;
 using EnemyLogic.States;
 using EnemyLogic.States.StateMachine;
 using Infrastructure.Services.Factories.States;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace EnemyLogic
 {
 	public class EnemyStateRegistrar : MonoBehaviour
 	{
+		[SerializeField] private EnemyAimStateMachine stateMachine;
+
 		private IEnemyAimStatesRegister _statesRegister;
 		private IStatesFactory _statesFactory;
 
@@ -15,16 +19,11 @@ namespace EnemyLogic
 		public void Constructor( IStatesFactory stateFactory) => 
 			_statesFactory = stateFactory;
 
-		private void Awake()
-		{
-			if (TryGetComponent(out IEnemyAimStatesRegister register))
-				_statesRegister = register;
-		}
+		private void Awake() => 
+			_statesRegister = stateMachine;
 
-		private void Start()
-		{
+		private void Start() => 
 			RegisterEnemyStates();
-		}
 
 		private void RegisterEnemyStates()
 		{

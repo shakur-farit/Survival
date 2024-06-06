@@ -10,12 +10,13 @@ namespace Character
 {
 	public class CharacterAimer : MonoBehaviour
 	{
+		[SerializeField] private CharacterAnimator _characterAnimator;
+
 		private IAimInputService _aimInputService;
 		private ICharacterAimStatesSwitcher _characterAimStatesSwitcher;
 
 		private Dictionary<string, AimStateInfo> _aimStates;
 		private string _currentState;
-		private CharacterAnimator _characterAnimator;
 
 		[Inject]
 		public void Constructor(IAimInputService aimInput, ICharacterAimStatesSwitcher characterAimStatesSwitcher)
@@ -30,12 +31,8 @@ namespace Character
 		private void OnDisable() => 
 			_aimInputService.OnDisable();
 
-		private void Awake()
-		{
+		private void Awake() => 
 			_aimInputService.RegisterAimInputAction();
-
-			_characterAnimator = gameObject.GetComponentInParent<CharacterAnimator>();
-		}
 
 		private void Start() => 
 			InitializeAimStates();

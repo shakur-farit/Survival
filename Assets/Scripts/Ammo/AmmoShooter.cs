@@ -1,4 +1,4 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -8,7 +8,8 @@ namespace Ammo
 {
 	public class AmmoShooter : MonoBehaviour
 	{
-		private float _delay;
+		private int _delay;
+		private bool _canShoot;
 
 		private IAmmoFactory _ammoFactory;
 		private IPersistentProgressService _persistentProgressService;
@@ -20,21 +21,24 @@ namespace Ammo
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Awake() => 
+		private void Awake() =>
 			_delay = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Dealy;
 
-		//private void Start() =>
-		//	Shoot();
-
-		private void Shoot() => 
-			StartCoroutine(ShootRoutine());
-
-
-		private IEnumerator ShootRoutine()
+		public async void StartShoot()
 		{
-			yield return new WaitForSeconds(_delay);
+			_canShoot = true;
+
+			while (_canShoot)
+				await ShootRoutine();
+		}
+
+		public void StopShoot() => 
+			_canShoot = false;
+
+		private async UniTask ShootRoutine()
+		{
+			await UniTask.Delay(_delay);
 			CreateAmmo();
-			StartCoroutine(ShootRoutine());
 		}
 
 		private async void CreateAmmo() =>
