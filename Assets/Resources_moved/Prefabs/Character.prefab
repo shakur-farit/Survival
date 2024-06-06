@@ -322,11 +322,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2214818999445400285}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0acc242acbf895145aae9a38e7879015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shooter: {fileID: 2501303574616644343}
 --- !u!58 &2809956282604488770
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -361,7 +362,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 4
 --- !u!1 &2287838410393570457
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff96392ce21cdb4792b00959006ecf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponShootPoint: {fileID: 8586382567303437777}
+  _weaponShootPoint: {fileID: 8586382567303437777}
 --- !u!114 &4276383437017267173
 MonoBehaviour:
   m_ObjectHideFlags: 0

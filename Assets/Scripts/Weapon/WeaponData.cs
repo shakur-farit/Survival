@@ -8,7 +8,7 @@ namespace Weapon
 {
 	public class WeaponData : MonoBehaviour
 	{
-		public Transform WeaponShootPoint;
+		[SerializeField] private Transform _weaponShootPoint;
 
 		private IPersistentProgressService _persistentProgressService;
 		private IStaticDataService _staticDataService;
@@ -28,7 +28,7 @@ namespace Weapon
 				{
 					_persistentProgressService.Progress.CharacterData.CurrentWeapon = weapon;
 
-					WeaponShootPoint.position = weapon.ShootPoint;
+					_weaponShootPoint.position = weapon.ShootPoint;
 				}
 			}
 		}

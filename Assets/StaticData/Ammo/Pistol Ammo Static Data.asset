@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 2
   MovementSpeed: 0.1
-  Dealy: 0.3
+  Dealy: 500
   IsEnemy: 0

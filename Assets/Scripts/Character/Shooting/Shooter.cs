@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.PersistentProgress;
@@ -25,22 +26,23 @@ namespace Character.Shooting
 		private void Awake() =>
 			_delay = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Dealy;
 
-		private async void TryToShoot()
+		public async void TryToShoot()
 		{
 			if(_isShoot)
 				return;
 
-			if (_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Count > 0) 
-				_canShoot = true;
+			_isShoot = true;
 
-			while (_canShoot) 
+			while (_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Count > 0) 
 				await Shoot();
+
+			_isShoot = false;
 		}
 
 		private async UniTask Shoot()
 		{
-			await UniTask.Delay(_delay);
 			CreateAmmo();
+			await UniTask.Delay(_delay);
 		}
 
 		private async void CreateAmmo() =>

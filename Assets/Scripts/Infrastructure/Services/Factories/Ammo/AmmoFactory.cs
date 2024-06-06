@@ -7,8 +7,6 @@ namespace Infrastructure.Services.Factories.Ammo
 {
 	public class AmmoFactory : Factory, IAmmoFactory
 	{
-		private GameObject _ammo;
-
 		public AmmoFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) :
 			base(assetsProvider, objectsCreator)
 		{
@@ -18,12 +16,12 @@ namespace Infrastructure.Services.Factories.Ammo
 		{
 			AssetsReference reference = await InitReference();
 
-			_ammo = await CreateObject(reference.AmmoAddress, parentTransform);
+			GameObject ammo = await CreateObject(reference.AmmoAddress, parentTransform);
 
-			_ammo.transform.SetParent(null);
+			ammo.transform.SetParent(null);
 		}
 
-		public void Destroy() => 
-			Object.Destroy(_ammo);
+		public void Destroy(GameObject gameObject) => 
+			Object.Destroy(gameObject);
 	}
 }

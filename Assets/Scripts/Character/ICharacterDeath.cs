@@ -1,8 +1,7 @@
-using Logic.Death;
-
 namespace Character
 {
-	public interface ICharacterDeath : IDeath
+	public interface ICharacterDeath
 	{
+		void Die();
 	}
 }

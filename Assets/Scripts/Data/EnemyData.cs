@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using EnemyLogic;
+using UnityEngine;
 
 namespace Data
 {
 	public class EnemyData
 	{
-		public List<Enemy> EnemiesInRangeList = new();
+		public List<GameObject> EnemiesInRangeList = new();
 	}
 }

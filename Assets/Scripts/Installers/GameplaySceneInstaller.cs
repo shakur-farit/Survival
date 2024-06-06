@@ -1,3 +1,4 @@
+using Ammo;
 using Character;
 using EnemyLogic;
 using EnemyLogic.Mediator;
@@ -43,6 +44,7 @@ namespace Installers
 		{
 			Container.Bind<ICharacterDeath>().To<CharacterDeath>().AsSingle();
 			Container.Bind<IEnemyDeath>().To<EnemyDeath>().AsSingle();
+			Container.Bind<IAmmoDeath>().To<AmmoDeath>().AsSingle();
 		}
 
 		private void RegisterStatesFactory() => 

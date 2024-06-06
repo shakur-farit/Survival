@@ -1,22 +1,30 @@
+using System;
+using System.Threading.Tasks;
 using Character;
+using Character.Shooting;
 using EnemyLogic;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
 using Zenject;
 
 namespace Ammo
 {
-	public class AmmoDamager : MonoBehaviour
+	public class AmmoCollider : MonoBehaviour
 	{
 		private int _damage;
 		private bool _isEnemy;
 
 		private IPersistentProgressService _persistentProgressService;
+		private IAmmoDeath _ammoDeath;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) =>
+		public void Constructor(IPersistentProgressService persistentProgressService, IAmmoDeath ammoDeath)
+		{
 			_persistentProgressService = persistentProgressService;
+			_ammoDeath = ammoDeath;
+		}
 
 
 		private void Awake()
@@ -36,6 +44,10 @@ namespace Ammo
 				characterHealth.TakeDamage(_damage);
 			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
 				enemyHealth.TakeDamage(_damage);
+			if(other.TryGetComponent(out EnemyDetector detector))
+				return;
+
+			_ammoDeath.Die(gameObject);
 		}
 	}
 }

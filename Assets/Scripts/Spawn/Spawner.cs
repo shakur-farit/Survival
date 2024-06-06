@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using EnemyLogic;
 using Infrastructure.Services.Factories.Enemy;
 using Infrastructure.Services.Randomizer;
@@ -26,28 +27,25 @@ namespace Spawn
 		{
 			_enemiesOnLevel = new Dictionary<EnemyType, int>()
 			{
-				{ EnemyType.Medusa, 3},
+				{ EnemyType.Hedusa, 3},
 				{ EnemyType.Orc, 1}
 			};
 		}
 
-		private void Start()
+		private void Start() => 
+			SpawnWaveOfEnemies();
+
+		private void SpawnWaveOfEnemies()
 		{
-			_enemies = new List<EnemyType>();
+			_enemies = _enemiesOnLevel.SelectMany(kvp =>
+				Enumerable.Repeat(kvp.Key, kvp.Value)).ToList();
 
-			foreach (KeyValuePair<EnemyType, int> keyValuePair in _enemiesOnLevel)
-			{
-				for (int i = 0; i < keyValuePair.Value; i++) 
-					_enemies.Add(keyValuePair.Key);
-			}
-
-			foreach (EnemyType enemyType in _enemies) 
-				SpawnEnemy(enemyType);
+			_enemies.ForEach(SpawnEnemy);
 		}
 
 		private async void SpawnEnemy(EnemyType enemyType)
 		{
-			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(10f, 10f));
+			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(-10f, 10f));
 			GameObject enemyObject =  await _enemyFactory.Create(randomPosition);
 
 			if (enemyObject.TryGetComponent(out Enemy enemy))
