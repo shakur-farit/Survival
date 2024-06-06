@@ -6,5 +6,6 @@ namespace Data
 	public class Progress
 	{
 		public CharacterData CharacterData = new();
+		public EnemyData EnemyData = new();
 	}
 }

@@ -1,6 +1,4 @@
-using Infrastructure.States;
-
-namespace Character.States.StatesMachine.Motion
+namespace Character.States
 {
 	public interface ICharacterAnimatorState
 	{

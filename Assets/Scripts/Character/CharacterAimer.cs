@@ -2,6 +2,7 @@ using Character.States.Aim;
 using Character.States.StatesMachine.Aim;
 using Infrastructure.Services.Input;
 using System.Collections.Generic;
+using Character.States;
 using Character.States.StatesMachine.Motion;
 using UnityEngine;
 using Zenject;

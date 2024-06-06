@@ -4,15 +4,16 @@ using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
 
-namespace Ammo
+namespace Character.Shooting
 {
-	public class AmmoShooter : MonoBehaviour
+	public class Shooter : MonoBehaviour
 	{
 		private int _delay;
-		private bool _canShoot;
 
 		private IAmmoFactory _ammoFactory;
 		private IPersistentProgressService _persistentProgressService;
+		private bool _isShoot;
+		private bool _canShoot;
 
 		[Inject]
 		public void Constructor(IAmmoFactory ammoFactory, IPersistentProgressService persistentProgressService)
@@ -24,18 +25,19 @@ namespace Ammo
 		private void Awake() =>
 			_delay = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Dealy;
 
-		public async void StartShoot()
+		private async void TryToShoot()
 		{
-			_canShoot = true;
+			if(_isShoot)
+				return;
 
-			while (_canShoot)
-				await ShootRoutine();
+			if (_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Count > 0) 
+				_canShoot = true;
+
+			while (_canShoot) 
+				await Shoot();
 		}
 
-		public void StopShoot() => 
-			_canShoot = false;
-
-		private async UniTask ShootRoutine()
+		private async UniTask Shoot()
 		{
 			await UniTask.Delay(_delay);
 			CreateAmmo();
