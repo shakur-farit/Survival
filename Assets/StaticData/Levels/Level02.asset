@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b36cd9e17612d754fa97556ab3fcdc9c, type: 3}
-  m_Name: Levels List
+  m_Script: {fileID: 11500000, guid: ff55459cb18b2054e808275b4cf2538f, type: 3}
+  m_Name: Level02
   m_EditorClassIdentifier: 
-  LevelsList:
-  - {fileID: 11400000, guid: 0c4dfd393927e5d4c8971765d91d09f5, type: 2}
-  - {fileID: 11400000, guid: a113cd3fbd051624a9313170cff57ddd, type: 2}
+  WavesOnLevel:
+  - EnemiesInWave:
+    - Type: 1
+      Number: 2
+    - Type: 2
+      Number: 1
+  WaveCooldown: 5000

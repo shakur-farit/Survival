@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EnemyLogic.States.StateMachine
 {
-	public class EnemyAimStateMachine : MonoBehaviour, IEnemyAimStatesSwitcher, IEnemyAimStatesRegister
+	public class EnemyAimStateMachine : MonoBehaviour, IEnemyAimStatesSwitcher, IEnemyAimStatesRegistrar
 	{
 		private readonly Dictionary<Type, IEnemyAnimatorState> _statesDictionary = new();
 		private IEnemyAnimatorState _activeState;

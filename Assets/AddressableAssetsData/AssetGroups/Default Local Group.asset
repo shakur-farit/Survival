@@ -32,11 +32,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f6e445c0785c8ab4499b0dffcba8a817
-    m_Address: Spawner
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cda24eefa79f92b43b175573e88175a8
     m_Address: UIRoot
     m_ReadOnly: 0

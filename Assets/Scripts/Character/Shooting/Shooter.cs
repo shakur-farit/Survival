@@ -13,7 +13,6 @@ namespace Character.Shooting
 		private IAmmoFactory _ammoFactory;
 		private IPersistentProgressService _persistentProgressService;
 		private bool _isShoot;
-		private bool _canShoot;
 
 		[Inject]
 		public void Constructor(IAmmoFactory ammoFactory, IPersistentProgressService persistentProgressService)

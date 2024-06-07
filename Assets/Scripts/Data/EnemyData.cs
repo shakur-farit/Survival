@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using EnemyLogic;
 using UnityEngine;
 
 namespace Data
@@ -7,5 +6,6 @@ namespace Data
 	public class EnemyData
 	{
 		public List<GameObject> EnemiesInRangeList = new();
+		public List<GameObject> DeadEnemies = new();
 	}
 }

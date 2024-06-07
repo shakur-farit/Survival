@@ -10,27 +10,28 @@ namespace EnemyLogic
 	{
 		[SerializeField] private EnemyAimStateMachine stateMachine;
 
-		private IEnemyAimStatesRegister _statesRegister;
+		private IEnemyAimStatesRegistrar _statesRegistrar;
 		private IStatesFactory _statesFactory;
 
 		[Inject]
 		public void Constructor( IStatesFactory stateFactory) => 
 			_statesFactory = stateFactory;
 
-		private void Awake() => 
-			_statesRegister = stateMachine;
+		private void Awake()
+		{
+			_statesRegistrar = stateMachine;
 
-		private void Start() => 
 			RegisterEnemyStates();
+		}
 
 		private void RegisterEnemyStates()
 		{
-			_statesRegister.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpState>());
-			_statesRegister.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpRightState>());
-			_statesRegister.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpLeftState>());
-			_statesRegister.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimRightState>());
-			_statesRegister.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimLeftState>());
-			_statesRegister.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimDownState>());
+			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpState>());
+			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpRightState>());
+			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpLeftState>());
+			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimRightState>());
+			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimLeftState>());
+			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimDownState>());
 		}
 	}
 

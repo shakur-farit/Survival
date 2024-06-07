@@ -1,7 +1,6 @@
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using EnemyLogic.States.StateMachine;
-using Events;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
@@ -22,7 +21,6 @@ namespace Installers
 			RegisterStaticDataService();
 			RegisterRandomizer();
 			RegisterStatesMachines();
-			RegisterEventer();
 		}
 
 		private void RegisterStatesMachines()
@@ -50,8 +48,5 @@ namespace Installers
 
 		private void RegisterRandomizer() =>
 			Container.Bind<IRandomService>().To<RandomService>().AsSingle();
-
-		private void RegisterEventer() => 
-			Container.BindInterfacesAndSelfTo<Eventer>().AsSingle();
 	}
 }

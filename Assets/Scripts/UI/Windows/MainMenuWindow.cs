@@ -1,7 +1,8 @@
 using Character;
-using Events;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using Infrastructure.States;
+using Infrastructure.States.StatesMachine;
 using StaticData;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,15 +18,15 @@ namespace UI.Windows
 
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
-		private IGamePlayEvents _eventer;
+		private IGameStatesSwitcher _gameStatesSwitcher;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService,
-			IGamePlayEvents eventer)
+		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService, 
+			IGameStatesSwitcher gameStatesSwitcher)
 		{
 			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;
-			_eventer = eventer;
+			_gameStatesSwitcher = gameStatesSwitcher;
 		}
 
 		private void Start()
@@ -35,11 +36,8 @@ namespace UI.Windows
 			_setThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
 		}
 
-		private void StartGame()
-		{
-			if(_persistentProgressService.Progress.CharacterData.CurrentCharacter != null)
-				_eventer.CallGameStartedEvent();
-		}
+		private void StartGame() => 
+			_gameStatesSwitcher.SwitchState<LoadLevelState>();
 
 		private void SetCharacter(CharacterType type)
 		{

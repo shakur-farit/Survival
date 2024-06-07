@@ -20,7 +20,7 @@ MonoBehaviour:
       Number: 1
   - EnemiesInWave:
     - Type: 1
-      Number: 4
+      Number: 3
     - Type: 2
       Number: 1
   WaveCooldown: 5000

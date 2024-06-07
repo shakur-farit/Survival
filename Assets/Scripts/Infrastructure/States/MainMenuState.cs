@@ -1,5 +1,3 @@
-using Events;
-using Infrastructure.States.StatesMachine;
 using UI.Services.Windows;
 using UI.Windows;
 
@@ -7,33 +5,15 @@ namespace Infrastructure.States
 {
 	public class MainMenuState : IGameState
 	{
-		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IWindowsService _windowsService;
-		private readonly IGamePlayEvents _eventer;
 
-
-		public MainMenuState(IGameStatesSwitcher gameStatesSwitcher, IWindowsService windowsService, IGamePlayEvents eventer)
-		{
-			_gameStatesSwitcher = gameStatesSwitcher;
+		public MainMenuState(IWindowsService windowsService) => 
 			_windowsService = windowsService;
-			_eventer = eventer;
-		}
 
-		public async void Enter()
-		{
-			_eventer.GameStarted += EnterInGameLoopingState;
-
+		public async void Enter() => 
 			await _windowsService.Open(WindowType.MainMenuWindow);
-		}
 
-		public void Exit()
-		{
+		public void Exit() => 
 			_windowsService.Close(WindowType.MainMenuWindow);
-
-			_eventer.GameStarted -= EnterInGameLoopingState;
-		}
-
-		private void EnterInGameLoopingState() => 
-			_gameStatesSwitcher.SwitchState<GameLoopingState>();
 	}
 }

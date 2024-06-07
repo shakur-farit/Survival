@@ -1,4 +1,3 @@
-using System;
 using EnemyLogic;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -8,8 +7,9 @@ namespace Character.Shooting
 {
 	public class EnemyDetector : MonoBehaviour
 	{
-		private IPersistentProgressService _persistentProgressService;
 		[SerializeField] private Shooter _shooter;
+
+		private IPersistentProgressService _persistentProgressService;
 
 		[Inject]
 		public void Constructor(IPersistentProgressService persistentProgressService) => 

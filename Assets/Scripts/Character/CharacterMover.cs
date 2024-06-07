@@ -13,15 +13,16 @@ namespace Character
 {
 	public class CharacterMover : MonoBehaviour
 	{
+		[SerializeField] private CharacterAnimator CharacterAnimator;
+		
 		private float _movementSpeed;
 		private bool _isMove;
+
+		private Dictionary<Func<bool>, Action> _stateActions;
 
 		private IMovementInputService _movementInputService;
 		private IPersistentProgressService _persistentProgressService;
 		private ICharacterMotionStatesSwitcher _characterMotionSwitcher;
-
-		private Dictionary<Func<bool>, Action> _stateActions;
-		private CharacterAnimator _characterAnimator;
 
 		[Inject]
 		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService,
@@ -42,19 +43,21 @@ namespace Character
 		{
 			_movementInputService.RegisterMovementInputAction();
 
-			if (gameObject.TryGetComponent(out CharacterAnimator characterAnimator))
-				_characterAnimator = characterAnimator;
+			InitializeStateActions();
 		}
 
 		private void Start()
 		{
 			SetupMovementSpeed();
 
-			InitializeStateActions();
+			SwitchToIdlingState();
 		}
 
 		private void FixedUpdate() => 
 			Move();
+
+		private void SwitchToIdlingState() => 
+			_characterMotionSwitcher.SwitchState<CharacterIdlingState>(CharacterAnimator);
 
 		private void InitializeStateActions()
 		{
@@ -90,7 +93,7 @@ namespace Character
 
 		private void SwitchCharacterState<T>() where T : ICharacterAnimatorState
 		{
-			_characterMotionSwitcher.SwitchState<T>(_characterAnimator);
+			_characterMotionSwitcher.SwitchState<T>(CharacterAnimator);
 			_isMove = !_isMove;
 		}
 

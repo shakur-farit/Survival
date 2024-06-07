@@ -6,10 +6,11 @@ using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Enemy;
 using Infrastructure.Services.Factories.Hud;
-using Infrastructure.Services.Factories.Spawner;
 using Infrastructure.Services.Factories.States;
 using Infrastructure.Services.Factories.UI;
 using Infrastructure.Services.ObjectCreator;
+using Spawn;
+using StaticData;
 using UI.Services.Windows;
 using Zenject;
 
@@ -24,6 +25,8 @@ namespace Installers
 			RegisterWindowsService();
 			RegisterDeath();
 			RegisterMediators();
+			RegisterEnemiesCounter();
+			RegisterSpawners();
 		}
 
 		private void RegisterFactories()
@@ -31,7 +34,6 @@ namespace Installers
 			RegisterStatesFactory();
 			RegisterCharacterFactory();
 			RegisterEnemyFactory();
-			RegisterSpawnerFactory();
 			RegisterHUDFactory();
 			RegisterUIFactory();
 			RegisterAmmoFactory();
@@ -47,6 +49,12 @@ namespace Installers
 			Container.Bind<IAmmoDeath>().To<AmmoDeath>().AsSingle();
 		}
 
+		private void RegisterSpawners() => 
+			Container.Bind<IEnemiesSpawner>().To<EnemiesSpawner>().AsSingle();
+
+		private void RegisterEnemiesCounter() => 
+			Container.Bind<IEnemiesCounter>().To<EnemiesCounter>().AsSingle();
+
 		private void RegisterStatesFactory() => 
 			Container.Bind<IStatesFactory>().To<StatesFactory>().AsSingle();
 
@@ -55,9 +63,6 @@ namespace Installers
 
 		private void RegisterEnemyFactory() => 
 			Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
-
-		private void RegisterSpawnerFactory() => 
-			Container.Bind<ISpawnerFactory>().To<SpawnerFactory>().AsSingle();
 
 		private void RegisterHUDFactory() => 
 			Container.Bind<IHudFactory>().To<HudFactory>().AsSingle();
