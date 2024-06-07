@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.PersistentProgress;

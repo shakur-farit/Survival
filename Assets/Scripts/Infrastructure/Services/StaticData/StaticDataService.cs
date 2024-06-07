@@ -6,35 +6,41 @@ namespace Infrastructure.Services.StaticData
 {
 	public class StaticDataService : IStaticDataService
 	{ 
-		private const string CharactersStaticDataListAddress = "Characters Static Data List";
-		private const string WeaponsStaticDataListAddress = "Weapons Static Data List";
-		private const string EnemiesStaticDataListAddress = "Enemies Static Data List";
+		private const string CharactersStaticDataListAddress = "Characters List";
+		private const string WeaponsStaticDataListAddress = "Weapons List";
+		private const string EnemiesStaticDataListAddress = "Enemies List";
+		private const string LevelsListStaticDataAddress = "Levels List";
 
 		private readonly IAssetsProvider _assetsProvider;
 
-		public CharactersStaticDataList CharactersStaticDataList { get; private set; }
-		public WeaponsStaticDataList WeaponsStaticDataList { get; private set; }
-		public EnemiesStaticDataList EnemiesStaticDataList { get; private set; }
+		public CharactersListStaticData CharactersListStaticData { get; private set; }
+		public WeaponsListStaticData WeaponsListStaticData { get; private set; }
+		public EnemiesListStaticData EnemiesListStaticData { get; private set; }
+		public LevelsListStaticData LevelsListStaticData { get; private set; }
 
 		public StaticDataService(IAssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
 
 		public async UniTask Load()
 		{
-			CharactersStaticDataList = await _assetsProvider.Load<CharactersStaticDataList>(CharactersStaticDataListAddress);
+			CharactersListStaticData = await _assetsProvider.Load<CharactersListStaticData>(CharactersStaticDataListAddress);
 
-			EnemiesStaticDataList = await _assetsProvider.Load<EnemiesStaticDataList>(EnemiesStaticDataListAddress);
+			EnemiesListStaticData = await _assetsProvider.Load<EnemiesListStaticData>(EnemiesStaticDataListAddress);
 
-			WeaponsStaticDataList = await _assetsProvider.Load<WeaponsStaticDataList>(WeaponsStaticDataListAddress);
+			WeaponsListStaticData = await _assetsProvider.Load<WeaponsListStaticData>(WeaponsStaticDataListAddress);
+
+			LevelsListStaticData = await _assetsProvider.Load<LevelsListStaticData>(LevelsListStaticDataAddress);
 		}
 
 		public async UniTask WarmUp()
 		{
-			await _assetsProvider.Load<CharactersStaticDataList>(CharactersStaticDataListAddress);
+			await _assetsProvider.Load<CharactersListStaticData>(CharactersStaticDataListAddress);
 
-			await _assetsProvider.Load<EnemiesStaticDataList>(EnemiesStaticDataListAddress);
+			await _assetsProvider.Load<EnemiesListStaticData>(EnemiesStaticDataListAddress);
 
-			await _assetsProvider.Load<WeaponsStaticDataList>(WeaponsStaticDataListAddress);
+			await _assetsProvider.Load<WeaponsListStaticData>(WeaponsStaticDataListAddress);
+		
+			await _assetsProvider.Load<LevelsListStaticData>(LevelsListStaticDataAddress);
 		}
 	}
 }

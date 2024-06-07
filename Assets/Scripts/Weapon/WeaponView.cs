@@ -22,7 +22,7 @@ namespace Weapon
 
 		private void Start()
 		{
-			foreach (WeaponStaticData weapon in _staticDataService.WeaponsStaticDataList.WeaponsList)
+			foreach (WeaponStaticData weapon in _staticDataService.WeaponsListStaticData.WeaponsList)
 			{
 				if (weapon.Type == _persistentProgressService.Progress.CharacterData.CurrentCharacter.DefaultWeapon)
 				{

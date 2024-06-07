@@ -1,9 +1,7 @@
-using System;
 using EnemyLogic.States;
 using EnemyLogic.States.StateMachine;
 using Infrastructure.Services.Factories.States;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace EnemyLogic

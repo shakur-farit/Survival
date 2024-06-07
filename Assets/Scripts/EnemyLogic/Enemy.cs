@@ -20,7 +20,7 @@ namespace EnemyLogic
 
 		public void Initialize(EnemyType enemyType)
 		{
-			foreach (EnemyStaticData enemyStaticData in _staticDataService.EnemiesStaticDataList.EnemiesList)
+			foreach (EnemyStaticData enemyStaticData in _staticDataService.EnemiesListStaticData.EnemiesList)
 			{
 				if(enemyStaticData.Type == enemyType)
 					_mediator.Initialize(enemyStaticData);

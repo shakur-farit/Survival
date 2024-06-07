@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cab97145e2e2aa84fb16ba99dd80d163, type: 3}
-  m_Name: Characters Static Data List
+  m_Script: {fileID: 11500000, guid: b36cd9e17612d754fa97556ab3fcdc9c, type: 3}
+  m_Name: Levels List
   m_EditorClassIdentifier: 
-  CharactersList:
-  - {fileID: 11400000, guid: f2e70028255f04b4d895b1256f5df770, type: 2}
-  - {fileID: 11400000, guid: 75764342d7d85514288cd2ebeb5bd279, type: 2}
+  LevelsList:
+  - {fileID: 11400000, guid: 0c4dfd393927e5d4c8971765d91d09f5, type: 2}

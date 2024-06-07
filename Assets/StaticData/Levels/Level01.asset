@@ -9,9 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b60bfd23feef2c4eb3da531cd257546, type: 3}
-  m_Name: Enemies Static Data List
+  m_Script: {fileID: 11500000, guid: ff55459cb18b2054e808275b4cf2538f, type: 3}
+  m_Name: Level01
   m_EditorClassIdentifier: 
-  EnemiesList:
-  - {fileID: 11400000, guid: 4aec57a78e8701b4ab2cd07b3da0255e, type: 2}
-  - {fileID: 11400000, guid: 20eb24d2f3bed344db0b30f41fcd92b9, type: 2}
+  WavesOnLevel:
+  - EnemiesInWave:
+    - Type: 1
+      Number: 2
+    - Type: 2
+      Number: 1
+  - EnemiesInWave:
+    - Type: 1
+      Number: 4
+    - Type: 2
+      Number: 1
+  WaveCooldown: 5000

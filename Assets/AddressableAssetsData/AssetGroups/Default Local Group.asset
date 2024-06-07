@@ -58,17 +58,22 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 240a5104759f4e14ca1037aba30f1300
-    m_Address: Characters Static Data List
+    m_Address: Characters List
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 099f6ebaeef840b4e9f4436d9356a47c
-    m_Address: Weapons Static Data List
+    m_Address: Weapons List
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4cad0dced5171d42b614ade3de50d4a
-    m_Address: Enemies Static Data List
+    m_Address: Enemies List
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8d439c2b4f3fe04b8106da26e45ee91
+    m_Address: Levels List
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using StaticData;
 
@@ -6,9 +5,10 @@ namespace Infrastructure.Services.StaticData
 {
 	public interface IStaticDataService
 	{
-		CharactersStaticDataList CharactersStaticDataList { get; }
-		WeaponsStaticDataList WeaponsStaticDataList { get; }
-		EnemiesStaticDataList EnemiesStaticDataList { get; }
+		CharactersListStaticData CharactersListStaticData { get; }
+		WeaponsListStaticData WeaponsListStaticData { get; }
+		EnemiesListStaticData EnemiesListStaticData { get; }
+		LevelsListStaticData LevelsListStaticData { get; }
 		UniTask Load();
 		UniTask WarmUp();
 	}

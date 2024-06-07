@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using EnemyLogic;
 using Infrastructure.Services.Factories.Enemy;
 using Infrastructure.Services.Randomizer;
+using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -10,30 +13,48 @@ namespace Spawn
 {
 	public class Spawner : MonoBehaviour
 	{
+		private readonly Dictionary<EnemyType, int> _enemiesOnLevel = new();
+		private List<EnemyType> _enemies;
+		private int _numberOfWaves;
+
 		private IRandomService _randomService;
 		private IEnemyFactory _enemyFactory;
-
-		private Dictionary<EnemyType, int> _enemiesOnLevel;
-		private List<EnemyType> _enemies;
+		private IStaticDataService _staticDataService;
 
 		[Inject]
-		public void Constructor(IEnemyFactory enemyFactory, IRandomService randomService)
+		public void Constructor(IEnemyFactory enemyFactory, IRandomService randomService, IStaticDataService staticData)
 		{
 			_enemyFactory = enemyFactory;
 			_randomService = randomService;
+			_staticDataService = staticData;
 		}
 
 		private void Awake()
 		{
-			_enemiesOnLevel = new Dictionary<EnemyType, int>()
-			{
-				{ EnemyType.Hedusa, 3},
-				{ EnemyType.Orc, 1}
-			};
+		//	foreach (LevelStaticData levelStaticData in _staticDataService.LevelsListStaticData.LevelsList)
+		//	foreach (WavesOnLevelInfo wavesOnLevelInfo in levelStaticData.WavesOnLevel)
+		//	foreach (EnemiesInWaveInfo enemiesInWaveInfo in wavesOnLevelInfo.EnemiesInWave)
+		//		_enemiesOnLevel.Add(enemiesInWaveInfo.Type, enemiesInWaveInfo.Number);
+
+			_numberOfWaves = _staticDataService.LevelsListStaticData.LevelsList[0].WavesOnLevel.Count;
 		}
 
-		private void Start() => 
-			SpawnWaveOfEnemies();
+		private async void Start()
+		{
+			foreach (LevelStaticData levelStaticData in _staticDataService.LevelsListStaticData.LevelsList)
+			{
+				foreach (WavesOnLevelInfo wavesOnLevel in levelStaticData.WavesOnLevel)
+				{
+					foreach (EnemiesInWaveInfo enemiesInWaveInfo in wavesOnLevel.EnemiesInWave)
+					{
+						_enemiesOnLevel.Add(enemiesInWaveInfo.Type, enemiesInWaveInfo.Number);
+					}
+					SpawnWaveOfEnemies();
+					_enemiesOnLevel.Clear();
+					await UniTask.Delay(5000);
+				}
+			}
+		}
 
 		private void SpawnWaveOfEnemies()
 		{

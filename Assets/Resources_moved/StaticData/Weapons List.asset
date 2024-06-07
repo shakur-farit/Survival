@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99bd19765a6cc6d47a6613929e23de06, type: 3}
-  m_Name: Pistol Ammo Static Data
+  m_Script: {fileID: 11500000, guid: 5b7e85346cb06484bb8f7356d00f8fb1, type: 3}
+  m_Name: Weapons List
   m_EditorClassIdentifier: 
-  Damage: 2
-  MovementSpeed: 0.05
-  Dealy: 500
-  IsEnemy: 0
+  WeaponsList:
+  - {fileID: 11400000, guid: dfc67447bf2a4e4448a05f44063a973d, type: 2}
+  - {fileID: 11400000, guid: 221b79c632a8a5d4a899c8b3346d5646, type: 2}

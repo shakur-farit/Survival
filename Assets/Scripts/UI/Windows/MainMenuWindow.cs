@@ -43,7 +43,7 @@ namespace UI.Windows
 
 		private void SetCharacter(CharacterType type)
 		{
-			foreach (CharacterStaticData character in _staticDataService.CharactersStaticDataList.CharactersList)
+			foreach (CharacterStaticData character in _staticDataService.CharactersListStaticData.CharactersList)
 				if (type == character.CharacterType)
 					_persistentProgressService.Progress.CharacterData.CurrentCharacter = character;
 		}
