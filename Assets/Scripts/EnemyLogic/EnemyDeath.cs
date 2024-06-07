@@ -20,7 +20,6 @@ namespace EnemyLogic
 		public void Die(GameObject gameObject)
 		{
 			_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Remove(gameObject);
-				Debug.Log(_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Count);
 			_enemyFactory.Destroy(gameObject);
 		}
 	}
