@@ -23,20 +23,20 @@ namespace Character
 			_characterAimStatesRegistrar = characterAimStatesMachine;
 		}
 
-		private void Awake() => 
-			RegisterCharacterStates();
+		//private void Awake() => 
+		//	RegisterCharacterStates();
 
-		private void RegisterCharacterStates()
-		{
-			_characterMotionStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterIdlingState>());
-			_characterMotionStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterMovingState>());
+		//private void RegisterCharacterStates()
+		//{
+		//	_characterMotionStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterIdlingState>());
+		//	_characterMotionStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterMovingState>());
 
-			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimUpState>());
-			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimUpRightState>());
-			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimUpLeftState>());
-			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimRightState>());
-			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimLeftState>());
-			_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimDownState>());
-		}
+		//	_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimUpState>());
+		//	_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimUpRightState>());
+		//	_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimUpLeftState>());
+		//	_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimRightState>());
+		//	_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimLeftState>());
+		//	_characterAimStatesRegistrar.RegisterState(_statesFactory.CreateCharacterStates<CharacterAimDownState>());
+		//}
 	}
 }

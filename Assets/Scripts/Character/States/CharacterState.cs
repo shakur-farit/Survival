@@ -1,6 +1,3 @@
-using Character.States.StatesMachine.Motion;
-using UnityEngine;
-
 namespace Character.States
 {
 	public abstract class CharacterState : ICharacterAnimatorState

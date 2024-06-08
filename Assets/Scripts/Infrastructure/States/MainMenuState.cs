@@ -11,9 +11,9 @@ namespace Infrastructure.States
 			_windowsService = windowsService;
 
 		public async void Enter() => 
-			await _windowsService.Open(WindowType.MainMenuWindow);
+			await _windowsService.Open(WindowType.MainMenu);
 
 		public void Exit() => 
-			_windowsService.Close(WindowType.MainMenuWindow);
+			_windowsService.Close(WindowType.MainMenu);
 	}
 }

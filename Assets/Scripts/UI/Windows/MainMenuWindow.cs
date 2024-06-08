@@ -10,9 +10,8 @@ using Zenject;
 
 namespace UI.Windows
 {
-	public class MainMenuWindow : MonoBehaviour
+	public class MainMenuWindow : WindowBass
 	{
-		[SerializeField] private Button _playButton;
 		[SerializeField] private Button _setGeneralButton;
 		[SerializeField] private Button _setThiefButton;
 
@@ -29,9 +28,9 @@ namespace UI.Windows
 			_gameStatesSwitcher = gameStatesSwitcher;
 		}
 
-		private void Start()
+		protected override void OnAwake()
 		{
-			_playButton.onClick.AddListener(StartGame);
+			ActionButton.onClick.AddListener(StartGame);
 			_setGeneralButton.onClick.AddListener(() => SetCharacter(CharacterType.TheGeneral));
 			_setThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
 		}

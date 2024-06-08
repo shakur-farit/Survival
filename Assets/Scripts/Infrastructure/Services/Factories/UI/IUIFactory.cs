@@ -6,7 +6,9 @@ namespace Infrastructure.Services.Factories.UI
 	{
 		UniTask CreateUIRoot();
 		UniTask CreateMainMenuWindow();
+		UniTask CreateLevelCompleteWindow();
 		void DestroyUIRoot();
 		void DestroyMainMenuWindow();
+		void DestroyLevelCompleteWindow();
 	}
 }

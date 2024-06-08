@@ -44,7 +44,7 @@ namespace Infrastructure.Services.Input
 		private Vector2 GetMovementInputAxis() => 
 			new(_moveInput.x, _moveInput.y);
 
-		private Vector2 GetAimInputAxis() => 
+		public Vector2 GetAimInputAxis() => 
 			new(_aimInput.x, _aimInput.y);
 	}
 }

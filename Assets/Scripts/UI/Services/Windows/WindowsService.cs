@@ -15,8 +15,11 @@ namespace UI.Services.Windows
 		{
 			switch (type)
 			{
-				case WindowType.MainMenuWindow:
+				case WindowType.MainMenu:
 					await _uiFactory.CreateMainMenuWindow();
+					break;
+				case WindowType.LevelComplete:
+					await _uiFactory.CreateLevelCompleteWindow();
 					break;
 			}
 		}
@@ -25,8 +28,11 @@ namespace UI.Services.Windows
 		{
 			switch (type)
 			{
-				case WindowType.MainMenuWindow:
+				case WindowType.MainMenu:
 					_uiFactory.DestroyMainMenuWindow();
+					break;
+				case WindowType.LevelComplete:
+					_uiFactory.DestroyLevelCompleteWindow();
 					break;
 			}
 		}

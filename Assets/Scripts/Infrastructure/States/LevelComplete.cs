@@ -1,8 +1,8 @@
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.States.StatesMachine;
-using UnityEngine;
+using UI.Services.Windows;
+using UI.Windows;
 
 namespace Infrastructure.States
 {
@@ -11,44 +11,41 @@ namespace Infrastructure.States
 		private readonly IHudFactory _hudFactory;
 		private readonly ICharacterFactory _characterFactory;
 		private readonly IPersistentProgressService _persistentProgressService;
-		private readonly IGameStatesSwitcher _gameStatesSwitcher;
+		private readonly IWindowsService _windowService;
 
-		public LevelComplete(IHudFactory hudFactory, ICharacterFactory characterFactory, IPersistentProgressService persistentProgressService, IGameStatesSwitcher gameStatesSwitcher)
+		public LevelComplete(IHudFactory hudFactory, ICharacterFactory characterFactory,
+			IPersistentProgressService persistentProgressService, IWindowsService windowService)
 		{
 			_hudFactory = hudFactory;
 			_characterFactory = characterFactory;
 			_persistentProgressService = persistentProgressService;
-			_gameStatesSwitcher = gameStatesSwitcher;
+			_windowService = windowService;
 		}
 
 		public void Enter()
 		{
-			Debug.Log("Open level complete window");
-			DestroyObjects();
-			StartNextLevel();
-		}
-
-		public void Exit()
-		{
-			
-		}
-
-		private void DestroyObjects()
-		{
-			DestroyCharacter();
+			OpenLevelCompleteWindow();
 			DestroyHud();
+			DestroyCharacter();
+			InitNextLevel();
 		}
+
+		public void Exit() =>
+			CloseLevelCompleteWindow();
+
+		private void OpenLevelCompleteWindow() =>
+			_windowService.Open(WindowType.LevelComplete);
+
+		private void CloseLevelCompleteWindow() =>
+			_windowService.Close(WindowType.LevelComplete);
 
 		private void DestroyCharacter() => 
 			_characterFactory.Destroy();
 
-		private void DestroyHud() => 
+		private void DestroyHud() =>
 			_hudFactory.Destroy();
 
-		private void StartNextLevel()
-		{
+		private void InitNextLevel() =>
 			_persistentProgressService.Progress.LevelData.CurrentLevel += 1;
-			_gameStatesSwitcher.SwitchState<LoadLevelState>();
-		}
 	}
 }

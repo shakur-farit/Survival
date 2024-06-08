@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace Infrastructure.Services.Factories.UI
 {
-	public class UIFactory : Infrastructure.Services.Factories.Factory, IUIFactory
+	public class UIFactory : Factory, IUIFactory
 	{
 		private GameObject _uiRoot;
 		private GameObject _mainMenuWindow;
+		private GameObject _levelCompleteWindow;
 
 		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
@@ -27,10 +28,19 @@ namespace Infrastructure.Services.Factories.UI
 			_mainMenuWindow = await CreateObject(reference.MainMenuWindowAddress, _uiRoot.transform);
 		}
 
+		public async UniTask CreateLevelCompleteWindow()
+		{
+			AssetsReference reference = await InitReference();
+			_levelCompleteWindow = await CreateObject(reference.LevelCompleteWindowAddress, _uiRoot.transform);
+		}
+
 		public void DestroyUIRoot() => 
 			Object.Destroy(_uiRoot);
 
 		public void DestroyMainMenuWindow() => 
 			Object.Destroy(_mainMenuWindow);
+
+		public void DestroyLevelCompleteWindow() =>
+			Object.Destroy(_levelCompleteWindow);
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Ammo;
 using Infrastructure.Services.PersistentProgress;
@@ -43,7 +44,7 @@ namespace Character.Shooting
 			await UniTask.Delay(_delay);
 		}
 
-		private async void CreateAmmo() =>
+		private async void CreateAmmo() => 
 			await _ammoFactory.Create(transform);
 	}
 }

@@ -36,11 +36,9 @@ namespace EnemyLogic
 			enemyData.EnemiesInRangeList.Remove(gameObject);
 			enemyData.DeadEnemies.Add(gameObject);
 
-			Debug.Log($"{enemyData.DeadEnemies.Count} / {enemiesOnLevel}");
-
 			if (enemiesOnLevel == enemyData.DeadEnemies.Count)
 			{
-				Debug.Log("Complete");
+				enemyData.DeadEnemies.Clear();
 				_gameStatesSwitcher.SwitchState<LevelComplete>();
 			}
 

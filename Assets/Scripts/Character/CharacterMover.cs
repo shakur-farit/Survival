@@ -42,7 +42,6 @@ namespace Character
 		private void Awake()
 		{
 			_movementInputService.RegisterMovementInputAction();
-
 			InitializeStateActions();
 		}
 

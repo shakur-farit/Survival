@@ -52,7 +52,7 @@ namespace Infrastructure.States
 		private async UniTask SpawnEnemies()
 		{
 			int currentLevel = _persistentProgressService.Progress.LevelData.CurrentLevel;
-			Debug.Log($"Load Level {currentLevel + 1}");
+			await UniTask.Delay(5000);
 			await _enemiesSpawner.SpawnEnemies(_staticDataService.LevelsListStaticData.LevelsList[currentLevel]);
 		}
 	}

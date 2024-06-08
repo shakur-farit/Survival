@@ -1,10 +1,6 @@
-using System;
-using System.Threading.Tasks;
 using Character;
-using Character.Shooting;
 using EnemyLogic;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -41,13 +37,16 @@ namespace Ammo
 		private void DealDamage(Collider2D other)
 		{
 			if (_isEnemy && other.gameObject.TryGetComponent(out CharacterHealth characterHealth))
+			{
 				characterHealth.TakeDamage(_damage);
-			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
-				enemyHealth.TakeDamage(_damage);
-			if(other.TryGetComponent(out EnemyDetector detector))
-				return;
+				_ammoDeath.Die(gameObject);
+			}
 
-			_ammoDeath.Die(gameObject);
+			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
+			{
+				enemyHealth.TakeDamage(_damage);
+				_ammoDeath.Die(gameObject);
+			}
 		}
 	}
 }

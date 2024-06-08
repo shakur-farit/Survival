@@ -15,7 +15,7 @@ MonoBehaviour:
   CharacterAddress: Character
   EnemyAddress: Enemy
   AmmoAddress: Ammo
-  SpawnerAddress: Spawner
   HudAddress: Hud
   UIRootAddress: UIRoot
   MainMenuWindowAddress: MainMenuWindow
+  LevelCompleteWindowAddress: LevelCompleteWindow

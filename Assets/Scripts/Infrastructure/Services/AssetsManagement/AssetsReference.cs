@@ -11,5 +11,6 @@ namespace Infrastructure.Services.AssetsManagement
 		public string HudAddress;
 		public string UIRootAddress;
 		public string MainMenuWindowAddress;
+		public string LevelCompleteWindowAddress;
 	}
 }
