@@ -1,6 +1,5 @@
 using Character;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Weapon;
 
 namespace StaticData

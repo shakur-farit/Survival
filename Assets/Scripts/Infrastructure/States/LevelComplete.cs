@@ -25,13 +25,18 @@ namespace Infrastructure.States
 		public void Enter()
 		{
 			OpenLevelCompleteWindow();
-			DestroyHud();
-			DestroyCharacter();
+			DestroyObjects();
 			InitNextLevel();
 		}
 
 		public void Exit() =>
 			CloseLevelCompleteWindow();
+
+		private void DestroyObjects()
+		{
+			DestroyHud();
+			DestroyCharacter();
+		}
 
 		private void OpenLevelCompleteWindow() =>
 			_windowService.Open(WindowType.LevelComplete);

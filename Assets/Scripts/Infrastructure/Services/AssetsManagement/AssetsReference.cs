@@ -12,5 +12,6 @@ namespace Infrastructure.Services.AssetsManagement
 		public string UIRootAddress;
 		public string MainMenuWindowAddress;
 		public string LevelCompleteWindowAddress;
+		public string GameOverWindowAddress;
 	}
 }

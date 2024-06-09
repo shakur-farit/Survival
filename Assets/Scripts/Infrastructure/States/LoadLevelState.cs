@@ -4,7 +4,6 @@ using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using Spawn;
-using UnityEngine;
 
 namespace Infrastructure.States
 {

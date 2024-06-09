@@ -29,16 +29,9 @@ namespace Character
 		public void TakeDamage(int damage)
 		{
 			if(_current <= 0)
-				return;
+				_characterDeath.Die();
 
 			_current -= damage;
-
-			if (_current < 0)
-			{
-				_current = 0;
-
-				_characterDeath.Die();
-			}
 		}
 
 		public void AddHealth(int value)

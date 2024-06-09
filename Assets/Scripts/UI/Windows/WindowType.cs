@@ -5,5 +5,6 @@ namespace UI.Windows
 		None = 0,
 		MainMenu,
 		LevelComplete,
+		GameOver
 	}
 }

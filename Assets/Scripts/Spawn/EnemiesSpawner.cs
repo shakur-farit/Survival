@@ -30,11 +30,13 @@ namespace Spawn
 		{
 			foreach (WavesOnLevelInfo wavesOnLevel in levelStaticData.WavesOnLevel)
 			{
+				_enemiesOnLevel.Clear();
+
 				foreach (EnemiesInWaveInfo enemiesInWaveInfo in wavesOnLevel.EnemiesInWave)
 					_enemiesOnLevel.Add(enemiesInWaveInfo.Type, enemiesInWaveInfo.Number);
 
 				SpawnWaveOfEnemies();
-				_enemiesOnLevel.Clear();
+
 				await UniTask.Delay(levelStaticData.WaveCooldown);
 			}
 		}

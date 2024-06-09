@@ -19,3 +19,4 @@ MonoBehaviour:
   UIRootAddress: UIRoot
   MainMenuWindowAddress: MainMenuWindow
   LevelCompleteWindowAddress: LevelCompleteWindow
+  GameOverWindowAddress: GameOverWindow

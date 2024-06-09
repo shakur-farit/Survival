@@ -21,6 +21,9 @@ namespace UI.Services.Windows
 				case WindowType.LevelComplete:
 					await _uiFactory.CreateLevelCompleteWindow();
 					break;
+				case WindowType.GameOver:
+					await _uiFactory.CreateGameOverWindow();
+					break;
 			}
 		}
 
@@ -33,6 +36,9 @@ namespace UI.Services.Windows
 					break;
 				case WindowType.LevelComplete:
 					_uiFactory.DestroyLevelCompleteWindow();
+					break;
+				case WindowType.GameOver:
+					_uiFactory.DestroyGameOVerWindow();
 					break;
 			}
 		}

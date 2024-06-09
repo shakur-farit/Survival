@@ -10,6 +10,7 @@ namespace Infrastructure.Services.Factories.UI
 		private GameObject _uiRoot;
 		private GameObject _mainMenuWindow;
 		private GameObject _levelCompleteWindow;
+		private GameObject _gameOverWindow;
 
 		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
@@ -34,6 +35,12 @@ namespace Infrastructure.Services.Factories.UI
 			_levelCompleteWindow = await CreateObject(reference.LevelCompleteWindowAddress, _uiRoot.transform);
 		}
 
+		public async UniTask CreateGameOverWindow()
+		{
+			AssetsReference reference = await InitReference();
+			_gameOverWindow = await CreateObject(reference.GameOverWindowAddress, _uiRoot.transform);
+		}
+
 		public void DestroyUIRoot() => 
 			Object.Destroy(_uiRoot);
 
@@ -42,5 +49,8 @@ namespace Infrastructure.Services.Factories.UI
 
 		public void DestroyLevelCompleteWindow() =>
 			Object.Destroy(_levelCompleteWindow);
+
+		public void DestroyGameOVerWindow() =>
+			Object.Destroy(_gameOverWindow);
 	}
 }
