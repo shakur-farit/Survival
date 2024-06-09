@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EnemyLogic;
-using Unity.VisualScripting;
+using LevelLogic;
 using UnityEngine;
 
 namespace StaticData
@@ -9,6 +9,7 @@ namespace StaticData
 	[CreateAssetMenu(fileName = "Level", menuName = "Scriptable Object/Static Data/Level")]
 	public class LevelStaticData : ScriptableObject
 	{
+		public Level Level;
 		public List<WavesOnLevelInfo> WavesOnLevel;
 		public int WaveCooldown;
 	}

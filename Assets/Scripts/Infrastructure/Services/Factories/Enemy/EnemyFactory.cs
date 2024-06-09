@@ -23,10 +23,7 @@ namespace Infrastructure.Services.Factories.Enemy
 			return enemy;
 		}
 
-		public void Destroy(GameObject gameObject)
-		{
-			EnemiesList.Remove(gameObject);
+		public void Destroy(GameObject gameObject) => 
 			Object.Destroy(gameObject);
-		}
 	}
 }

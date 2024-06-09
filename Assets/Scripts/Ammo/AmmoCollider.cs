@@ -31,22 +31,38 @@ namespace Ammo
 			_isEnemy = currentWeaponAmmo.IsEnemy;
 		}
 
-		private void OnTriggerEnter2D(Collider2D other) => 
-			DealDamage(other);
+		private void OnTriggerEnter2D(Collider2D other)
+		{
+			TryDealDamageToCharacter(other);
 
-		private void DealDamage(Collider2D other)
+			TryDealDamageToEnemy(other);
+		}
+
+		private void TryDealDamageToCharacter(Collider2D other)
 		{
 			if (_isEnemy && other.gameObject.TryGetComponent(out CharacterHealth characterHealth))
-			{
-				characterHealth.TakeDamage(_damage);
-				_ammoDeath.Die(gameObject);
-			}
-
-			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
-			{
-				enemyHealth.TakeDamage(_damage);
-				_ammoDeath.Die(gameObject);
-			}
+				DealDamageToCharacter(characterHealth);
 		}
+
+		private void TryDealDamageToEnemy(Collider2D other)
+		{
+			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
+				DealDamageToEnemy(enemyHealth);
+		}
+
+		private void DealDamageToCharacter(CharacterHealth characterHealth)
+		{
+			characterHealth.TakeDamage(_damage);
+			DestroyAmmo();
+		}
+
+		private void DealDamageToEnemy(EnemyHealth enemyHealth)
+		{
+			enemyHealth.TakeDamage(_damage);
+			DestroyAmmo();
+		}
+
+		private void DestroyAmmo() => 
+			_ammoDeath.Die(gameObject);
 	}
 }

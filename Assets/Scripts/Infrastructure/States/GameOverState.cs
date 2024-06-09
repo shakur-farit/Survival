@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Enemy;
 using Infrastructure.Services.Factories.Hud;
+using Spawn;
 using UI.Services.Windows;
 using UI.Windows;
 using UnityEngine;
@@ -15,31 +15,33 @@ namespace Infrastructure.States
 		private readonly ICharacterFactory _characterFactory;
 		private readonly IHudFactory _hudFactory;
 		private readonly IEnemyFactory _enemyFactory;
+		private readonly IEnemiesSpawner _enemiesSpawner;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
-			IHudFactory hudFactory, IEnemyFactory enemyFactory)
+			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemiesSpawner enemiesSpawner)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
 			_enemyFactory = enemyFactory;
+			_enemiesSpawner = enemiesSpawner;
 		}
 
 		public async void Enter()
 		{
 			await OpenGameOverWindow();
-
+			StopEnemiesSpawn();
 			DestroyObjects();
 		}
 
 		public void Exit() => 
 			CloseGameOverWindow();
 
-		private void CloseGameOverWindow() => 
-			_windowService.Close(WindowType.GameOver);
-
 		private async UniTask OpenGameOverWindow() => 
 			await _windowService.Open(WindowType.GameOver);
+
+		private void StopEnemiesSpawn() => 
+			_enemiesSpawner.StopSpawn();
 
 		private void DestroyObjects()
 		{
@@ -56,11 +58,13 @@ namespace Infrastructure.States
 
 		private void DestroyEnemies()
 		{
-			foreach (GameObject enemy in _enemyFactory.EnemiesList)
-			{
-				_enemyFactory.EnemiesList.Remove(enemy);
+			foreach (GameObject enemy in _enemyFactory.EnemiesList) 
 				_enemyFactory.Destroy(enemy);
-			}
+
+			_enemyFactory.EnemiesList.Clear();
 		}
+
+		private void CloseGameOverWindow() => 
+			_windowService.Close(WindowType.GameOver);
 	}
 }

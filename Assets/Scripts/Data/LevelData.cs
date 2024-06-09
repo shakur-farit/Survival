@@ -1,10 +1,13 @@
 using System;
+using StaticData;
 
 namespace Data
 {
 	[Serializable]
 	public class LevelData
 	{
-		public int CurrentLevel;
+		public int PreviousLevel;
+		public LevelStaticData CurrentLevelStaticData;
+		public int EnemiesNumberInLevele;
 	}
 }

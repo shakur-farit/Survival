@@ -2,8 +2,9 @@ using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
+using LevelLogic;
 using Spawn;
+using StaticData;
 
 namespace Infrastructure.States
 {
@@ -11,23 +12,26 @@ namespace Infrastructure.States
 	{
 		private readonly ICharacterFactory _characterFactory;
 		private readonly IHudFactory _hudFactory;
-		private readonly IStaticDataService _staticDataService;
 		private readonly IEnemiesSpawner _enemiesSpawner;
 		private readonly IPersistentProgressService _persistentProgressService;
-
+		private readonly IEnemiesCounter _enemiesCounter;
+		private readonly ILevelInitializer _levelInitializer;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
-			IStaticDataService staticDataService, IEnemiesSpawner enemiesSpawner, IPersistentProgressService persistentProgressService)
+			IEnemiesSpawner enemiesSpawner, IPersistentProgressService persistentProgressService, 
+			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
-			_staticDataService = staticDataService;
 			_enemiesSpawner = enemiesSpawner;
 			_persistentProgressService = persistentProgressService;
+			_enemiesCounter = enemiesCounter;
+			_levelInitializer = levelInitializer;
 		}
 
 		public async void Enter()
 		{
+			LevelInitialize();
 			await CreateGameObjects();
 			await SpawnEnemies();
 		}
@@ -42,6 +46,12 @@ namespace Infrastructure.States
 			await CreateHud();
 		}
 
+		private void LevelInitialize()
+		{
+			_levelInitializer.SetupLevelStaticData();
+			_enemiesCounter.SetEnemiesNumberInLevel();
+		}
+
 		private async UniTask CreateCharacter() => 
 			await _characterFactory.Create();
 
@@ -50,9 +60,10 @@ namespace Infrastructure.States
 
 		private async UniTask SpawnEnemies()
 		{
-			int currentLevel = _persistentProgressService.Progress.LevelData.CurrentLevel;
+			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
+
 			await UniTask.Delay(5000);
-			await _enemiesSpawner.SpawnEnemies(_staticDataService.LevelsListStaticData.LevelsList[currentLevel]);
+			await _enemiesSpawner.SpawnEnemies(levelStaticData);
 		}
 	}
 }

@@ -1,9 +1,7 @@
 using Data;
 using Infrastructure.Services.Factories.Enemy;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.States;
-using Infrastructure.States.StatesMachine;
-using StaticData;
+using LevelLogic;
 using UnityEngine;
 using Zenject;
 
@@ -13,36 +11,28 @@ namespace EnemyLogic
 	{
 		private IEnemyFactory _enemyFactory;
 		private IPersistentProgressService _persistentProgressService;
-		private IEnemiesCounter _counter;
-		private IGameStatesSwitcher _gameStatesSwitcher;
+		private ILevelCompleter _levelCompleter;
 
 
 		[Inject]
-		public void Constructor(IEnemyFactory enemyFactory, IPersistentProgressService persistentProgressService,
-			IEnemiesCounter counter, IGameStatesSwitcher gameStatesSwitcher)
+		public void Constructor(IEnemyFactory enemyFactory, IPersistentProgressService persistentProgressService, 
+			ILevelCompleter levelCompleter)
 		{
 			_enemyFactory = enemyFactory;
 			_persistentProgressService = persistentProgressService;
-			_counter = counter;
-			_gameStatesSwitcher = gameStatesSwitcher;
+			_levelCompleter = levelCompleter;
 		}
 
 		public void Die(GameObject gameObject)
 		{
 			EnemyData enemyData = _persistentProgressService.Progress.EnemyData;
 
-			int enemiesOnLevel = _counter.GetCountEnemies();
-
 			enemyData.EnemiesInRangeList.Remove(gameObject);
 			enemyData.DeadEnemies.Add(gameObject);
 
-			if (enemiesOnLevel == enemyData.DeadEnemies.Count)
-			{
-				enemyData.DeadEnemies.Clear();
-				_gameStatesSwitcher.SwitchState<LevelComplete>();
-			}
-
 			_enemyFactory.Destroy(gameObject);
+
+			_levelCompleter.TryCompleteLevel();
 		}
 	}
 }

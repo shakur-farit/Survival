@@ -51,6 +51,6 @@ namespace Infrastructure.States
 			_hudFactory.Destroy();
 
 		private void InitNextLevel() =>
-			_persistentProgressService.Progress.LevelData.CurrentLevel += 1;
+			_persistentProgressService.Progress.LevelData.PreviousLevel += 1;
 	}
 }

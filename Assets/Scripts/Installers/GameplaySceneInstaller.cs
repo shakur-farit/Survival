@@ -9,8 +9,8 @@ using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.Factories.States;
 using Infrastructure.Services.Factories.UI;
 using Infrastructure.Services.ObjectCreator;
+using LevelLogic;
 using Spawn;
-using StaticData;
 using UI.Services.Windows;
 using Zenject;
 
@@ -27,6 +27,7 @@ namespace Installers
 			RegisterMediators();
 			RegisterEnemiesCounter();
 			RegisterSpawners();
+			RegisterLevelServices();
 		}
 
 		private void RegisterFactories()
@@ -47,6 +48,12 @@ namespace Installers
 			Container.Bind<ICharacterDeath>().To<CharacterDeath>().AsSingle();
 			Container.Bind<IEnemyDeath>().To<EnemyDeath>().AsSingle();
 			Container.Bind<IAmmoDeath>().To<AmmoDeath>().AsSingle();
+		}
+
+		private void RegisterLevelServices()
+		{
+			Container.Bind<ILevelInitializer>().To<LevelInitializer>().AsSingle();
+			Container.Bind<ILevelCompleter>().To<LevelCompleter>().AsSingle();
 		}
 
 		private void RegisterSpawners() => 

@@ -1,4 +1,3 @@
-using System;
 using Character;
 using EnemyLogic.Mediator;
 using StaticData;
@@ -19,11 +18,6 @@ namespace EnemyLogic
 
 		private void Awake() =>
 			_mediator.RegisterDamager(this);
-
-		private void Start()
-		{
-			Debug.Log(_damage);
-		}
 
 		public void SetupDamage(EnemyStaticData enemyStaticData) => 
 			_damage = enemyStaticData.Damage;
