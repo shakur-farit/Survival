@@ -15,16 +15,16 @@ namespace Infrastructure.States
 		private readonly ICharacterFactory _characterFactory;
 		private readonly IHudFactory _hudFactory;
 		private readonly IEnemyFactory _enemyFactory;
-		private readonly IEnemiesSpawner _enemiesSpawner;
+		private readonly IEnemySpawner _enemySpawner;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
-			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemiesSpawner enemiesSpawner)
+			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
 			_enemyFactory = enemyFactory;
-			_enemiesSpawner = enemiesSpawner;
+			_enemySpawner = enemySpawner;
 		}
 
 		public async void Enter()
@@ -41,7 +41,7 @@ namespace Infrastructure.States
 			await _windowService.Open(WindowType.GameOver);
 
 		private void StopEnemiesSpawn() => 
-			_enemiesSpawner.StopSpawn();
+			_enemySpawner.StopSpawn();
 
 		private void DestroyObjects()
 		{

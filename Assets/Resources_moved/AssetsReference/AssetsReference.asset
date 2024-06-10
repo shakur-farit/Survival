@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterAddress: Character
   EnemyAddress: Enemy
   AmmoAddress: Ammo
+  DropAddress: Drop
   HudAddress: Hud
   UIRootAddress: UIRoot
   MainMenuWindowAddress: MainMenuWindow

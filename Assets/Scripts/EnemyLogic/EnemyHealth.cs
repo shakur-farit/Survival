@@ -31,7 +31,7 @@ namespace EnemyLogic
 			_current -= damage;
 
 			if( _current <= 0 )
-				_enemyDeath.Die(gameObject);
+				_enemyDeath.Die(gameObject, transform.position);
 		}
 
 		public void SetupHealth(EnemyStaticData enemyStaticData) => 

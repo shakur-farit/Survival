@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74d6423a761f9bc4a8aee22de9b8e468, type: 3}
-  m_Name: Weapons List
+  m_Script: {fileID: 11500000, guid: 9ac9d8ad238aa454fa81acabfab93af3, type: 3}
+  m_Name: Drops List
   m_EditorClassIdentifier: 
-  WeaponsList:
-  - {fileID: 11400000, guid: dfc67447bf2a4e4448a05f44063a973d, type: 2}
-  - {fileID: 11400000, guid: 221b79c632a8a5d4a899c8b3346d5646, type: 2}
+  DropsList:
+  - {fileID: 11400000, guid: cf4aa5ddc259d6f4399dfa80c0df6747, type: 2}
+  - {fileID: 11400000, guid: d9496eccc3ef7eb47b6f94b8c95a4999, type: 2}

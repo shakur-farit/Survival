@@ -8,6 +8,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string CharacterAddress;
 		public string EnemyAddress;
 		public string AmmoAddress;
+		public string DropAddress;
 		public string HudAddress;
 		public string UIRootAddress;
 		public string MainMenuWindowAddress;

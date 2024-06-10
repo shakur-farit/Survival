@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using StaticData;
+using StaticData.Lists;
 
 namespace Infrastructure.Services.StaticData
 {
@@ -17,6 +18,7 @@ namespace Infrastructure.Services.StaticData
 		public WeaponsListStaticData WeaponsListStaticData { get; private set; }
 		public EnemiesListStaticData EnemiesListStaticData { get; private set; }
 		public LevelsListStaticData LevelsListStaticData { get; private set; }
+		public DropsListStaticData DropsListStaticData { get; private set; }
 
 		public StaticDataService(IAssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Thief Static Data
   m_EditorClassIdentifier: 
   CharacterType: 2
-  DefaultWeapon: 2
+  DefaultWeapon: 1
   MovementSpeed: 6
   StartHealth: 3
   MaxHealth: 6
+  DamageTakingCooldown: 1500
   HandSprite: {fileID: 21300000, guid: fdff32e8dc92a49a38c60d52e4394ba7, type: 3}
   Controller: {fileID: 9100000, guid: 3f018cebb641449a7a49950b93679bbc, type: 2}

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using StaticData;
+using StaticData.Lists;
 
 namespace Infrastructure.Services.StaticData
 {
@@ -9,6 +10,8 @@ namespace Infrastructure.Services.StaticData
 		WeaponsListStaticData WeaponsListStaticData { get; }
 		EnemiesListStaticData EnemiesListStaticData { get; }
 		LevelsListStaticData LevelsListStaticData { get; }
+		DropsListStaticData DropsListStaticData { get; }
+
 		UniTask Load();
 		UniTask WarmUp();
 	}

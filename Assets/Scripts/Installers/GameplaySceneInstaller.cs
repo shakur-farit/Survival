@@ -35,6 +35,7 @@ namespace Installers
 			RegisterStatesFactory();
 			RegisterCharacterFactory();
 			RegisterEnemyFactory();
+			RegisterDropFactory();
 			RegisterHUDFactory();
 			RegisterUIFactory();
 			RegisterAmmoFactory();
@@ -56,14 +57,20 @@ namespace Installers
 			Container.Bind<ILevelCompleter>().To<LevelCompleter>().AsSingle();
 		}
 
-		private void RegisterSpawners() => 
-			Container.Bind<IEnemiesSpawner>().To<EnemiesSpawner>().AsSingle();
+		private void RegisterSpawners()
+		{
+			Container.Bind<IEnemySpawner>().To<EnemySpawner>().AsSingle();
+			Container.Bind<IDropSpawner>().To<DropSpawner>().AsSingle();
+		}
 
 		private void RegisterEnemiesCounter() => 
 			Container.Bind<IEnemiesCounter>().To<EnemiesCounter>().AsSingle();
 
 		private void RegisterStatesFactory() => 
 			Container.Bind<IStatesFactory>().To<StatesFactory>().AsSingle();
+
+		private void RegisterDropFactory() => 
+			Container.Bind<IDropFactory>().To<DropFactory>().AsSingle();
 
 		private void RegisterCharacterFactory() => 
 			Container.Bind<ICharacterFactory>().To<CharacterFactory>().AsSingle();

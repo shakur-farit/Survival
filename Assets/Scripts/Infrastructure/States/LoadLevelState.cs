@@ -12,18 +12,18 @@ namespace Infrastructure.States
 	{
 		private readonly ICharacterFactory _characterFactory;
 		private readonly IHudFactory _hudFactory;
-		private readonly IEnemiesSpawner _enemiesSpawner;
+		private readonly IEnemySpawner _enemySpawner;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IEnemiesCounter _enemiesCounter;
 		private readonly ILevelInitializer _levelInitializer;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
-			IEnemiesSpawner enemiesSpawner, IPersistentProgressService persistentProgressService, 
+			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
 			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
-			_enemiesSpawner = enemiesSpawner;
+			_enemySpawner = enemySpawner;
 			_persistentProgressService = persistentProgressService;
 			_enemiesCounter = enemiesCounter;
 			_levelInitializer = levelInitializer;
@@ -63,7 +63,7 @@ namespace Infrastructure.States
 			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
 
 			await UniTask.Delay(5000);
-			await _enemiesSpawner.SpawnEnemies(levelStaticData);
+			await _enemySpawner.SpawnEnemies(levelStaticData);
 		}
 	}
 }

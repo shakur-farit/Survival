@@ -11,7 +11,9 @@ namespace StaticData
 	{
 		public Level Level;
 		public List<WavesOnLevelInfo> WavesOnLevel;
-		public int WaveCooldown;
+
+		[Tooltip("Time to next wave. Value in milliseconds")]
+		[Range(0, 10000)] public int WaveCooldown;
 	}
 
 	[Serializable]
@@ -24,8 +26,6 @@ namespace StaticData
 	public struct EnemiesInWaveInfo
 	{
 		public EnemyType Type;
-		public int Number;
+		[Range(1, 100)] public int Number;
 	}
 }
-
-

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Spawn
 {
-	public class EnemiesSpawner : IEnemiesSpawner
+	public class EnemySpawner : IEnemySpawner
 	{
 		private readonly Dictionary<EnemyType, int> _enemiesOnLevel = new();
 		private List<EnemyType> _enemies = new();
@@ -18,7 +18,7 @@ namespace Spawn
 		private readonly IRandomService _randomService;
 		private readonly IEnemyFactory _enemyFactory;
 
-		public EnemiesSpawner(IRandomService randomService, IEnemyFactory enemyFactory)
+		public EnemySpawner(IRandomService randomService, IEnemyFactory enemyFactory)
 		{
 			_randomService = randomService;
 			_enemyFactory = enemyFactory;

@@ -52,23 +52,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 240a5104759f4e14ca1037aba30f1300
-    m_Address: Characters List
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 099f6ebaeef840b4e9f4436d9356a47c
-    m_Address: Weapons List
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4cad0dced5171d42b614ade3de50d4a
     m_Address: Enemies List
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f57d47b6073a3d64286a59adf1b4d06c
+    m_Address: Drops List
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8d439c2b4f3fe04b8106da26e45ee91
     m_Address: Levels List
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 240a5104759f4e14ca1037aba30f1300
+    m_Address: Characters List
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -79,6 +79,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 08ae95ca5e659fe4dbad8a5ff11f70f2
     m_Address: GameOverWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a714d722f43cb494d8f3e8ecfd60f72e
+    m_Address: Drop
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 099f6ebaeef840b4e9f4436d9356a47c
+    m_Address: Weapons List
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

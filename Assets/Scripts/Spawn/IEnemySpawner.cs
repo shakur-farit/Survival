@@ -3,7 +3,7 @@ using StaticData;
 
 namespace Spawn
 {
-	public interface IEnemiesSpawner
+	public interface IEnemySpawner
 	{
 		UniTask SpawnEnemies(LevelStaticData levelStaticData);
 		void StopSpawn();

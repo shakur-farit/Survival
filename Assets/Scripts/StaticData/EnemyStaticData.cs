@@ -9,8 +9,8 @@ namespace StaticData
 		public EnemyType Type;
 		public Sprite Sprite;
 		public RuntimeAnimatorController Animator;
-		public float MovementSpeed;
-		public int CurrentHealth;
-		public int Damage;
+		[Range(0f, 10f)] public float MovementSpeed;
+		[Range(1, 100)] public int CurrentHealth;
+		[Range(1, 10)] public int Damage;
 	}
 }
