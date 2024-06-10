@@ -12,6 +12,7 @@ namespace StaticData
 		public float MovementSpeed;
 		public int StartHealth;
 		public int MaxHealth;
+		public int DamageTakingCooldown;
 		public Sprite HandSprite;
 		public RuntimeAnimatorController Controller;
 	}
