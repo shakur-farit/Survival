@@ -1,6 +1,4 @@
-using EnemyLogic.States.StateMachine;
 using StaticData;
-using UnityEngine;
 
 namespace EnemyLogic.Mediator
 {

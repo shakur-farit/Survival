@@ -17,4 +17,4 @@ MonoBehaviour:
   Animator: {fileID: 9100000, guid: 19b6ff9fbadc74e479b63068d33eb245, type: 2}
   MovementSpeed: 2
   CurrentHealth: 3
-  Damage: 1
+  Damage: 0

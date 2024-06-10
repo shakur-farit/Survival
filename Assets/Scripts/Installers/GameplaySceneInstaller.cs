@@ -1,5 +1,6 @@
 using Ammo;
 using Character;
+using DropLogic;
 using EnemyLogic;
 using EnemyLogic.Mediator;
 using Infrastructure.Services.Factories.Ammo;
@@ -28,6 +29,7 @@ namespace Installers
 			RegisterEnemiesCounter();
 			RegisterSpawners();
 			RegisterLevelServices();
+			RegisterDropStaticDataInitializer();
 		}
 
 		private void RegisterFactories()
@@ -41,8 +43,11 @@ namespace Installers
 			RegisterAmmoFactory();
 		}
 
-		private void RegisterMediators() => 
+		private void RegisterMediators()
+		{
 			Container.BindInterfacesAndSelfTo<EnemyMediator>().AsSingle();
+			Container.BindInterfacesAndSelfTo<DropMediator>().AsSingle();
+		}
 
 		private void RegisterDeath()
 		{
@@ -62,6 +67,9 @@ namespace Installers
 			Container.Bind<IEnemySpawner>().To<EnemySpawner>().AsSingle();
 			Container.Bind<IDropSpawner>().To<DropSpawner>().AsSingle();
 		}
+
+		private void RegisterDropStaticDataInitializer() => 
+			Container.Bind<IDropStaticDataInitializer>().To<DropStaticDataInitializer>().AsSingle();
 
 		private void RegisterEnemiesCounter() => 
 			Container.Bind<IEnemiesCounter>().To<EnemiesCounter>().AsSingle();

@@ -30,14 +30,29 @@ namespace EnemyLogic
 		{
 			EnemyData enemyData = _persistentProgressService.Progress.EnemyData;
 
+			RemoveFromCharacterRange(gameObject, enemyData);
+			AddToDeadEnemies(gameObject, enemyData);
+
+			SpawnDrop(position);
+
+			Destroy(gameObject);
+
+			TryCompleteLevel();
+		}
+
+		private static void RemoveFromCharacterRange(GameObject gameObject, EnemyData enemyData) => 
 			enemyData.EnemiesInRangeList.Remove(gameObject);
+
+		private static void AddToDeadEnemies(GameObject gameObject, EnemyData enemyData) => 
 			enemyData.DeadEnemies.Add(gameObject);
 
+		private void SpawnDrop(Vector2 position) => 
 			_dropSpawner.Spawn(position);
 
+		private void Destroy(GameObject gameObject) => 
 			_enemyFactory.Destroy(gameObject);
 
+		private void TryCompleteLevel() => 
 			_levelCompleter.TryCompleteLevel();
-		}
 	}
 }
