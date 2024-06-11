@@ -1,3 +1,4 @@
+using DropLogic.Mediator;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -10,17 +11,16 @@ namespace DropLogic
 
 		private IDropValueMediator _mediator;
 
+		public int Value => _value;
+
 		[Inject]
-		public void Constructor(IDropValueMediator mediator) => 
+		public void Constructor(IDropValueMediator mediator) =>
 			_mediator = mediator;
 
-		private void Awake() => 
+		private void Awake() =>
 			_mediator.RegisterDrop(this);
 
-		public void SetupValue(DropStaticData dropStaticData)
-		{
+		public void SetupValue(DropStaticData dropStaticData) => 
 			_value = dropStaticData.Value;
-			Debug.Log(_value);
-		}
 	}
 }

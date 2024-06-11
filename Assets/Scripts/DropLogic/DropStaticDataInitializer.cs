@@ -1,29 +1,27 @@
+using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using StaticData;
-using UnityEngine;
 
 namespace DropLogic
 {
 	public class DropStaticDataInitializer : IDropStaticDataInitializer
 	{
+		private const int CoinDropChancePercent = 80;
+
 		private readonly IStaticDataService _staticDataService;
+		private readonly IRandomService _randomizer;
 
-		public DropStaticDataInitializer(IStaticDataService staticDataService) => 
-			_staticDataService = staticDataService;
-
-		public DropStaticData InitializeDrop()
+		public DropStaticDataInitializer(IStaticDataService staticDataService, IRandomService randomizer)
 		{
-			DropType type;
+			_staticDataService = staticDataService;
+			_randomizer = randomizer;
+		}
 
-			int min = 0;
-			int max = 100;
+		public DropStaticData InitializeDropStaticData()
+		{
+			int dropChance = _randomizer.NextZeroToHundred();
 
-			int random = Random.Range(min, max);
-
-			if (random >= 0 && random <= 50)
-				type = DropType.Coin;
-			else
-				type = DropType.Heart;
+			DropType type = dropChance < CoinDropChancePercent ? DropType.Coin : DropType.Heart;
 
 			foreach (DropStaticData dropStaticData in _staticDataService.DropsListStaticData.DropsList)
 			{

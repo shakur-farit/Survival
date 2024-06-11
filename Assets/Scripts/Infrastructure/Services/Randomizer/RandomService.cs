@@ -6,5 +6,13 @@ namespace Infrastructure.Services.Randomizer
 	{
 		public float Next(float min, float max) =>
 			Random.Range(min, max);
+
+		public int NextZeroToHundred()
+		{
+			int min = 0;
+			int max = 110;
+
+			return Random.Range(min, max);
+		}
 	}
 }

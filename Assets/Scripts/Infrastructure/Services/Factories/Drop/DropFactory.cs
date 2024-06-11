@@ -3,7 +3,7 @@ using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
-namespace Infrastructure.Services.Factories.Ammo
+namespace Infrastructure.Services.Factories.Drop
 {
 	public class DropFactory : Factory, IDropFactory
 	{
@@ -12,11 +12,11 @@ namespace Infrastructure.Services.Factories.Ammo
 		{
 		}
 
-		public async UniTask Create(Vector2 position)
+		public async UniTask<GameObject> Create(Vector2 position)
 		{
 			AssetsReference reference = await InitReference();
 
-			await CreateObject(reference.DropAddress, position);
+			return await CreateObject(reference.DropAddress, position);
 		}
 
 		public void Destroy(GameObject gameObject) => 

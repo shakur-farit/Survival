@@ -1,3 +1,4 @@
+using DropLogic.Mediator;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -7,6 +8,7 @@ namespace DropLogic
 	public class DropView : MonoBehaviour
 	{
 		[SerializeField] private SpriteRenderer _spriteRenderer;
+
 		private IDropViewMediator _mediator;
 
 		[Inject]

@@ -4,6 +4,6 @@ namespace DropLogic
 {
 	public interface IDropStaticDataInitializer
 	{
-		DropStaticData InitializeDrop();
+		DropStaticData InitializeDropStaticData();
 	}
 }

@@ -15,3 +15,4 @@ MonoBehaviour:
   Type: 2
   Sprite: {fileID: 21300000, guid: 93356131eec0f44458223985928ac6e3, type: 3}
   Value: 1
+  DropChance: 20

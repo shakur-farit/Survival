@@ -1,4 +1,4 @@
-namespace DropLogic
+namespace DropLogic.Mediator
 {
 	public interface IDropValueMediator
 	{

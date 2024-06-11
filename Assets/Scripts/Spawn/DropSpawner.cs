@@ -1,5 +1,6 @@
 using DropLogic;
-using Infrastructure.Services.Factories.Ammo;
+using DropLogic.Mediator;
+using Infrastructure.Services.Factories.Drop;
 using StaticData;
 using UnityEngine;
 
@@ -20,9 +21,9 @@ namespace Spawn
 
 		public async void Spawn(Vector2 position)
 		{
-			await _dropFactory.Create(position);
+			GameObject dropGo = await _dropFactory.Create(position);
 
-			DropStaticData dropStaticData = _dropStaticDataInitializer.InitializeDrop();
+			DropStaticData dropStaticData = _dropStaticDataInitializer.InitializeDropStaticData();
 
 			_dropMediator.Initialize(dropStaticData);
 		}

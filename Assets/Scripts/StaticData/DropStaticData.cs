@@ -9,5 +9,6 @@ namespace StaticData
 		public DropType Type;
 		public Sprite Sprite;
 		public int Value;
+		public int DropChance;
 	}
 }
