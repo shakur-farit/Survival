@@ -17,6 +17,7 @@ namespace DropLogic.Mediator
 		{
 			_view.SetupView(dropStaticData);
 			_drop.SetupValue(dropStaticData);
+			_drop.SetupType(dropStaticData);
 		}
 	}
 }

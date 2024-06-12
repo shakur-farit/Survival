@@ -17,15 +17,12 @@ namespace DropLogic
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.TryGetComponent(out CharacterHealth health))
+			if (other.TryGetComponent(out CharacterDropPickuper pickuper))
 			{
-				AddHealthToCharacter(health);
+				pickuper.PickupDrop(_drop.Type, _drop.Value);
 				Destroy();
 			}
 		}
-
-		private void AddHealthToCharacter(CharacterHealth health) => 
-			health.AddHealth(_drop.Value);
 
 		private void Destroy() => 
 			_dropFactory.Destroy(gameObject);
