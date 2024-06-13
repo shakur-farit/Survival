@@ -1,3 +1,4 @@
+using Character;
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using EnemyLogic.States.StateMachine;
@@ -7,6 +8,7 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.StatesMachine;
+using Score;
 using Zenject;
 
 namespace Installers
@@ -20,6 +22,7 @@ namespace Installers
 			RegisterAssetsProvider();
 			RegisterStaticDataService();
 			RegisterRandomizer();
+			RegisterScoreCounter();
 			RegisterStatesMachines();
 		}
 
@@ -36,6 +39,9 @@ namespace Installers
 			Container.Bind<CharacterInput>().AsSingle();
 			Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
 		}
+
+		private void RegisterScoreCounter() => 
+			Container.Bind<IScoreCounter>().To<ScoreCounter>().AsSingle();
 
 		private void RegisterPersistentProgressServices() =>
 			Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();

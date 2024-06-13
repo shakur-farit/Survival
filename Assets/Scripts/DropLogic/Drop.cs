@@ -29,4 +29,6 @@ namespace DropLogic
 		public void SetupType(DropStaticData dropStaticData) => 
 			_type = dropStaticData.Type;
 	}
+
+
 }
