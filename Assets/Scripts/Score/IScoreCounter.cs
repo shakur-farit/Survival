@@ -1,3 +1,5 @@
+using System;
+
 namespace Score
 {
 	public interface IScoreCounter
@@ -6,5 +8,6 @@ namespace Score
 
 		void AddScore(int dropValue);
 		void RemoveScore(int dropValue);
+		event Action ScoreChanged;
 	}
 }

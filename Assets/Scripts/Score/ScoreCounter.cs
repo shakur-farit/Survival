@@ -1,11 +1,19 @@
+using System;
+
 namespace Score
 {
-	class ScoreCounter : IScoreCounter
+	public class ScoreCounter : IScoreCounter
 	{
+		public event Action ScoreChanged;
+
 		public int Score { get; private set; }
 		
-		public void AddScore(int dropValue) => 
+		public void AddScore(int dropValue)
+		{
 			Score += dropValue;
+
+			ScoreChanged?.Invoke();
+		}
 
 		public void RemoveScore(int dropValue)
 		{
@@ -13,6 +21,8 @@ namespace Score
 
 			if(Score < 0) 
 				Score = 0;
+
+			ScoreChanged?.Invoke();
 		}
 	}
 }
