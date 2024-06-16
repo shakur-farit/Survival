@@ -7,6 +7,7 @@ using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
+using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
 using Score;
 using Zenject;
@@ -21,10 +22,14 @@ namespace Installers
 			RegisterPersistentProgressServices();
 			RegisterAssetsProvider();
 			RegisterStaticDataService();
+			RegisterTimer();
 			RegisterRandomizer();
 			RegisterScoreCounter();
 			RegisterStatesMachines();
 		}
+
+		private void RegisterTimer() => 
+			Container.Bind<ICountDownTimer>().To<TimerService>().AsSingle();
 
 		private void RegisterStatesMachines()
 		{

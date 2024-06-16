@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Timer;
 using LevelLogic;
 using Spawn;
 using StaticData;
@@ -16,10 +17,11 @@ namespace Infrastructure.States
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IEnemiesCounter _enemiesCounter;
 		private readonly ILevelInitializer _levelInitializer;
+		private readonly ICountDownTimer _timer;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
 			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
-			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer)
+			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
@@ -27,13 +29,14 @@ namespace Infrastructure.States
 			_persistentProgressService = persistentProgressService;
 			_enemiesCounter = enemiesCounter;
 			_levelInitializer = levelInitializer;
+			_timer = timer;
 		}
 
 		public async void Enter()
 		{
 			LevelInitialize();
 			await CreateGameObjects();
-			await SpawnEnemies();
+			_timer.Start(10, null, SpawnEnemies);
 		}
 
 		public void Exit()
@@ -58,7 +61,7 @@ namespace Infrastructure.States
 		private async UniTask CreateHud() =>
 			await _hudFactory.Create();
 
-		private async UniTask SpawnEnemies()
+		private async void SpawnEnemies()
 		{
 			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
 
