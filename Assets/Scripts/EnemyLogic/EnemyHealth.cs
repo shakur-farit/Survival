@@ -1,5 +1,5 @@
 using EnemyLogic.Mediator;
-using Logic.Health;
+using Infrastructure.Services.Health;
 using StaticData;
 using UnityEngine;
 using Zenject;

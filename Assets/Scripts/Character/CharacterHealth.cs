@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
+using Infrastructure.Services.Health;
 using Infrastructure.Services.PersistentProgress;
-using Logic.Health;
 using StaticData;
 using UnityEngine;
 using Zenject;

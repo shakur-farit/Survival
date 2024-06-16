@@ -1,4 +1,4 @@
-namespace Logic.Health
+namespace Infrastructure.Services.Health
 {
 	public interface IHealthAddable : IHealth
 	{
