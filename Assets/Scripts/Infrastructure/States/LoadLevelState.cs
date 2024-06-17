@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Hud;
@@ -6,6 +7,7 @@ using Infrastructure.Services.Timer;
 using LevelLogic;
 using Spawn;
 using StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -36,7 +38,7 @@ namespace Infrastructure.States
 		{
 			LevelInitialize();
 			await CreateGameObjects();
-			_timer.Start(10, null, SpawnEnemies);
+			await StartTimer();
 		}
 
 		public void Exit()
@@ -48,6 +50,9 @@ namespace Infrastructure.States
 			await CreateCharacter();
 			await CreateHud();
 		}
+
+		private async UniTask StartTimer() => 
+			await _timer.Start(10, null, SpawnEnemies);
 
 		private void LevelInitialize()
 		{
@@ -65,7 +70,6 @@ namespace Infrastructure.States
 		{
 			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
 
-			await UniTask.Delay(5000);
 			await _enemySpawner.SpawnEnemies(levelStaticData);
 		}
 	}

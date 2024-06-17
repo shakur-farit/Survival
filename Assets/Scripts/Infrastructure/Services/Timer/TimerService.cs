@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Infrastructure.Services.Timer
 {
@@ -13,6 +14,7 @@ namespace Infrastructure.Services.Timer
 
 			while (_timeLeft > 0)
 			{
+				Debug.Log(_timeLeft);
 				await UniTask.Delay(1000);
 				_timeLeft--;
 				onTick?.Invoke();
