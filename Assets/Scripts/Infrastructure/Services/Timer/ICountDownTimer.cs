@@ -5,7 +5,10 @@ namespace Infrastructure.Services.Timer
 {
 	public interface ICountDownTimer
 	{
-		UniTask Start(int durationInSeconds, Action onTick, Action onComplete);
+		event Action Started;
+		event Action Completed;
+
+		UniTask Start(int durationInSeconds);
 		int GetTimeLeft();
 	}
 }

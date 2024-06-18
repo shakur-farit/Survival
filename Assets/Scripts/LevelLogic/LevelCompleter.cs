@@ -1,8 +1,8 @@
 using Data;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Timer;
 using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
-using UnityEngine;
 
 namespace LevelLogic
 {
@@ -10,12 +10,14 @@ namespace LevelLogic
 	{
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ICountDownTimer _timer;
 
 		public LevelCompleter(IGameStatesSwitcher gameStatesSwitcher,
-			IPersistentProgressService persistentProgressService)
+			IPersistentProgressService persistentProgressService, ICountDownTimer timer)
 		{
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_persistentProgressService = persistentProgressService;
+			_timer = timer;
 		}
 
 		public void TryCompleteLevel()
@@ -25,9 +27,25 @@ namespace LevelLogic
 
 			if (enemiesNumberInLevel == enemyData.DeadEnemies.Count)
 			{
-				enemyData.DeadEnemies.Clear();
-				_gameStatesSwitcher.SwitchState<LevelComplete>();
+				_timer.Completed += EnterToLevelCompleteState;
+
+				ClearDeadEnemiesList(enemyData);
+
+				StartTimer();
 			}
+		}
+
+		private static void ClearDeadEnemiesList(EnemyData enemyData) => 
+			enemyData.DeadEnemies.Clear();
+
+		private void StartTimer() => 
+			_timer.Start(15);
+
+		private void EnterToLevelCompleteState()
+		{
+			_timer.Completed -= EnterToLevelCompleteState;
+
+			_gameStatesSwitcher.SwitchState<LevelComplete>();
 		}
 	}
 }

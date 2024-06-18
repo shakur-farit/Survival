@@ -8,5 +8,6 @@ namespace Data
 		public CharacterData CharacterData = new();
 		public EnemyData EnemyData = new();
 		public LevelData LevelData = new();
+		public DropData DropData = new();
 	}
 }

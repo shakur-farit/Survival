@@ -4,9 +4,11 @@ using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
+using Infrastructure.States.StatesMachine;
 using LevelLogic;
 using Spawn;
 using StaticData;
+using TMPro;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -20,10 +22,12 @@ namespace Infrastructure.States
 		private readonly IEnemiesCounter _enemiesCounter;
 		private readonly ILevelInitializer _levelInitializer;
 		private readonly ICountDownTimer _timer;
+		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
 			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
-			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer)
+			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer, 
+			IGameStatesSwitcher gameStatesSwitcher)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
@@ -32,18 +36,21 @@ namespace Infrastructure.States
 			_enemiesCounter = enemiesCounter;
 			_levelInitializer = levelInitializer;
 			_timer = timer;
+			_gameStatesSwitcher = gameStatesSwitcher;
 		}
 
 		public async void Enter()
 		{
+			_timer.Completed += SpawnEnemies;
+
 			LevelInitialize();
 			await CreateGameObjects();
 			await StartTimer();
+			EnterToGameLoopState();
 		}
 
-		public void Exit()
-		{
-		}
+		public void Exit() => 
+			_timer.Completed -= SpawnEnemies;
 
 		private async UniTask CreateGameObjects()
 		{
@@ -52,7 +59,7 @@ namespace Infrastructure.States
 		}
 
 		private async UniTask StartTimer() => 
-			await _timer.Start(10, null, SpawnEnemies);
+			await _timer.Start(10);
 
 		private void LevelInitialize()
 		{
@@ -72,5 +79,8 @@ namespace Infrastructure.States
 
 			await _enemySpawner.SpawnEnemies(levelStaticData);
 		}
+
+		private void EnterToGameLoopState() => 
+			_gameStatesSwitcher.SwitchState<GameLoopState>();
 	}
 }

@@ -6,21 +6,27 @@ namespace Infrastructure.Services.Timer
 {
 	public class TimerService : ICountDownTimer
 	{
+		private const int OneSecond = 1000;
+
 		private int _timeLeft;
 
-		public async UniTask Start(int durationInSeconds, Action onTick, Action onComplete)
+		public event Action Started;
+		public event Action Completed;
+
+		public async UniTask Start(int durationInSeconds)
 		{
+			Started?.Invoke();
+
 			_timeLeft = durationInSeconds;
 
 			while (_timeLeft > 0)
 			{
 				Debug.Log(_timeLeft);
-				await UniTask.Delay(1000);
+				await UniTask.Delay(OneSecond);
 				_timeLeft--;
-				onTick?.Invoke();
 			}
 
-			onComplete?.Invoke();
+			Completed?.Invoke();
 		}
 
 		public int GetTimeLeft() => 

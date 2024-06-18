@@ -3,6 +3,7 @@ using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.PersistentProgress;
 using UI.Services.Windows;
 using UI.Windows;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -49,6 +50,11 @@ namespace Infrastructure.States
 
 		private void DestroyHud() =>
 			_hudFactory.Destroy();
+
+		private void DestroyDrops()
+		{
+			
+		}
 
 		private void InitNextLevel() =>
 			_persistentProgressService.Progress.LevelData.PreviousLevel += 1;
