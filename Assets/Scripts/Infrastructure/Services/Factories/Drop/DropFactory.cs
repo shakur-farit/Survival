@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
@@ -7,16 +8,20 @@ namespace Infrastructure.Services.Factories.Drop
 {
 	public class DropFactory : Factory, IDropFactory
 	{
+		public List<GameObject> DropsList { get; private set; } = new();
+
 		protected DropFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
 		{
 		}
 
-		public async UniTask<GameObject> Create(Vector2 position)
+		public async UniTask Create(Vector2 position)
 		{
 			AssetsReference reference = await InitReference();
 
-			return await CreateObject(reference.DropAddress, position);
+			GameObject drop = await CreateObject(reference.DropAddress, position);
+
+			DropsList.Add(drop);
 		}
 
 		public void Destroy(GameObject gameObject) => 

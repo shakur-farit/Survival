@@ -39,7 +39,7 @@ namespace LevelLogic
 			enemyData.DeadEnemies.Clear();
 
 		private void StartTimer() => 
-			_timer.Start(15);
+			_timer.Start(_persistentProgressService.Progress.LevelData.CurrentLevelStaticData.TimeToCompleteLevel);
 
 		private void EnterToLevelCompleteState()
 		{

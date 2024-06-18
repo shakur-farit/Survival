@@ -1,24 +1,16 @@
-using Infrastructure.Services.Factories.Character;
-using Infrastructure.Services.Factories.Hud;
 using Infrastructure.Services.PersistentProgress;
 using UI.Services.Windows;
 using UI.Windows;
-using UnityEngine;
 
 namespace Infrastructure.States
 {
 	public class LevelComplete : IGameState
 	{
-		private readonly IHudFactory _hudFactory;
-		private readonly ICharacterFactory _characterFactory;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IWindowsService _windowService;
 
-		public LevelComplete(IHudFactory hudFactory, ICharacterFactory characterFactory,
-			IPersistentProgressService persistentProgressService, IWindowsService windowService)
+		public LevelComplete(IPersistentProgressService persistentProgressService, IWindowsService windowService)
 		{
-			_hudFactory = hudFactory;
-			_characterFactory = characterFactory;
 			_persistentProgressService = persistentProgressService;
 			_windowService = windowService;
 		}
@@ -26,35 +18,17 @@ namespace Infrastructure.States
 		public void Enter()
 		{
 			OpenLevelCompleteWindow();
-			DestroyObjects();
 			InitNextLevel();
 		}
 
 		public void Exit() =>
 			CloseLevelCompleteWindow();
 
-		private void DestroyObjects()
-		{
-			DestroyHud();
-			DestroyCharacter();
-		}
-
 		private void OpenLevelCompleteWindow() =>
 			_windowService.Open(WindowType.LevelComplete);
 
 		private void CloseLevelCompleteWindow() =>
 			_windowService.Close(WindowType.LevelComplete);
-
-		private void DestroyCharacter() => 
-			_characterFactory.Destroy();
-
-		private void DestroyHud() =>
-			_hudFactory.Destroy();
-
-		private void DestroyDrops()
-		{
-			
-		}
 
 		private void InitNextLevel() =>
 			_persistentProgressService.Progress.LevelData.PreviousLevel += 1;

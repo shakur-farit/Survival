@@ -60,8 +60,6 @@ namespace Character
 
 			if(_current > _max)
 				_current = _max;
-
-			Debug.Log(_current);
 		}
 
 		private async void TakeCooldown()

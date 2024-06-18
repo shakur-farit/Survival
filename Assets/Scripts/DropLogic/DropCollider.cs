@@ -1,6 +1,5 @@
 using Character;
 using Infrastructure.Services.Factories.Drop;
-using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
 
@@ -11,21 +10,16 @@ namespace DropLogic
 		[SerializeField] private Drop _drop;
 
 		private IDropFactory _dropFactory;
-		private IPersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Constructor(IDropFactory dropFactory, IPersistentProgressService persistentProgressService)
-		{
-			_persistentProgressService = persistentProgressService;
+		public void Constructor(IDropFactory dropFactory) => 
 			_dropFactory = dropFactory;
-		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (other.TryGetComponent(out CharacterDropPickuper pickuper))
 			{
 				PickupDrop(pickuper);
-				RemoveFromDropList();
 				Destroy();
 			}
 		}
@@ -33,10 +27,10 @@ namespace DropLogic
 		private void PickupDrop(CharacterDropPickuper pickuper) => 
 			pickuper.PickupDrop(_drop.Type, _drop.Value);
 
-		private void RemoveFromDropList() => 
-			_persistentProgressService.Progress.DropData.DropsList.Remove(gameObject);
-
-		private void Destroy() => 
+		private void Destroy()
+		{
+			_dropFactory.DropsList.Remove(gameObject);
 			_dropFactory.Destroy(gameObject);
+		}
 	}
 }

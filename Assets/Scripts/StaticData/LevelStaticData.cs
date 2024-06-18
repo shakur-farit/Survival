@@ -14,6 +14,9 @@ namespace StaticData
 
 		[Tooltip("Time to next wave. Value in milliseconds")]
 		[Range(0, 10000)] public int WaveCooldown;
+		
+		[Range(0, 30)]public int TimeToStart;
+		[Range(0, 30)]public int TimeToCompleteLevel;
 	}
 
 	[Serializable]

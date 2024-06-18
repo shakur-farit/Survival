@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Factories.Character;
 using Infrastructure.Services.Factories.Hud;
@@ -8,8 +7,6 @@ using Infrastructure.States.StatesMachine;
 using LevelLogic;
 using Spawn;
 using StaticData;
-using TMPro;
-using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -59,7 +56,7 @@ namespace Infrastructure.States
 		}
 
 		private async UniTask StartTimer() => 
-			await _timer.Start(10);
+			await _timer.Start(_persistentProgressService.Progress.LevelData.CurrentLevelStaticData.TimeToStart);
 
 		private void LevelInitialize()
 		{

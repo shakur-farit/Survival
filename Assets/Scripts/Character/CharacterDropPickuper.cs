@@ -29,11 +29,8 @@ namespace Character
 
 		private void AddScore(DropType dropType, int dropValue)
 		{
-			if (dropType == DropType.Coin)
-			{
+			if (dropType == DropType.Coin) 
 				_scoreCounter.AddScore(dropValue);
-				Debug.Log($"Score is {_scoreCounter.Score}");
-			}
 		}
 	}
 }
