@@ -35,8 +35,13 @@ namespace UI.Windows
 			_setThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
 		}
 
-		private void StartGame() => 
+		private void StartGame()
+		{
+			if(_persistentProgressService.Progress.CharacterData.CurrentCharacter == null)
+				return;
+
 			_gameStatesSwitcher.SwitchState<LoadLevelState>();
+		}
 
 		private void SetCharacter(CharacterType type)
 		{
