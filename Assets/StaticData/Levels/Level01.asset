@@ -16,17 +16,13 @@ MonoBehaviour:
   WavesOnLevel:
   - EnemiesInWave:
     - Type: 1
-      Number: 2
-    - Type: 2
       Number: 1
   - EnemiesInWave:
     - Type: 1
-      Number: 4
-    - Type: 2
-      Number: 1
+      Number: 2
   - EnemiesInWave:
     - Type: 1
-      Number: 4
-    - Type: 2
-      Number: 2
+      Number: 3
   WaveCooldown: 5000
+  TimeToStart: 0
+  TimeToCompleteLevel: 0

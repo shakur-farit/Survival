@@ -24,13 +24,15 @@ namespace Weapon
 		{
 			foreach (WeaponStaticData weapon in _staticDataService.WeaponsListStaticData.WeaponsList)
 			{
-				if (weapon.Type == _persistentProgressService.Progress.CharacterData.CurrentCharacter.DefaultWeapon)
+				if (weapon.Type == _persistentProgressService.Progress.CharacterData.CurrentWeapon.Type)
 				{
 					_persistentProgressService.Progress.CharacterData.CurrentWeapon = weapon;
 
 					_weaponShootPoint.position = weapon.ShootPoint;
 				}
 			}
+
+			Debug.Log(_persistentProgressService.Progress.CharacterData.CurrentWeapon.Type);
 		}
 	}
 }

@@ -47,7 +47,13 @@ namespace UI.Windows
 		{
 			foreach (CharacterStaticData character in _staticDataService.CharactersListStaticData.CharactersList)
 				if (type == character.CharacterType)
+				{
 					_persistentProgressService.Progress.CharacterData.CurrentCharacter = character;
+
+					foreach (WeaponStaticData weaponStaticData in _staticDataService.WeaponsListStaticData.WeaponsList)
+						if (character.DefaultWeapon == weaponStaticData.Type)
+							_persistentProgressService.Progress.CharacterData.CurrentWeapon = weaponStaticData;
+				}
 		}
 	}
 }

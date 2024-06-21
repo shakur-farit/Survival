@@ -5,5 +5,6 @@ namespace Weapon
 		None = 0,
 		Pistol,
 		Shotgun,
+		MachineGun,
 	}
 }
