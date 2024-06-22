@@ -4,12 +4,12 @@ using UI.Windows;
 
 namespace Infrastructure.States
 {
-	public class LevelComplete : IGameState
+	public class LevelCompleteState : IGameState
 	{
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IWindowsService _windowService;
 
-		public LevelComplete(IPersistentProgressService persistentProgressService, IWindowsService windowService)
+		public LevelCompleteState(IPersistentProgressService persistentProgressService, IWindowsService windowService)
 		{
 			_persistentProgressService = persistentProgressService;
 			_windowService = windowService;

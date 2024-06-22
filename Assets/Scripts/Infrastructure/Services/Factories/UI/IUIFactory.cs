@@ -8,9 +8,12 @@ namespace Infrastructure.Services.Factories.UI
 		UniTask CreateMainMenuWindow();
 		UniTask CreateLevelCompleteWindow();
 		UniTask CreateGameOverWindow();
+		UniTask CreateShopWindow();
+
 		void DestroyUIRoot();
 		void DestroyMainMenuWindow();
 		void DestroyLevelCompleteWindow();
 		void DestroyGameOVerWindow();
+		void DestroyShopWindow();
 	}
 }

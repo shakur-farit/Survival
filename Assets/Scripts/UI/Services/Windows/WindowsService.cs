@@ -24,6 +24,9 @@ namespace UI.Services.Windows
 				case WindowType.GameOver:
 					await _uiFactory.CreateGameOverWindow();
 					break;
+				case WindowType.Shop:
+					await _uiFactory.CreateShopWindow();
+					break;
 			}
 		}
 
@@ -39,6 +42,9 @@ namespace UI.Services.Windows
 					break;
 				case WindowType.GameOver:
 					_uiFactory.DestroyGameOVerWindow();
+					break;
+				case WindowType.Shop:
+					_uiFactory.DestroyShopWindow();
 					break;
 			}
 		}

@@ -45,7 +45,7 @@ namespace LevelLogic
 		{
 			_timer.Completed -= EnterToLevelCompleteState;
 
-			_gameStatesSwitcher.SwitchState<LevelComplete>();
+			_gameStatesSwitcher.SwitchState<LevelCompleteState>();
 		}
 	}
 }
