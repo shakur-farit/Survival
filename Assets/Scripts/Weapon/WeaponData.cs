@@ -31,8 +31,6 @@ namespace Weapon
 					_weaponShootPoint.position = weapon.ShootPoint;
 				}
 			}
-
-			Debug.Log(_persistentProgressService.Progress.CharacterData.CurrentWeapon.Type);
 		}
 	}
 }

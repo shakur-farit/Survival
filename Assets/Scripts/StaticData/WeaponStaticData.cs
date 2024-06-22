@@ -10,5 +10,6 @@ namespace StaticData
 		public AmmoStaticData Ammo;
 		public Sprite Sprite;
 		public Vector2 ShootPoint;
+		public int Price;
 	}
 }

@@ -6,8 +6,8 @@ namespace Infrastructure.Services.Factories.Drop
 {
 	public interface IDropFactory
 	{
+		List<GameObject> DropsList { get; }
 		UniTask Create(Vector2 position);
 		void Destroy(GameObject gameObject);
-		List<GameObject> DropsList { get; }
 	}
 }

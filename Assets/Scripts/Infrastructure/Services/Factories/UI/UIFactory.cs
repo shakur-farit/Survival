@@ -11,7 +11,6 @@ namespace Infrastructure.Services.Factories.UI
 		private GameObject _mainMenuWindow;
 		private GameObject _levelCompleteWindow;
 		private GameObject _gameOverWindow;
-		private GameObject _shopWindow;
 
 		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
@@ -42,12 +41,6 @@ namespace Infrastructure.Services.Factories.UI
 			_gameOverWindow = await CreateObject(reference.GameOverWindowAddress, _uiRoot.transform);
 		}
 
-		public async UniTask CreateShopWindow()
-		{
-			AssetsReference reference = await InitReference();
-			_shopWindow = await CreateObject(reference.ShopWindowAddress, _uiRoot.transform);
-		}
-
 		public void DestroyUIRoot() => 
 			Object.Destroy(_uiRoot);
 
@@ -59,8 +52,5 @@ namespace Infrastructure.Services.Factories.UI
 
 		public void DestroyGameOVerWindow() =>
 			Object.Destroy(_gameOverWindow);
-
-		public void DestroyShopWindow() => 
-			Object.Destroy(_shopWindow);
 	}
 }

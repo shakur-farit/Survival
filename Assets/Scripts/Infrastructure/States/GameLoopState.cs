@@ -40,7 +40,7 @@ namespace Infrastructure.States
 
 		private void DestroyDrops()
 		{
-			foreach (GameObject drop in _dropFactory.DropsList)
+			foreach (GameObject drop in _dropFactory.DropsList) 
 				_dropFactory.Destroy(drop);
 
 			_dropFactory.DropsList.Clear();

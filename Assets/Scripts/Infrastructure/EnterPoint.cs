@@ -60,7 +60,6 @@ namespace Infrastructure
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<MainMenuState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<LoadLevelState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<LevelCompleteState>());
-			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<ShopState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<GameLoopState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<GameOverState>());
 		}

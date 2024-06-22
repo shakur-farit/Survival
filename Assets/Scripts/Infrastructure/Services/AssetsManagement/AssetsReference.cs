@@ -14,6 +14,5 @@ namespace Infrastructure.Services.AssetsManagement
 		public string MainMenuWindowAddress;
 		public string LevelCompleteWindowAddress;
 		public string GameOverWindowAddress;
-		public string ShopWindowAddress;
 	}
 }

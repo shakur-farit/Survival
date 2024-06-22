@@ -1,7 +1,6 @@
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
-using UnityEngine;
 
 namespace LevelLogic
 {
@@ -24,10 +23,7 @@ namespace LevelLogic
 
 			foreach (LevelStaticData levelStaticData in _staticDataService.LevelsListStaticData.LevelsList)
 				if (level == levelStaticData.Level)
-				{
-					Debug.Log(levelStaticData);
 					_persistentProgressService.Progress.LevelData.CurrentLevelStaticData = levelStaticData;
-				}
 		}
 	}
 }
