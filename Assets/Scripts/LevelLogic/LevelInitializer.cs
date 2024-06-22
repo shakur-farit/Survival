@@ -24,7 +24,10 @@ namespace LevelLogic
 
 			foreach (LevelStaticData levelStaticData in _staticDataService.LevelsListStaticData.LevelsList)
 				if (level == levelStaticData.Level)
+				{
+					Debug.Log(levelStaticData);
 					_persistentProgressService.Progress.LevelData.CurrentLevelStaticData = levelStaticData;
+				}
 		}
 	}
 }

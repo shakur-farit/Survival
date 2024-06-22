@@ -8,6 +8,7 @@ namespace LevelLogic
 {
 	public class LevelCompleter : ILevelCompleter
 	{
+		private const int NextLevelStep = 1;
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly ICountDownTimer _timer;
@@ -45,7 +46,12 @@ namespace LevelLogic
 		{
 			_timer.Completed -= EnterToLevelCompleteState;
 
+			SetupNextLevel();
+
 			_gameStatesSwitcher.SwitchState<LevelCompleteState>();
 		}
+
+		private void SetupNextLevel() => 
+			_persistentProgressService.Progress.LevelData.PreviousLevel += NextLevelStep;
 	}
 }

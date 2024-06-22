@@ -15,11 +15,8 @@ namespace Infrastructure.States
 			_windowService = windowService;
 		}
 
-		public void Enter()
-		{
+		public void Enter() => 
 			OpenLevelCompleteWindow();
-			InitNextLevel();
-		}
 
 		public void Exit() =>
 			CloseLevelCompleteWindow();
@@ -30,7 +27,5 @@ namespace Infrastructure.States
 		private void CloseLevelCompleteWindow() =>
 			_windowService.Close(WindowType.LevelComplete);
 
-		private void InitNextLevel() =>
-			_persistentProgressService.Progress.LevelData.PreviousLevel += 1;
 	}
 }
