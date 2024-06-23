@@ -1,8 +1,6 @@
-using StaticData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Shop
 {
@@ -10,22 +8,16 @@ namespace Shop
 	{
 		[SerializeField] private Image _sprite;
 		[SerializeField] private TextMeshProUGUI _priceText;
+		[SerializeField] private ShopItemInitializer _initializer;
 
-		private IShopMediator _mediator;
+		private void Start() => 
+			SetupView();
 
-		[Inject]
-		public void Constructor(IShopMediator mediator) => 
-			_mediator = mediator;
-
-		private void Awake() => 
-			_mediator.RegisterView(this);
-
-		public void SetupView(WeaponStaticData weaponStaticData)
+		public void SetupView()
 		{
-			_sprite.sprite = weaponStaticData.Sprite;
+			_sprite.sprite = _initializer.WeaponStaticData.Sprite;
 
-			_priceText.text = weaponStaticData.Price.ToString();
-
+			_priceText.text = _initializer.WeaponStaticData.Price.ToString();
 		}
 	}
 }

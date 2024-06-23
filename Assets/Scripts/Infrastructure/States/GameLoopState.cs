@@ -1,6 +1,6 @@
-using Infrastructure.Services.Factories.Character;
-using Infrastructure.Services.Factories.Drop;
-using Infrastructure.Services.Factories.Hud;
+using Character.Factory;
+using DropLogic.Factory;
+using Hud.Factory;
 using UnityEngine;
 
 namespace Infrastructure.States

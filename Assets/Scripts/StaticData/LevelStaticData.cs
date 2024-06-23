@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using EnemyLogic;
+using Enemy;
 using LevelLogic;
 using UnityEngine;
 

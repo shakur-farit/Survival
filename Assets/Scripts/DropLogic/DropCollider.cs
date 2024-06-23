@@ -1,5 +1,5 @@
 using Character;
-using Infrastructure.Services.Factories.Drop;
+using DropLogic.Factory;
 using UnityEngine;
 using Zenject;
 

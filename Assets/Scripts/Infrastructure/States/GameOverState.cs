@@ -1,7 +1,7 @@
+using Character.Factory;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.Factories.Character;
-using Infrastructure.Services.Factories.Enemy;
-using Infrastructure.Services.Factories.Hud;
+using Enemy.Factory;
+using Hud.Factory;
 using Spawn;
 using UI.Services.Windows;
 using UI.Windows;

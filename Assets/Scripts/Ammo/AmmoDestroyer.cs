@@ -1,5 +1,5 @@
+using Ammo.Factory;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.Factories.Ammo;
 using UnityEngine;
 using Zenject;
 

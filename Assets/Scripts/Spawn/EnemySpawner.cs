@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using EnemyLogic;
-using Infrastructure.Services.Factories.Enemy;
+using Enemy;
+using Enemy.Factory;
 using Infrastructure.Services.Randomizer;
+using Shop;
 using StaticData;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace Spawn
 			_enemyFactory = enemyFactory;
 		}
 
-		public async UniTask SpawnEnemies(LevelStaticData levelStaticData)
+		public async UniTask Spawn(LevelStaticData levelStaticData)
 		{
 			_canSpawn = true;
 
@@ -60,7 +61,7 @@ namespace Spawn
 			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(-10f, 10f));
 			GameObject enemyObject = await _enemyFactory.Create(randomPosition);
 
-			if (enemyObject.TryGetComponent(out Enemy enemy))
+			if (enemyObject.TryGetComponent(out EnemyInitializer enemy))
 				enemy.Initialize(enemyType);
 
 			if (enemyObject.TryGetComponent(out EnemyAnimator animator))

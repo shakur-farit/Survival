@@ -1,20 +1,20 @@
 using Ammo;
+using Ammo.Factory;
 using Character;
+using Character.Factory;
 using DropLogic;
+using DropLogic.Factory;
 using DropLogic.Mediator;
-using EnemyLogic;
-using EnemyLogic.Mediator;
-using Infrastructure.Services.Factories.Ammo;
-using Infrastructure.Services.Factories.Character;
-using Infrastructure.Services.Factories.Drop;
-using Infrastructure.Services.Factories.Enemy;
-using Infrastructure.Services.Factories.Hud;
-using Infrastructure.Services.Factories.States;
-using Infrastructure.Services.Factories.UI;
+using Enemy;
+using Enemy.Factory;
+using Enemy.Mediator;
+using Hud.Factory;
 using Infrastructure.Services.ObjectCreator;
+using Infrastructure.States.Factory;
 using LevelLogic;
 using Shop;
 using Spawn;
+using UI.Factory;
 using UI.Services.Windows;
 using Zenject;
 
@@ -50,7 +50,6 @@ namespace Installers
 		{
 			Container.BindInterfacesAndSelfTo<EnemyMediator>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DropMediator>().AsSingle();
-			Container.BindInterfacesAndSelfTo<ShopMediator>().AsSingle();
 		}
 
 		private void RegisterDeath()

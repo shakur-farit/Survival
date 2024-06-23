@@ -1,7 +1,6 @@
-using Character;
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
-using EnemyLogic.States.StateMachine;
+using Enemy.States.StateMachine;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;

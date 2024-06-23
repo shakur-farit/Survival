@@ -5,7 +5,7 @@ namespace Spawn
 {
 	public interface IEnemySpawner
 	{
-		UniTask SpawnEnemies(LevelStaticData levelStaticData);
+		UniTask Spawn(LevelStaticData levelStaticData);
 		void StopSpawn();
 	}
 }

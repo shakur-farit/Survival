@@ -1,5 +1,5 @@
+using System;
 using Score;
-using StaticData;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,35 +9,35 @@ namespace Shop
 	public class ShopItemBuyer : MonoBehaviour
 	{
 		[SerializeField] private Button _buyButton;
+		[SerializeField] private ShopItemInitializer _initializer;
 
 		private int _price;
 
-		private IShopMediator _mediator;
 		private IScoreCounter _scoreCounter;
 
 		[Inject]
-		public void Constructor(IShopMediator mediator, IScoreCounter scoreCounter)
-		{
-			_mediator = mediator;
+		public void Constructor(IScoreCounter scoreCounter) => 
 			_scoreCounter = scoreCounter;
-		}
 
-		private void Awake()
-		{
-			_mediator.RegisterBuyer(this);
-
+		private void Awake() => 
 			_buyButton.onClick.AddListener(BuyItem);
-		}
 
-		public void SetupPrice(WeaponStaticData weaponStaticData) =>
-			_price = weaponStaticData.Price;
+		private void Start() => 
+			SetupPrice();
 
 		private void BuyItem()
 		{
 			if (_price > _scoreCounter.Score)
+			{
+				Debug.Log($"Not enough");
 				return;
+			}
 
 			_scoreCounter.RemoveScore(_price);
+			Debug.Log($"Buy");
 		}
+
+		private void SetupPrice() => 
+			_price = _initializer.WeaponStaticData.Price;
 	}
 }

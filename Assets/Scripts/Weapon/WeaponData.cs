@@ -1,3 +1,4 @@
+using System.Linq;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
@@ -20,16 +21,19 @@ namespace Weapon
 			_staticDataService = staticDataService;
 		}
 
-		private void Awake()
-		{
-			foreach (WeaponStaticData weapon in _staticDataService.WeaponsListStaticData.WeaponsList)
-			{
-				if (weapon.Type == _persistentProgressService.Progress.CharacterData.CurrentWeapon.Type)
-				{
-					_persistentProgressService.Progress.CharacterData.CurrentWeapon = weapon;
+		private void Awake() => 
+			SetupWeapon();
 
-					_weaponShootPoint.position = weapon.ShootPoint;
-				}
+		private void SetupWeapon()
+		{
+			WeaponType currentWeaponType = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Type;
+			WeaponStaticData currentWeapon = _staticDataService.WeaponsListStaticData.WeaponsList
+				.FirstOrDefault(weapon => weapon.Type == currentWeaponType);
+
+			if (currentWeapon != null)
+			{
+				_persistentProgressService.Progress.CharacterData.CurrentWeapon = currentWeapon;
+				_weaponShootPoint.position = currentWeapon.ShootPoint;
 			}
 		}
 	}

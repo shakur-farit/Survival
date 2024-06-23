@@ -1,4 +1,4 @@
-using Infrastructure.Services.Factories.Character;
+using Character.Factory;
 using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
 

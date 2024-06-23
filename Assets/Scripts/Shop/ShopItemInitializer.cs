@@ -15,26 +15,24 @@ namespace Shop
 		private IRandomService _randomizer;
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
-		private IShopMediator _mediator;
+
+		public WeaponStaticData WeaponStaticData { get; private set; }
 
 		[Inject]
 		public void Constructor(IRandomService randomizer, IStaticDataService staticDataService,
-			IPersistentProgressService persistentProgressService, IShopMediator mediator)
+			IPersistentProgressService persistentProgressService)
 		{
 			_randomizer = randomizer;
 			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;
-			_mediator = mediator;
 		}
 
 		private void Awake() => 
-			InitializeShopItem(GetRandomWeaponStaticData());
+			GetRandomWeaponStaticData();
 
-		private WeaponStaticData GetRandomWeaponStaticData()
+		private void GetRandomWeaponStaticData()
 		{
-			WeaponStaticData weaponStaticData = null;
-
-			while (weaponStaticData == null)
+			while (WeaponStaticData == null)
 			{
 				Array values = Enum.GetValues(typeof(WeaponType));
 				WeaponType randomType = (WeaponType)values.GetValue(_randomizer.Next(0, values.Length));
@@ -42,20 +40,12 @@ namespace Shop
 				if (_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Contains(randomType))
 					continue;
 
-				weaponStaticData = _staticDataService.WeaponsListStaticData.WeaponsList
+				WeaponStaticData = _staticDataService.WeaponsListStaticData.WeaponsList
 					.FirstOrDefault(weapon => weapon.Type == randomType);
 
-				if (weaponStaticData != null)
+				if (WeaponStaticData != null)
 					_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Add(randomType);
 			}
-
-			return weaponStaticData;
-		}
-
-		private void InitializeShopItem(WeaponStaticData weaponStaticData)
-		{
-			Debug.Log(weaponStaticData.Type);
-			_mediator.Initialize(weaponStaticData);
 		}
 	}
 }

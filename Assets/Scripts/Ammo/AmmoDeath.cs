@@ -1,4 +1,4 @@
-using Infrastructure.Services.Factories.Ammo;
+using Ammo.Factory;
 using UnityEngine;
 
 namespace Ammo

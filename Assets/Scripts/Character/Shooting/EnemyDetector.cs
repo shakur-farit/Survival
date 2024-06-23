@@ -1,4 +1,4 @@
-using EnemyLogic;
+using Enemy;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
@@ -17,7 +17,7 @@ namespace Character.Shooting
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.TryGetComponent(out Enemy enemy))
+			if (other.TryGetComponent(out EnemyInitializer enemy))
 			{
 				_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Add(enemy.gameObject);
 				_shooter.TryToShoot();
@@ -26,7 +26,7 @@ namespace Character.Shooting
 
 		private void OnTriggerExit2D(Collider2D other)
 		{
-			if (other.TryGetComponent(out Enemy enemy))
+			if (other.TryGetComponent(out EnemyInitializer enemy))
 				_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Remove(enemy.gameObject);
 		}
 	}

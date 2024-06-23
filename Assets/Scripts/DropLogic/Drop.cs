@@ -1,4 +1,3 @@
-using System;
 using DropLogic.Mediator;
 using StaticData;
 using UnityEngine;

@@ -339,6 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 801376480242536258}
   _priceText: {fileID: 1762631761935823326}
+  _initializer: {fileID: 8257083293970522531}
 --- !u!114 &8257083293970522531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buyButton: {fileID: 4247703067706930779}
+  _initializer: {fileID: 8257083293970522531}
 --- !u!1 &7866177975111141202
 GameObject:
   m_ObjectHideFlags: 0

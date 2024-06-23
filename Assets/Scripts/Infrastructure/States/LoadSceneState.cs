@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.Factories.UI;
 using Infrastructure.States.StatesMachine;
+using UI.Factory;
 
 namespace Infrastructure.States
 {

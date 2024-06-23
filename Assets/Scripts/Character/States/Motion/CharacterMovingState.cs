@@ -1,5 +1,3 @@
-using Infrastructure.Services.Factories.Character;
-
 namespace Character.States.Motion
 {
 	public class CharacterMovingState : CharacterState

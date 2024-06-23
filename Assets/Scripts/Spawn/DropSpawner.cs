@@ -1,6 +1,6 @@
 using DropLogic;
+using DropLogic.Factory;
 using DropLogic.Mediator;
-using Infrastructure.Services.Factories.Drop;
 using StaticData;
 using UnityEngine;
 

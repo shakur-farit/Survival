@@ -1,6 +1,6 @@
+using Character.Factory;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.Factories.Character;
-using Infrastructure.Services.Factories.Hud;
+using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
@@ -74,7 +74,7 @@ namespace Infrastructure.States
 		{
 			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
 
-			await _enemySpawner.SpawnEnemies(levelStaticData);
+			await _enemySpawner.Spawn(levelStaticData);
 		}
 
 		private void EnterToGameLoopState() => 
