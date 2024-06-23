@@ -13,6 +13,7 @@ using Infrastructure.Services.Factories.States;
 using Infrastructure.Services.Factories.UI;
 using Infrastructure.Services.ObjectCreator;
 using LevelLogic;
+using Shop;
 using Spawn;
 using UI.Services.Windows;
 using Zenject;
@@ -49,6 +50,7 @@ namespace Installers
 		{
 			Container.BindInterfacesAndSelfTo<EnemyMediator>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DropMediator>().AsSingle();
+			Container.BindInterfacesAndSelfTo<ShopMediator>().AsSingle();
 		}
 
 		private void RegisterDeath()

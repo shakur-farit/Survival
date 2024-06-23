@@ -165,8 +165,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 67367792095191892}
-  - {fileID: 4622898930020426207}
-  - {fileID: 2067864041792430314}
   m_Father: {fileID: 7328612932446488058}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -242,6 +240,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2135344456656959649}
+  - {fileID: 8494358100849931474}
+  - {fileID: 8213025202793980388}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -383,17 +383,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!1001 &118364801629878118
+--- !u!1001 &3493057000797239133
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2135344456656959649}
+    m_TransformParent: {fileID: 7328612932446488058}
     m_Modifications:
     - target: {fileID: 3914317351830727803, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_Name
-      value: ShopCell
+      value: ShopItem (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_Pivot.x
@@ -457,11 +457,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -548
+      value: 595
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -480,22 +480,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
---- !u!224 &4622898930020426207 stripped
+--- !u!224 &8213025202793980388 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
-  m_PrefabInstance: {fileID: 118364801629878118}
+  m_PrefabInstance: {fileID: 3493057000797239133}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6715383120327030355
+--- !u!1001 &3774394228289266283
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2135344456656959649}
+    m_TransformParent: {fileID: 7328612932446488058}
     m_Modifications:
     - target: {fileID: 3914317351830727803, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_Name
-      value: ShopCell (1)
+      value: ShopItem
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_Pivot.x
@@ -559,11 +559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 523
+      value: -573
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -582,8 +582,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
---- !u!224 &2067864041792430314 stripped
+--- !u!224 &8494358100849931474 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4720707259035309753, guid: ce8c0231b23907a48bb9859ed39d901b, type: 3}
-  m_PrefabInstance: {fileID: 6715383120327030355}
+  m_PrefabInstance: {fileID: 3774394228289266283}
   m_PrefabAsset: {fileID: 0}
