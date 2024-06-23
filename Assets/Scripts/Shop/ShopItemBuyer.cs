@@ -11,6 +11,7 @@ namespace Shop
 		[SerializeField] private Button _buyButton;
 
 		private int _price;
+
 		private IShopMediator _mediator;
 		private IScoreCounter _scoreCounter;
 
@@ -34,13 +35,8 @@ namespace Shop
 		private void BuyItem()
 		{
 			if (_price > _scoreCounter.Score)
-			{
-				Debug.Log($"Not Enough Score {_scoreCounter.Score} / {_price}");
 				return;
-			}
 
-			Debug.Log("BuyItem");
-			Debug.Log($"{_scoreCounter.Score} / {_price}");
 			_scoreCounter.RemoveScore(_price);
 		}
 	}

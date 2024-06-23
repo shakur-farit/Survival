@@ -12,8 +12,6 @@ namespace Shop
 {
 	public class ShopItemInitializer : MonoBehaviour
 	{
-		private WeaponStaticData _weaponStaticData;
-
 		private IRandomService _randomizer;
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
@@ -30,14 +28,13 @@ namespace Shop
 		}
 
 		private void Awake() => 
-			GetRandomWeaponStaticData();
+			InitializeShopItem(GetRandomWeaponStaticData());
 
-		private void Start() => 
-			InitializeShopItem();
-
-		private void GetRandomWeaponStaticData()
+		private WeaponStaticData GetRandomWeaponStaticData()
 		{
-			while (_weaponStaticData == null)
+			WeaponStaticData weaponStaticData = null;
+
+			while (weaponStaticData == null)
 			{
 				Array values = Enum.GetValues(typeof(WeaponType));
 				WeaponType randomType = (WeaponType)values.GetValue(_randomizer.Next(0, values.Length));
@@ -45,15 +42,20 @@ namespace Shop
 				if (_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Contains(randomType))
 					continue;
 
-				_weaponStaticData = _staticDataService.WeaponsListStaticData.WeaponsList
+				weaponStaticData = _staticDataService.WeaponsListStaticData.WeaponsList
 					.FirstOrDefault(weapon => weapon.Type == randomType);
 
-				if (_weaponStaticData != null)
+				if (weaponStaticData != null)
 					_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Add(randomType);
 			}
+
+			return weaponStaticData;
 		}
 
-		private void InitializeShopItem() => 
-			_mediator.Initialize(_weaponStaticData);
+		private void InitializeShopItem(WeaponStaticData weaponStaticData)
+		{
+			Debug.Log(weaponStaticData.Type);
+			_mediator.Initialize(weaponStaticData);
+		}
 	}
 }
