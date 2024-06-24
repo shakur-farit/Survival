@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MaxHealth Shop Item Static Data
   m_EditorClassIdentifier: 
   Type: 3
+  Sprite: {fileID: 0}
   Price: 0
-  HealthItemType: 1
+  HealthItemType: 0
   HealthValue: 0

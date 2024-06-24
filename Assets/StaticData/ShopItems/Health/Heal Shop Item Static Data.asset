@@ -15,5 +15,5 @@ MonoBehaviour:
   Type: 3
   Sprite: {fileID: 0}
   Price: 0
-  HealthItemType: 2
+  HealthItemType: 0
   HealthValue: 0

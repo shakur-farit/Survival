@@ -25,12 +25,12 @@ namespace Shop
 		{
 			_buyButton.onClick.AddListener(BuyItem);
 
-			InitDictionary();
+			//InitDictionary();
 		}
 
 		private void Start()
 		{
-			SetupPrice();
+			//SetupPrice();
 		}
 
 		private void BuyItem()
@@ -45,23 +45,23 @@ namespace Shop
 			Debug.Log($"Buy");
 		}
 
-		private void SetupPrice()
-		{
-			ShopItemType type = _initializer.RandomShopItemType;
+		//private void SetupPrice()
+		//{
+		//	ShopItemType type = _initializer.RandomShopItemType;
 
-			if (_actionByItemType.TryGetValue(type, out Action action))
-				action();
-		}
+		//	if (_actionByItemType.TryGetValue(type, out Action action))
+		//		action();
+		//}
 
-		private void InitDictionary()
-		{
-			_actionByItemType = new Dictionary<ShopItemType, Action>
-			{
-				{ ShopItemType.Weapon, SetupWeaponPrice }
-			};
-		}
+		//private void InitDictionary()
+		//{
+		//	_actionByItemType = new Dictionary<ShopItemType, Action>
+		//	{
+		//		{ ShopItemType.Weapon, SetupWeaponPrice }
+		//	};
+		//}
 
-		private void SetupWeaponPrice() => 
-			_price = _initializer.WeaponStaticData.Price;
+		//private void SetupWeaponPrice() => 
+		//	_price = _initializer.WeaponStaticData.Price;
 	}
 }

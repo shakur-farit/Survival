@@ -23,10 +23,10 @@ namespace Shop
 
 		private void SetupView()
 		{
-			ShopItemType type = _initializer.RandomShopItemType;
+			//ShopItemType type = _initializer.WeaponShopItemStaticData.Type;
 
-			if (_actionByItemType.TryGetValue(type, out Action action))
-				action();
+			//if (_actionByItemType.TryGetValue(type, out Action action))
+			//	action();
 		}
 
 		private void InitDictionary()
@@ -39,11 +39,11 @@ namespace Shop
 
 		private void SetupWeaponView()
 		{
-			WeaponStaticData weaponStaticData = _initializer.WeaponStaticData;
+			//WeaponStaticData weaponStaticData = _initializer.WeaponShopItemStaticData.Type;
 
-			_sprite.sprite = weaponStaticData.Sprite;
+			//_sprite.sprite = weaponStaticData.Sprite;
 
-			_priceText.text = weaponStaticData.Price.ToString();
+			//_priceText.text = weaponStaticData.Price.ToString();
 		}
 	}
 }
