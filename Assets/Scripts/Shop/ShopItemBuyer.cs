@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Score;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ namespace Shop
 		[SerializeField] private ShopItemInitializer _initializer;
 
 		private int _price;
+		private Dictionary<ShopItemType, Action> _actionByItemType;
 
 		private IScoreCounter _scoreCounter;
 
@@ -19,11 +21,17 @@ namespace Shop
 		public void Constructor(IScoreCounter scoreCounter) => 
 			_scoreCounter = scoreCounter;
 
-		private void Awake() => 
+		private void Awake()
+		{
 			_buyButton.onClick.AddListener(BuyItem);
 
-		private void Start() => 
+			InitDictionary();
+		}
+
+		private void Start()
+		{
 			SetupPrice();
+		}
 
 		private void BuyItem()
 		{
@@ -37,7 +45,23 @@ namespace Shop
 			Debug.Log($"Buy");
 		}
 
-		private void SetupPrice() => 
+		private void SetupPrice()
+		{
+			ShopItemType type = _initializer.RandomShopItemType;
+
+			if (_actionByItemType.TryGetValue(type, out Action action))
+				action();
+		}
+
+		private void InitDictionary()
+		{
+			_actionByItemType = new Dictionary<ShopItemType, Action>
+			{
+				{ ShopItemType.Weapon, SetupWeaponPrice }
+			};
+		}
+
+		private void SetupWeaponPrice() => 
 			_price = _initializer.WeaponStaticData.Price;
 	}
 }

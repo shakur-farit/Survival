@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Weapon;
 
@@ -11,5 +12,10 @@ namespace StaticData
 		public Sprite Sprite;
 		public Vector2 ShootPoint;
 		public int Price;
+	}
+
+	public struct WeaponShopItem
+	{
+		public WeaponStaticData StaticData;
 	}
 }
