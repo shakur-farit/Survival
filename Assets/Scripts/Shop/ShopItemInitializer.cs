@@ -1,8 +1,11 @@
 using System;
+using System.Linq;
+using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
+using Weapon;
 using Zenject;
 
 namespace Shop
@@ -11,30 +14,49 @@ namespace Shop
 	{
 		private IRandomService _randomizer;
 		private IStaticDataService _staticDataService;
+		private IPersistentProgressService _persistentProgressService;
 
-		public WeaponShopItemStaticData WeaponShopItemStaticData { private set; get; }
+		public WeaponStaticData WeaponStaticData { private set; get; }
 
 		[Inject]
-		public void Constructor(IRandomService randomizer, IStaticDataService staticDataService)
+		public void Constructor(IRandomService randomizer, IStaticDataService staticDataService,
+			IPersistentProgressService persistentProgressService)
 		{
 			_randomizer = randomizer;
 			_staticDataService = staticDataService;
+			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Awake()
+		private void Awake() =>
+			GetRandomWeaponStaticData();
+
+		private void GetRandomWeaponStaticData()
 		{
-			GetRandomShopItemStaticData();
+			while (WeaponStaticData == null)
+			{
+				WeaponType randomType = GetRandomWeaponType();
+
+				Debug.Log(randomType);
+
+				if (_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Contains(randomType))
+					continue;
+
+				WeaponStaticData = GetWeaponStaticDataByType(randomType);
+
+				_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Add(randomType);
+			}
 		}
 
-		private void GetRandomShopItemStaticData()
+		WeaponType GetRandomWeaponType()
 		{
-			Array values = Enum.GetValues(typeof(ShopItemType));
-			ShopItemType randomShopItemType = ShopItemType.Weapon;
-			//ShopItemType randomType = (ShopItemType)values.GetValue(_randomizer.Next(0, values.Length));
+			Array values = Enum.GetValues(typeof(WeaponType));
+			return (WeaponType)values.GetValue(_randomizer.Next(0, values.Length));
+		}
 
-			//foreach (WeaponShopItemStaticData shopItemStatic in _staticDataService.ShopItemsListStaticData.ShopItemsList)
-			//	if (randomShopItemType == shopItemStatic.Type)
-			//		WeaponShopItemStaticData = shopItemStatic;
+		WeaponStaticData GetWeaponStaticDataByType(WeaponType type)
+		{
+			return _staticDataService.WeaponsListStaticData.WeaponsList
+				.FirstOrDefault(weapon => weapon.Type == type);
 		}
 	}
 }

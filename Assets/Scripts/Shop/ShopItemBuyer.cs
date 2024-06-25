@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using Infrastructure.Services.PersistentProgress;
 using Score;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,25 +12,22 @@ namespace Shop
 		[SerializeField] private ShopItemInitializer _initializer;
 
 		private int _price;
-		private Dictionary<ShopItemType, Action> _actionByItemType;
 
 		private IScoreCounter _scoreCounter;
+		private IPersistentProgressService _persistentProgressService;
 
 		[Inject]
-		public void Constructor(IScoreCounter scoreCounter) => 
-			_scoreCounter = scoreCounter;
-
-		private void Awake()
+		public void Constructor(IScoreCounter scoreCounter, IPersistentProgressService persistentProgressService)
 		{
+			_scoreCounter = scoreCounter;
+			_persistentProgressService = persistentProgressService;
+		}
+
+		private void Awake() => 
 			_buyButton.onClick.AddListener(BuyItem);
 
-			//InitDictionary();
-		}
-
-		private void Start()
-		{
-			//SetupPrice();
-		}
+		private void Start() => 
+			SetupPrice();
 
 		private void BuyItem()
 		{
@@ -42,26 +38,22 @@ namespace Shop
 			}
 
 			_scoreCounter.RemoveScore(_price);
+
+			if (_persistentProgressService.Progress.CharacterData.CurrentWeapon.Type == _initializer.WeaponStaticData.Type)
+			{
+				
+				Debug.Log(_persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Damage);
+				_persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Damage += 2;
+				Debug.Log(_persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Damage);
+				return;
+			}
+
+			_persistentProgressService.Progress.CharacterData.CurrentWeapon = _initializer.WeaponStaticData;
+
 			Debug.Log($"Buy");
 		}
 
-		//private void SetupPrice()
-		//{
-		//	ShopItemType type = _initializer.RandomShopItemType;
-
-		//	if (_actionByItemType.TryGetValue(type, out Action action))
-		//		action();
-		//}
-
-		//private void InitDictionary()
-		//{
-		//	_actionByItemType = new Dictionary<ShopItemType, Action>
-		//	{
-		//		{ ShopItemType.Weapon, SetupWeaponPrice }
-		//	};
-		//}
-
-		//private void SetupWeaponPrice() => 
-		//	_price = _initializer.WeaponStaticData.Price;
+		private void SetupPrice() =>
+			_price = _initializer.WeaponStaticData.Price;
 	}
 }

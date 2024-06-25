@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using StaticData;
 using TMPro;
 using UnityEngine;
@@ -13,37 +11,16 @@ namespace Shop
 		[SerializeField] private TextMeshProUGUI _priceText;
 		[SerializeField] private ShopItemInitializer _initializer;
 
-		private Dictionary<ShopItemType, Action> _actionByItemType;
-
-		private void Awake() => 
-			InitDictionary();
-
 		private void Start() => 
 			SetupView();
 
 		private void SetupView()
 		{
-			//ShopItemType type = _initializer.WeaponShopItemStaticData.Type;
+			WeaponStaticData weaponStaticData = _initializer.WeaponStaticData;
 
-			//if (_actionByItemType.TryGetValue(type, out Action action))
-			//	action();
-		}
+			_sprite.sprite = weaponStaticData.Sprite;
 
-		private void InitDictionary()
-		{
-			_actionByItemType = new Dictionary<ShopItemType, Action>
-			{
-				{ ShopItemType.Weapon, SetupWeaponView }
-			};
-		}
-
-		private void SetupWeaponView()
-		{
-			//WeaponStaticData weaponStaticData = _initializer.WeaponShopItemStaticData.Type;
-
-			//_sprite.sprite = weaponStaticData.Sprite;
-
-			//_priceText.text = weaponStaticData.Price.ToString();
+			_priceText.text = weaponStaticData.Price.ToString();
 		}
 	}
 }
