@@ -29,6 +29,7 @@ namespace Enemy
 				return;
 
 			_current -= damage;
+			Debug.Log(_current);
 
 			if( _current <= 0 )
 				_enemyDeath.Die(gameObject, transform.position);

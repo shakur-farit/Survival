@@ -27,8 +27,10 @@ namespace Ammo
 		{
 			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo;
 
-			_damage = currentWeaponAmmo.Damage;
+			_damage = _persistentProgressService.Progress.CharacterData.CurrentAmmoDamage;
 			_isEnemy = currentWeaponAmmo.IsEnemy;
+
+			Debug.Log(_damage);
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)

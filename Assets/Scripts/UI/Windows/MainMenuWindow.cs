@@ -52,7 +52,11 @@ namespace UI.Windows
 
 					foreach (WeaponStaticData weaponStaticData in _staticDataService.WeaponsListStaticData.WeaponsList)
 						if (character.DefaultWeapon == weaponStaticData.Type)
+						{
 							_persistentProgressService.Progress.CharacterData.CurrentWeapon = weaponStaticData;
+							_persistentProgressService.Progress.CharacterData.CurrentAmmoDamage = weaponStaticData.Ammo.Damage;
+							_persistentProgressService.Progress.CharacterData.CurrentAmmoDelay = weaponStaticData.Ammo.Delay;
+						}
 				}
 		}
 	}

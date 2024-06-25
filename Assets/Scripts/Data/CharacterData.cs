@@ -8,5 +8,7 @@ namespace Data
 	{
 		public CharacterStaticData CurrentCharacter;
 		public WeaponStaticData CurrentWeapon;
+		public int CurrentAmmoDamage;
+		public int CurrentAmmoDelay;
 	}
 }

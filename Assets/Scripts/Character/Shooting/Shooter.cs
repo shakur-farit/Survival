@@ -22,7 +22,7 @@ namespace Character.Shooting
 		}
 
 		private void Awake() =>
-			_delay = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Dealy;
+			_delay = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Delay;
 
 		public async void TryToShoot()
 		{

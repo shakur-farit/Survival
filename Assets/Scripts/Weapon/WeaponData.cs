@@ -33,6 +33,10 @@ namespace Weapon
 			if (currentWeapon != null)
 			{
 				_persistentProgressService.Progress.CharacterData.CurrentWeapon = currentWeapon;
+
+				//_persistentProgressService.Progress.CharacterData.CurrentAmmoDamage = currentWeapon.Ammo.Damage;
+				//_persistentProgressService.Progress.CharacterData.CurrentAmmoDelay = currentWeapon.Ammo.Delay;
+
 				_weaponShootPoint.position = currentWeapon.ShootPoint;
 			}
 		}

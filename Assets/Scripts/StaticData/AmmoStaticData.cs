@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StaticData
 {
@@ -7,7 +8,7 @@ namespace StaticData
 	{
 		public int Damage;
 		public float MovementSpeed;
-		public int Dealy;
+		[FormerlySerializedAs("Dealy")] public int Delay;
 		public bool IsEnemy;
 	}
 }

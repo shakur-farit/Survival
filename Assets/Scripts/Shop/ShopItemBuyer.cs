@@ -1,3 +1,4 @@
+using Data;
 using Infrastructure.Services.PersistentProgress;
 using Score;
 using UnityEngine;
@@ -39,18 +40,22 @@ namespace Shop
 
 			_scoreCounter.RemoveScore(_price);
 
-			if (_persistentProgressService.Progress.CharacterData.CurrentWeapon.Type == _initializer.WeaponStaticData.Type)
+			CharacterData characterData = _persistentProgressService.Progress.CharacterData;
+
+			if (characterData.CurrentWeapon.Type == _initializer.WeaponStaticData.Type)
 			{
 				
-				Debug.Log(_persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Damage);
-				_persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Damage += 2;
-				Debug.Log(_persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.Damage);
+				Debug.Log(characterData.CurrentAmmoDamage);
+				characterData.CurrentAmmoDamage += characterData.CurrentWeapon.AmmoDamageUpgrade;
+				Debug.Log(characterData.CurrentAmmoDamage);
 				return;
 			}
 
-			_persistentProgressService.Progress.CharacterData.CurrentWeapon = _initializer.WeaponStaticData;
+			characterData.CurrentWeapon = _initializer.WeaponStaticData;
+			characterData.CurrentAmmoDamage = characterData.CurrentWeapon.Ammo.Damage;
 
 			Debug.Log($"Buy");
+			Debug.Log(characterData.CurrentAmmoDamage);
 		}
 
 		private void SetupPrice() =>
