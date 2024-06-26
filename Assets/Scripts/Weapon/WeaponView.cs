@@ -24,9 +24,9 @@ namespace Weapon
 		{
 			foreach (WeaponStaticData weapon in _staticDataService.WeaponsListStaticData.WeaponsList)
 			{
-				if (weapon.Type == _persistentProgressService.Progress.CharacterData.CurrentWeapon.Type)
+				if (weapon.Type == _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Type)
 				{
-					_persistentProgressService.Progress.CharacterData.CurrentWeapon = weapon;
+					_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon = weapon;
 
 					WeaponSpriteRenderer.sprite = weapon.Sprite;
 				}

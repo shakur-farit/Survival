@@ -26,16 +26,13 @@ namespace Weapon
 
 		private void SetupWeapon()
 		{
-			WeaponType currentWeaponType = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Type;
+			WeaponType currentWeaponType = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Type;
 			WeaponStaticData currentWeapon = _staticDataService.WeaponsListStaticData.WeaponsList
 				.FirstOrDefault(weapon => weapon.Type == currentWeaponType);
 
 			if (currentWeapon != null)
 			{
-				_persistentProgressService.Progress.CharacterData.CurrentWeapon = currentWeapon;
-
-				//_persistentProgressService.Progress.CharacterData.CurrentAmmoDamage = currentWeapon.Ammo.Damage;
-				//_persistentProgressService.Progress.CharacterData.CurrentAmmoDelay = currentWeapon.Ammo.Delay;
+				_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon = currentWeapon;
 
 				_weaponShootPoint.position = currentWeapon.ShootPoint;
 			}

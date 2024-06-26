@@ -1,4 +1,5 @@
 using Character;
+using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States;
@@ -45,6 +46,9 @@ namespace UI.Windows
 
 		private void SetCharacter(CharacterType type)
 		{
+			CharacterWeaponData characterWeaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+
+
 			foreach (CharacterStaticData character in _staticDataService.CharactersListStaticData.CharactersList)
 				if (type == character.CharacterType)
 				{
@@ -53,9 +57,9 @@ namespace UI.Windows
 					foreach (WeaponStaticData weaponStaticData in _staticDataService.WeaponsListStaticData.WeaponsList)
 						if (character.DefaultWeapon == weaponStaticData.Type)
 						{
-							_persistentProgressService.Progress.CharacterData.CurrentWeapon = weaponStaticData;
-							_persistentProgressService.Progress.CharacterData.CurrentAmmoDamage = weaponStaticData.Ammo.Damage;
-							_persistentProgressService.Progress.CharacterData.CurrentAmmoDelay = weaponStaticData.Ammo.Delay;
+							characterWeaponData.CurrentWeapon = weaponStaticData;
+							characterWeaponData.CurrentAmmoDamage = weaponStaticData.Damage;
+							characterWeaponData.CurrentAmmoDelay = weaponStaticData.Delay;
 						}
 				}
 		}

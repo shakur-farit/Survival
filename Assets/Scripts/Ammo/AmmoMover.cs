@@ -15,7 +15,7 @@ namespace Ammo
 			_persistentProgressService = persistentProgressService;
 
 		private void Awake() => 
-			_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo.MovementSpeed;
+			_movementSpeed = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.MovementSpeed;
 
 		private void Update() => 
 			transform.Translate(_movementSpeed, 0, 0);

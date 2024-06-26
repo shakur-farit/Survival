@@ -33,29 +33,38 @@ namespace Shop
 		private void BuyItem()
 		{
 			if (_price > _scoreCounter.Score)
-			{
-				Debug.Log($"Not enough");
 				return;
-			}
 
 			_scoreCounter.RemoveScore(_price);
 
 			CharacterData characterData = _persistentProgressService.Progress.CharacterData;
 
-			if (characterData.CurrentWeapon.Type == _initializer.WeaponStaticData.Type)
+			if (characterData.WeaponData.CurrentWeapon.Type == _initializer.WeaponStaticData.Type)
 			{
-				
-				Debug.Log(characterData.CurrentAmmoDamage);
-				characterData.CurrentAmmoDamage += characterData.CurrentWeapon.AmmoDamageUpgrade;
-				Debug.Log(characterData.CurrentAmmoDamage);
+				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.Damage)
+				{
+					characterData.WeaponData.CurrentAmmoDamage += characterData.WeaponData.CurrentWeapon.AmmoDamageUpgrade;
+					Debug.Log(characterData.WeaponData.CurrentAmmoDamage);
+					return;
+				}
+
+				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.Delay)
+				{
+					characterData.WeaponData.CurrentAmmoDelay -= characterData.WeaponData.CurrentWeapon.DelayUpgrade;
+					Debug.Log(characterData.WeaponData.CurrentAmmoDelay);
+					return;
+				}
+			}
+
+			if (_initializer.WeaponUpgradeType != WeaponUpgradeType.None)
+			{
+				Debug.Log($"Can't buy this upgrade. You need buy weapon first");
 				return;
 			}
 
-			characterData.CurrentWeapon = _initializer.WeaponStaticData;
-			characterData.CurrentAmmoDamage = characterData.CurrentWeapon.Ammo.Damage;
-
-			Debug.Log($"Buy");
-			Debug.Log(characterData.CurrentAmmoDamage);
+			characterData.WeaponData.CurrentWeapon = _initializer.WeaponStaticData;
+			characterData.WeaponData.CurrentAmmoDamage = characterData.WeaponData.CurrentWeapon.Damage;
+			characterData.WeaponData.CurrentAmmoDelay = characterData.WeaponData.CurrentWeapon.Delay;
 		}
 
 		private void SetupPrice() =>

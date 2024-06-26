@@ -7,8 +7,6 @@ namespace Data
 	public class CharacterData
 	{
 		public CharacterStaticData CurrentCharacter;
-		public WeaponStaticData CurrentWeapon;
-		public int CurrentAmmoDamage;
-		public int CurrentAmmoDelay;
+		public CharacterWeaponData WeaponData = new();
 	}
 }

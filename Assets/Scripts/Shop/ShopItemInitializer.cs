@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
@@ -16,7 +17,8 @@ namespace Shop
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
 
-		public WeaponStaticData WeaponStaticData { private set; get; }
+		public WeaponStaticData WeaponStaticData { get; private set; }
+		public WeaponUpgradeType WeaponUpgradeType { get; private set; }
 
 		[Inject]
 		public void Constructor(IRandomService randomizer, IStaticDataService staticDataService,
@@ -32,28 +34,42 @@ namespace Shop
 
 		private void GetRandomWeaponStaticData()
 		{
+			ShopData shopData = _persistentProgressService.Progress.ShopData;
+
 			while (WeaponStaticData == null)
 			{
-				WeaponType randomType = GetRandomWeaponType();
+				WeaponType randomWeaponType = GetRandomWeaponType();
+				WeaponUpgradeType randomUpgradeType = GetRandomUpgradeType();
 
-				Debug.Log(randomType);
-
-				if (_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Contains(randomType))
+				if(randomWeaponType == _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Type && 
+				   randomUpgradeType == WeaponUpgradeType.None)
 					continue;
 
-				WeaponStaticData = GetWeaponStaticDataByType(randomType);
+				if(shopData.UsedWeaponTypes.Contains(randomWeaponType) && 
+				    shopData.UsedWeaponUpgradeTypes.Contains(randomUpgradeType))
+					continue;
 
-				_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Add(randomType);
+				WeaponStaticData = GetWeaponStaticDataByType(randomWeaponType);
+				WeaponUpgradeType = randomUpgradeType;
+
+				shopData.UsedWeaponTypes.Add(randomWeaponType);
+				shopData.UsedWeaponUpgradeTypes.Add(randomUpgradeType);
 			}
 		}
 
-		WeaponType GetRandomWeaponType()
+		private WeaponType GetRandomWeaponType()
 		{
 			Array values = Enum.GetValues(typeof(WeaponType));
 			return (WeaponType)values.GetValue(_randomizer.Next(0, values.Length));
 		}
 
-		WeaponStaticData GetWeaponStaticDataByType(WeaponType type)
+		private WeaponUpgradeType GetRandomUpgradeType()
+		{
+			Array values = Enum.GetValues(typeof(WeaponUpgradeType));
+			return (WeaponUpgradeType)values.GetValue(_randomizer.Next(0, values.Length));
+		}
+
+		private WeaponStaticData GetWeaponStaticDataByType(WeaponType type)
 		{
 			return _staticDataService.WeaponsListStaticData.WeaponsList
 				.FirstOrDefault(weapon => weapon.Type == type);

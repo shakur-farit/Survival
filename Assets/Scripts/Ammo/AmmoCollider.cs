@@ -25,12 +25,10 @@ namespace Ammo
 
 		private void Awake()
 		{
-			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.CharacterData.CurrentWeapon.Ammo;
+			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo;
 
-			_damage = _persistentProgressService.Progress.CharacterData.CurrentAmmoDamage;
+			_damage = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoDamage;
 			_isEnemy = currentWeaponAmmo.IsEnemy;
-
-			Debug.Log(_damage);
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)

@@ -12,6 +12,8 @@ namespace StaticData
 		public AmmoStaticData Ammo;
 		public Sprite Sprite;
 		public Vector2 ShootPoint;
+		public int Damage;
+		public int Delay;
 
 		[Header("Shop Details")]
 		[Range(0, 1000)]public int Price;
