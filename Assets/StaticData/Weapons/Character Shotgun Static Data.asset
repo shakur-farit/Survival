@@ -15,7 +15,11 @@ MonoBehaviour:
   Type: 2
   Ammo: {fileID: 11400000, guid: f71808b6949507f4bb69977384377e49, type: 2}
   Sprite: {fileID: 21300000, guid: 957e7c5a4532c7b4fa28cd31bf5aee5d, type: 3}
-  ShootPoint: {x: 0.9, y: 0.3}
+  ShootPoint: {x: 1.31, y: 0.23}
+  Damage: 2
+  Delay: 500
+  Spread: 0.005
   Price: 2
   AmmoDamageUpgrade: 0
   DelayUpgrade: 0
+  AccuracyUpgrade: 0

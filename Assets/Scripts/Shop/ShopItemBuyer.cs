@@ -48,23 +48,20 @@ namespace Shop
 					return;
 				}
 
-				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.Delay)
+				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.ShotsInterval)
 				{
-					characterData.WeaponData.CurrentAmmoDelay -= characterData.WeaponData.CurrentWeapon.DelayUpgrade;
-					Debug.Log(characterData.WeaponData.CurrentAmmoDelay);
+					characterData.WeaponData.CurrentAmmoShootsInterval -= characterData.WeaponData.CurrentWeapon.ShotsIntervalUpgrade;
+					Debug.Log(characterData.WeaponData.CurrentAmmoShootsInterval);
 					return;
 				}
 			}
 
 			if (_initializer.WeaponUpgradeType != WeaponUpgradeType.None)
-			{
-				Debug.Log($"Can't buy this upgrade. You need buy weapon first");
 				return;
-			}
 
 			characterData.WeaponData.CurrentWeapon = _initializer.WeaponStaticData;
 			characterData.WeaponData.CurrentAmmoDamage = characterData.WeaponData.CurrentWeapon.Damage;
-			characterData.WeaponData.CurrentAmmoDelay = characterData.WeaponData.CurrentWeapon.Delay;
+			characterData.WeaponData.CurrentAmmoShootsInterval = characterData.WeaponData.CurrentWeapon.ShotsInterval;
 		}
 
 		private void SetupPrice() =>

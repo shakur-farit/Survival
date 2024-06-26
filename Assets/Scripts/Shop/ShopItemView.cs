@@ -51,7 +51,7 @@ namespace Shop
 			_upgradeSpritesDictionary = new Dictionary<WeaponUpgradeType, Image>()
 			{
 				{ WeaponUpgradeType.Damage, _weaponDamageUpgradeSprite },
-				{ WeaponUpgradeType.Delay, _weaponDelayUpgradeSprite }
+				{ WeaponUpgradeType.ShotsInterval, _weaponDelayUpgradeSprite }
 			};
 		}
 	}

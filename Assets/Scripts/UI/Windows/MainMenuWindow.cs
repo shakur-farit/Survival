@@ -59,7 +59,7 @@ namespace UI.Windows
 						{
 							characterWeaponData.CurrentWeapon = weaponStaticData;
 							characterWeaponData.CurrentAmmoDamage = weaponStaticData.Damage;
-							characterWeaponData.CurrentAmmoDelay = weaponStaticData.Delay;
+							characterWeaponData.CurrentAmmoShootsInterval = weaponStaticData.ShotsInterval;
 						}
 				}
 		}

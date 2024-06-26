@@ -1,6 +1,7 @@
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.PersistentProgress;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +9,7 @@ namespace Character.Shooting
 {
 	public class Shooter : MonoBehaviour
 	{
-		private int _delay;
+		private int _shootsInterval;
 
 		private IAmmoFactory _ammoFactory;
 		private IPersistentProgressService _persistentProgressService;
@@ -21,11 +22,8 @@ namespace Character.Shooting
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Awake()
-		{
-			_delay = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoDelay;
-			Debug.Log(_delay);
-		}
+		private void Awake() => 
+			_shootsInterval = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoShootsInterval;
 
 		public async void TryToShoot()
 		{
@@ -42,8 +40,18 @@ namespace Character.Shooting
 
 		private async UniTask Shoot()
 		{
-			CreateAmmo();
-			await UniTask.Delay(_delay);
+			WeaponStaticData weaponStaticData = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon;
+
+			int ammoAmount = weaponStaticData.AmmoAmount;
+			int spawnInterval = weaponStaticData.AmmoSpawnInterval;
+
+			for (int i = 0; i < ammoAmount; i++)
+			{
+				CreateAmmo();
+				await UniTask.Delay(spawnInterval);
+			}
+
+			await UniTask.Delay(_shootsInterval);
 		}
 
 		private async void CreateAmmo() => 

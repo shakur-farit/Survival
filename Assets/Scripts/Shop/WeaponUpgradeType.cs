@@ -4,6 +4,6 @@ namespace Shop
 	{
 		None = 0,
 		Damage,
-		Delay,
+		ShotsInterval,
 	}
 }

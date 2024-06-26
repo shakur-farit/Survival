@@ -1,5 +1,6 @@
 using System;
 using StaticData;
+using UnityEngine.Serialization;
 
 namespace Data
 {
@@ -8,6 +9,7 @@ namespace Data
 	{
 		public WeaponStaticData CurrentWeapon;
 		public int CurrentAmmoDamage;
-		public int CurrentAmmoDelay;
+		public int CurrentAmmoShootsInterval;
+		public float Spread;
 	}
 }
