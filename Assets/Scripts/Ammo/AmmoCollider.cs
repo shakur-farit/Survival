@@ -1,4 +1,5 @@
 using Character;
+using Data;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
 using StaticData;
@@ -9,6 +10,8 @@ namespace Ammo
 {
 	public class AmmoCollider : MonoBehaviour
 	{
+		[SerializeField] private CircleCollider2D _collider;
+
 		private int _damage;
 		private bool _isEnemy;
 
@@ -25,9 +28,14 @@ namespace Ammo
 
 		private void Awake()
 		{
-			AmmoStaticData currentWeaponAmmo = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo;
+			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
 
-			_damage = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoDamage;
+			_collider.radius = weaponData.CurrentWeapon.Ammo.ColliderRadius;
+
+			AmmoStaticData currentWeaponAmmo = weaponData.CurrentWeapon.Ammo;
+
+			_damage = weaponData.CurrentAmmoDamage;
+
 			_isEnemy = currentWeaponAmmo.IsEnemy;
 		}
 

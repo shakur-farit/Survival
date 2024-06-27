@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1829985761953955059}
@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 33a55999e44f4724191171c59fc64319, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 4df9cc7131cd27f4288bca5e76c82034, type: 3}
+  m_Color: {r: 0.7735849, g: 0.20834655, b: 0.1715023, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1564749175262534872}
   - component: {fileID: 6046585954958194308}
   - component: {fileID: 4433070495098612061}
+  - component: {fileID: 8452613444044616169}
   m_Layer: 0
   m_Name: Ammo
   m_TagString: Untagged
@@ -152,9 +153,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.001877144}
   serializedVersion: 2
-  m_Radius: 0.08
+  m_Radius: 0.235
 --- !u!114 &1564749175262534872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aebd158b8baa34391a600bc485f386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 8917602126094848502}
 --- !u!114 &4433070495098612061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,3 +193,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e90c9ff95839b4ebd3e9674b026f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8452613444044616169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6539570766999889727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4585c04b0531ed74ea2578faf1e273ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 6390910501267623108}

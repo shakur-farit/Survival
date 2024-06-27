@@ -6,5 +6,7 @@ namespace Weapon
 		Pistol,
 		Shotgun,
 		MachineGun,
+		Uzi,
+		Sniper
 	}
 }

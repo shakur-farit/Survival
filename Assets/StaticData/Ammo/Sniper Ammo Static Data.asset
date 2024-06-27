@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99bd19765a6cc6d47a6613929e23de06, type: 3}
-  m_Name: Shotgun Ammo Static Data
+  m_Name: Sniper Ammo Static Data
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 4df9cc7131cd27f4288bca5e76c82034, type: 3}
-  Material: {fileID: 2100000, guid: 5dceff0f64a88b949a3db290b8082010, type: 2}
-  MovementSpeed: 0.03
+  Sprite: {fileID: 21300000, guid: c3be09077243891458bdbf46a57d2e8a, type: 3}
+  Material: {fileID: 2100000, guid: 33a55999e44f4724191171c59fc64319, type: 2}
+  MovementSpeed: 0.15
   LiveTime: 1000
-  ColliderRadius: 0.2
+  ColliderRadius: 0.135
   IsEnemy: 0

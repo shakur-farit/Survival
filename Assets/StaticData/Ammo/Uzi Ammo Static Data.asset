@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99bd19765a6cc6d47a6613929e23de06, type: 3}
-  m_Name: Shotgun Ammo Static Data
+  m_Name: Uzi Ammo Static Data
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 4df9cc7131cd27f4288bca5e76c82034, type: 3}
-  Material: {fileID: 2100000, guid: 5dceff0f64a88b949a3db290b8082010, type: 2}
-  MovementSpeed: 0.03
+  Sprite: {fileID: 21300000, guid: e36e8bbd18074d341b170885ac002038, type: 3}
+  Material: {fileID: 2100000, guid: c64696a09f1cb1a4d9766d1fe9778ca5, type: 2}
+  MovementSpeed: 0.075
   LiveTime: 1000
-  ColliderRadius: 0.2
+  ColliderRadius: 0.235
   IsEnemy: 0

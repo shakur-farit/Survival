@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bd19765a6cc6d47a6613929e23de06, type: 3}
   m_Name: MachineGun Ammo Static Data
   m_EditorClassIdentifier: 
-  Damage: 2
+  Sprite: {fileID: 21300000, guid: e36e8bbd18074d341b170885ac002038, type: 3}
+  Material: {fileID: 2100000, guid: c64696a09f1cb1a4d9766d1fe9778ca5, type: 2}
   MovementSpeed: 0.1
-  Dealy: 200
+  LiveTime: 1500
+  ColliderRadius: 0.235
   IsEnemy: 0

@@ -17,9 +17,12 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: dff74299f2cf7674eb05930ed6b07f8e, type: 3}
   ShootPoint: {x: 0.9, y: 0.3}
   Damage: 2
-  Delay: 300
-  Spread: 0.01
+  ShotsInterval: 300
+  SpreadMin: 0
+  SpreadMax: 0.01
+  AmmoAmount: 1
+  AmmoSpawnInterval: 0
   Price: 3
   AmmoDamageUpgrade: 1
-  DelayUpgrade: 5
-  AccuracyUpgrade: 0
+  ShotsIntervalUpgrade: 10
+  AccuracyUpgrade: 0.001
