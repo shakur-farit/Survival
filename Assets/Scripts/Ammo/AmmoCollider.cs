@@ -1,8 +1,6 @@
 using Character;
-using Data;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
-using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -28,15 +26,11 @@ namespace Ammo
 
 		private void Awake()
 		{
-			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+			SetupColliderRadius();
 
-			_collider.radius = weaponData.CurrentWeapon.Ammo.ColliderRadius;
+			SetupDamage();
 
-			AmmoStaticData currentWeaponAmmo = weaponData.CurrentWeapon.Ammo;
-
-			_damage = weaponData.CurrentAmmoDamage;
-
-			_isEnemy = currentWeaponAmmo.IsEnemy;
+			IsEnemyAmmo();
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -45,6 +39,15 @@ namespace Ammo
 
 			TryDealDamageToEnemy(other);
 		}
+
+		private void SetupColliderRadius() => 
+			_collider.radius = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.ColliderRadius;
+
+		private void SetupDamage() => 
+			_damage = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoDamage;
+
+		private void IsEnemyAmmo() => 
+			_isEnemy = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.IsEnemy;
 
 		private void TryDealDamageToCharacter(Collider2D other)
 		{

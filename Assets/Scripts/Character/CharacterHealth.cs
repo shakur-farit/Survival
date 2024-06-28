@@ -24,14 +24,17 @@ namespace Character
 			_characterDeath = characterDeath;
 		}
 
-		private void Awake()
+		private void Awake() => 
+			SetupHealthDetails();
+
+		private void SetupHealthDetails()
 		{
 			CharacterStaticData currentCharacter = _persistentProgressService.Progress.CharacterData.CurrentCharacter;
-			
+
 			_current = currentCharacter.StartHealth;
 			_max = currentCharacter.MaxHealth;
 			_damageTakingCooldown = currentCharacter.DamageTakingCooldown;
-			
+
 			_canTakeDamage = true;
 		}
 

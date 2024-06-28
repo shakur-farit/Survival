@@ -19,7 +19,7 @@ namespace Character.Shooting
 		{
 			if (other.TryGetComponent(out EnemyInitializer enemy))
 			{
-				_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Add(enemy.gameObject);
+				AddToEnemiesInRangeList(enemy);
 				_shooter.TryToShoot();
 			}
 		}
@@ -27,7 +27,13 @@ namespace Character.Shooting
 		private void OnTriggerExit2D(Collider2D other)
 		{
 			if (other.TryGetComponent(out EnemyInitializer enemy))
-				_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Remove(enemy.gameObject);
+				RemoveFromEnemiesInRangeList(enemy);
 		}
+
+		private void AddToEnemiesInRangeList(EnemyInitializer enemy) => 
+			_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Add(enemy.gameObject);
+
+		private void RemoveFromEnemiesInRangeList(EnemyInitializer enemy) => 
+			_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Remove(enemy.gameObject);
 	}
 }

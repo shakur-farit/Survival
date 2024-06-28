@@ -12,7 +12,6 @@ using Hud.Factory;
 using Infrastructure.Services.ObjectCreator;
 using Infrastructure.States.Factory;
 using LevelLogic;
-using Shop;
 using Spawn;
 using UI.Factory;
 using UI.Services.Windows;

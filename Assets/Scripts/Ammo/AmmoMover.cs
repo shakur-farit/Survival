@@ -22,15 +22,18 @@ namespace Ammo
 
 		private void Awake()
 		{
-			_movementSpeed = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.MovementSpeed;
+			SetupMovementSpeed();
 
-			_spread = GetSpread();
+			SetupSpread();
 		}
+
+		private void SetupMovementSpeed() => 
+			_movementSpeed = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.MovementSpeed;
 
 		private void Update() => 
 			transform.Translate(_movementSpeed, _spread, 0);
 
-		private float GetSpread()
+		private void SetupSpread()
 		{
 			float spreadMin = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.SpreadMin;
 			float spreadMax = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.SpreadMax;
@@ -39,7 +42,7 @@ namespace Ammo
 
 			float randomSpread = _randomizer.Next(spreadMin, spreadMax);
 
-			return randomSpread * spreadToggle;
+			_spread = randomSpread * spreadToggle;
 		}
 	}
 }

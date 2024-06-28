@@ -1,5 +1,3 @@
-using Character.States.StatesMachine.Motion;
-
 namespace Character.States.StatesMachine.Aim
 {
 	public interface ICharacterAimStatesRegistrar

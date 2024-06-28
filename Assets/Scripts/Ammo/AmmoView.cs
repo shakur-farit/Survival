@@ -21,7 +21,7 @@ namespace Ammo
 		private void SetupView()
 		{
 			_spriteRenderer.sprite = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.Sprite;
-			_spriteRenderer.material= _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.Material;
+			_spriteRenderer.material = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.Material;
 		}
 	}
 }

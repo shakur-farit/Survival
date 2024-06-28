@@ -1,5 +1,4 @@
 using System;
-using Character.States.StatesMachine.Motion;
 using System.Collections.Generic;
 
 namespace Character.States.StatesMachine.Aim
