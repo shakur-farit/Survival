@@ -2,17 +2,18 @@ using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-namespace Infrastructure.FactoryBase
+namespace SpecialEffects.Factory
 {
-	public class SpecialEffectsFactory : Factory, ISpecialEffectsFactory
+	public class SpecialEffectsFactory : Infrastructure.FactoryBase.Factory, ISpecialEffectsFactory
 	{
 		protected SpecialEffectsFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) :
 			base(assetsProvider, objectsCreator)
 		{
 		}
 
-		public async UniTask Create(Vector2 position)
+		public async UniTask CreateShootEffect(Vector2 position)
 		{
 			AssetsReference reference = await InitReference();
 

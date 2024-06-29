@@ -5,7 +5,7 @@ using Zenject;
 
 namespace DropLogic
 {
-	public class Drop : MonoBehaviour
+	public class DropData : MonoBehaviour
 	{
 		private int _value;
 		private DropType _type;
@@ -28,6 +28,4 @@ namespace DropLogic
 		public void SetupType(DropStaticData dropStaticData) => 
 			_type = dropStaticData.Type;
 	}
-
-
 }

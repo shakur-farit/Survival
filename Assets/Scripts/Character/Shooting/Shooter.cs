@@ -2,6 +2,7 @@ using Ammo.Factory;
 using Cysharp.Threading.Tasks;
 using Infrastructure.FactoryBase;
 using Infrastructure.Services.PersistentProgress;
+using SpecialEffects.Factory;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -63,6 +64,6 @@ namespace Character.Shooting
 			await _ammoFactory.Create(transform);
 
 		private async void CreateShootSpecialEffect() => 
-			await _sfxFactory.Create(transform.position);
+			await _sfxFactory.CreateShootEffect(transform.position);
 	}
 }

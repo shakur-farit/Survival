@@ -9,8 +9,9 @@ namespace StaticData
 	{
 		[Header("Main Details")]
 		public WeaponType Type;
-		public AmmoStaticData Ammo;
 		public Sprite Sprite;
+		public AmmoStaticData Ammo;
+		public ShootSpecialEffectsStaticData ShootSpecialEffects;
 		public Vector2 ShootPoint;
 		[Range(0, 10)] public int Damage;
 		[Tooltip("Value is milliseconds")]

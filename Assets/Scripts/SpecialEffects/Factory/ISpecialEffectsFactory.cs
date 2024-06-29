@@ -1,11 +1,11 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Infrastructure.FactoryBase
+namespace SpecialEffects.Factory
 {
 	public interface ISpecialEffectsFactory
 	{
-		UniTask Create(Vector2 position);
+		UniTask CreateShootEffect(Vector2 position);
 		void Destroy(GameObject gameObject);
 	}
 }

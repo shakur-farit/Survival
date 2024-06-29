@@ -14,6 +14,7 @@ using Infrastructure.Services.ObjectCreator;
 using Infrastructure.States.Factory;
 using LevelLogic;
 using Spawn;
+using SpecialEffects.Factory;
 using UI.Factory;
 using UI.Services.Windows;
 using Zenject;

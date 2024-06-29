@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Level", menuName = "Scriptable Object/Static Data/Level")]
+	[CreateAssetMenu(fileName = "Level_ Static Data", menuName = "Scriptable Object/Static Data/Level")]
 	public class LevelStaticData : ScriptableObject
 	{
 		public Level Level;

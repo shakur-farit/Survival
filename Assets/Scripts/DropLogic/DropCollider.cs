@@ -1,13 +1,14 @@
 using Character;
 using DropLogic.Factory;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace DropLogic
 {
 	public class DropCollider : MonoBehaviour
 	{
-		[SerializeField] private Drop _drop;
+		[FormerlySerializedAs("_drop")] [SerializeField] private DropData dropData;
 
 		private IDropFactory _dropFactory;
 
@@ -25,7 +26,7 @@ namespace DropLogic
 		}
 
 		private void PickupDrop(CharacterDropPickuper pickuper) => 
-			pickuper.PickupDrop(_drop.Type, _drop.Value);
+			pickuper.PickupDrop(dropData.Type, dropData.Value);
 
 		private void Destroy()
 		{
