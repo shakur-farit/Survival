@@ -9,6 +9,7 @@ using Enemy;
 using Enemy.Factory;
 using Enemy.Mediator;
 using Hud.Factory;
+using Infrastructure.FactoryBase;
 using Infrastructure.Services.ObjectCreator;
 using Infrastructure.States.Factory;
 using LevelLogic;
@@ -43,6 +44,7 @@ namespace Installers
 			RegisterHUDFactory();
 			RegisterUIFactory();
 			RegisterAmmoFactory();
+			RegisterSpecialEffectsFactory();
 		}
 
 		private void RegisterMediators()
@@ -96,6 +98,9 @@ namespace Installers
 
 		private void RegisterAmmoFactory() => 
 			Container.Bind<IAmmoFactory>().To<AmmoFactory>().AsSingle();
+
+		private void RegisterSpecialEffectsFactory() => 
+			Container.Bind<ISpecialEffectsFactory>().To<SpecialEffectsFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();

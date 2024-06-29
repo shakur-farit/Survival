@@ -1,5 +1,6 @@
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
+using Infrastructure.FactoryBase;
 using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using UnityEngine;
@@ -14,11 +15,14 @@ namespace Character.Shooting
 		private IAmmoFactory _ammoFactory;
 		private IPersistentProgressService _persistentProgressService;
 		private bool _isShoot;
+		private ISpecialEffectsFactory _sfxFactory;
 
 		[Inject]
-		public void Constructor(IAmmoFactory ammoFactory, IPersistentProgressService persistentProgressService)
+		public void Constructor(IAmmoFactory ammoFactory, IPersistentProgressService persistentProgressService,
+			ISpecialEffectsFactory sfxFactory)
 		{
 			_ammoFactory = ammoFactory;
+			_sfxFactory = sfxFactory;
 			_persistentProgressService = persistentProgressService;
 		}
 
@@ -48,6 +52,7 @@ namespace Character.Shooting
 			for (int i = 0; i < ammoAmount; i++)
 			{
 				CreateAmmo();
+				CreateShootSpecialEffect();
 				await UniTask.Delay(spawnInterval);
 			}
 
@@ -56,5 +61,8 @@ namespace Character.Shooting
 
 		private async void CreateAmmo() => 
 			await _ammoFactory.Create(transform);
+
+		private async void CreateShootSpecialEffect() => 
+			await _sfxFactory.Create(transform.position);
 	}
 }
