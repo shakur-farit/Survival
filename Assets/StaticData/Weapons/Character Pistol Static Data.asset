@@ -19,7 +19,7 @@ MonoBehaviour:
   Damage: 1
   ShotsInterval: 500
   SpreadMin: 0
-  SpreadMax: 0.001
+  SpreadMax: 0.005
   AmmoAmount: 1
   AmmoSpawnInterval: 0
   Price: 1
