@@ -5,16 +5,59 @@ namespace StaticData
 	[CreateAssetMenu(fileName = "Shoot Special Effect Static Data", menuName = "Scriptable Object/Static Data/Shoot Special Effects")]
 	public class ShootSpecialEffectsStaticData : ScriptableObject
 	{
-		public Sprite Sprite;
-		public Gradient ColorGradient;
+		[Header("Main Module")]
 		[Range(0f, 5f)] public float StartLifetime;
 		[Range(0f, 5f)] public float StartSpeed;
 		[Range(0f, 5f)] public float StartSize;
-		[Range(-1f, 5f)] public float EffectGravity;
+		[Range(-5f, 5f)] public float EffectGravity;
 		[Range(0, 500)] public int MaxParticalNumber;
+
+		[Header("Emission Module")]
 		[Range(0, 500)] public int EmissionRate;
 		[Range(0, 500)] public int BurstParticalNumber;
+
+		[Header("Shape Module")] 
+		public ParticleSystemShapeType ShapeType;
+		[Range(0f, 20f)] public float Radius;
+		[Range(0f, 20f)] public float RadiusThickness;
+		public ParticleSystemShapeMultiModeValue ArcMode;
+		[Range(0f, 20f)] public float Spread;
+
+		[Header("Velocity Over Lifetime Module")]
 		public Vector3 VelocityOverLifetimeMin;
 		public Vector3 VelocityOverLifetimeMax;
+		public AnimationCurve SpeedModifier;
+
+		[Header("Limit Velocity Over Lifetime Module")]
+		public bool IsActiveLimitModule;
+		public AnimationCurve Speed;
+		[Range(0f, 20f)] public float Dampen;
+		[Range(0f, 20f)] public float Drag;
+
+		[Header("Color Over Lifetime Module")]
+		public Gradient ColorGradient;
+
+		[Header("Size Over Lifetime Module")]
+		public bool IsActiveSizetModule;
+		public AnimationCurve Size;
+
+		[Header("Rotation Over Lifetime Module")] 
+		[Range(0f, 500f)] public float AngularVelocity;
+
+		[Header("Noise Module")] 
+		[Range(0f, 20f)] public float Strength;
+		[Range(0f, 20f)] public float Frequency;
+		[Range(0f, 20f)] public float ScrollSpeed;
+		public bool Damping;
+		[Range(0f, 20f)] public float OctaveScale;
+		[Range(0f, 100f)] public float PositionAmount;
+		[Range(0f, 100f)] public float RotationAmount;
+		[Range(0f, 100f)] public float SizeAmount;
+
+		[Header("Texture Sheet Animation Module")]
+		public Sprite Sprite;
+
+		[Header("Render Module")]
+		public Material Material;
 	}
 }
