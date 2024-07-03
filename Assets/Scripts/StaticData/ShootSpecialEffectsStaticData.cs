@@ -7,13 +7,13 @@ namespace StaticData
 	{
 		public Sprite Sprite;
 		public Gradient ColorGradient;
-		[Range(0.1f, 5f)] public float StartLifetime;
-		[Range(0.1f, 5f)] public float StartSpeed;
-		[Range(0.1f, 5f)] public float StartSize;
+		[Range(0f, 5f)] public float StartLifetime;
+		[Range(0f, 5f)] public float StartSpeed;
+		[Range(0f, 5f)] public float StartSize;
 		[Range(-1f, 5f)] public float EffectGravity;
-		[Range(10, 500)] public int MaxParticalNumber;
-		[Range(10, 500)] public int EmissionRate;
-		[Range(10, 500)] public int BurstParticalNumber;
+		[Range(0, 500)] public int MaxParticalNumber;
+		[Range(0, 500)] public int EmissionRate;
+		[Range(0, 500)] public int BurstParticalNumber;
 		public Vector3 VelocityOverLifetimeMin;
 		public Vector3 VelocityOverLifetimeMax;
 	}
