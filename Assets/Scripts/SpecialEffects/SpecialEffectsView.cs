@@ -1,5 +1,5 @@
-using System;
 using Infrastructure.Services.PersistentProgress;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -17,11 +17,29 @@ namespace SpecialEffects
 
 		private void Awake()
 		{
-			_particleSystem.textureSheetAnimation.SetSprite(0, _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.ShootSpecialEffects.Sprite);
-			
+			ShootSpecialEffectsStaticData effectsStaticData = _persistentProgressService.Progress.CharacterData.WeaponData
+				.CurrentWeapon
+				.ShootSpecialEffects;
+
+			SetupSprite(effectsStaticData);
+			SetupColorGradient(effectsStaticData);
+		}
+
+		private void SetupSprite(ShootSpecialEffectsStaticData effectsStaticData) =>
+			_particleSystem.textureSheetAnimation.SetSprite(0, effectsStaticData.Sprite);
+
+		private void SetupColorGradient(ShootSpecialEffectsStaticData effectsStaticData)
+		{
 			ParticleSystem.ColorOverLifetimeModule colorOverLifetime = _particleSystem.colorOverLifetime;
-			colorOverLifetime.color = _persistentProgressService.Progress.CharacterData.WeaponData
-				.CurrentWeapon.ShootSpecialEffects.ColorGradient;
+
+			colorOverLifetime.color = effectsStaticData.ColorGradient;
+		}
+
+		private void SetupMaterial(ShootSpecialEffectsStaticData effectsStaticData)
+		{
+			ParticleSystemRenderer render = _particleSystem.GetComponent<ParticleSystemRenderer>();
+
+			render.material = effectsStaticData.Material;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StaticData
 {
@@ -21,16 +22,15 @@ namespace StaticData
 		[Range(0f, 20f)] public float Radius;
 		[Range(0f, 20f)] public float RadiusThickness;
 		public ParticleSystemShapeMultiModeValue ArcMode;
-		[Range(0f, 20f)] public float Spread;
+		[Range(0f, 20f)] public float ArcSpread;
 
 		[Header("Velocity Over Lifetime Module")]
 		public Vector3 VelocityOverLifetimeMin;
 		public Vector3 VelocityOverLifetimeMax;
-		public AnimationCurve SpeedModifier;
+		public ParticleSystem.MinMaxCurve SpeedModifier;
 
 		[Header("Limit Velocity Over Lifetime Module")]
 		public bool IsActiveLimitModule;
-		public AnimationCurve Speed;
 		[Range(0f, 20f)] public float Dampen;
 		[Range(0f, 20f)] public float Drag;
 
@@ -39,10 +39,7 @@ namespace StaticData
 
 		[Header("Size Over Lifetime Module")]
 		public bool IsActiveSizetModule;
-		public AnimationCurve Size;
-
-		[Header("Rotation Over Lifetime Module")] 
-		[Range(0f, 500f)] public float AngularVelocity;
+		public ParticleSystem.MinMaxCurve Size;
 
 		[Header("Noise Module")] 
 		[Range(0f, 20f)] public float Strength;

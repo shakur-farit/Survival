@@ -25,10 +25,12 @@ namespace SpecialEffects
 				.ShootSpecialEffects;
 
 			SetupMainModule(effectsStaticData);
-
 			SetupEmissionModule(effectsStaticData);
-
+			SetupShapeModule(effectsStaticData);
 			SetupVelocityOverLifetimeModule(effectsStaticData);
+			SetupLimitVelocityOverLifetimeModule(effectsStaticData);
+			SetupSizeOverLifetimeModule(effectsStaticData);
+			SetupNoiseModule(effectsStaticData);
 		}
 
 		private void SetupMainModule(ShootSpecialEffectsStaticData effectsStaticData)
@@ -53,6 +55,18 @@ namespace SpecialEffects
 			emissionModule.SetBurst(0, burst);
 		}
 
+		private void SetupShapeModule(ShootSpecialEffectsStaticData effectsStaticData)
+		{
+			ParticleSystem.ShapeModule shapeModule = _particleSystem.shape;
+
+			shapeModule.shapeType = effectsStaticData.ShapeType;
+			shapeModule.radius = effectsStaticData.Radius;
+			shapeModule.radiusThickness = effectsStaticData.RadiusThickness;
+			shapeModule.arcMode = effectsStaticData.ArcMode;
+			shapeModule.arcSpread = effectsStaticData.ArcSpread;
+
+		}
+
 		private void SetupVelocityOverLifetimeModule(ShootSpecialEffectsStaticData effectsStaticData)
 		{
 			ParticleSystem.VelocityOverLifetimeModule velocityModule = _particleSystem.velocityOverLifetime;
@@ -60,6 +74,39 @@ namespace SpecialEffects
 			SetupXCurve(effectsStaticData, velocityModule);
 			SetupYCurve(effectsStaticData, velocityModule);
 			SetupZCurve(effectsStaticData, velocityModule);
+
+			velocityModule.speedModifier = effectsStaticData.SpeedModifier;
+		}
+
+		private void SetupLimitVelocityOverLifetimeModule(ShootSpecialEffectsStaticData effectsStaticData)
+		{
+			ParticleSystem.LimitVelocityOverLifetimeModule limitModule = new ParticleSystem.LimitVelocityOverLifetimeModule();
+
+			limitModule.enabled = effectsStaticData.IsActiveLimitModule;
+			limitModule.dampen = effectsStaticData.Dampen;
+			limitModule.drag = effectsStaticData.Drag;
+		}
+
+		private void SetupSizeOverLifetimeModule(ShootSpecialEffectsStaticData effectsStaticData)
+		{
+			ParticleSystem.SizeOverLifetimeModule sizeModule = _particleSystem.sizeOverLifetime;
+
+			sizeModule.enabled = effectsStaticData.IsActiveSizetModule;
+			sizeModule.size = effectsStaticData.Size;
+		}
+
+		private void SetupNoiseModule(ShootSpecialEffectsStaticData effectsStaticData)
+		{
+			ParticleSystem.NoiseModule noiseModule = _particleSystem.noise;
+
+			noiseModule.strength = effectsStaticData.Strength;
+			noiseModule.frequency = effectsStaticData.Frequency;
+			noiseModule.scrollSpeed = effectsStaticData.ScrollSpeed;
+			noiseModule.damping = effectsStaticData.Damping;
+			noiseModule.octaveScale = effectsStaticData.OctaveScale;
+			noiseModule.positionAmount = effectsStaticData.PositionAmount;
+			noiseModule.rotationAmount = effectsStaticData.RotationAmount;
+			noiseModule.sizeAmount = effectsStaticData.SizeAmount;
 		}
 
 		private static void SetupZCurve(ShootSpecialEffectsStaticData effectsStaticData,

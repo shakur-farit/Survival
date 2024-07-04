@@ -12,7 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248510550e229044bbe04e94b0085b76, type: 3}
   m_Name: Flash Shoot Special Effect Static Data
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: bb7ccf2391a6a544ab96e81e36b6a0ed, type: 3}
+  StartLifetime: 0.5
+  StartSpeed: 0.5
+  StartSize: 0.25
+  EffectGravity: -0.01
+  MaxParticalNumber: 10
+  EmissionRate: 100
+  BurstParticalNumber: 20
+  ShapeType: 0
+  Radius: 0
+  RadiusThickness: 0
+  ArcMode: 0
+  Spread: 0
+  VelocityOverLifetimeMin: {x: -0.3, y: -0.1, z: 0}
+  VelocityOverLifetimeMax: {x: 0.3, y: 0.1, z: 0}
+  SpeedModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  IsActiveLimitModule: 0
+  Speed:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Dampen: 0
+  Drag: 0
   ColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -43,12 +89,21 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 6
     m_NumAlphaKeys: 3
-  StartLifetime: 0.5
-  StartSpeed: 0.5
-  StartSize: 0.25
-  EffectGravity: -0.01
-  MaxParticalNumber: 10
-  EmissionRate: 100
-  BurstParticalNumber: 20
-  VelocityOverLifetimeMin: {x: -0.3, y: -0.1, z: 0}
-  VelocityOverLifetimeMax: {x: 0.3, y: 0.1, z: 0}
+  IsActiveSizetModule: 0
+  Size:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AngularVelocity: 0
+  Strength: 0
+  Frequency: 0
+  ScrollSpeed: 0
+  Damping: 0
+  OctaveScale: 0
+  PositionAmount: 0
+  RotationAmount: 0
+  SizeAmount: 0
+  Sprite: {fileID: 21300000, guid: bb7ccf2391a6a544ab96e81e36b6a0ed, type: 3}
+  Material: {fileID: 0}
