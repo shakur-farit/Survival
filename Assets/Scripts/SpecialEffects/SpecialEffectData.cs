@@ -5,7 +5,7 @@ using Zenject;
 
 namespace SpecialEffects
 {
-	public class SpecialEffectsData : MonoBehaviour
+	public class SpecialEffectData : MonoBehaviour
 	{
 		[SerializeField] private ParticleSystem _particleSystem;
 

@@ -1,11 +1,15 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace StaticData
 {
 	[CreateAssetMenu(fileName = "Shoot Special Effect Static Data", menuName = "Scriptable Object/Static Data/Shoot Special Effects")]
 	public class ShootSpecialEffectsStaticData : ScriptableObject
 	{
+		[Header("MAIN SETTINGS")] 
+		[Range(0, 5000)]public int Lifetime;
+
+		[Header("PARTICLE SYSTEM SETTINGS")]
+		[Space(10)]
 		[Header("Main Module")]
 		[Range(0f, 100f)] public float StartLifetime;
 		[Range(0f, 100f)] public float StartSpeed;

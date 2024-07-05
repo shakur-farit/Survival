@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1971045507705109633}
   - component: {fileID: 4824700854594683646}
   - component: {fileID: 6716566410928673578}
+  - component: {fileID: 7461369859526356590}
   m_Layer: 0
   m_Name: ShootSpecialEffect
   m_TagString: Untagged
@@ -4922,6 +4923,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5216855d16ded774b9d378175e5366be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 3980311704007136871}
+--- !u!114 &7461369859526356590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889337726632153876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fe2c9c4b71481458da7c9bbb5af4fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 3980311704007136871}
