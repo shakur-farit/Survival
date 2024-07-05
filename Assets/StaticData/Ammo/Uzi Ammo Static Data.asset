@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Uzi Ammo Static Data
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: e36e8bbd18074d341b170885ac002038, type: 3}
-  Material: {fileID: 2100000, guid: c64696a09f1cb1a4d9766d1fe9778ca5, type: 2}
+  Material: {fileID: 2100000, guid: c92da765fb7cca448a71d99956fe00bd, type: 2}
   MovementSpeed: 0.075
   LiveTime: 1000
   ColliderRadius: 0.235

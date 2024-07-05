@@ -7,9 +7,9 @@ namespace StaticData
 	public class ShootSpecialEffectsStaticData : ScriptableObject
 	{
 		[Header("Main Module")]
-		[Range(0f, 5f)] public float StartLifetime;
-		[Range(0f, 5f)] public float StartSpeed;
-		[Range(0f, 5f)] public float StartSize;
+		[Range(0f, 100f)] public float StartLifetime;
+		[Range(0f, 100f)] public float StartSpeed;
+		[Range(0f, 100f)] public float StartSize;
 		[Range(-5f, 5f)] public float EffectGravity;
 		[Range(0, 500)] public int MaxParticalNumber;
 
@@ -19,7 +19,7 @@ namespace StaticData
 
 		[Header("Shape Module")] 
 		public ParticleSystemShapeType ShapeType;
-		[Range(0f, 20f)] public float Radius;
+		[Range(0f, 100f)] public float Radius;
 		[Range(0f, 20f)] public float RadiusThickness;
 		public ParticleSystemShapeMultiModeValue ArcMode;
 		[Range(0f, 20f)] public float ArcSpread;

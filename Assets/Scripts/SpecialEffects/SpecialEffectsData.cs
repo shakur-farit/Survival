@@ -80,7 +80,7 @@ namespace SpecialEffects
 
 		private void SetupLimitVelocityOverLifetimeModule(ShootSpecialEffectsStaticData effectsStaticData)
 		{
-			ParticleSystem.LimitVelocityOverLifetimeModule limitModule = new ParticleSystem.LimitVelocityOverLifetimeModule();
+			ParticleSystem.LimitVelocityOverLifetimeModule limitModule = _particleSystem.limitVelocityOverLifetime;
 
 			limitModule.enabled = effectsStaticData.IsActiveLimitModule;
 			limitModule.dampen = effectsStaticData.Dampen;
