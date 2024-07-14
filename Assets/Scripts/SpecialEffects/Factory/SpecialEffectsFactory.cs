@@ -13,11 +13,11 @@ namespace SpecialEffects.Factory
 		{
 		}
 
-		public async UniTask CreateShootEffect(Vector2 position)
+		public async UniTask<GameObject> CreateShootEffect(Vector2 position)
 		{
 			AssetsReference reference = await InitReference();
 
-			await CreateObject(reference.ShootSpecialEffetcAddress, position);
+			return await CreateObject(reference.ShootSpecialEffetcAddress, position);
 		}
 
 		public void Destroy(GameObject gameObject) => 

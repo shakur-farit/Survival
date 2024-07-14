@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Weapon;
 
 namespace StaticData
@@ -11,7 +12,7 @@ namespace StaticData
 		public WeaponType Type;
 		public Sprite Sprite;
 		public AmmoStaticData Ammo;
-		public ShootSpecialEffectsStaticData ShootSpecialEffects;
+		[FormerlySerializedAs("specialEffects")] [FormerlySerializedAs("ShootSpecialEffects")] public SpecialEffectStaticData specialEffect;
 		public Vector2 ShootPoint;
 		[Range(0, 10)] public int Damage;
 		[Tooltip("Value is milliseconds")]

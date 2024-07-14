@@ -1,7 +1,7 @@
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
-using Infrastructure.FactoryBase;
 using Infrastructure.Services.PersistentProgress;
+using SpecialEffects;
 using SpecialEffects.Factory;
 using StaticData;
 using UnityEngine;
@@ -53,7 +53,9 @@ namespace Character.Shooting
 			for (int i = 0; i < ammoAmount; i++)
 			{
 				CreateAmmo();
-				CreateShootSpecialEffect();
+				GameObject shootEffect = await CreateSpecialEffect();
+				InitializeSpecialEffect(shootEffect, weaponStaticData.specialEffect);
+
 				await UniTask.Delay(spawnInterval);
 			}
 
@@ -63,7 +65,16 @@ namespace Character.Shooting
 		private async void CreateAmmo() => 
 			await _ammoFactory.Create(transform);
 
-		private async void CreateShootSpecialEffect() => 
+		private async UniTask<GameObject> CreateSpecialEffect() => 
 			await _sfxFactory.CreateShootEffect(transform.position);
+
+		private void InitializeSpecialEffect(GameObject shootEffect, SpecialEffectStaticData staticData)
+		{
+			if (shootEffect.TryGetComponent(out SpecialEffectData data))
+				data.Initialize(staticData);
+
+			if(shootEffect.TryGetComponent(out SpecialEffectView view))
+				view.Initialize(staticData);
+		}
 	}
 }

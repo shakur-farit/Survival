@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Shoot Special Effect Static Data", menuName = "Scriptable Object/Static Data/Shoot Special Effects")]
-	public class ShootSpecialEffectsStaticData : ScriptableObject
+	[CreateAssetMenu(fileName = "Special Effect Static Data", menuName = "Scriptable Object/Static Data/Special Effect")]
+	public class SpecialEffectStaticData : ScriptableObject
 	{
 		[Header("MAIN SETTINGS")] 
 		[Range(0, 5000)]public int Lifetime;

@@ -1,6 +1,7 @@
 using Character;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
+using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -12,24 +13,24 @@ namespace Ammo
 
 		private int _damage;
 		private bool _isEnemy;
+		private SpecialEffectStaticData _effectStaticData;
 
 		private IPersistentProgressService _persistentProgressService;
-		private IAmmoDeath _ammoDeath;
+		private IAmmoDestroy _ammoDestroy;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IAmmoDeath ammoDeath)
+		public void Constructor(IPersistentProgressService persistentProgressService, IAmmoDestroy ammoDestroy)
 		{
 			_persistentProgressService = persistentProgressService;
-			_ammoDeath = ammoDeath;
+			_ammoDestroy = ammoDestroy;
 		}
 
 
 		private void Awake()
 		{
 			SetupColliderRadius();
-
 			SetupDamage();
-
+			SetupSpecialEffect();
 			IsEnemyAmmo();
 		}
 
@@ -45,6 +46,10 @@ namespace Ammo
 
 		private void SetupDamage() => 
 			_damage = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoDamage;
+
+		private void SetupSpecialEffect() =>
+			_effectStaticData = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo
+				.hitSpecialEffect;
 
 		private void IsEnemyAmmo() => 
 			_isEnemy = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.IsEnemy;
@@ -74,6 +79,6 @@ namespace Ammo
 		}
 
 		private void DestroyAmmo() => 
-			_ammoDeath.Die(gameObject);
+			_ammoDestroy.DestroyInHit(gameObject, transform.position, _effectStaticData);
 	}
 }

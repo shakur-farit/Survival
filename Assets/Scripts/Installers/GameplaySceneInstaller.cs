@@ -58,7 +58,7 @@ namespace Installers
 		{
 			Container.Bind<ICharacterDeath>().To<CharacterDeath>().AsSingle();
 			Container.Bind<IEnemyDeath>().To<EnemyDeath>().AsSingle();
-			Container.Bind<IAmmoDeath>().To<AmmoDeath>().AsSingle();
+			Container.Bind<IAmmoDestroy>().To<AmmoDestroy>().AsSingle();
 		}
 
 		private void RegisterLevelServices()

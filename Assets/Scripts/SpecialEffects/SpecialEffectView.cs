@@ -1,7 +1,5 @@
-using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using UnityEngine;
-using Zenject;
 
 namespace SpecialEffects
 {
@@ -9,37 +7,31 @@ namespace SpecialEffects
 	{
 		[SerializeField] private ParticleSystem _particleSystem;
 
-		private IPersistentProgressService _persistentProgressService;
+		public void Initialize(SpecialEffectStaticData effectStaticData) => 
+			SetupView(effectStaticData);
 
-		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
-
-		private void Awake()
+		private void SetupView(SpecialEffectStaticData effectStaticData)
 		{
-			ShootSpecialEffectsStaticData effectsStaticData = _persistentProgressService.Progress.CharacterData.WeaponData
-				.CurrentWeapon
-				.ShootSpecialEffects;
-
-			SetupSprite(effectsStaticData);
-			SetupColorGradient(effectsStaticData);
+			SetupSprite(effectStaticData);
+			SetupColorGradient(effectStaticData);
+			SetupMaterial(effectStaticData);
 		}
 
-		private void SetupSprite(ShootSpecialEffectsStaticData effectsStaticData) =>
-			_particleSystem.textureSheetAnimation.SetSprite(0, effectsStaticData.Sprite);
+		private void SetupSprite(SpecialEffectStaticData effectStaticData) =>
+			_particleSystem.textureSheetAnimation.SetSprite(0, effectStaticData.Sprite);
 
-		private void SetupColorGradient(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupColorGradient(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.ColorOverLifetimeModule colorOverLifetime = _particleSystem.colorOverLifetime;
 
-			colorOverLifetime.color = effectsStaticData.ColorGradient;
+			colorOverLifetime.color = effectStaticData.ColorGradient;
 		}
 
-		private void SetupMaterial(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupMaterial(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystemRenderer render = _particleSystem.GetComponent<ParticleSystemRenderer>();
 
-			render.material = effectsStaticData.Material;
+			render.material = effectStaticData.Material;
 		}
 	}
 }

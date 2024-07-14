@@ -1,7 +1,5 @@
-using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using UnityEngine;
-using Zenject;
 
 namespace SpecialEffects
 {
@@ -9,140 +7,132 @@ namespace SpecialEffects
 	{
 		[SerializeField] private ParticleSystem _particleSystem;
 
-		private IPersistentProgressService _persistentProgressService;
+		public void Initialize(SpecialEffectStaticData effectStaticData) => 
+			SetupModules(effectStaticData);
 
-		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
-
-		private void Awake() => 
-			SetupModules();
-
-		private void SetupModules()
+		private void SetupModules(SpecialEffectStaticData effectStaticData)
 		{
-			ShootSpecialEffectsStaticData effectsStaticData = _persistentProgressService.Progress.CharacterData.WeaponData
-				.CurrentWeapon
-				.ShootSpecialEffects;
-
-			SetupMainModule(effectsStaticData);
-			SetupEmissionModule(effectsStaticData);
-			SetupShapeModule(effectsStaticData);
-			SetupVelocityOverLifetimeModule(effectsStaticData);
-			SetupLimitVelocityOverLifetimeModule(effectsStaticData);
-			SetupSizeOverLifetimeModule(effectsStaticData);
-			SetupNoiseModule(effectsStaticData);
+			SetupMainModule(effectStaticData);
+			SetupEmissionModule(effectStaticData);
+			SetupShapeModule(effectStaticData);
+			SetupVelocityOverLifetimeModule(effectStaticData);
+			SetupLimitVelocityOverLifetimeModule(effectStaticData);
+			SetupSizeOverLifetimeModule(effectStaticData);
+			SetupNoiseModule(effectStaticData);
 		}
 
-		private void SetupMainModule(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupMainModule(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.MainModule mainModule = _particleSystem.main;
 
-			mainModule.startLifetime = effectsStaticData.StartLifetime;
-			mainModule.startSpeed = effectsStaticData.StartSpeed;
-			mainModule.startSize = effectsStaticData.StartSize;
-			mainModule.gravityModifier = effectsStaticData.EffectGravity;
-			mainModule.maxParticles = effectsStaticData.MaxParticalNumber;
+			mainModule.startLifetime = effectStaticData.StartLifetime;
+			mainModule.startSpeed = effectStaticData.StartSpeed;
+			mainModule.startSize = effectStaticData.StartSize;
+			mainModule.gravityModifier = effectStaticData.EffectGravity;
+			mainModule.maxParticles = effectStaticData.MaxParticalNumber;
 		}
 
-		private void SetupEmissionModule(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupEmissionModule(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.EmissionModule emissionModule = _particleSystem.emission;
 
-			emissionModule.rateOverTime = effectsStaticData.EmissionRate;
+			emissionModule.rateOverTime = effectStaticData.EmissionRate;
 
 			float burstTime = 0f;
-			ParticleSystem.Burst burst = new ParticleSystem.Burst(burstTime, effectsStaticData.BurstParticalNumber);
-			emissionModule.SetBurst(0, burst);
+			int index = 0;
+
+			ParticleSystem.Burst burst = new ParticleSystem.Burst(burstTime, effectStaticData.BurstParticalNumber);
+			emissionModule.SetBurst(index, burst);
 		}
 
-		private void SetupShapeModule(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupShapeModule(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.ShapeModule shapeModule = _particleSystem.shape;
 
-			shapeModule.shapeType = effectsStaticData.ShapeType;
-			shapeModule.radius = effectsStaticData.Radius;
-			shapeModule.radiusThickness = effectsStaticData.RadiusThickness;
-			shapeModule.arcMode = effectsStaticData.ArcMode;
-			shapeModule.arcSpread = effectsStaticData.ArcSpread;
+			shapeModule.shapeType = effectStaticData.ShapeType;
+			shapeModule.radius = effectStaticData.Radius;
+			shapeModule.radiusThickness = effectStaticData.RadiusThickness;
+			shapeModule.arcMode = effectStaticData.ArcMode;
+			shapeModule.arcSpread = effectStaticData.ArcSpread;
 
 		}
 
-		private void SetupVelocityOverLifetimeModule(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupVelocityOverLifetimeModule(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.VelocityOverLifetimeModule velocityModule = _particleSystem.velocityOverLifetime;
 
-			SetupXCurve(effectsStaticData, velocityModule);
-			SetupYCurve(effectsStaticData, velocityModule);
-			SetupZCurve(effectsStaticData, velocityModule);
+			SetupXCurve(effectStaticData, velocityModule);
+			SetupYCurve(effectStaticData, velocityModule);
+			SetupZCurve(effectStaticData, velocityModule);
 
-			velocityModule.speedModifier = effectsStaticData.SpeedModifier;
+			velocityModule.speedModifier = effectStaticData.SpeedModifier;
 		}
 
-		private void SetupLimitVelocityOverLifetimeModule(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupLimitVelocityOverLifetimeModule(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.LimitVelocityOverLifetimeModule limitModule = _particleSystem.limitVelocityOverLifetime;
 
-			limitModule.enabled = effectsStaticData.IsActiveLimitModule;
-			limitModule.dampen = effectsStaticData.Dampen;
-			limitModule.drag = effectsStaticData.Drag;
+			limitModule.enabled = effectStaticData.IsActiveLimitModule;
+			limitModule.dampen = effectStaticData.Dampen;
+			limitModule.drag = effectStaticData.Drag;
 		}
 
-		private void SetupSizeOverLifetimeModule(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupSizeOverLifetimeModule(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.SizeOverLifetimeModule sizeModule = _particleSystem.sizeOverLifetime;
 
-			sizeModule.enabled = effectsStaticData.IsActiveSizetModule;
-			sizeModule.size = effectsStaticData.Size;
+			sizeModule.enabled = effectStaticData.IsActiveSizetModule;
+			sizeModule.size = effectStaticData.Size;
 		}
 
-		private void SetupNoiseModule(ShootSpecialEffectsStaticData effectsStaticData)
+		private void SetupNoiseModule(SpecialEffectStaticData effectStaticData)
 		{
 			ParticleSystem.NoiseModule noiseModule = _particleSystem.noise;
 
-			noiseModule.strength = effectsStaticData.Strength;
-			noiseModule.frequency = effectsStaticData.Frequency;
-			noiseModule.scrollSpeed = effectsStaticData.ScrollSpeed;
-			noiseModule.damping = effectsStaticData.Damping;
-			noiseModule.octaveScale = effectsStaticData.OctaveScale;
-			noiseModule.positionAmount = effectsStaticData.PositionAmount;
-			noiseModule.rotationAmount = effectsStaticData.RotationAmount;
-			noiseModule.sizeAmount = effectsStaticData.SizeAmount;
+			noiseModule.strength = effectStaticData.Strength;
+			noiseModule.frequency = effectStaticData.Frequency;
+			noiseModule.scrollSpeed = effectStaticData.ScrollSpeed;
+			noiseModule.damping = effectStaticData.Damping;
+			noiseModule.octaveScale = effectStaticData.OctaveScale;
+			noiseModule.positionAmount = effectStaticData.PositionAmount;
+			noiseModule.rotationAmount = effectStaticData.RotationAmount;
+			noiseModule.sizeAmount = effectStaticData.SizeAmount;
 		}
 
-		private static void SetupZCurve(ShootSpecialEffectsStaticData effectsStaticData,
+		private static void SetupZCurve(SpecialEffectStaticData effectStaticData,
 			ParticleSystem.VelocityOverLifetimeModule velocityModule)
 		{
 			ParticleSystem.MinMaxCurve minMaxCurveZ = new ParticleSystem.MinMaxCurve
 			{
 				mode = ParticleSystemCurveMode.TwoConstants,
-				constantMin = effectsStaticData.VelocityOverLifetimeMin.z,
-				constantMax = effectsStaticData.VelocityOverLifetimeMax.z
+				constantMin = effectStaticData.VelocityOverLifetimeMin.z,
+				constantMax = effectStaticData.VelocityOverLifetimeMax.z
 			};
 
 			velocityModule.z = minMaxCurveZ;
 		}
 
-		private static void SetupYCurve(ShootSpecialEffectsStaticData effectsStaticData,
+		private static void SetupYCurve(SpecialEffectStaticData effectStaticData,
 			ParticleSystem.VelocityOverLifetimeModule velocityModule)
 		{
 			ParticleSystem.MinMaxCurve minMaxCurveY = new ParticleSystem.MinMaxCurve
 			{
 				mode = ParticleSystemCurveMode.TwoConstants,
-				constantMin = effectsStaticData.VelocityOverLifetimeMin.y,
-				constantMax = effectsStaticData.VelocityOverLifetimeMax.y
+				constantMin = effectStaticData.VelocityOverLifetimeMin.y,
+				constantMax = effectStaticData.VelocityOverLifetimeMax.y
 			};
 
 			velocityModule.y = minMaxCurveY;
 		}
 
-		private static void SetupXCurve(ShootSpecialEffectsStaticData effectsStaticData,
+		private static void SetupXCurve(SpecialEffectStaticData effectStaticData,
 			ParticleSystem.VelocityOverLifetimeModule velocityModule)
 		{
 			ParticleSystem.MinMaxCurve minMaxCurveX = new ParticleSystem.MinMaxCurve
 			{
 				mode = ParticleSystemCurveMode.TwoConstants,
-				constantMin = effectsStaticData.VelocityOverLifetimeMin.x,
-				constantMax = effectsStaticData.VelocityOverLifetimeMax.x
+				constantMin = effectStaticData.VelocityOverLifetimeMin.x,
+				constantMax = effectStaticData.VelocityOverLifetimeMax.x
 			};
 
 			velocityModule.x = minMaxCurveX;

@@ -5,7 +5,7 @@ namespace SpecialEffects.Factory
 {
 	public interface ISpecialEffectsFactory
 	{
-		UniTask CreateShootEffect(Vector2 position);
+		UniTask<GameObject> CreateShootEffect(Vector2 position);
 		void Destroy(GameObject gameObject);
 	}
 }
