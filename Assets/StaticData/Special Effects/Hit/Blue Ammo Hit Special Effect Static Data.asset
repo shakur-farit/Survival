@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 248510550e229044bbe04e94b0085b76, type: 3}
-  m_Name: Pistol Ammo Hit Special Effect Static Data
+  m_Name: Blue Ammo Hit Special Effect Static Data
   m_EditorClassIdentifier: 
   Lifetime: 1000
   StartLifetime: 0.5

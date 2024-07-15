@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Character Uzi Static Data
   m_EditorClassIdentifier: 
   Type: 4
-  Ammo: {fileID: 11400000, guid: fdd0525b6d396434f97c4aeb7f70a43b, type: 2}
   Sprite: {fileID: 21300000, guid: a735f74a317b5f944929af56be472cb7, type: 3}
+  Ammo: {fileID: 11400000, guid: fdd0525b6d396434f97c4aeb7f70a43b, type: 2}
+  specialEffect: {fileID: 11400000, guid: 3ce56e646f66dbb42a0218e3e0e8256d, type: 2}
   ShootPoint: {x: 1, y: 0.29}
   Damage: 1
   ShotsInterval: 350
