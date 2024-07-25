@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Greenish Smoke Shoot Special Effect Static Data
   m_EditorClassIdentifier: 
   Lifetime: 1500
-  StartLifetime: 1.1
-  StartSpeed: 0.4
+  StartLifetime: 2
+  StartSpeed: 0.1
   StartSize: 0.15
   EffectGravity: -0.07
   MaxParticalNumber: 100
-  EmissionRate: 15
+  EmissionRate: 40
   BurstParticalNumber: 15
   ShapeType: 4
   Radius: 0.05
@@ -49,9 +49,9 @@ MonoBehaviour:
   Drag: 0
   ColorGradient:
     serializedVersion: 2
-    key0: {r: 0.9137255, g: 0.8048765, b: 0.5921569, a: 1}
-    key1: {r: 0.8862745, g: 0.5869369, b: 0.21960783, a: 0.81960785}
-    key2: {r: 0.77254903, g: 0.52787834, b: 0.3882353, a: 0.15686275}
+    key0: {r: 0.4431636, g: 0.81960785, b: 0.09019606, a: 1}
+    key1: {r: 0.52393323, g: 0.7372549, b: 0.058823545, a: 0.81960785}
+    key2: {r: 0.70291954, g: 0.7921569, b: 0.5137255, a: 0.15686275}
     key3: {r: 0.5, g: 0.47933513, b: 0.4457547, a: 0}
     key4: {r: 0.4716981, g: 0.40272337, b: 0.40272337, a: 0}
     key5: {r: 0.3773585, g: 0.3542186, b: 0.3542186, a: 0}
