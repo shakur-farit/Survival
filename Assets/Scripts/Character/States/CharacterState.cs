@@ -1,9 +1,15 @@
+using UnityEngine;
+
 namespace Character.States
 {
 	public abstract class CharacterState : ICharacterAnimatorState
 	{
-		public void Enter(CharacterAnimator characterAnimator) => 
+		public void Enter(CharacterAnimator characterAnimator)
+		{
+			Debug.Log(GetType());
+
 			StartAnimation(characterAnimator);
+		}
 
 		public void Exit(CharacterAnimator characterAnimator) => 
 			StopAnimation(characterAnimator);

@@ -1,6 +1,5 @@
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;

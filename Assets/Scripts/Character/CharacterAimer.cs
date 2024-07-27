@@ -51,14 +51,14 @@ namespace Character
 		{
 			_aimStates = new Dictionary<string, AimStateInfo>
 			{
-				{ "Up", CreateAimStateInfo<CharacterAimUpState>("Up", 67f, 112f) },
-				{ "UpLeft", CreateAimStateInfo<CharacterAimUpLeftState>("UpLeft", 112f, 158f) },
+				{ "Up", CreateAimStateInfo<CharacterAimUpState>("Up", 67f, 90f) },
+				{ "UpLeft", CreateAimStateInfo<CharacterAimUpLeftState>("UpLeft", 115f, 140f) },
 				{ "UpRight", CreateAimStateInfo<CharacterAimUpRightState>("UpRight", 22f, 67f) },
 				{ "Left", CreateAimStateInfo<CharacterAimLeftState>("Left", 158f, 180f) },
-				{ "LeftNegative", CreateAimStateInfo<CharacterAimLeftState>("Left", -180f, -135f) },
-				{ "Down", CreateAimStateInfo<CharacterAimDownState>("Down", -135f, -45f) },
+				{ "LeftNegative", CreateAimStateInfo<CharacterAimLeftState>("Left", -180f, -136f) },
+				{ "Down", CreateAimStateInfo<CharacterAimDownState>("Down", -115f, -46f) },
 				{ "Right", CreateAimStateInfo<CharacterAimRightState>("Right", -45f, 0f) },
-				{ "RightPositive", CreateAimStateInfo<CharacterAimRightState>("Right", 0f, 22f) }
+				{ "RightPositive", CreateAimStateInfo<CharacterAimRightState>("Right", 0f, 21f) }
 			};
 		}
 
