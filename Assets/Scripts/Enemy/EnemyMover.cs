@@ -43,6 +43,13 @@ namespace Enemy
 			Vector2 targetPosition = _target.transform.position;
 			Vector2 enemyPosition = transform.position;
 
+
+			Vector3 difference = transform.position - _target.transform.position;
+			float distanceSquared = difference.sqrMagnitude;
+
+			if(distanceSquared < 1)
+				return;
+
 			Vector2 direction = targetPosition - enemyPosition;
 			direction.Normalize();
 

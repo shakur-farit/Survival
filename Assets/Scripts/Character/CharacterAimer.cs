@@ -17,6 +17,7 @@ namespace Character
 
 		private Dictionary<string, AimStateInfo> _aimStates;
 		private string _currentState;
+		private Transform _targetTransform;
 
 		[Inject]
 		public void Constructor(IAimInputService aimInput, ICharacterAimStatesSwitcher characterAimStatesSwitcher)
@@ -37,7 +38,14 @@ namespace Character
 		private void Start() => 
 			InitializeAimStates();
 
-		private void FixedUpdate() => Aim();
+		private void FixedUpdate() => 
+			Aim();
+
+		public void SetTarget(Transform target) =>
+			_targetTransform = target;
+
+		public void ClearTarget() =>
+			_targetTransform = null;
 
 		private void InitializeAimStates()
 		{
@@ -73,8 +81,17 @@ namespace Character
 
 		private void Aim()
 		{
-			Vector2 aimVector = _aimInputService.AimAxis;
-			float angleDegree = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
+			float angleDegree = 0f;
+
+			if (_targetTransform == null)
+			{
+				transform.rotation = Quaternion.AngleAxis(angleDegree, Vector3.forward);
+				return;
+			}
+
+			Vector2 direction = _targetTransform.position - transform.position;
+			angleDegree = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
 			transform.rotation = Quaternion.AngleAxis(angleDegree, Vector3.forward);
 
 			EnterInSuitableState(angleDegree);

@@ -1,6 +1,8 @@
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.StaticData;
 using SpecialEffects;
 using SpecialEffects.Factory;
 using StaticData;
@@ -11,70 +13,60 @@ namespace Character.Shooting
 {
 	public class Shooter : MonoBehaviour
 	{
-		private int _shootsInterval;
-
-		private IAmmoFactory _ammoFactory;
-		private IPersistentProgressService _persistentProgressService;
 		private bool _isShoot;
-		private ISpecialEffectsFactory _sfxFactory;
+		private int _shootCooldown;
+
+		private IFireInputService _fireInputSystem;
+		private IAmmoFactory _ammoFactory;
+		private IStaticDataService _staticDataService;
+		private IPersistentProgressService _persistentProgressService;
+
+		public bool CanShoot { get; set; }
 
 		[Inject]
-		public void Constructor(IAmmoFactory ammoFactory, IPersistentProgressService persistentProgressService,
-			ISpecialEffectsFactory sfxFactory)
+		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory, 
+			IPersistentProgressService persistentProgressService)
 		{
+			_fireInputSystem = fireInputSystem;
 			_ammoFactory = ammoFactory;
-			_sfxFactory = sfxFactory;
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Awake() => 
-			_shootsInterval = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoShootsInterval;
-
-		public async void TryToShoot()
+		private void Awake()
 		{
-			if(_isShoot)
+			_fireInputSystem.RegisterFireInputAction();
+			_shootCooldown = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.ShotsInterval;
+		}
+
+		private void Update()
+		{
+			if (_fireInputSystem.IsFireButtonPressed)
+				TryToShoot();
+		}
+
+		private async void TryToShoot()
+		{
+			if (CanShoot == false)
+				return;
+
+			if (_isShoot)
 				return;
 
 			_isShoot = true;
 
-			while (_persistentProgressService.Progress.EnemyData.EnemiesInRangeList.Count > 0) 
-				await Shoot();
+
+			await Shoot();
 
 			_isShoot = false;
 		}
 
 		private async UniTask Shoot()
 		{
-			WeaponStaticData weaponStaticData = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon;
-
-			int ammoAmount = weaponStaticData.AmmoAmount;
-			int spawnInterval = weaponStaticData.AmmoSpawnInterval;
-
-			for (int i = 0; i < ammoAmount; i++)
-			{
-				CreateAmmo();
-				GameObject shootEffect = await CreateSpecialEffect();
-				InitializeSpecialEffect(shootEffect, weaponStaticData.specialEffect);
-
-				await UniTask.Delay(spawnInterval);
-			}
-
-			await UniTask.Delay(_shootsInterval);
+			await CreateAmmo();
+			await UniTask.Delay(_shootCooldown);
 		}
 
-		private async void CreateAmmo() => 
+		private async UniTask CreateAmmo() =>
 			await _ammoFactory.Create(transform);
-
-		private async UniTask<GameObject> CreateSpecialEffect() => 
-			await _sfxFactory.CreateShootEffect(transform.position);
-
-		private void InitializeSpecialEffect(GameObject shootEffect, SpecialEffectStaticData staticData)
-		{
-			if (shootEffect.TryGetComponent(out SpecialEffectData data))
-				data.Initialize(staticData);
-
-			if(shootEffect.TryGetComponent(out SpecialEffectView view))
-				view.Initialize(staticData);
-		}
 	}
 }
