@@ -12,9 +12,11 @@ namespace StaticData
 		public WeaponType Type;
 		public Sprite Sprite;
 		public AmmoStaticData Ammo;
-		[FormerlySerializedAs("specialEffects")] [FormerlySerializedAs("ShootSpecialEffects")] public SpecialEffectStaticData specialEffect;
+		public SpecialEffectStaticData specialEffect;
 		public Vector2 ShootPoint;
 		[Range(0, 10)] public int Damage;
+		public bool IsInfinityAmmo;
+		[Range(0, 200)]public int MagazineSize;
 		[Tooltip("Value is milliseconds")]
 		[Range(0, 5000)] public int ShotsInterval;
 		[Range(0f, 0.05f)] public float SpreadMin;
@@ -31,7 +33,6 @@ namespace StaticData
 		[Tooltip("Value is milliseconds")]
 		[Range(0, 5000)]public int ShotsIntervalUpgrade;
 		[Range(0f, 0.01f)] public float AccuracyUpgrade;
-
 
 		private void OnValidate()
 		{

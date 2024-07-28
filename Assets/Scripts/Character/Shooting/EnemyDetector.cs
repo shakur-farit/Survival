@@ -65,12 +65,12 @@ namespace Character.Shooting
 			{
 				EnemyHealth closestEnemy = GetClosestEnemy();
 				_aimer.SetTarget(closestEnemy.transform);
-				_shooter.CanShoot = true;
+				_shooter.TargetDetected = true;
 			}
 			else
 			{
 				_aimer.ClearTarget();
-				_shooter.CanShoot = false;
+				_shooter.TargetDetected = false;
 			}
 		}
 

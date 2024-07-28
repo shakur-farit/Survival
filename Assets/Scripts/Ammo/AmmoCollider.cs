@@ -49,7 +49,7 @@ namespace Ammo
 
 		private void SetupSpecialEffect() =>
 			_effectStaticData = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo
-				.hitSpecialEffect;
+				.HitSpecialEffect;
 
 		private void IsEnemyAmmo() => 
 			_isEnemy = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.IsEnemy;
