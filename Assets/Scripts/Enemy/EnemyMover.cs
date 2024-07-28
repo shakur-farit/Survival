@@ -2,6 +2,7 @@ using Character.Factory;
 using Enemy.Mediator;
 using StaticData;
 using UnityEngine;
+using Utility;
 using Zenject;
 
 namespace Enemy
@@ -47,7 +48,7 @@ namespace Enemy
 			Vector3 difference = transform.position - _target.transform.position;
 			float distanceSquared = difference.sqrMagnitude;
 
-			if(distanceSquared < 1)
+			if(distanceSquared < Constants.MinDistanceToTarget)
 				return;
 
 			Vector2 direction = targetPosition - enemyPosition;

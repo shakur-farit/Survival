@@ -4,12 +4,8 @@ namespace Character.States
 {
 	public abstract class CharacterState : ICharacterAnimatorState
 	{
-		public void Enter(CharacterAnimator characterAnimator)
-		{
-			Debug.Log(GetType());
-
+		public void Enter(CharacterAnimator characterAnimator) => 
 			StartAnimation(characterAnimator);
-		}
 
 		public void Exit(CharacterAnimator characterAnimator) => 
 			StopAnimation(characterAnimator);

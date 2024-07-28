@@ -3,9 +3,6 @@ using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
-using SpecialEffects;
-using SpecialEffects.Factory;
-using StaticData;
 using UnityEngine;
 using Zenject;
 

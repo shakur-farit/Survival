@@ -4,12 +4,14 @@ using Infrastructure.Services.Input;
 using System.Collections.Generic;
 using Character.States;
 using UnityEngine;
+using Utility;
 using Zenject;
 
 namespace Character
 {
 	public class CharacterAimer : MonoBehaviour
 	{
+		[SerializeField] private Transform _characterTransform;
 		[SerializeField] private CharacterAnimator _characterAnimator;
 
 		private IAimInputService _aimInputService;
@@ -51,14 +53,14 @@ namespace Character
 		{
 			_aimStates = new Dictionary<string, AimStateInfo>
 			{
-				{ "Up", CreateAimStateInfo<CharacterAimUpState>("Up", 67f, 90f) },
-				{ "UpLeft", CreateAimStateInfo<CharacterAimUpLeftState>("UpLeft", 115f, 140f) },
-				{ "UpRight", CreateAimStateInfo<CharacterAimUpRightState>("UpRight", 22f, 67f) },
-				{ "Left", CreateAimStateInfo<CharacterAimLeftState>("Left", 158f, 180f) },
-				{ "LeftNegative", CreateAimStateInfo<CharacterAimLeftState>("Left", -180f, -136f) },
-				{ "Down", CreateAimStateInfo<CharacterAimDownState>("Down", -115f, -46f) },
-				{ "Right", CreateAimStateInfo<CharacterAimRightState>("Right", -45f, 0f) },
-				{ "RightPositive", CreateAimStateInfo<CharacterAimRightState>("Right", 0f, 21f) }
+				{ "Up", CreateAimStateInfo<CharacterAimUpState>("Up", Constants.UpAndUpRightBorder, Constants.UpAndUpLeftBorder) },
+				{ "UpLeft", CreateAimStateInfo<CharacterAimUpLeftState>("UpLeft", Constants.UpAndUpLeftBorder, Constants.LeftAndUpLeftBorder) },
+				{ "UpRight", CreateAimStateInfo<CharacterAimUpRightState>("UpRight", Constants.RightAndUpRightBorder, Constants.UpAndUpRightBorder) },
+				{ "Left", CreateAimStateInfo<CharacterAimLeftState>("Left", Constants.LeftAndUpLeftBorder, Constants.LeftPositiveBorder) },
+				{ "LeftNegative", CreateAimStateInfo<CharacterAimLeftState>("Left", Constants.LeftNegativeBorder, Constants.LeftAndDownBorder) },
+				{ "Down", CreateAimStateInfo<CharacterAimDownState>("Down", Constants.LeftAndDownBorder, Constants.RightAndDownBorder) },
+				{ "Right", CreateAimStateInfo<CharacterAimRightState>("Right", Constants.RightAndDownBorder, Constants.RightNegativeBorder) },
+				{ "RightPositive", CreateAimStateInfo<CharacterAimRightState>("Right", Constants.RightNegativeBorder, Constants.RightAndUpRightBorder) }
 			};
 		}
 
@@ -89,7 +91,7 @@ namespace Character
 				return;
 			}
 
-			Vector2 direction = _targetTransform.position - transform.position;
+			Vector2 direction = _targetTransform.position - _characterTransform.position;
 			angleDegree = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
 			transform.rotation = Quaternion.AngleAxis(angleDegree, Vector3.forward);
