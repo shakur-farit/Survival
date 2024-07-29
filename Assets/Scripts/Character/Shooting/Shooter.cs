@@ -15,6 +15,7 @@ namespace Character.Shooting
 	{
 		private bool _isShoot;
 		private bool _infinityAmmo;
+		private bool _isReloading;
 		private int _shootInterval;
 		private int _ammoCount;
 
@@ -52,14 +53,14 @@ namespace Character.Shooting
 
 		private async void TryToShoot()
 		{
-			if (TargetDetected == false)
-				return;
-
-			if (_isShoot)
+			if (TargetDetected == false || _isShoot || _isReloading)
 				return;
 
 			if (_ammoCount <= 0 && _infinityAmmo == false)
+			{
+				await Reload();
 				return;
+			}
 
 			_isShoot = true;
 
@@ -106,6 +107,23 @@ namespace Character.Shooting
 
 			if (shootEffect.TryGetComponent(out SpecialEffectView view))
 				view.Initialize(staticData);
+		}
+
+		private async UniTask Reload()
+		{
+			if (_isReloading)
+				return;
+
+			_isReloading = true;
+
+			Debug.Log("Relaod begine");
+
+			await UniTask.Delay(2000);
+
+			_ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.MagazineSize;
+			Debug.Log("Relaod finished: ammo -" + _ammoCount);
+
+			_isReloading = false;
 		}
 	}
 }

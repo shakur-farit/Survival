@@ -88,6 +88,7 @@ namespace Character
 			if (_targetTransform == null)
 			{
 				transform.rotation = Quaternion.AngleAxis(angleDegree, Vector3.forward);
+				EnterInSuitableState(angleDegree);
 				return;
 			}
 
