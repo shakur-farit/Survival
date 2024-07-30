@@ -2,6 +2,7 @@ using Ammo;
 using Ammo.Factory;
 using Character;
 using Character.Factory;
+using Character.Shooting;
 using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
@@ -9,7 +10,6 @@ using Enemy;
 using Enemy.Factory;
 using Enemy.Mediator;
 using Hud.Factory;
-using Infrastructure.FactoryBase;
 using Infrastructure.Services.ObjectCreator;
 using Infrastructure.States.Factory;
 using LevelLogic;
@@ -33,6 +33,7 @@ namespace Installers
 			RegisterEnemiesCounter();
 			RegisterSpawners();
 			RegisterLevelServices();
+			RegisterWeaponReloader();
 			RegisterDropStaticDataInitializer();
 		}
 
@@ -108,5 +109,8 @@ namespace Installers
 
 		private void RegisterWindowsService() => 
 			Container.Bind<IWindowsService>().To<WindowsService>().AsSingle();
+
+		private void RegisterWeaponReloader() => 
+			Container.Bind<IWeaponReloader>().To<WeaponReloader>().AsSingle();
 	}
 }

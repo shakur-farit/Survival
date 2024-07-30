@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Weapon;
 
 namespace StaticData
@@ -15,10 +13,12 @@ namespace StaticData
 		public SpecialEffectStaticData specialEffect;
 		public Vector2 ShootPoint;
 		[Range(0, 10)] public int Damage;
+		[Tooltip("Value is milliseconds")]
+		[Range(0, 5000)] public int ShotsInterval;
 		public bool IsInfinityAmmo;
 		[Range(0, 200)]public int MagazineSize;
 		[Tooltip("Value is milliseconds")]
-		[Range(0, 5000)] public int ShotsInterval;
+		[Range(0, 5000)]public int ReloadTime;
 		[Range(0f, 0.05f)] public float SpreadMin;
 		[Range(0f, 0.05f)] public float SpreadMax;
 

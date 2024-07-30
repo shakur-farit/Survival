@@ -18,9 +18,10 @@ MonoBehaviour:
   specialEffect: {fileID: 11400000, guid: 4fbbd9522dcdb364ca1f160fd1523a76, type: 2}
   ShootPoint: {x: 0.9, y: 0.3}
   Damage: 1
-  IsInfinityAmmo: 0
-  MagazineSize: 3
   ShotsInterval: 500
+  IsInfinityAmmo: 1
+  MagazineSize: 0
+  ReloadTime: 0
   SpreadMin: 0
   SpreadMax: 0.005
   AmmoAmount: 1

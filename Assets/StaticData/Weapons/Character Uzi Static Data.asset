@@ -19,6 +19,9 @@ MonoBehaviour:
   ShootPoint: {x: 1, y: 0.29}
   Damage: 1
   ShotsInterval: 350
+  IsInfinityAmmo: 0
+  MagazineSize: 20
+  ReloadTime: 1500
   SpreadMin: 0.003
   SpreadMax: 0.007
   AmmoAmount: 1

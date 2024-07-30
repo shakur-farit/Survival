@@ -2,15 +2,19 @@ namespace Utility
 {
 	public class Constants
 	{
-		// Epsilon
+		// General
 		public const float Epsilon = 0.001f;
+		public const int ValueOfInfinity = -1;
 
 		// Drop animation values
 		public const int JumpPower = 2;
 		public const int JumpNumber = 1;
 		public const float JumDuration = 0.5f;
 		public const int RotateDuration = 2;
-		public const int ValueOfInfinity = -1;
+
+		// Weapon reloading text animation values
+		public const float BlinkDuration = 0.5f;
+		public const float EndValue = 0;
 
 		// Character aiming angle values
 		public const float UpAndUpRightBorder = 67f;

@@ -1,8 +1,8 @@
+using System;
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.StaticData;
 using SpecialEffects;
 using SpecialEffects.Factory;
 using StaticData;
@@ -21,21 +21,29 @@ namespace Character.Shooting
 
 		private IFireInputService _fireInputSystem;
 		private IAmmoFactory _ammoFactory;
-		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
 		private ISpecialEffectsFactory _sfxFactory;
+		private IWeaponReloader _weaponReloader;
 
 		public bool TargetDetected { get; set; }
 
 		[Inject]
 		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory,
-			IPersistentProgressService persistentProgressService, ISpecialEffectsFactory sfxFactory)
+			IPersistentProgressService persistentProgressService, ISpecialEffectsFactory sfxFactory,
+			IWeaponReloader weaponReloader)
 		{
 			_fireInputSystem = fireInputSystem;
 			_ammoFactory = ammoFactory;
 			_persistentProgressService = persistentProgressService;
 			_sfxFactory = sfxFactory;
+			_weaponReloader = weaponReloader;
 		}
+
+		private void OnEnable() => 
+			_weaponReloader.WeaponReloaded += UpdateAmmoCount;
+
+		private void OnDisable() => 
+			_weaponReloader.WeaponReloaded -= UpdateAmmoCount;
 
 		private void Awake()
 		{
@@ -58,7 +66,8 @@ namespace Character.Shooting
 
 			if (_ammoCount <= 0 && _infinityAmmo == false)
 			{
-				await Reload();
+				await ReloadWeapon();
+
 				return;
 			}
 
@@ -91,7 +100,6 @@ namespace Character.Shooting
 				return;
 
 			_ammoCount--;
-			Debug.Log(_ammoCount);
 		}
 
 		private async UniTask CreateAmmo() =>
@@ -99,7 +107,7 @@ namespace Character.Shooting
 
 		private async UniTask<GameObject> CreateSpecialEffect() =>
 			await _sfxFactory.CreateShootEffect(transform.position);
-		
+
 		private void InitializeSpecialEffect(GameObject shootEffect, SpecialEffectStaticData staticData)
 		{
 			if (shootEffect.TryGetComponent(out SpecialEffectData data))
@@ -109,21 +117,16 @@ namespace Character.Shooting
 				view.Initialize(staticData);
 		}
 
-		private async UniTask Reload()
+		private async UniTask ReloadWeapon()
 		{
-			if (_isReloading)
-				return;
-
 			_isReloading = true;
 
-			Debug.Log("Relaod begine");
-
-			await UniTask.Delay(2000);
-
-			_ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.MagazineSize;
-			Debug.Log("Relaod finished: ammo -" + _ammoCount);
+			await _weaponReloader.Reload();
 
 			_isReloading = false;
 		}
+
+		private void UpdateAmmoCount() => 
+			_ammoCount = _weaponReloader.AmmoCount;
 	}
 }
