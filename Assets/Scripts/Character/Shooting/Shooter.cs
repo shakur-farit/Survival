@@ -97,14 +97,14 @@ namespace Character.Shooting
 				await UniTask.Delay(spawnInterval);
 			}
 
+			_bulletIconFactory.Destroy();
+
 			await UniTask.Delay(_shootInterval);
 
-			if(_infinityAmmo)
+			if (_infinityAmmo)
 				return;
 
 			_ammoCount--;
-
-			_bulletIconFactory.Destroy();
 		}
 
 		private async UniTask CreateAmmo() =>

@@ -24,15 +24,12 @@ namespace Hud.Factory
 			GameObject bulletIcon = await CreateObject(reference.BulletIconAddress, parentTransform);
 			bulletIcon.transform.localPosition = position;
 			_bulletIcons.Push(bulletIcon);
-
-			Debug.Log(BulletIcons.Count);
 		}
 
 		public void Destroy()
 		{
 			GameObject bulletIcon = _bulletIcons.Pop();
 			Object.Destroy(bulletIcon);
-			Debug.Log(BulletIcons.Count);
 		}
 	}
 }
