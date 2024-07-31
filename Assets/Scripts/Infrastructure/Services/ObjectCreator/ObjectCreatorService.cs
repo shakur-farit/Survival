@@ -7,7 +7,7 @@ namespace Infrastructure.Services.ObjectCreator
 	{
 		private readonly IInstantiator _instantiator;
 
-		public ObjectCreatorService(IInstantiator instantiator)=>
+		public ObjectCreatorService(IInstantiator instantiator) =>
 			_instantiator = instantiator;
 
 		public GameObject Instantiate(GameObject prefab) =>
@@ -18,5 +18,8 @@ namespace Infrastructure.Services.ObjectCreator
 
 		public GameObject Instantiate(GameObject prefab, Vector2 position) =>
 			_instantiator.InstantiatePrefab(prefab, position, Quaternion.identity, null);
+
+		public GameObject Instantiate(GameObject prefab, Transform parent, Vector2 position) =>
+			_instantiator.InstantiatePrefab(prefab, position, Quaternion.identity, parent);
 	}
 }

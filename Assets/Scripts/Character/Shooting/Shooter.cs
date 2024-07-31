@@ -1,6 +1,7 @@
 using System;
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
+using Hud.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using SpecialEffects;
@@ -24,19 +25,21 @@ namespace Character.Shooting
 		private IPersistentProgressService _persistentProgressService;
 		private ISpecialEffectsFactory _sfxFactory;
 		private IWeaponReloader _weaponReloader;
+		private IBulletIconFactory _bulletIconFactory;
 
 		public bool TargetDetected { get; set; }
 
 		[Inject]
 		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory,
 			IPersistentProgressService persistentProgressService, ISpecialEffectsFactory sfxFactory,
-			IWeaponReloader weaponReloader)
+			IWeaponReloader weaponReloader, IBulletIconFactory bulletIconFactory)
 		{
 			_fireInputSystem = fireInputSystem;
 			_ammoFactory = ammoFactory;
 			_persistentProgressService = persistentProgressService;
 			_sfxFactory = sfxFactory;
 			_weaponReloader = weaponReloader;
+			_bulletIconFactory = bulletIconFactory;
 		}
 
 		private void OnEnable() => 
@@ -100,6 +103,8 @@ namespace Character.Shooting
 				return;
 
 			_ammoCount--;
+
+			_bulletIconFactory.Destroy();
 		}
 
 		private async UniTask CreateAmmo() =>

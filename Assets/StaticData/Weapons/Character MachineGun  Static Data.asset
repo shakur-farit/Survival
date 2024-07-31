@@ -20,7 +20,7 @@ MonoBehaviour:
   Damage: 2
   ShotsInterval: 300
   IsInfinityAmmo: 0
-  MagazineSize: 3
+  MagazineSize: 35
   ReloadTime: 2000
   SpreadMin: 0
   SpreadMax: 0.01

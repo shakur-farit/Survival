@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
@@ -6,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace SpecialEffects.Factory
 {
-	public class SpecialEffectsFactory : Infrastructure.FactoryBase.Factory, ISpecialEffectsFactory
+	public class SpecialEffectsFactory : FactoryBase, ISpecialEffectsFactory
 	{
 		protected SpecialEffectsFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) :
 			base(assetsProvider, objectsCreator)

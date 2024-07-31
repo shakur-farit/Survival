@@ -7,5 +7,6 @@ namespace Infrastructure.Services.ObjectCreator
 		GameObject Instantiate(GameObject prefab);
 		GameObject Instantiate(GameObject prefab, Transform parent);
 		GameObject Instantiate(GameObject prefab, Vector2 position);
+		GameObject Instantiate(GameObject prefab, Transform parent, Vector2 position);
 	}
 }

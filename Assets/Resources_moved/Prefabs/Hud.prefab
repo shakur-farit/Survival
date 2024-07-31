@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -199, y: 414}
+  m_AnchoredPosition: {x: -319, y: 428}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1666064231121728413
@@ -120,6 +120,41 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1445020054965898485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5836551299729854244}
+  m_Layer: 5
+  m_Name: BulletIconsHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5836551299729854244
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445020054965898485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6121040462133665561}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -234, y: 194.8}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2857103265027055351
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -321, y: 106}
+  m_AnchoredPosition: {x: -328, y: 106}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6258582739727348637
@@ -278,7 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6121040462133665561}
   m_Layer: 5
-  m_Name: WeaponRelaoding
+  m_Name: WeaponShooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,12 +333,14 @@ RectTransform:
   m_Children:
   - {fileID: 6361951384975778106}
   - {fileID: 423726766426339314}
+  - {fileID: 5836551299729854244}
+  - {fileID: 7509940332289749792}
   m_Father: {fileID: 2459962368603478395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 850, y: -275}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6094012963840429800
 GameObject:
@@ -338,7 +375,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4285186849229748715}
-  - {fileID: 7509940332289749792}
   - {fileID: 3904589770469230433}
   - {fileID: 8145699703298515017}
   - {fileID: 6121040462133665561}
@@ -426,6 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponReloadButton: {fileID: 4103690869509981122}
   _reloadingText: {fileID: 2895980454579712306}
+  _bulletIconsHonlder: {fileID: 5836551299729854244}
 --- !u!1 &6816609257338586388
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,17 +536,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6938768019243270687}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8718256585434784436}
-  m_Father: {fileID: 2459962368603478395}
+  m_Father: {fileID: 6121040462133665561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -350, y: 249.99997}
+  m_AnchoredPosition: {x: -350.21146, y: 249.64626}
   m_SizeDelta: {x: 700, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7640888080825580506
@@ -712,7 +749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 010a6e5305fa7004f89c5d317b7b47d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88540b2c8e3d3004592f56f61aa04d61, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -809,7 +846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8472355787268659219, guid: cb8ebbe811e833b48951cde086fe37c1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -96
+      value: -152
       objectReference: {fileID: 0}
     - target: {fileID: 8472355787268659219, guid: cb8ebbe811e833b48951cde086fe37c1, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -1,11 +1,12 @@
 using Cysharp.Threading.Tasks;
+using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace UI.Factory
 {
-	public class UIFactory : Infrastructure.FactoryBase.Factory, IUIFactory
+	public class UIFactory : FactoryBase, IUIFactory
 	{
 		private GameObject _uiRoot;
 		private GameObject _mainMenuWindow;

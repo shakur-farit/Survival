@@ -1,11 +1,12 @@
 using Cysharp.Threading.Tasks;
+using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace Character.Factory
 {
-	public class CharacterFactory : Infrastructure.FactoryBase.Factory, ICharacterFactory
+	public class CharacterFactory : FactoryBase, ICharacterFactory
 	{
 		public GameObject Character { get; private set; }
 

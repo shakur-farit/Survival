@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace Enemy.Factory
 {
-	public class EnemyFactory : Infrastructure.FactoryBase.Factory, IEnemyFactory
+	public class EnemyFactory : FactoryBase, IEnemyFactory
 	{
 		public List<GameObject> EnemiesList { get; set; } = new();
 

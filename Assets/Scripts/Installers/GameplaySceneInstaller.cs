@@ -47,6 +47,7 @@ namespace Installers
 			RegisterUIFactory();
 			RegisterAmmoFactory();
 			RegisterSpecialEffectsFactory();
+			RegisterBulletIconsFactory();
 		}
 
 		private void RegisterMediators()
@@ -103,6 +104,9 @@ namespace Installers
 
 		private void RegisterSpecialEffectsFactory() => 
 			Container.Bind<ISpecialEffectsFactory>().To<SpecialEffectsFactory>().AsSingle();
+
+		private void RegisterBulletIconsFactory() =>
+			Container.Bind<IBulletIconFactory>().To<BulletIconFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();

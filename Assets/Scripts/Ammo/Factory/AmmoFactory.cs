@@ -1,11 +1,12 @@
 using Cysharp.Threading.Tasks;
+using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace Ammo.Factory
 {
-	public class AmmoFactory : Infrastructure.FactoryBase.Factory, IAmmoFactory
+	public class AmmoFactory : FactoryBase, IAmmoFactory
 	{
 		public AmmoFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) :
 			base(assetsProvider, objectsCreator)

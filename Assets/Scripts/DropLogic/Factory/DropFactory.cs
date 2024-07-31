@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace DropLogic.Factory
 {
-	public class DropFactory : Infrastructure.FactoryBase.Factory, IDropFactory
+	public class DropFactory : FactoryBase, IDropFactory
 	{
 		public List<GameObject> DropsList { get; private set; } = new();
 
