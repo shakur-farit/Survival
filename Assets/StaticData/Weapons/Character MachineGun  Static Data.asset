@@ -17,6 +17,7 @@ MonoBehaviour:
   Ammo: {fileID: 11400000, guid: b065e3d24a56c844f95c7896beabb707, type: 2}
   specialEffect: {fileID: 11400000, guid: 3ce56e646f66dbb42a0218e3e0e8256d, type: 2}
   ShootPoint: {x: 1.069, y: 0.323}
+  EnemyDetectedRange: 10
   Damage: 2
   ShotsInterval: 300
   IsInfinityAmmo: 0

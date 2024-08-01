@@ -9,7 +9,6 @@ namespace StaticData
 		public Material Material;
 		public SpecialEffectStaticData HitSpecialEffect;
 		[Range(0.01f, 5f)]public float MovementSpeed;
-		[Range(500, 5000)]public int LiveTime;
 		[Range(0.05f, 5f)]public float ColliderRadius;
 		public bool IsEnemy;
 	}

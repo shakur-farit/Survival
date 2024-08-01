@@ -1,6 +1,5 @@
 using System;
 using StaticData;
-using UnityEngine.Serialization;
 
 namespace Data
 {

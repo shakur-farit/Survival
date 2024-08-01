@@ -1,4 +1,6 @@
+using System;
 using Character;
+using Character.Shooting;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
 using StaticData;
@@ -13,6 +15,7 @@ namespace Ammo
 
 		private int _damage;
 		private bool _isEnemy;
+		private bool _isCollided;
 		private SpecialEffectStaticData _effectStaticData;
 
 		private IPersistentProgressService _persistentProgressService;
@@ -41,6 +44,15 @@ namespace Ammo
 			TryDealDamageToEnemy(other);
 		}
 
+		private void OnTriggerExit2D(Collider2D other) => 
+			DestroyAmmoOnOutOfDetectedRange(other);
+
+		private void DestroyAmmoOnOutOfDetectedRange(Collider2D other)
+		{
+			if(other.TryGetComponent(out EnemyDetector detector))
+				DestroyAmmo();
+		}
+
 		private void SetupColliderRadius() => 
 			_collider.radius = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.ColliderRadius;
 
@@ -62,23 +74,32 @@ namespace Ammo
 
 		private void TryDealDamageToEnemy(Collider2D other)
 		{
+			if (_isCollided)
+				return;
+
 			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
+			{
 				DealDamageToEnemy(enemyHealth);
+				_isCollided = true;
+			}
 		}
 
 		private void DealDamageToCharacter(CharacterHealth characterHealth)
 		{
 			characterHealth.TakeDamage(_damage);
-			DestroyAmmo();
+			DestroyAmmoInHit();
 		}
 
 		private void DealDamageToEnemy(EnemyHealth enemyHealth)
 		{
 			enemyHealth.TakeDamage(_damage);
-			DestroyAmmo();
+			DestroyAmmoInHit();
 		}
 
-		private void DestroyAmmo() => 
+		private void DestroyAmmoInHit() => 
 			_ammoDestroy.DestroyInHit(gameObject, transform.position, _effectStaticData);
+
+		private void DestroyAmmo() =>
+			_ammoDestroy.DestroyOnOutOfDetectedRange(gameObject);
 	}
 }

@@ -18,9 +18,9 @@ namespace Ammo
 
 		private void Start()
 		{
-			int liveTime = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.LiveTime;
+			//int liveTime = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.LiveTime;
 
-			_ammoDestroy.DestroyWithDelay(liveTime, gameObject);
+			//_ammoDestroy.DestroyWithDelay(liveTime, gameObject);
 		}
 	}
 }

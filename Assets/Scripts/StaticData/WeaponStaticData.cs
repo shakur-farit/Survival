@@ -12,6 +12,7 @@ namespace StaticData
 		public AmmoStaticData Ammo;
 		public SpecialEffectStaticData specialEffect;
 		public Vector2 ShootPoint;
+		[Range(0f, 50f)] public float EnemyDetectedRange;
 		[Range(0, 10)] public int Damage;
 		[Tooltip("Value is milliseconds")]
 		[Range(0, 5000)] public int ShotsInterval;

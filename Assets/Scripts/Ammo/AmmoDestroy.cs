@@ -18,12 +18,8 @@ namespace Ammo
 			_specialEffectsFactory = specialEffectsFactory;
 		}
 
-		public async UniTask DestroyWithDelay(int liveTime, GameObject gameObject)
-		{
-			await UniTask.Delay(liveTime);
-
+		public void DestroyOnOutOfDetectedRange(GameObject gameObject) => 
 			Destroy(gameObject);
-		}
 
 		public async UniTask DestroyInHit(GameObject gameObject, Vector2 position, SpecialEffectStaticData effectStaticData)
 		{

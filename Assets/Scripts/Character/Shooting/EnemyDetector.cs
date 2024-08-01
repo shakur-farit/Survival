@@ -1,3 +1,4 @@
+using System;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
 using System.Collections.Generic;
@@ -20,8 +21,11 @@ namespace Character.Shooting
 		public void Constructor(IPersistentProgressService persistentProgressService) => 
 			_persistentProgressService = persistentProgressService;
 
-		private void Awake() =>
-			_circleCollider.radius = _persistentProgressService.Progress.CharacterData.CurrentCharacter.EnemyDetectRange;
+		private void Awake()
+		{
+			_circleCollider.radius =
+				_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.EnemyDetectedRange;
+		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
@@ -90,6 +94,12 @@ namespace Character.Shooting
 			}
 
 			return closestEnemy;
+		}
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.color = Color.yellow;
+			Gizmos.DrawWireSphere(transform.position, _circleCollider.radius);
 		}
 	}
 }
