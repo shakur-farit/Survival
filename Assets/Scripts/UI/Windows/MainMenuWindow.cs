@@ -54,13 +54,26 @@ namespace UI.Windows
 				{
 					_persistentProgressService.Progress.CharacterData.CurrentCharacter = character;
 
-					foreach (WeaponStaticData weaponStaticData in _staticDataService.WeaponsListStaticData.WeaponsList)
-						if (character.DefaultWeapon == weaponStaticData.Type)
-						{
-							characterWeaponData.CurrentWeapon = weaponStaticData;
-							characterWeaponData.CurrentAmmoDamage = weaponStaticData.Damage;
-							characterWeaponData.CurrentAmmoShootsInterval = weaponStaticData.ShotsInterval;
-						}
+					SetWeapon(character, characterWeaponData);
+				}
+		}
+
+		private void SetWeapon(CharacterStaticData character, CharacterWeaponData characterWeaponData)
+		{
+			if(_persistentProgressService.IsNew == false)
+				return;
+
+			foreach (WeaponStaticData weaponStaticData in _staticDataService.WeaponsListStaticData.WeaponsList)
+				if (character.DefaultWeapon == weaponStaticData.Type)
+				{
+					characterWeaponData.CurrentWeapon = weaponStaticData;
+
+					characterWeaponData.Range = weaponStaticData.Range;
+					characterWeaponData.Damage = weaponStaticData.Damage;
+					characterWeaponData.ShootsInterval = weaponStaticData.ShotsInterval;
+					characterWeaponData.MagazineSize = weaponStaticData.MagazineSize;
+					characterWeaponData.ReloadTime = weaponStaticData.ReloadTime;
+					characterWeaponData.Spread = weaponStaticData.SpreadMax;
 				}
 		}
 	}

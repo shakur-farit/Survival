@@ -1,6 +1,7 @@
 using Data;
 using Infrastructure.Services.PersistentProgress;
 using Score;
+using StaticData;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -41,17 +42,45 @@ namespace Shop
 
 			if (characterData.WeaponData.CurrentWeapon.Type == _initializer.WeaponStaticData.Type)
 			{
+				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.Range)
+				{
+					characterData.WeaponData.Range += characterData.WeaponData.CurrentWeapon.RangeUpgrade;
+					Debug.Log(characterData.WeaponData.Range);
+					return;
+				}
+				
 				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.Damage)
 				{
-					characterData.WeaponData.CurrentAmmoDamage += characterData.WeaponData.CurrentWeapon.AmmoDamageUpgrade;
-					Debug.Log(characterData.WeaponData.CurrentAmmoDamage);
+					characterData.WeaponData.Damage += characterData.WeaponData.CurrentWeapon.DamageUpgrade;
+					Debug.Log(characterData.WeaponData.Damage);
 					return;
 				}
 
 				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.ShotsInterval)
 				{
-					characterData.WeaponData.CurrentAmmoShootsInterval -= characterData.WeaponData.CurrentWeapon.ShotsIntervalUpgrade;
-					Debug.Log(characterData.WeaponData.CurrentAmmoShootsInterval);
+					characterData.WeaponData.ShootsInterval -= characterData.WeaponData.CurrentWeapon.ShotsIntervalUpgrade;
+					Debug.Log(characterData.WeaponData.ShootsInterval);
+					return;
+				}
+
+				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.MagazineSize)
+				{
+					characterData.WeaponData.MagazineSize += characterData.WeaponData.CurrentWeapon.MagazineSizeUpgrade;
+					Debug.Log(characterData.WeaponData.MagazineSize);
+					return;
+				}
+
+				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.ReloadTime)
+				{
+					characterData.WeaponData.ReloadTime -= characterData.WeaponData.CurrentWeapon.RelaodTimeUpdgrade;
+					Debug.Log(characterData.WeaponData.ReloadTime);
+					return;
+				}
+
+				if (_initializer.WeaponUpgradeType == WeaponUpgradeType.Accuracy)
+				{
+					characterData.WeaponData.Spread -= characterData.WeaponData.CurrentWeapon.AccuracyUpgrade;
+					Debug.Log(characterData.WeaponData.Spread);
 					return;
 				}
 			}
@@ -59,9 +88,21 @@ namespace Shop
 			if (_initializer.WeaponUpgradeType != WeaponUpgradeType.None)
 				return;
 
+			BuyNewWeapon(characterData);
+		}
+
+		private void BuyNewWeapon(CharacterData characterData)
+		{
 			characterData.WeaponData.CurrentWeapon = _initializer.WeaponStaticData;
-			characterData.WeaponData.CurrentAmmoDamage = characterData.WeaponData.CurrentWeapon.Damage;
-			characterData.WeaponData.CurrentAmmoShootsInterval = characterData.WeaponData.CurrentWeapon.ShotsInterval;
+
+			WeaponStaticData currentWeapon = characterData.WeaponData.CurrentWeapon;
+
+			characterData.WeaponData.Damage = currentWeapon.Damage;
+			characterData.WeaponData.Range = currentWeapon.Range;
+			characterData.WeaponData.ShootsInterval = currentWeapon.ShotsInterval;
+			characterData.WeaponData.MagazineSize = currentWeapon.MagazineSize;
+			characterData.WeaponData.ReloadTime = currentWeapon.ReloadTime;
+			characterData.WeaponData.Spread = currentWeapon.SpreadMax;
 		}
 
 		private void SetupPrice() =>

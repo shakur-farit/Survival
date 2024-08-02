@@ -24,10 +24,13 @@ MonoBehaviour:
   MagazineSize: 20
   ReloadTime: 1500
   SpreadMin: 0.003
-  SpreadMax: 0.007
+  SpreadMax: 0.012
   AmmoAmount: 1
   AmmoSpawnInterval: 0
   Price: 3
+  EnemyDetectedRangeUpgrade: 0
   AmmoDamageUpgrade: 1
   ShotsIntervalUpgrade: 10
-  AccuracyUpgrade: 0.001
+  MagazineSizeUpgrade: 0
+  RelaodTimeUpdgrade: 0
+  AccuracyUpgrade: 0.0005

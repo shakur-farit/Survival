@@ -7,8 +7,11 @@ namespace Data
 	public class CharacterWeaponData
 	{
 		public WeaponStaticData CurrentWeapon;
-		public int CurrentAmmoDamage;
-		public int CurrentAmmoShootsInterval;
+		public float Range;
+		public int Damage; 
+		public int ShootsInterval;
+		public int MagazineSize;
+		public int ReloadTime;
 		public float Spread;
 	}
 }

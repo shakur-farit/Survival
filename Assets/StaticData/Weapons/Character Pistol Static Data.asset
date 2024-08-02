@@ -17,17 +17,20 @@ MonoBehaviour:
   Ammo: {fileID: 11400000, guid: f71808b6949507f4bb69977384377e49, type: 2}
   specialEffect: {fileID: 11400000, guid: 4fbbd9522dcdb364ca1f160fd1523a76, type: 2}
   ShootPoint: {x: 0.9, y: 0.3}
-  EnemyDetectedRange: 7
+  Range: 6
   Damage: 1
   ShotsInterval: 500
   IsInfinityAmmo: 1
   MagazineSize: 0
   ReloadTime: 0
   SpreadMin: 0
-  SpreadMax: 0.005
+  SpreadMax: 0.01
   AmmoAmount: 1
   AmmoSpawnInterval: 0
   Price: 1
-  AmmoDamageUpgrade: 1
-  ShotsIntervalUpgrade: 10
-  AccuracyUpgrade: 0.005
+  RangeUpgrade: 0.5
+  DamageUpgrade: 1
+  ShotsIntervalUpgrade: 20
+  MagazineSizeUpgrade: 0
+  RelaodTimeUpdgrade: 0
+  AccuracyUpgrade: 0.001

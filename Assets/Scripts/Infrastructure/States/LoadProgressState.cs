@@ -30,8 +30,11 @@ namespace Infrastructure.States
 		{
 		}
 
-		private void InitializeNewProgress() => 
+		private void InitializeNewProgress()
+		{
 			_persistentProgressService.Progress = new Progress();
+			_persistentProgressService.IsNew = true;
+		}
 
 		private void EnterToLoadSceneState() => 
 			_gameStatesSwitcher.SwitchState<LoadSceneState>();

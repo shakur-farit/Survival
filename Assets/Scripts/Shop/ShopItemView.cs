@@ -1,32 +1,33 @@
 using System.Collections.Generic;
+using Infrastructure.Services.StaticData;
 using StaticData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Shop
 {
 	public class ShopItemView : MonoBehaviour
 	{
 		[SerializeField] private Image _weaponSprite;
-		[SerializeField] private Image _weaponDamageUpgradeSprite;
-		[SerializeField] private Image _weaponDelayUpgradeSprite;
+		[SerializeField] private Image _upgradeSprite;
 		[SerializeField] private TextMeshProUGUI _priceText;
 		[SerializeField] private ShopItemInitializer _initializer;
 
-		private Dictionary<WeaponUpgradeType, Image> _upgradeSpritesDictionary = new();
+		private Dictionary<WeaponUpgradeType, Sprite> _upgradeSpritesDictionary = new();
+		
+		private IStaticDataService _staticDataService;
 
-		private void Awake()
-		{
+		[Inject]
+		public void Constructor(IStaticDataService staticDataService) => 
+			_staticDataService = staticDataService;
+
+		private void Awake() => 
 			InitializeUpgradeDictionary();
-		}
 
-		private void Start()
-		{
-			HideUpgradeSprites();
-
+		private void Start() => 
 			SetupView();
-		}
 
 		private void SetupView()
 		{
@@ -36,22 +37,21 @@ namespace Shop
 
 			_priceText.text = weaponStaticData.Price.ToString();
 
-			if(_upgradeSpritesDictionary.TryGetValue(_initializer.WeaponUpgradeType, out Image sprite))
-				sprite.gameObject.SetActive(true);
-		}
-
-		private void HideUpgradeSprites()
-		{
-			_weaponDamageUpgradeSprite.gameObject.SetActive(false);
-			_weaponDelayUpgradeSprite.gameObject.SetActive(false);
+			if (_upgradeSpritesDictionary.TryGetValue(_initializer.WeaponUpgradeType, out Sprite sprite))
+				_upgradeSprite.sprite = sprite;
 		}
 
 		private void InitializeUpgradeDictionary()
 		{
-			_upgradeSpritesDictionary = new Dictionary<WeaponUpgradeType, Image>()
+			_upgradeSpritesDictionary = new Dictionary<WeaponUpgradeType, Sprite>()
 			{
-				{ WeaponUpgradeType.Damage, _weaponDamageUpgradeSprite },
-				{ WeaponUpgradeType.ShotsInterval, _weaponDelayUpgradeSprite }
+				{ WeaponUpgradeType.None , null},
+				{ WeaponUpgradeType.Range, _staticDataService.ShopItemStaticData.RangeSprite},
+				{ WeaponUpgradeType.Damage, _staticDataService.ShopItemStaticData.DamageSprite },
+				{ WeaponUpgradeType.ShotsInterval, _staticDataService.ShopItemStaticData.ShotsIntervalSprite},
+				{ WeaponUpgradeType.MagazineSize, _staticDataService.ShopItemStaticData.MagazineSizeSprite},
+				{ WeaponUpgradeType.ReloadTime, _staticDataService.ShopItemStaticData.ReloadTimeSprite},
+				{ WeaponUpgradeType.Accuracy, _staticDataService.ShopItemStaticData.AccuracySprite},
 			};
 		}
 	}

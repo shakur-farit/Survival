@@ -57,7 +57,7 @@ namespace Ammo
 			_collider.radius = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.ColliderRadius;
 
 		private void SetupDamage() => 
-			_damage = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoDamage;
+			_damage = _persistentProgressService.Progress.CharacterData.WeaponData.Damage;
 
 		private void SetupSpecialEffect() =>
 			_effectStaticData = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo

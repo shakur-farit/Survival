@@ -24,7 +24,7 @@ namespace Character.Shooting
 		private void Awake()
 		{
 			_circleCollider.radius =
-				_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.EnemyDetectedRange;
+				_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Range;
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)

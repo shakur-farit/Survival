@@ -12,7 +12,7 @@ namespace StaticData
 		public Level Level;
 		public List<WavesOnLevelInfo> WavesOnLevel;
 
-		[Tooltip("Time to next wave. Value in milliseconds")]
+		[Tooltip("Time to next wave. Value is a milliseconds")]
 		[Range(0, 10000)] public int WaveCooldown;
 		
 		[Range(0, 30)]public int TimeToStart;
