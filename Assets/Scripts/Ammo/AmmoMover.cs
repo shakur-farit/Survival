@@ -36,7 +36,7 @@ namespace Ammo
 		private void SetupSpread()
 		{
 			float spreadMin = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.SpreadMin;
-			float spreadMax = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.SpreadMax;
+			float spreadMax = _persistentProgressService.Progress.CharacterData.WeaponData.Spread;
 
 			int spreadToggle = _randomizer.Next(0, 2) * 2 - 1; // Get a random spread toggle 1 or -1
 
