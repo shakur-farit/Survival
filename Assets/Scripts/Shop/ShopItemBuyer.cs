@@ -38,8 +38,6 @@ namespace Shop
 
 			CharacterData characterData = _persistentProgressService.Progress.CharacterData;
 
-
-
 			if (_initializer.WeaponUpgradeType == WeaponUpgradeType.None)
 			{
 				if (characterData.WeaponData.CurrentWeapon == _initializer.WeaponStaticData)
@@ -66,50 +64,102 @@ namespace Shop
 			switch (_initializer.WeaponUpgradeType)
 			{
 				case WeaponUpgradeType.Range:
-					characterData.WeaponData.Range += characterData.WeaponData.CurrentWeapon.RangeUpgrade;
-					Debug.Log($"Upgrade {WeaponUpgradeType.Range}. Now is {characterData.WeaponData.Range}");
+					UpgradeRange(characterData);
 					break;
 
 				case WeaponUpgradeType.Damage:
-					characterData.WeaponData.Damage += characterData.WeaponData.CurrentWeapon.DamageUpgrade;
-					Debug.Log($"Upgrade {WeaponUpgradeType.Damage}. Now is {characterData.WeaponData.Damage}");
+					UpgradeDamage(characterData);
 					break;
 
 				case WeaponUpgradeType.ShotsInterval:
-					characterData.WeaponData.ShootsInterval -= characterData.WeaponData.CurrentWeapon.ShotsIntervalUpgrade;
-					Debug.Log($"Upgrade {WeaponUpgradeType.ShotsInterval}. Now is {characterData.WeaponData.ShootsInterval}");
+					UpgradeShootsInterval(characterData);
 					break;
 
 				case WeaponUpgradeType.MagazineSize:
-					characterData.WeaponData.MagazineSize += characterData.WeaponData.CurrentWeapon.MagazineSizeUpgrade;
-					Debug.Log($"Upgrade {WeaponUpgradeType.MagazineSize}. Now is {characterData.WeaponData.MagazineSize}");
+					UpgradeMagazineSize(characterData);
 					break;
 
 				case WeaponUpgradeType.ReloadTime:
-					characterData.WeaponData.ReloadTime -= characterData.WeaponData.CurrentWeapon.RelaodTimeUpdgrade;
-					Debug.Log($"Upgrade {WeaponUpgradeType.ReloadTime}. Now is {characterData.WeaponData.ReloadTime}");
+					UpgradeReloadTime(characterData);
 					break;
 
 				case WeaponUpgradeType.Accuracy:
-
-					if (characterData.WeaponData.Spread <= 0)
-					{
-						Debug.Log($"Upgrade {WeaponUpgradeType.Accuracy} upgrade to maximum");
-						return;
-					}
-
-					characterData.WeaponData.Spread -= characterData.WeaponData.CurrentWeapon.AccuracyUpgrade;
-
-					if (characterData.WeaponData.Spread < 0)
-						characterData.WeaponData.Spread = 0;
-
-					Debug.Log($"Upgrade {WeaponUpgradeType.Accuracy}. Now is {characterData.WeaponData.Spread}");
-					break;
-
-				default:
-					Debug.LogWarning("Unknown WeaponUpgradeType");
+					UpgradeSpread(characterData);
 					break;
 			}
+		}
+
+		private void UpgradeRange(CharacterData characterData)
+		{
+			characterData.WeaponData.Range += characterData.WeaponData.CurrentWeapon.RangeUpgrade;
+			Debug.Log($"Upgrade {WeaponUpgradeType.Range}. Now is {characterData.WeaponData.Range}");
+			RemoveScore();
+		}
+
+		private void UpgradeDamage(CharacterData characterData)
+		{
+			characterData.WeaponData.Damage += characterData.WeaponData.CurrentWeapon.DamageUpgrade;
+			Debug.Log($"Upgrade {WeaponUpgradeType.Damage}. Now is {characterData.WeaponData.Damage}");
+			RemoveScore();
+		}
+
+		private void UpgradeShootsInterval(CharacterData characterData)
+		{
+			if (characterData.WeaponData.ShootsInterval <= 0)
+			{
+				Debug.Log($"Upgrade {WeaponUpgradeType.ShotsInterval} upgrade to maximum");
+				return;
+			}
+
+			characterData.WeaponData.ShootsInterval -= characterData.WeaponData.CurrentWeapon.ShotsIntervalUpgrade;
+
+			if (characterData.WeaponData.ShootsInterval < 0)
+				characterData.WeaponData.ShootsInterval = 0;
+
+			Debug.Log($"Upgrade {WeaponUpgradeType.ShotsInterval}. Now is {characterData.WeaponData.ShootsInterval}");
+
+			RemoveScore();
+		}
+
+		private void UpgradeMagazineSize(CharacterData characterData)
+		{
+			characterData.WeaponData.MagazineSize += characterData.WeaponData.CurrentWeapon.MagazineSizeUpgrade;
+			Debug.Log($"Upgrade {WeaponUpgradeType.MagazineSize}. Now is {characterData.WeaponData.MagazineSize}");
+			RemoveScore();
+		}
+
+		private void UpgradeReloadTime(CharacterData characterData)
+		{
+			if (characterData.WeaponData.ReloadTime <= 0)
+			{
+				Debug.Log($"Upgrade {WeaponUpgradeType.ReloadTime} upgrade to maximum");
+				return;
+			}
+
+			characterData.WeaponData.ReloadTime -= characterData.WeaponData.CurrentWeapon.RelaodTimeUpdgrade;
+
+			if (characterData.WeaponData.ReloadTime < 0)
+				characterData.WeaponData.ReloadTime = 0;
+
+			Debug.Log($"Upgrade {WeaponUpgradeType.ReloadTime}. Now is {characterData.WeaponData.ReloadTime}");
+
+			RemoveScore();
+		}
+
+		private void UpgradeSpread(CharacterData characterData)
+		{
+			if (characterData.WeaponData.Spread <= 0)
+			{
+				Debug.Log($"Upgrade {WeaponUpgradeType.Accuracy} upgrade to maximum");
+				return;
+			}
+
+			characterData.WeaponData.Spread -= characterData.WeaponData.CurrentWeapon.AccuracyUpgrade;
+
+			if (characterData.WeaponData.Spread < 0)
+				characterData.WeaponData.Spread = 0;
+
+			Debug.Log($"Upgrade {WeaponUpgradeType.Accuracy}. Now is {characterData.WeaponData.Spread}");
 
 			RemoveScore();
 		}

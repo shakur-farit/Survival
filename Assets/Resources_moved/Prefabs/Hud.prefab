@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4970cfd22163c8a4994d946918b106ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletIconsHonlder: {fileID: 5836551299729854244}
+  _bulletIconsHolder: {fileID: 5836551299729854244}
 --- !u!1 &6816609257338586388
 GameObject:
   m_ObjectHideFlags: 0

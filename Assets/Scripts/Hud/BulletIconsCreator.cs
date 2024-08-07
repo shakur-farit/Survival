@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using Character.Shooting;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
@@ -9,7 +10,7 @@ namespace Hud
 {
 	public class BulletIconsCreator : MonoBehaviour
 	{
-		[SerializeField] private Transform _bulletIconsHonlder;
+		[SerializeField] private Transform _bulletIconsHolder;
 
 		private IWeaponReloader _weaponRealoader;
 		private IPersistentProgressService _persistentProgressService;
@@ -36,15 +37,16 @@ namespace Hud
 		{
 			DeleteBulletIcons();
 
-			int ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.MagazineSize;
+			int ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.MagazineSize;
 
 			Vector2 position = Vector2.zero;
-			float nextIconYPositionStep = Constants.NextIconYPositionStep;
 
 			for (int i = 0; i < ammoCount; i++)
 			{
-				_bulletIconFactory.Create(_bulletIconsHonlder, position);
-				position = new Vector2(position.x, position.y + nextIconYPositionStep);
+				_bulletIconFactory.Create(_bulletIconsHolder, position);
+
+				position = (i + 1) % Constants.MaxIconsInColumn == 0 ? new Vector2(position.x + Constants.NextIconXPositionStep, 0) :
+					new Vector2(position.x, position.y + Constants.NextIconYPositionStep);
 			}
 		}
 

@@ -30,7 +30,9 @@ namespace Utility
 		// Minimal distance to target for enemy move
 		public const float MinDistanceToTarget = 1f;
 
-		// Step value for next bullet icon's Y axis position
+		// Values for next bullet icon's position
 		public const float NextIconYPositionStep = 15f;
+		public const float NextIconXPositionStep = 30f;
+		public const int MaxIconsInColumn = 20;
 	}
 }

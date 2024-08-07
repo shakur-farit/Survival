@@ -18,7 +18,7 @@ namespace Character.Shooting
 		private bool _infinityAmmo;
 		private bool _isReloading;
 		private int _shootInterval;
-		private int _ammoCount;
+		private int _ammoInMagazine;
 
 		private IFireInputService _fireInputSystem;
 		private IAmmoFactory _ammoFactory;
@@ -51,8 +51,8 @@ namespace Character.Shooting
 		private void Awake()
 		{
 			_fireInputSystem.RegisterFireInputAction();
-			_shootInterval = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.ShotsInterval;
-			_ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.MagazineSize;
+			_shootInterval = _persistentProgressService.Progress.CharacterData.WeaponData.ShootsInterval;
+			_ammoInMagazine = _persistentProgressService.Progress.CharacterData.WeaponData.MagazineSize;
 			_infinityAmmo = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.IsInfinityAmmo;
 		}
 
@@ -67,7 +67,7 @@ namespace Character.Shooting
 			if (TargetDetected == false || _isShoot || _isReloading)
 				return;
 
-			if (_ammoCount <= 0 && _infinityAmmo == false)
+			if (_ammoInMagazine <= 0 && _infinityAmmo == false)
 			{
 				await ReloadWeapon();
 
@@ -104,7 +104,7 @@ namespace Character.Shooting
 			if (_infinityAmmo)
 				return;
 
-			_ammoCount--;
+			_ammoInMagazine--;
 		}
 
 		private async UniTask CreateAmmo() =>
@@ -132,6 +132,6 @@ namespace Character.Shooting
 		}
 
 		private void UpdateAmmoCount() => 
-			_ammoCount = _weaponReloader.AmmoCount;
+			_ammoInMagazine = _weaponReloader.AmmoCount;
 	}
 }

@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Data;
 using Infrastructure.Services.PersistentProgress;
-using StaticData;
 
 namespace Character.Shooting
 {
@@ -21,7 +21,7 @@ namespace Character.Shooting
 
 		public async UniTask Reload()
 		{
-			WeaponStaticData currentWeapon = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon;
+			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
 
 			ReloadInProgress?.Invoke();
 
@@ -30,9 +30,9 @@ namespace Character.Shooting
 
 			_isReloading = true;
 
-			await UniTask.Delay(currentWeapon.ReloadTime);
+			await UniTask.Delay(weaponData.ReloadTime);
 
-			AmmoCount = currentWeapon.MagazineSize;
+			AmmoCount = weaponData.MagazineSize;
 
 			WeaponReloaded?.Invoke();
 

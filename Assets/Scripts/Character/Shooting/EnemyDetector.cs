@@ -1,4 +1,3 @@
-using System;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace Character.Shooting
 		private void Awake()
 		{
 			_circleCollider.radius =
-				_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Range;
+				_persistentProgressService.Progress.CharacterData.WeaponData.Range;
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
