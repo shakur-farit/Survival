@@ -12,6 +12,7 @@ namespace UI.Factory
 		private GameObject _mainMenuWindow;
 		private GameObject _levelCompleteWindow;
 		private GameObject _gameOverWindow;
+		private GameObject _weaponStatsWindow;
 
 		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
@@ -42,6 +43,12 @@ namespace UI.Factory
 			_gameOverWindow = await CreateObject(reference.GameOverWindowAddress, _uiRoot.transform);
 		}
 
+		public async UniTask CreateWeaponStatsWindow()
+		{
+			AssetsReference reference = await InitReference();
+			_weaponStatsWindow = await CreateObject(reference.WeaponStatsWindowAddress, _uiRoot.transform);
+		}
+
 		public void DestroyUIRoot() => 
 			Object.Destroy(_uiRoot);
 
@@ -51,7 +58,10 @@ namespace UI.Factory
 		public void DestroyLevelCompleteWindow() =>
 			Object.Destroy(_levelCompleteWindow);
 
-		public void DestroyGameOVerWindow() =>
+		public void DestroyGameOverWindow() =>
 			Object.Destroy(_gameOverWindow);
+
+		public void DestroyWeaponStatsWindow() => 
+			Object.Destroy(_weaponStatsWindow);
 	}
 }

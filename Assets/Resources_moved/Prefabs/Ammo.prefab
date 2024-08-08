@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1558405127
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 4df9cc7131cd27f4288bca5e76c82034, type: 3}
   m_Color: {r: 0.7735849, g: 0.20834655, b: 0.1715023, a: 1}
@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 1564749175262534872}
   - component: {fileID: 6046585954958194308}
   - component: {fileID: 8452613444044616169}
-  - component: {fileID: 1259588691194431659}
   m_Layer: 0
   m_Name: Ammo
   m_TagString: Untagged
@@ -194,15 +193,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 6390910501267623108}
---- !u!114 &1259588691194431659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539570766999889727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 158c84775a826ea458eec3d7108e05bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

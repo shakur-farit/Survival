@@ -24,6 +24,9 @@ namespace UI.Services.Windows
 				case WindowType.GameOver:
 					await _uiFactory.CreateGameOverWindow();
 					break;
+				case WindowType.WeaponStats:
+					await _uiFactory.CreateWeaponStatsWindow();
+					break;
 			}
 		}
 
@@ -38,7 +41,10 @@ namespace UI.Services.Windows
 					_uiFactory.DestroyLevelCompleteWindow();
 					break;
 				case WindowType.GameOver:
-					_uiFactory.DestroyGameOVerWindow();
+					_uiFactory.DestroyGameOverWindow();
+					break;
+				case WindowType.WeaponStats:
+					_uiFactory.DestroyWeaponStatsWindow();
 					break;
 			}
 		}

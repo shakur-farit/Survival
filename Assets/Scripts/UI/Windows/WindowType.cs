@@ -6,5 +6,6 @@ namespace UI.Windows
 		MainMenu,
 		LevelComplete,
 		GameOver,
+		WeaponStats
 	}
 }
