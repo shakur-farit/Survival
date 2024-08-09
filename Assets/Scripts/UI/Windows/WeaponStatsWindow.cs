@@ -10,6 +10,7 @@ namespace UI.Windows
 {
 	public class WeaponStatsWindow : WindowBass
 	{
+		[SerializeField] private Button _informationButton;
 		[SerializeField] private Image _weaponSprite;
 		[SerializeField] private TextMeshProUGUI _weaponNameText;
 		[SerializeField] private TextMeshProUGUI _damageValueText;
@@ -33,12 +34,20 @@ namespace UI.Windows
 		{
 			ActionButton.onClick.AddListener(CloseWindow);
 
+			_informationButton.onClick.AddListener(OpenInformationWindow);
+
 			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
 
 			UpdateWeapon(weaponData);
 
 			UpdateStats(weaponData);
 		}
+
+		private void CloseWindow() => 
+			_windowsService.Close(WindowType.WeaponStats);
+
+		private void OpenInformationWindow() => 
+			_windowsService.Open(WindowType.Information);
 
 		private void UpdateWeapon(CharacterWeaponData weaponData)
 		{
@@ -55,8 +64,5 @@ namespace UI.Windows
 			_reloadTimeValueText.text = weaponData.ReloadTime.ToString();
 			_accuracyValueText.text = weaponData.Spread.ToString();
 		}
-
-		private void CloseWindow() => 
-			_windowsService.Close(WindowType.WeaponStats);
 	}
 }

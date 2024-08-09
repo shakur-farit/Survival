@@ -22,5 +22,6 @@ MonoBehaviour:
   LevelCompleteWindowAddress: LevelCompleteWindow
   GameOverWindowAddress: GameOverWindow
   WeaponStatsWindowAddress: WeaponStatsWindow
+  InformationWindowAddress: InformationWindow
   ShootSpecialEffetcAddress: ShootSpecialEffect
   BulletIconAddress: BulletIcon

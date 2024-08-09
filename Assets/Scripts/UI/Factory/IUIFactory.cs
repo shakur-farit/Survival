@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
 namespace UI.Factory
@@ -10,11 +9,13 @@ namespace UI.Factory
 		UniTask CreateLevelCompleteWindow();
 		UniTask CreateGameOverWindow();
 		UniTask CreateWeaponStatsWindow();
+		UniTask CreateInformationWindow();
 
 		void DestroyUIRoot();
 		void DestroyMainMenuWindow();
 		void DestroyLevelCompleteWindow();
 		void DestroyGameOverWindow();
 		void DestroyWeaponStatsWindow();
+		void DestroyInformationWindow();
 	}
 }

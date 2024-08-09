@@ -27,6 +27,9 @@ namespace UI.Services.Windows
 				case WindowType.WeaponStats:
 					await _uiFactory.CreateWeaponStatsWindow();
 					break;
+				case WindowType.Information:
+					await _uiFactory.CreateInformationWindow();
+					break;
 			}
 		}
 
@@ -45,6 +48,9 @@ namespace UI.Services.Windows
 					break;
 				case WindowType.WeaponStats:
 					_uiFactory.DestroyWeaponStatsWindow();
+					break;
+				case WindowType.Information:
+					_uiFactory.DestroyInformationWindow();
 					break;
 			}
 		}
