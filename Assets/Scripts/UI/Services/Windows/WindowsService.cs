@@ -30,6 +30,9 @@ namespace UI.Services.Windows
 				case WindowType.Information:
 					await _uiFactory.CreateInformationWindow();
 					break;
+				case WindowType.Dialog:
+					await _uiFactory.CreateDialogWindow();
+					break;
 			}
 		}
 
@@ -51,6 +54,9 @@ namespace UI.Services.Windows
 					break;
 				case WindowType.Information:
 					_uiFactory.DestroyInformationWindow();
+					break;
+				case WindowType.Dialog:
+					_uiFactory.DestroyDialogWindow();
 					break;
 			}
 		}

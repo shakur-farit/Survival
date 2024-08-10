@@ -7,6 +7,7 @@ namespace UI.Windows
 		LevelComplete,
 		GameOver,
 		WeaponStats,
-		Information
+		Information,
+		Dialog
 	}
 }

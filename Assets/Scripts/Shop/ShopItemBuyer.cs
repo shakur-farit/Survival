@@ -1,7 +1,10 @@
 using Data;
+using Infrastructure.Services.Dialog;
 using Infrastructure.Services.PersistentProgress;
 using Score;
 using StaticData;
+using UI.Services.Windows;
+using UI.Windows;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -17,12 +20,17 @@ namespace Shop
 
 		private IScoreCounter _scoreCounter;
 		private IPersistentProgressService _persistentProgressService;
+		private IDialogService _dialogService;
+		private IWindowsService _windowsService;
 
 		[Inject]
-		public void Constructor(IScoreCounter scoreCounter, IPersistentProgressService persistentProgressService)
+		public void Constructor(IScoreCounter scoreCounter, IPersistentProgressService persistentProgressService,
+			IDialogService dialogService, IWindowsService windowsService)
 		{
 			_scoreCounter = scoreCounter;
 			_persistentProgressService = persistentProgressService;
+			_dialogService = dialogService;
+			_windowsService = windowsService;
 		}
 
 		private void Awake() => 
@@ -34,7 +42,11 @@ namespace Shop
 		private void BuyItem()
 		{
 			if (_price > _scoreCounter.Score)
+			{
+				OpenDialogWindow("You have not enough coins");
+
 				return;
+			}
 
 			CharacterData characterData = _persistentProgressService.Progress.CharacterData;
 
@@ -42,7 +54,8 @@ namespace Shop
 			{
 				if (characterData.WeaponData.CurrentWeapon == _initializer.WeaponStaticData)
 				{
-					Debug.Log($"You already have {characterData.WeaponData.CurrentWeapon}");
+					OpenDialogWindow($"You already have {characterData.WeaponData.CurrentWeapon.Type}");
+
 					return;
 				}
 
@@ -52,7 +65,8 @@ namespace Shop
 
 			if (characterData.WeaponData.CurrentWeapon.Type != _initializer.WeaponStaticData.Type)
 			{
-				Debug.Log($"Should first buy {_initializer.WeaponStaticData.Type} to upgrade");
+				OpenDialogWindow($"Should first buy {_initializer.WeaponStaticData.Type} to upgrade");
+
 				return;
 			}
 
@@ -92,14 +106,12 @@ namespace Shop
 		private void UpgradeRange(CharacterData characterData)
 		{
 			characterData.WeaponData.Range += characterData.WeaponData.CurrentWeapon.RangeUpgrade;
-			Debug.Log($"Upgrade {WeaponUpgradeType.Range}. Now is {characterData.WeaponData.Range}");
 			RemoveScore();
 		}
 
 		private void UpgradeDamage(CharacterData characterData)
 		{
 			characterData.WeaponData.Damage += characterData.WeaponData.CurrentWeapon.DamageUpgrade;
-			Debug.Log($"Upgrade {WeaponUpgradeType.Damage}. Now is {characterData.WeaponData.Damage}");
 			RemoveScore();
 		}
 
@@ -107,7 +119,8 @@ namespace Shop
 		{
 			if (characterData.WeaponData.ShootsInterval <= 0)
 			{
-				Debug.Log($"Upgrade {WeaponUpgradeType.ShotsInterval} upgrade to maximum");
+				OpenDialogWindow($"Upgrade {WeaponUpgradeType.ShotsInterval} upgrade to maximum");
+
 				return;
 			}
 
@@ -116,15 +129,12 @@ namespace Shop
 			if (characterData.WeaponData.ShootsInterval < 0)
 				characterData.WeaponData.ShootsInterval = 0;
 
-			Debug.Log($"Upgrade {WeaponUpgradeType.ShotsInterval}. Now is {characterData.WeaponData.ShootsInterval}");
-
 			RemoveScore();
 		}
 
 		private void UpgradeMagazineSize(CharacterData characterData)
 		{
 			characterData.WeaponData.MagazineSize += characterData.WeaponData.CurrentWeapon.MagazineSizeUpgrade;
-			Debug.Log($"Upgrade {WeaponUpgradeType.MagazineSize}. Now is {characterData.WeaponData.MagazineSize}");
 			RemoveScore();
 		}
 
@@ -132,7 +142,8 @@ namespace Shop
 		{
 			if (characterData.WeaponData.ReloadTime <= 0)
 			{
-				Debug.Log($"Upgrade {WeaponUpgradeType.ReloadTime} upgrade to maximum");
+				OpenDialogWindow($"Upgrade {WeaponUpgradeType.ReloadTime} upgrade to maximum");
+
 				return;
 			}
 
@@ -141,8 +152,6 @@ namespace Shop
 			if (characterData.WeaponData.ReloadTime < 0)
 				characterData.WeaponData.ReloadTime = 0;
 
-			Debug.Log($"Upgrade {WeaponUpgradeType.ReloadTime}. Now is {characterData.WeaponData.ReloadTime}");
-
 			RemoveScore();
 		}
 
@@ -150,7 +159,8 @@ namespace Shop
 		{
 			if (characterData.WeaponData.Spread <= 0)
 			{
-				Debug.Log($"Upgrade {WeaponUpgradeType.Accuracy} upgrade to maximum");
+				OpenDialogWindow($"Upgrade {WeaponUpgradeType.Accuracy} upgrade to maximum");
+
 				return;
 			}
 
@@ -159,7 +169,6 @@ namespace Shop
 			if (characterData.WeaponData.Spread < 0)
 				characterData.WeaponData.Spread = 0;
 
-			Debug.Log($"Upgrade {WeaponUpgradeType.Accuracy}. Now is {characterData.WeaponData.Spread}");
 
 			RemoveScore();
 		}
@@ -180,13 +189,16 @@ namespace Shop
 			RemoveScore();
 		}
 
-		private void RemoveScore()
-		{
+		private void RemoveScore() => 
 			_scoreCounter.RemoveScore(_price);
-			Debug.Log($"Remove {_price}. Scores - {_scoreCounter.Score}");
-		}
 
 		private void SetupPrice() =>
 			_price = _initializer.WeaponStaticData.Price;
+
+		private void OpenDialogWindow(string text)
+		{
+			_dialogService.UpdateText(text);
+			_windowsService.Open(WindowType.Dialog);
+		}
 	}
 }

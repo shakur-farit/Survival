@@ -14,6 +14,7 @@ namespace UI.Factory
 		private GameObject _gameOverWindow;
 		private GameObject _weaponStatsWindow;
 		private GameObject _informationWindow;
+		private GameObject _dialogWindow;
 
 		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
@@ -56,6 +57,12 @@ namespace UI.Factory
 			_informationWindow = await CreateObject(reference.InformationWindowAddress, _uiRoot.transform);
 		}
 
+		public async UniTask CreateDialogWindow()
+		{
+			AssetsReference reference = await InitReference();
+			_dialogWindow = await CreateObject(reference.DialogWindowAddress, _uiRoot.transform);
+		}
+
 		public void DestroyUIRoot() => 
 			Object.Destroy(_uiRoot);
 
@@ -73,5 +80,8 @@ namespace UI.Factory
 
 		public void DestroyInformationWindow() => 
 			Object.Destroy(_informationWindow);
+
+		public void DestroyDialogWindow() => 
+			Object.Destroy(_dialogWindow);
 	}
 }

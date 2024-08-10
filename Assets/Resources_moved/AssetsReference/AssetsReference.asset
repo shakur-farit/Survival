@@ -23,5 +23,6 @@ MonoBehaviour:
   GameOverWindowAddress: GameOverWindow
   WeaponStatsWindowAddress: WeaponStatsWindow
   InformationWindowAddress: InformationWindow
+  DialogWindowAddress: DialogWindow
   ShootSpecialEffetcAddress: ShootSpecialEffect
   BulletIconAddress: BulletIcon

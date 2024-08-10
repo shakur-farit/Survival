@@ -2,6 +2,7 @@ using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using Enemy.States.StateMachine;
 using Infrastructure.Services.AssetsManagement;
+using Infrastructure.Services.Dialog;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
@@ -23,6 +24,7 @@ namespace Installers
 			RegisterStaticDataService();
 			RegisterTimer();
 			RegisterRandomizer();
+			RegisterDialogService();
 			RegisterScoreCounter();
 			RegisterStatesMachines();
 		}
@@ -52,6 +54,9 @@ namespace Installers
 
 		private void RegisterAssetsProvider() =>
 			Container.BindInterfacesAndSelfTo<AssetsProvider>().AsSingle();
+
+		private void RegisterDialogService() => 
+			Container.Bind<IDialogService>().To<DialogService>().AsSingle();
 
 		private void RegisterStaticDataService() =>
 			Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();

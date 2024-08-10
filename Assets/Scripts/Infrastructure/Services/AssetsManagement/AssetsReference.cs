@@ -16,6 +16,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string GameOverWindowAddress;
 		public string WeaponStatsWindowAddress;
 		public string InformationWindowAddress;
+		public string DialogWindowAddress;
 		public string ShootSpecialEffetcAddress;
 		public string BulletIconAddress;
 	}
