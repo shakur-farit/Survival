@@ -122,6 +122,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce8c0231b23907a48bb9859ed39d901b
+    m_Address: ShopItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 782d9aa09d4b10c498fed3024d7b9b2a
+    m_Address: HeartIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 53e9e2f32e8d6c84d8f1e59d6f24ea32, type: 2}
   m_SchemaSet:

@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterAddress: Character
   EnemyAddress: Enemy
   AmmoAddress: Ammo
+  ShootSpecialEffetcAddress: ShootSpecialEffect
   DropAddress: Drop
   HudAddress: Hud
   UIRootAddress: UIRoot
@@ -24,5 +25,6 @@ MonoBehaviour:
   WeaponStatsWindowAddress: WeaponStatsWindow
   InformationWindowAddress: InformationWindow
   DialogWindowAddress: DialogWindow
-  ShootSpecialEffetcAddress: ShootSpecialEffect
+  ShopItemAddress: ShopItem
   BulletIconAddress: BulletIcon
+  HeartIconAddress: HeartIcon

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Infrastructure.Services.AssetsManagement
 {
@@ -8,6 +9,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string CharacterAddress;
 		public string EnemyAddress;
 		public string AmmoAddress;
+		public string ShootSpecialEffetcAddress;
 		public string DropAddress;
 		public string HudAddress;
 		public string UIRootAddress;
@@ -17,9 +19,8 @@ namespace Infrastructure.Services.AssetsManagement
 		public string WeaponStatsWindowAddress;
 		public string InformationWindowAddress;
 		public string DialogWindowAddress;
-		public string ShootSpecialEffetcAddress;
-		public string BulletIconAddress;
 		public string ShopItemAddress;
-
+		public string BulletIconAddress;
+		public string HeartIconAddress;
 	}
 }

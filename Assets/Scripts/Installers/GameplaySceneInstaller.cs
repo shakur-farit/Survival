@@ -48,6 +48,7 @@ namespace Installers
 			RegisterAmmoFactory();
 			RegisterSpecialEffectsFactory();
 			RegisterBulletIconsFactory();
+			RegisterHeartIconsFactory();
 			RegisterShopItemFactory();
 		}
 
@@ -111,6 +112,9 @@ namespace Installers
 
 		private void RegisterBulletIconsFactory() =>
 			Container.Bind<IBulletIconFactory>().To<BulletIconFactory>().AsSingle();
+
+		private void RegisterHeartIconsFactory() => 
+			Container.Bind<IHeartIconFactory>().To<HeartIconFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();

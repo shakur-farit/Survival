@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace Hud.Factory
 {
-	public class BulletIconFactory : FactoryBase, IBulletIconFactory
+	public class HeartIconFactory : FactoryBase, IHeartIconFactory
 	{
-		private readonly Stack<GameObject> _bulletIcons = new();
+		private readonly Stack<GameObject> _heartIcons = new();
 
-		public Stack<GameObject> BulletIcons => _bulletIcons;
+		public Stack<GameObject> HeartIcons => _heartIcons;
 
-		protected BulletIconFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
+		protected HeartIconFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
 		{
 		}
@@ -21,14 +21,14 @@ namespace Hud.Factory
 		public async UniTask Create(Transform parentTransform, Vector2 position)
 		{
 			AssetsReference reference = await InitReference();
-			GameObject icon = await CreateObject(reference.BulletIconAddress, parentTransform);
+			GameObject icon = await CreateObject(reference.HeartIconAddress, parentTransform);
 			icon.transform.localPosition = position;
-			_bulletIcons.Push(icon);
+			_heartIcons.Push(icon);
 		}
 
 		public void Destroy()
 		{
-			GameObject bulletIcon = _bulletIcons.Pop();
+			GameObject bulletIcon = _heartIcons.Pop();
 			Object.Destroy(bulletIcon);
 		}
 	}

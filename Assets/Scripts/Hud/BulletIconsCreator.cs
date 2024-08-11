@@ -1,4 +1,3 @@
-using System.Diagnostics.Contracts;
 using Character.Shooting;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
@@ -45,8 +44,8 @@ namespace Hud
 			{
 				_bulletIconFactory.Create(_bulletIconsHolder, position);
 
-				position = (i + 1) % Constants.MaxIconsInColumn == 0 ? new Vector2(position.x + Constants.NextIconXPositionStep, 0) :
-					new Vector2(position.x, position.y + Constants.NextIconYPositionStep);
+				position = (i + 1) % Constants.MaxBulletIconsInColumn == 0 ? new Vector2(position.x + Constants.NextBulletIconXPositionStep, 0) :
+					new Vector2(position.x, position.y + Constants.NextBulletIconYPositionStep);
 			}
 		}
 

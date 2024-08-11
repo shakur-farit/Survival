@@ -8,8 +8,6 @@ namespace UI.Factory
 {
 	public class ShopItemFactory : FactoryBase, IShopItemFactory
 	{
-		private GameObject _shopItem;
-
 		protected ShopItemFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
 		{
@@ -18,9 +16,9 @@ namespace UI.Factory
 		public async UniTask Create(Transform parentTransform, Vector2 position)
 		{
 			AssetsReference reference = await InitReference();
-			_shopItem = await CreateObject(reference.ShopItemAddress, parentTransform);
+			GameObject shopItem = await CreateObject(reference.ShopItemAddress, parentTransform);
 
-			_shopItem.transform.localPosition = position;
+			shopItem.transform.localPosition = position;
 		}
 	}
 }

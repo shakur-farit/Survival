@@ -8,5 +8,9 @@ namespace Data
 	{
 		public CharacterStaticData CurrentCharacter;
 		public CharacterWeaponData WeaponData = new();
+
+		public int CurrentHealth;
+		public int MaxHealth;
+		public int DamageTakingCooldown;
 	}
 }

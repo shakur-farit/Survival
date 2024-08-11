@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
+using Data;
 using Infrastructure.Services.Health;
 using Infrastructure.Services.PersistentProgress;
-using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -9,9 +9,6 @@ namespace Character
 {
 	public class CharacterHealth : MonoBehaviour, IHealthAddable
 	{
-		private int _current;
-		private int _max;
-		private int _damageTakingCooldown;
 		private bool _canTakeDamage;
 
 		private IPersistentProgressService _persistentProgressService;
@@ -29,26 +26,28 @@ namespace Character
 
 		private void SetupHealthDetails()
 		{
-			CharacterStaticData currentCharacter = _persistentProgressService.Progress.CharacterData.CurrentCharacter;
+			CharacterData character = _persistentProgressService.Progress.CharacterData;
 
-			_current = currentCharacter.StartHealth;
-			_max = currentCharacter.MaxHealth;
-			_damageTakingCooldown = currentCharacter.DamageTakingCooldown;
+			character.CurrentHealth = character.CurrentCharacter.StartHealth;
+			character.MaxHealth = character.CurrentCharacter.MaxHealth;
+			character.DamageTakingCooldown = character.CurrentCharacter.DamageTakingCooldown;
 
 			_canTakeDamage = true;
 		}
 
 		public void TakeDamage(int damage)
 		{
-			if(_current <=0)
+			CharacterData character = _persistentProgressService.Progress.CharacterData;
+
+			if (character.CurrentHealth <= 0)
 				return;
 
 			if(_canTakeDamage == false)
 				return;
 
-			_current -= damage;
+			character.CurrentHealth -= damage;
 
-			if (_current <= 0)
+			if (character.CurrentHealth <= 0)
 			{
 				_characterDeath.Die();
 				return;
@@ -59,16 +58,20 @@ namespace Character
 
 		public void AddHealth(int value)
 		{
-			_current += value;
+			CharacterData character = _persistentProgressService.Progress.CharacterData;
 
-			if(_current > _max)
-				_current = _max;
+			character.CurrentHealth += value;
+
+			if(character.CurrentHealth > character.MaxHealth)
+				character.CurrentHealth = character.MaxHealth;
 		}
 
 		private async void TakeCooldown()
 		{
+			CharacterData character = _persistentProgressService.Progress.CharacterData;
+
 			_canTakeDamage = false;
-			await UniTask.Delay(_damageTakingCooldown);
+			await UniTask.Delay(character.DamageTakingCooldown);
 			_canTakeDamage = true;
 		}
 	}

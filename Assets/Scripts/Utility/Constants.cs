@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Utility
 {
 	public class Constants
@@ -30,14 +32,15 @@ namespace Utility
 		// Minimal distance to target for enemy move
 		public const float MinDistanceToTarget = 1f;
 
-		// Values for next bullet icon's position
-		public const float NextIconYPositionStep = 15f;
-		public const float NextIconXPositionStep = 30f;
-		public const int MaxIconsInColumn = 20;
-		
+		// Hud values
+		public const float NextBulletIconYPositionStep = 15f;
+		public const float NextBulletIconXPositionStep = 30f;
+		public const int MaxBulletIconsInColumn = 20;
+		public const float NextHearthIconXPositionStep = 60f;
+
 		// Timer values
 		public const int OneSecond = 1000;
-		
+
 		// Shop items values
 		public const float NextItemXPositionStep = 600f;
 		public const int ItemsNumber = 3;
