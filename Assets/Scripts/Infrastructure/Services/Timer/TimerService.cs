@@ -1,12 +1,11 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Utility;
 
 namespace Infrastructure.Services.Timer
 {
 	public class TimerService : ICountDownTimer
 	{
-		private const int OneSecond = 1000;
-
 		private int _timeLeft;
 
 		public event Action Started;
@@ -20,7 +19,7 @@ namespace Infrastructure.Services.Timer
 
 			while (_timeLeft > 0)
 			{
-				await UniTask.Delay(OneSecond);
+				await UniTask.Delay(Constants.OneSecond);
 				_timeLeft--;
 			}
 

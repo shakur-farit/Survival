@@ -19,5 +19,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string DialogWindowAddress;
 		public string ShootSpecialEffetcAddress;
 		public string BulletIconAddress;
+		public string ShopItemAddress;
+
 	}
 }

@@ -34,5 +34,12 @@ namespace Utility
 		public const float NextIconYPositionStep = 15f;
 		public const float NextIconXPositionStep = 30f;
 		public const int MaxIconsInColumn = 20;
+		
+		// Timer values
+		public const int OneSecond = 1000;
+		
+		// Shop items values
+		public const float NextItemXPositionStep = 600f;
+		public const int ItemsNumber = 3;
 	}
 }

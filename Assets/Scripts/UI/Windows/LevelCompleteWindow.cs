@@ -1,8 +1,10 @@
 using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
+using UI.Factory;
 using UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 using Zenject;
 
 namespace UI.Windows
@@ -13,12 +15,14 @@ namespace UI.Windows
 
 		private IGameStatesSwitcher _statesSwitcher;
 		private IWindowsService _windowsService;
+		private IShopItemFactory _shopItemFactory;
 
 		[Inject]
-		public void Constructor(IGameStatesSwitcher statesSwitcher, IWindowsService windowsService)
+		public void Constructor(IGameStatesSwitcher statesSwitcher, IWindowsService windowsService, IShopItemFactory shopItemFactory)
 		{
 			_statesSwitcher = statesSwitcher;
 			_windowsService = windowsService;
+			_shopItemFactory = shopItemFactory;
 		}
 
 		protected override void OnAwake()
@@ -26,6 +30,20 @@ namespace UI.Windows
 			ActionButton.onClick.AddListener(StartNextLevel);
 
 			_weaponStatsButton.onClick.AddListener(OpenWeaponStatsWindow);
+
+			CreateShopItems();
+		}
+
+		private void CreateShopItems()
+		{
+			Vector2 position = new Vector2(-600f, 0f);
+
+			for (int i = 0; i < Constants.ItemsNumber; i++)
+			{
+				_shopItemFactory.Create(transform, position);
+
+				position.x += Constants.NextItemXPositionStep;
+			}
 		}
 
 		private void OpenWeaponStatsWindow() => 

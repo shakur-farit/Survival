@@ -48,6 +48,7 @@ namespace Installers
 			RegisterAmmoFactory();
 			RegisterSpecialEffectsFactory();
 			RegisterBulletIconsFactory();
+			RegisterShopItemFactory();
 		}
 
 		private void RegisterMediators()
@@ -80,6 +81,9 @@ namespace Installers
 
 		private void RegisterEnemiesCounter() => 
 			Container.Bind<IEnemiesCounter>().To<EnemiesCounter>().AsSingle();
+
+		private void RegisterShopItemFactory() => 
+			Container.Bind<IShopItemFactory>().To<ShopItemFactory>().AsSingle();
 
 		private void RegisterStatesFactory() => 
 			Container.Bind<IStatesFactory>().To<StatesFactory>().AsSingle();
