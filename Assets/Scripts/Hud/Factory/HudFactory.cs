@@ -9,19 +9,20 @@ namespace Hud.Factory
 {
 	public class HudFactory : FactoryBase, IHudFactory
 	{
-		private GameObject _hud;
+		public GameObject Hud { get; private set; }
 
-		public HudFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : base(assetsProvider, objectsCreator)
+		public HudFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
+			base(assetsProvider, objectsCreator)
 		{
 		}
 
 		public async UniTask Create()
 		{
 			AssetsReference reference = await InitReference();
-			_hud = await CreateObject(reference.HudAddress);
+			Hud = await CreateObject(reference.HudAddress);
 		}
 
 		public void Destroy() => 
-			Object.Destroy(_hud);
+			Object.Destroy(Hud);
 	}
 }

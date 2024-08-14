@@ -6,8 +6,7 @@ namespace Hud.Factory
 {
 	public interface IHeartIconFactory
 	{
-		Stack<GameObject> HeartIcons { get; }
+		List<GameObject> HeartIcons { get; }
 		UniTask Create(Transform parentTransform, Vector2 position);
-		void Destroy();
 	}
 }

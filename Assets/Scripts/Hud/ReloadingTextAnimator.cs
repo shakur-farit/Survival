@@ -21,7 +21,7 @@ namespace Hud
 			Blink();
 
 		private void Blink() => 
-			_text.DOFade(Constants.EndValue, Constants.BlinkDuration)
+			_text.DOFade(Constants.EndValue, Constants.TextBlinkDuration)
 				.SetLoops(Constants.ValueOfInfinity, LoopType.Yoyo);
 	}
 }

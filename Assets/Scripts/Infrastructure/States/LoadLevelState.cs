@@ -1,5 +1,7 @@
+using Character;
 using Character.Factory;
 using Cysharp.Threading.Tasks;
+using Hud;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
@@ -7,6 +9,7 @@ using Infrastructure.States.StatesMachine;
 using LevelLogic;
 using Spawn;
 using StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -67,8 +70,12 @@ namespace Infrastructure.States
 		private async UniTask CreateCharacter() => 
 			await _characterFactory.Create();
 
-		private async UniTask CreateHud() =>
+		private async UniTask CreateHud()
+		{
 			await _hudFactory.Create();
+			_hudFactory.Hud.GetComponent<ActorUI>()
+				.SetCharacterHealth(_characterFactory.Character.GetComponent<CharacterHealth>());
+		}
 
 		private async void SpawnEnemies()
 		{

@@ -392,6 +392,7 @@ GameObject:
   - component: {fileID: 7912017495739323004}
   - component: {fileID: 3806271420377075324}
   - component: {fileID: 4396460010098017314}
+  - component: {fileID: 8382712250780362975}
   m_Layer: 5
   m_Name: Hud
   m_TagString: Untagged
@@ -526,6 +527,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heartIconsHolder: {fileID: 5488257202135132969}
+--- !u!114 &8382712250780362975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094012963840429800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b7e30c0e602664988d6ec8e5c08073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpBar: {fileID: 4396460010098017314}
 --- !u!1 &6816609257338586388
 GameObject:
   m_ObjectHideFlags: 0

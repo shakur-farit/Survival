@@ -9,9 +9,9 @@ namespace Hud.Factory
 {
 	public class HeartIconFactory : FactoryBase, IHeartIconFactory
 	{
-		private readonly Stack<GameObject> _heartIcons = new();
+		private readonly List<GameObject> _heartIcons = new();
 
-		public Stack<GameObject> HeartIcons => _heartIcons;
+		public List<GameObject> HeartIcons => _heartIcons;
 
 		protected HeartIconFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
@@ -23,13 +23,7 @@ namespace Hud.Factory
 			AssetsReference reference = await InitReference();
 			GameObject icon = await CreateObject(reference.HeartIconAddress, parentTransform);
 			icon.transform.localPosition = position;
-			_heartIcons.Push(icon);
-		}
-
-		public void Destroy()
-		{
-			GameObject bulletIcon = _heartIcons.Pop();
-			Object.Destroy(bulletIcon);
+			_heartIcons.Add(icon);
 		}
 	}
 }

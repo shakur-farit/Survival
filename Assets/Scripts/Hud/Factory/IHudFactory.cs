@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Hud.Factory
 {
@@ -6,5 +7,6 @@ namespace Hud.Factory
 	{
 		UniTask Create();
 		void Destroy();
+		GameObject Hud { get; }
 	}
 }

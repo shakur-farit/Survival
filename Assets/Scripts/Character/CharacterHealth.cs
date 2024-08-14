@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using Data;
 using Infrastructure.Services.Health;
@@ -9,6 +10,10 @@ namespace Character
 {
 	public class CharacterHealth : MonoBehaviour, IHealthAddable
 	{
+		public Action HealthChanged;
+
+		[SerializeField] private CharacterBlinker _blinker;
+
 		private bool _canTakeDamage;
 
 		private IPersistentProgressService _persistentProgressService;
@@ -47,6 +52,10 @@ namespace Character
 
 			character.CurrentHealth -= damage;
 
+			HealthChanged?.Invoke();
+
+			_blinker.BlinkOnDamaged();
+
 			if (character.CurrentHealth <= 0)
 			{
 				_characterDeath.Die();
@@ -62,7 +71,11 @@ namespace Character
 
 			character.CurrentHealth += value;
 
-			if(character.CurrentHealth > character.MaxHealth)
+			HealthChanged?.Invoke();
+
+			_blinker.BlinkOnHealed();
+
+			if (character.CurrentHealth > character.MaxHealth)
 				character.CurrentHealth = character.MaxHealth;
 		}
 

@@ -15,7 +15,7 @@ namespace Utility
 		public const int RotateDuration = 2;
 
 		// Weapon reloading text animation values
-		public const float BlinkDuration = 0.5f;
+		public const float TextBlinkDuration = 0.5f;
 		public const float EndValue = 0;
 
 		// Character aiming angle values
@@ -44,5 +44,8 @@ namespace Utility
 		// Shop items values
 		public const float NextItemXPositionStep = 600f;
 		public const int ItemsNumber = 3;
+		
+		// Character's sprite blink values
+		public const float CharacterSpriteBlinkDuration = 0.15f;
 	}
 }
