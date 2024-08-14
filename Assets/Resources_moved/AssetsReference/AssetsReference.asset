@@ -26,5 +26,5 @@ MonoBehaviour:
   InformationWindowAddress: InformationWindow
   DialogWindowAddress: DialogWindow
   ShopItemAddress: ShopItem
-  BulletIconAddress: BulletIcon
+  AmmoIconAddress: AmmoIcon
   HeartIconAddress: HeartIcon

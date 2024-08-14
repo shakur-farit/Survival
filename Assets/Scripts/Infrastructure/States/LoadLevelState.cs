@@ -1,5 +1,6 @@
 using Character;
 using Character.Factory;
+using Character.Shooting;
 using Cysharp.Threading.Tasks;
 using Hud;
 using Hud.Factory;
@@ -75,6 +76,8 @@ namespace Infrastructure.States
 			await _hudFactory.Create();
 			_hudFactory.Hud.GetComponent<ActorUI>()
 				.SetCharacterHealth(_characterFactory.Character.GetComponent<CharacterHealth>());
+			_hudFactory.Hud.GetComponent<ActorUI>()
+				.SetShooter(_characterFactory.Character.GetComponent<Shooter>());
 		}
 
 		private async void SpawnEnemies()

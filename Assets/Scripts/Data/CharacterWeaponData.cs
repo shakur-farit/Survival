@@ -13,5 +13,6 @@ namespace Data
 		public int MagazineSize;
 		public int ReloadTime;
 		public float Spread;
+		public int CurrentAmmoCount;
 	}
 }

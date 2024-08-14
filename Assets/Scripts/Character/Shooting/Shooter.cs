@@ -1,6 +1,7 @@
 using System;
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
+using Data;
 using Hud.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
@@ -14,46 +15,45 @@ namespace Character.Shooting
 {
 	public class Shooter : MonoBehaviour
 	{
+		public Action Shot;
+
+		[SerializeField] private Transform _weaponShootTransform;
+
 		private bool _isShoot;
 		private bool _infinityAmmo;
 		private bool _isReloading;
 		private int _shootInterval;
-		private int _ammoInMagazine;
 
 		private IFireInputService _fireInputSystem;
 		private IAmmoFactory _ammoFactory;
 		private IPersistentProgressService _persistentProgressService;
 		private ISpecialEffectsFactory _sfxFactory;
 		private IWeaponReloader _weaponReloader;
-		private IBulletIconFactory _bulletIconFactory;
 
 		public bool TargetDetected { get; set; }
 
 		[Inject]
 		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory,
 			IPersistentProgressService persistentProgressService, ISpecialEffectsFactory sfxFactory,
-			IWeaponReloader weaponReloader, IBulletIconFactory bulletIconFactory)
+			IWeaponReloader weaponReloader, IAmmoIconFactory ammoIconFactory)
 		{
 			_fireInputSystem = fireInputSystem;
 			_ammoFactory = ammoFactory;
 			_persistentProgressService = persistentProgressService;
 			_sfxFactory = sfxFactory;
 			_weaponReloader = weaponReloader;
-			_bulletIconFactory = bulletIconFactory;
 		}
-
-		private void OnEnable() => 
-			_weaponReloader.WeaponReloaded += UpdateAmmoCount;
-
-		private void OnDisable() => 
-			_weaponReloader.WeaponReloaded -= UpdateAmmoCount;
 
 		private void Awake()
 		{
 			_fireInputSystem.RegisterFireInputAction();
-			_shootInterval = _persistentProgressService.Progress.CharacterData.WeaponData.ShootsInterval;
-			_ammoInMagazine = _persistentProgressService.Progress.CharacterData.WeaponData.MagazineSize;
-			_infinityAmmo = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.IsInfinityAmmo;
+
+			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+
+			_shootInterval = weaponData.ShootsInterval;
+			weaponData.CurrentAmmoCount = weaponData.MagazineSize;
+			_infinityAmmo = weaponData.CurrentWeapon.IsInfinityAmmo;
+
 		}
 
 		private void Update()
@@ -67,7 +67,7 @@ namespace Character.Shooting
 			if (TargetDetected == false || _isShoot || _isReloading)
 				return;
 
-			if (_ammoInMagazine <= 0 && _infinityAmmo == false)
+			if (_persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount <= 0 && _infinityAmmo == false)
 			{
 				await ReloadWeapon();
 
@@ -83,35 +83,36 @@ namespace Character.Shooting
 
 		private async UniTask Shoot()
 		{
-			WeaponStaticData weaponStaticData = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon;
+			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
 
-			int ammoAmount = weaponStaticData.AmmoAmount;
-			int spawnInterval = weaponStaticData.AmmoSpawnInterval;
+			int ammoAmount = weaponData.CurrentWeapon.AmmoAmount;
+			int spawnInterval = weaponData.CurrentWeapon.AmmoSpawnInterval;
 
 			for (int i = 0; i < ammoAmount; i++)
 			{
 				await CreateAmmo();
 				GameObject shootEffect = await CreateSpecialEffect();
-				InitializeSpecialEffect(shootEffect, weaponStaticData.specialEffect);
+				InitializeSpecialEffect(shootEffect, weaponData.CurrentWeapon.specialEffect);
 
 				await UniTask.Delay(spawnInterval);
 			}
-
-			_bulletIconFactory.Destroy();
 
 			await UniTask.Delay(_shootInterval);
 
 			if (_infinityAmmo)
 				return;
 
-			_ammoInMagazine--;
+			--weaponData.CurrentAmmoCount;
+			Shot?.Invoke();
+
+			Debug.Log(weaponData.CurrentAmmoCount);
 		}
 
 		private async UniTask CreateAmmo() =>
-			await _ammoFactory.Create(transform);
+			await _ammoFactory.Create(_weaponShootTransform);
 
 		private async UniTask<GameObject> CreateSpecialEffect() =>
-			await _sfxFactory.CreateShootEffect(transform.position);
+			await _sfxFactory.CreateShootEffect(_weaponShootTransform.position);
 
 		private void InitializeSpecialEffect(GameObject shootEffect, SpecialEffectStaticData staticData)
 		{
@@ -130,8 +131,5 @@ namespace Character.Shooting
 
 			_isReloading = false;
 		}
-
-		private void UpdateAmmoCount() => 
-			_ammoInMagazine = _weaponReloader.AmmoCount;
 	}
 }

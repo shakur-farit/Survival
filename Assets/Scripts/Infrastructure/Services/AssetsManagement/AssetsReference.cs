@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Infrastructure.Services.AssetsManagement
 {
@@ -20,7 +19,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string InformationWindowAddress;
 		public string DialogWindowAddress;
 		public string ShopItemAddress;
-		public string BulletIconAddress;
+		public string AmmoIconAddress;
 		public string HeartIconAddress;
 	}
 }

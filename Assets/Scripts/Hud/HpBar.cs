@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
@@ -31,7 +32,7 @@ namespace Hud
 		public void UpdateHearthIcons()
 		{
 			int currentHealth = _persistentProgressService.Progress.CharacterData.CurrentHealth;
-			var hearts = _heartIconsFactory.HeartIcons;
+			List<GameObject> hearts = _heartIconsFactory.HeartIcons;
 
 			for (int i = 0; i < hearts.Count; i++)
 				hearts[i].SetActive(i < currentHealth);
@@ -39,6 +40,8 @@ namespace Hud
 
 		private async UniTask CreateStartHearthIcons()
 		{
+			ClearIconsList();
+
 			Vector2 position = Vector2.zero;
 
 			for (int i = 0; i < _persistentProgressService.Progress.CharacterData.MaxHealth; i++)
@@ -51,5 +54,13 @@ namespace Hud
 
 		private async UniTask CreateHearthIcon(Vector2 position) => 
 			await _heartIconsFactory.Create(_heartIconsHolder, position);
+
+		private void ClearIconsList()
+		{
+			foreach (GameObject heartIcon in _heartIconsFactory.HeartIcons)
+				Destroy(heartIcon);
+
+			_heartIconsFactory.HeartIcons.Clear();
+		}
 	}
 }

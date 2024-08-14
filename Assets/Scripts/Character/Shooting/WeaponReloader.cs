@@ -17,8 +17,6 @@ namespace Character.Shooting
 		public WeaponReloader(IPersistentProgressService persistentProgressService) => 
 			_persistentProgressService = persistentProgressService;
 
-		public int AmmoCount { get; private set; }
-
 		public async UniTask Reload()
 		{
 			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
@@ -32,7 +30,7 @@ namespace Character.Shooting
 
 			await UniTask.Delay(weaponData.ReloadTime);
 
-			AmmoCount = weaponData.MagazineSize;
+			weaponData.CurrentAmmoCount = weaponData.MagazineSize;
 
 			WeaponReloaded?.Invoke();
 

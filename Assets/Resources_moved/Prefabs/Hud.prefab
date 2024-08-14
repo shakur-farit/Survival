@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5836551299729854244}
   m_Layer: 5
-  m_Name: BulletIconsHolder
+  m_Name: AmmoIconsHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4970cfd22163c8a4994d946918b106ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletIconsHolder: {fileID: 5836551299729854244}
+  _ammoIconsHolder: {fileID: 5836551299729854244}
 --- !u!114 &4396460010098017314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hpBar: {fileID: 4396460010098017314}
+  _ammoBar: {fileID: 3806271420377075324}
 --- !u!1 &6816609257338586388
 GameObject:
   m_ObjectHideFlags: 0

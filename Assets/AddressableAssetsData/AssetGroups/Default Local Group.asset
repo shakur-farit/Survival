@@ -98,7 +98,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb6d522c6b964f249984bf5de367ed09
-    m_Address: BulletIcon
+    m_Address: AmmoIcon
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

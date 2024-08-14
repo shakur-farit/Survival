@@ -111,7 +111,7 @@ namespace Installers
 			Container.Bind<ISpecialEffectsFactory>().To<SpecialEffectsFactory>().AsSingle();
 
 		private void RegisterBulletIconsFactory() =>
-			Container.Bind<IBulletIconFactory>().To<BulletIconFactory>().AsSingle();
+			Container.Bind<IAmmoIconFactory>().To<AmmoIconFactory>().AsSingle();
 
 		private void RegisterHeartIconsFactory() => 
 			Container.Bind<IHeartIconFactory>().To<HeartIconFactory>().AsSingle();
