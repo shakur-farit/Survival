@@ -37,6 +37,12 @@ namespace Shop
 
 			_priceText.text = weaponStaticData.Price.ToString();
 
+			if (_initializer.WeaponUpgradeType == WeaponUpgradeType.None)
+			{
+				_upgradeSprite.gameObject.SetActive(false);
+				return;
+			}
+
 			if (_upgradeSpritesDictionary.TryGetValue(_initializer.WeaponUpgradeType, out Sprite sprite))
 				_upgradeSprite.sprite = sprite;
 		}

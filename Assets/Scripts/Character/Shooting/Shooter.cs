@@ -104,8 +104,6 @@ namespace Character.Shooting
 
 			--weaponData.CurrentAmmoCount;
 			Shot?.Invoke();
-
-			Debug.Log(weaponData.CurrentAmmoCount);
 		}
 
 		private async UniTask CreateAmmo() =>

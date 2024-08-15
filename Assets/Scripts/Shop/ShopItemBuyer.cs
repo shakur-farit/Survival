@@ -41,7 +41,7 @@ namespace Shop
 
 		private void BuyItem()
 		{
-			if (_price > _scoreCounter.Score)
+			if (_price > _persistentProgressService.Progress.ScoreData.CurrentScore)
 			{
 				OpenDialogWindow("You have not enough coins");
 

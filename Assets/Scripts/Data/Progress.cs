@@ -9,5 +9,6 @@ namespace Data
 		public EnemyData EnemyData = new();
 		public LevelData LevelData = new();
 		public ShopData ShopData = new();
+		public ScoreData ScoreData = new();
 	}
 }

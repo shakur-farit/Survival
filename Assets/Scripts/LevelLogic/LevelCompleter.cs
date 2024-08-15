@@ -3,12 +3,13 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
+using UnityEngine;
+using Utility;
 
 namespace LevelLogic
 {
 	public class LevelCompleter : ILevelCompleter
 	{
-		private const int NextLevelStep = 1;
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly ICountDownTimer _timer;
@@ -52,6 +53,6 @@ namespace LevelLogic
 		}
 
 		private void SetupNextLevel() => 
-			_persistentProgressService.Progress.LevelData.PreviousLevel += NextLevelStep;
+			_persistentProgressService.Progress.LevelData.PreviousLevel += Constants.NextLevelStep;
 	}
 }

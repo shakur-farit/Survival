@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Utility
 {
 	public class Constants
@@ -7,6 +5,8 @@ namespace Utility
 		// General
 		public const float Epsilon = 0.001f;
 		public const int ValueOfInfinity = -1;
+		public const int Zero = 0;
+
 
 		// Drop animation values
 		public const int JumpPower = 2;
@@ -14,9 +14,11 @@ namespace Utility
 		public const float JumDuration = 0.5f;
 		public const int RotateDuration = 2;
 
+
 		// Weapon reloading text animation values
 		public const float TextBlinkDuration = 0.5f;
 		public const float EndValue = 0;
+
 
 		// Character aiming angle values
 		public const float UpAndUpRightBorder = 67f;
@@ -29,8 +31,10 @@ namespace Utility
 		public const float LeftNegativeBorder = -180f;
 		public const float LeftPositiveBorder = 180f;
 
+
 		// Minimal distance to target for enemy move
 		public const float MinDistanceToTarget = 1f;
+
 
 		// Hud values
 		public const float NextBulletIconYPositionStep = 15f;
@@ -38,14 +42,21 @@ namespace Utility
 		public const int MaxBulletIconsInColumn = 20;
 		public const float NextHearthIconXPositionStep = 60f;
 
+
 		// Timer values
 		public const int OneSecond = 1000;
+
 
 		// Shop items values
 		public const float NextItemXPositionStep = 600f;
 		public const int ItemsNumber = 3;
-		
+
+
 		// Character's sprite blink values
 		public const float CharacterSpriteBlinkDuration = 0.15f;
+
+
+		// Level values
+		public const int NextLevelStep = 1;
 	}
 }

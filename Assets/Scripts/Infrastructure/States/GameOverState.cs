@@ -2,10 +2,12 @@ using Character.Factory;
 using Cysharp.Threading.Tasks;
 using Enemy.Factory;
 using Hud.Factory;
+using Infrastructure.Services.PersistentProgress;
 using Spawn;
 using UI.Services.Windows;
 using UI.Windows;
 using UnityEngine;
+using Utility;
 
 namespace Infrastructure.States
 {
@@ -16,15 +18,18 @@ namespace Infrastructure.States
 		private readonly IHudFactory _hudFactory;
 		private readonly IEnemyFactory _enemyFactory;
 		private readonly IEnemySpawner _enemySpawner;
+		private readonly IPersistentProgressService _persistentProgressService;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
-			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner)
+			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner, 
+			IPersistentProgressService persistentProgressService)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
 			_enemyFactory = enemyFactory;
 			_enemySpawner = enemySpawner;
+			_persistentProgressService = persistentProgressService;
 		}
 
 		public async void Enter()
@@ -32,6 +37,7 @@ namespace Infrastructure.States
 			await OpenGameOverWindow();
 			StopEnemiesSpawn();
 			DestroyObjects();
+			ResetData();
 		}
 
 		public void Exit() => 
@@ -66,5 +72,12 @@ namespace Infrastructure.States
 
 		private void CloseGameOverWindow() => 
 			_windowService.Close(WindowType.GameOver);
+
+		private void ResetData()
+		{
+			_persistentProgressService.Progress.LevelData.PreviousLevel = Constants.Zero;
+			_persistentProgressService.Progress.ScoreData.CurrentScore = Constants.Zero;
+			_persistentProgressService.Progress.EnemyData.DeadEnemies.Clear();
+		}
 	}
 }
