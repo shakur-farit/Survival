@@ -10,7 +10,7 @@ namespace Character.Shooting
 		public event Action ReloadInProgress;
 		public event Action WeaponReloaded;
 
-		private bool _isReloading;
+		public bool IsReloading { get; private set; }
 
 		private readonly IPersistentProgressService _persistentProgressService;
 
@@ -21,12 +21,12 @@ namespace Character.Shooting
 		{
 			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
 
+			if (IsReloading)
+				return;
+			
 			ReloadInProgress?.Invoke();
 
-			if (_isReloading)
-				return;
-
-			_isReloading = true;
+			IsReloading = true;
 
 			await UniTask.Delay(weaponData.ReloadTime);
 
@@ -34,7 +34,7 @@ namespace Character.Shooting
 
 			WeaponReloaded?.Invoke();
 
-			_isReloading = false;
+			IsReloading = false;
 		}
 	}
 }

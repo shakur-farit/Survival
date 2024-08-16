@@ -8,6 +8,8 @@ namespace Character.Shooting
 		event Action WeaponReloaded;
 		event Action ReloadInProgress;
 
+		bool IsReloading { get; }
+
 		UniTask Reload();
 	}
 }

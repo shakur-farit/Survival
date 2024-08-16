@@ -21,7 +21,7 @@ namespace Character.Shooting
 
 		private bool _isShoot;
 		private bool _infinityAmmo;
-		private bool _isReloading;
+		//private bool _isReloading;
 		private int _shootInterval;
 
 		private IFireInputService _fireInputSystem;
@@ -64,7 +64,7 @@ namespace Character.Shooting
 
 		private async void TryToShoot()
 		{
-			if (TargetDetected == false || _isShoot || _isReloading)
+			if (TargetDetected == false || _isShoot || _weaponReloader.IsReloading)
 				return;
 
 			if (_persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount <= 0 && _infinityAmmo == false)
@@ -123,11 +123,11 @@ namespace Character.Shooting
 
 		private async UniTask ReloadWeapon()
 		{
-			_isReloading = true;
+			//_isReloading = true;
 
 			await _weaponReloader.Reload();
 
-			_isReloading = false;
+			//_isReloading = false;
 		}
 	}
 }

@@ -1,5 +1,7 @@
 using System;
+using Data;
 using Infrastructure.Services.PersistentProgress;
+using UnityEngine;
 
 namespace Score
 {
@@ -12,8 +14,6 @@ namespace Score
 		public ScoreCounter(IPersistentProgressService persistentProgressService) => 
 			_persistentProgressService = persistentProgressService;
 
-		//public int Score { get; private set; }
-		
 		public void AddScore(int dropValue)
 		{
 			_persistentProgressService.Progress.ScoreData.CurrentScore += dropValue;
@@ -21,14 +21,14 @@ namespace Score
 			ScoreChanged?.Invoke();
 		}
 
-		public void RemoveScore(int dropValue)
+		public void RemoveScore(int value)
 		{
-			int score = _persistentProgressService.Progress.ScoreData.CurrentScore;
+			ScoreData scoreData = _persistentProgressService.Progress.ScoreData;
 
-			score -= dropValue;
+			scoreData.CurrentScore -= value;
 
-			if(score < 0) 
-				score = 0;
+			if (scoreData.CurrentScore < 0)
+				scoreData.CurrentScore = 0;
 
 			ScoreChanged?.Invoke();
 		}
