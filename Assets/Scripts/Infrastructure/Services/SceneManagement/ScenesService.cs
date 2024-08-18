@@ -7,5 +7,8 @@ namespace Infrastructure.States
 	{
 		public async UniTask SwitchSceneTo(string sceneName) => 
 			await SceneManager.LoadSceneAsync(sceneName);
+
+		public async UniTask LoadSceneAdditive(string sceneName) => 
+			await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 	}
 }

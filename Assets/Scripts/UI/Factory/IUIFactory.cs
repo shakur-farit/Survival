@@ -1,10 +1,13 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace UI.Factory
 {
 	public interface IUIFactory
 	{
+		GameObject UIRoot { get; }
+
 		UniTask CreateUIRoot();
 		UniTask CreateMainMenuWindow();
 		UniTask CreateLevelCompleteWindow();

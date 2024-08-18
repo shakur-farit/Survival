@@ -34,10 +34,14 @@ namespace Infrastructure.States
 		private async UniTask OpenMainMenuWindow() => 
 			await _windowsService.Open(WindowType.MainMenu);
 
-		private async UniTask SwitchToMainMenuScene() => 
+		private async UniTask SwitchToMainMenuScene()
+		{
 			await _scenesService.SwitchSceneTo(Constants.MainMenuScene);
 
-		private async UniTask CreateUIRoot() =>
+			await _scenesService.LoadSceneAdditive(Constants.CharacterSelectorScene);
+		}
+
+		private async UniTask CreateUIRoot() => 
 			await _uiFactory.CreateUIRoot();
 	}
 }

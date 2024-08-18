@@ -9,13 +9,13 @@ namespace UI.Factory
 {
 	public class UIFactory : FactoryBase, IUIFactory
 	{
-		private GameObject _uiRoot;
 		private GameObject _mainMenuWindow;
 		private GameObject _levelCompleteWindow;
 		private GameObject _gameOverWindow;
 		private GameObject _weaponStatsWindow;
 		private GameObject _informationWindow;
 		private GameObject _dialogWindow;
+		public GameObject UIRoot { get; private set; }
 
 		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
 			base(assetsProvider, objectsCreator)
@@ -25,47 +25,47 @@ namespace UI.Factory
 		public async UniTask CreateUIRoot()
 		{
 			AssetsReference reference = await InitReference();
-			_uiRoot = await CreateObject(reference.UIRootAddress);
+			UIRoot = await CreateObject(reference.UIRootAddress);
 		}
 
 		public async UniTask CreateMainMenuWindow()
 		{
 			AssetsReference reference = await InitReference();
-			_mainMenuWindow = await CreateObject(reference.MainMenuWindowAddress, _uiRoot.transform);
+			_mainMenuWindow = await CreateObject(reference.MainMenuWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateLevelCompleteWindow()
 		{
 			AssetsReference reference = await InitReference();
-			_levelCompleteWindow = await CreateObject(reference.LevelCompleteWindowAddress, _uiRoot.transform);
+			_levelCompleteWindow = await CreateObject(reference.LevelCompleteWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateGameOverWindow()
 		{
 			AssetsReference reference = await InitReference();
-			_gameOverWindow = await CreateObject(reference.GameOverWindowAddress, _uiRoot.transform);
+			_gameOverWindow = await CreateObject(reference.GameOverWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateWeaponStatsWindow()
 		{
 			AssetsReference reference = await InitReference();
-			_weaponStatsWindow = await CreateObject(reference.WeaponStatsWindowAddress, _uiRoot.transform);
+			_weaponStatsWindow = await CreateObject(reference.WeaponStatsWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateInformationWindow()
 		{
 			AssetsReference reference = await InitReference();
-			_informationWindow = await CreateObject(reference.InformationWindowAddress, _uiRoot.transform);
+			_informationWindow = await CreateObject(reference.InformationWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateDialogWindow()
 		{
 			AssetsReference reference = await InitReference();
-			_dialogWindow = await CreateObject(reference.DialogWindowAddress, _uiRoot.transform);
+			_dialogWindow = await CreateObject(reference.DialogWindowAddress, UIRoot.transform);
 		}
 
 		public void DestroyUIRoot() => 
-			Object.Destroy(_uiRoot);
+			Object.Destroy(UIRoot);
 
 		public void DestroyMainMenuWindow() => 
 			Object.Destroy(_mainMenuWindow);

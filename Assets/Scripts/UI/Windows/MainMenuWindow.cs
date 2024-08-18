@@ -14,7 +14,7 @@ namespace UI.Windows
 	public class MainMenuWindow : WindowBass
 	{
 		[SerializeField] private Button _setGeneralButton;
-		[SerializeField] private Button _setThiefButton;
+		//[SerializeField] private Button _setThiefButton;
 
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
@@ -33,7 +33,7 @@ namespace UI.Windows
 		{
 			ActionButton.onClick.AddListener(StartGame);
 			_setGeneralButton.onClick.AddListener(() => SetCharacter(CharacterType.TheGeneral));
-			_setThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
+			//_setThiefButton.onClick.AddListener(() => SetCharacter(CharacterType.TheThief));
 		}
 
 		private void StartGame()
