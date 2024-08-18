@@ -10,6 +10,7 @@ using Infrastructure.States.StatesMachine;
 using LevelLogic;
 using Spawn;
 using StaticData;
+using Utility;
 
 namespace Infrastructure.States
 {
@@ -23,11 +24,12 @@ namespace Infrastructure.States
 		private readonly ILevelInitializer _levelInitializer;
 		private readonly ICountDownTimer _timer;
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
+		private readonly IScenesService _scenesService;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
 			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
 			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer, 
-			IGameStatesSwitcher gameStatesSwitcher)
+			IGameStatesSwitcher gameStatesSwitcher, IScenesService scenesService)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
@@ -37,11 +39,14 @@ namespace Infrastructure.States
 			_levelInitializer = levelInitializer;
 			_timer = timer;
 			_gameStatesSwitcher = gameStatesSwitcher;
+			_scenesService = scenesService;
 		}
 
 		public async void Enter()
 		{
 			_timer.Completed += SpawnEnemies;
+
+			await SwitchToGameScene();
 
 			LevelInitialize();
 			await CreateGameObjects();
@@ -51,6 +56,9 @@ namespace Infrastructure.States
 
 		public void Exit() => 
 			_timer.Completed -= SpawnEnemies;
+
+		private async UniTask SwitchToGameScene() => 
+			await _scenesService.SwitchSceneTo(Constants.GameScene);
 
 		private async UniTask CreateGameObjects()
 		{

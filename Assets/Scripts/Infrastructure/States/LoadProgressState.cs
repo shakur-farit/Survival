@@ -37,6 +37,6 @@ namespace Infrastructure.States
 		}
 
 		private void EnterToLoadSceneState() => 
-			_gameStatesSwitcher.SwitchState<LoadSceneState>();
+			_gameStatesSwitcher.SwitchState<MainMenuState>();
 	}
 }

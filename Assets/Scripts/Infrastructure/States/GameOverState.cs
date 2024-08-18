@@ -4,6 +4,7 @@ using Enemy.Factory;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Spawn;
+using UI.Factory;
 using UI.Services.Windows;
 using UI.Windows;
 using UnityEngine;
@@ -19,10 +20,11 @@ namespace Infrastructure.States
 		private readonly IEnemyFactory _enemyFactory;
 		private readonly IEnemySpawner _enemySpawner;
 		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly IUIFactory _uiFactory;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
 			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner, 
-			IPersistentProgressService persistentProgressService)
+			IPersistentProgressService persistentProgressService, IUIFactory uiFactory)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
@@ -30,6 +32,7 @@ namespace Infrastructure.States
 			_enemyFactory = enemyFactory;
 			_enemySpawner = enemySpawner;
 			_persistentProgressService = persistentProgressService;
+			_uiFactory = uiFactory;
 		}
 
 		public async void Enter()
@@ -40,8 +43,12 @@ namespace Infrastructure.States
 			ResetData();
 		}
 
-		public void Exit() => 
+		public void Exit()
+		{
 			CloseGameOverWindow();
+
+			DestroyUIRoot();
+		}
 
 		private async UniTask OpenGameOverWindow() => 
 			await _windowService.Open(WindowType.GameOver);
@@ -72,6 +79,9 @@ namespace Infrastructure.States
 
 		private void CloseGameOverWindow() => 
 			_windowService.Close(WindowType.GameOver);
+
+		private void DestroyUIRoot() => 
+			_uiFactory.DestroyUIRoot();
 
 		private void ResetData()
 		{

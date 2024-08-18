@@ -58,5 +58,9 @@ namespace Utility
 
 		// Level values
 		public const int NextLevelStep = 1;
+
+		// Scenes name
+		public const string MainMenuScene = "MainMenu";
+		public const string GameScene = "Game";
 	}
 }
