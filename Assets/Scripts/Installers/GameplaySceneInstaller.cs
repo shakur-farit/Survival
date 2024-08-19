@@ -2,6 +2,7 @@ using Ammo;
 using Ammo.Factory;
 using Character;
 using Character.Factory;
+using Character.Selector;
 using Character.Shooting;
 using DropLogic;
 using DropLogic.Factory;
@@ -50,6 +51,7 @@ namespace Installers
 			RegisterBulletIconsFactory();
 			RegisterHeartIconsFactory();
 			RegisterShopItemFactory();
+			RegisterSelectorFactory();
 		}
 
 		private void RegisterMediators()
@@ -115,6 +117,9 @@ namespace Installers
 
 		private void RegisterHeartIconsFactory() => 
 			Container.Bind<IHeartIconFactory>().To<HeartIconFactory>().AsSingle();
+
+		private void RegisterSelectorFactory() =>
+			Container.Bind<ICharacterSelectorFactory>().To<CharacterSelectorFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();

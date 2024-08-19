@@ -5,5 +5,6 @@ namespace Character
 		None = 0,
     TheGeneral,
 		TheThief,
+		TheScientist
 	}
 }

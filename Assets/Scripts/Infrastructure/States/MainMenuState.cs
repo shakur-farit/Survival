@@ -1,3 +1,4 @@
+using Character.Selector;
 using Cysharp.Threading.Tasks;
 using UI.Factory;
 using UI.Services.Windows;
@@ -11,12 +12,15 @@ namespace Infrastructure.States
 		private readonly IWindowsService _windowsService;
 		private readonly IUIFactory _uiFactory;
 		private readonly IScenesService _scenesService;
+		private readonly ICharacterSelectorFactory _characterSelectorFactory;
 
-		public MainMenuState(IWindowsService windowsService, IUIFactory uiFactory, IScenesService scenesService)
+		public MainMenuState(IWindowsService windowsService, IUIFactory uiFactory, 
+			IScenesService scenesService, ICharacterSelectorFactory characterSelectorFactory)
 		{
 			_windowsService = windowsService;
 			_uiFactory = uiFactory;
 			_scenesService = scenesService;
+			_characterSelectorFactory = characterSelectorFactory;
 		}
 
 		public async void Enter()
@@ -26,22 +30,32 @@ namespace Infrastructure.States
 			await CreateUIRoot();
 
 			await OpenMainMenuWindow();
+
+			await CreateCharacterSelector();
 		}
 
-		public void Exit() => 
-			_windowsService.Close(WindowType.MainMenu);
+		public void Exit()
+		{
+			CloserMainMenuWindow();
+			DestroySelector();
+		}
 
 		private async UniTask OpenMainMenuWindow() => 
 			await _windowsService.Open(WindowType.MainMenu);
 
-		private async UniTask SwitchToMainMenuScene()
-		{
+		private async UniTask SwitchToMainMenuScene() => 
 			await _scenesService.SwitchSceneTo(Constants.MainMenuScene);
-
-			await _scenesService.LoadSceneAdditive(Constants.CharacterSelectorScene);
-		}
 
 		private async UniTask CreateUIRoot() => 
 			await _uiFactory.CreateUIRoot();
+
+		private async UniTask CreateCharacterSelector() => 
+			await _characterSelectorFactory.Create();
+
+		private void DestroySelector() => 
+			_characterSelectorFactory.Destroy();
+
+		private void CloserMainMenuWindow() => 
+			_windowsService.Close(WindowType.MainMenu);
 	}
 }

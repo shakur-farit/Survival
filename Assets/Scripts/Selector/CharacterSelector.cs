@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Data;
 using Infrastructure.Services.PersistentProgress;
@@ -6,6 +5,7 @@ using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Character.Selector
 {
@@ -16,12 +16,12 @@ namespace Character.Selector
 		[SerializeField] private Animator _animator;
 
 		private List<CharacterStaticData> _charactersList;
-		private int _previousIndex = 0;
-		private int _currentIndex = 0;
+		private int _currentIndex;
 
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
 
+		[Inject]
 		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService)
 		{
 			_staticDataService = staticDataService;
@@ -35,37 +35,35 @@ namespace Character.Selector
 			_nextCharacterButton.onClick.AddListener(SetNextCharacter);
 			_previusCharacterButton.onClick.AddListener(SetPreviousCharacter);
 
-			if (_charactersList.Count == 1)
-			{
-				_nextCharacterButton.gameObject.SetActive(false);
-				_previusCharacterButton.gameObject.SetActive(false);
-			} 
+			UpdateButtons();
 
+			SetStartCharacter();
+		}
 
-			SetNextCharacter();
+		private void SetStartCharacter()
+		{
+			SetCharacter(_currentIndex);
+
+			UpdateButtons();
 		}
 
 		private void SetNextCharacter()
 		{
+			if (_currentIndex < _charactersList.Count - 1) 
+				_currentIndex++;
+
 			SetCharacter(_currentIndex);
 
-			if (_currentIndex == _charactersList.Count - 1)
-			{
-				_nextCharacterButton.gameObject.SetActive(false);
-				return;
-			}
-
-			_currentIndex++;
+			UpdateButtons();
 		}
 
 		private void SetPreviousCharacter()
 		{
 			_currentIndex--;
-			
+
 			SetCharacter(_currentIndex);
 
-			if (_currentIndex == 0) 
-				_previusCharacterButton.gameObject.SetActive(false);
+			UpdateButtons();
 		}
 
 		private void SetCharacter(int currentIndex)
@@ -108,6 +106,24 @@ namespace Character.Selector
 					characterWeaponData.ReloadTime = weaponStaticData.ReloadTime;
 					characterWeaponData.Spread = weaponStaticData.SpreadMax;
 				}
+		}
+
+		private void UpdateButtons()
+		{
+			_nextCharacterButton.gameObject.SetActive(true);
+			_previusCharacterButton.gameObject.SetActive(true);
+
+			if (_charactersList.Count == 1)
+			{
+				_nextCharacterButton.gameObject.SetActive(false);
+				_previusCharacterButton.gameObject.SetActive(false);
+			}
+
+			if (_currentIndex >= _charactersList.Count - 1) 
+				_nextCharacterButton.gameObject.SetActive(false);
+
+			if (_currentIndex == 0)
+				_previusCharacterButton.gameObject.SetActive(false);
 		}
 	}
 }

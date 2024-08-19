@@ -12,6 +12,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string DropAddress;
 		public string HudAddress;
 		public string UIRootAddress;
+		public string CharacterSelectorAddress;
 		public string MainMenuWindowAddress;
 		public string LevelCompleteWindowAddress;
 		public string GameOverWindowAddress;

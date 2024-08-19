@@ -62,6 +62,5 @@ namespace Utility
 		// Scenes name
 		public const string MainMenuScene = "MainMenu";
 		public const string GameScene = "Game";
-		public const string CharacterSelectorScene = "CharacterSelector";
 	}
 }

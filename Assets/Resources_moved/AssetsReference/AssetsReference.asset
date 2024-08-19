@@ -19,6 +19,7 @@ MonoBehaviour:
   DropAddress: Drop
   HudAddress: Hud
   UIRootAddress: UIRoot
+  CharacterSelectorAddress: CharacterSelector
   MainMenuWindowAddress: MainMenuWindow
   LevelCompleteWindowAddress: LevelCompleteWindow
   GameOverWindowAddress: GameOverWindow
