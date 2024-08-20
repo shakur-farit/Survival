@@ -33,7 +33,7 @@ namespace Utility
 
 
 		// Minimal distance to target for enemy move
-		public const float MinDistanceToTarget = 1f;
+		public const float MinDistanceToTarget = 0.25f;
 
 
 		// Hud values

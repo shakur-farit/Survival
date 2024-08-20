@@ -11,6 +11,8 @@ namespace Enemy
 		private IEnemyDamagerMediator _mediator;
 
 		private int _damage;
+		private bool _isInsideTrigger;
+		private CharacterHealth _characterHealth;
 
 		[Inject]
 		public void Constructor(IEnemyDamagerMediator mediator) =>
@@ -19,19 +21,29 @@ namespace Enemy
 		private void Awake() =>
 			_mediator.RegisterDamager(this);
 
+		private void Update()
+		{
+			if(_isInsideTrigger)
+				DealDamage(_characterHealth);
+		}
+
 		public void SetupDamage(EnemyStaticData enemyStaticData) => 
 			_damage = enemyStaticData.Damage;
 
-		private void OnTriggerEnter2D(Collider2D other) => 
-			TryDealDamage(other);
-
-		private void OnTriggerStay2D(Collider2D other) => 
-			TryDealDamage(other);
-
-		private void TryDealDamage(Collider2D other)
+		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.gameObject.TryGetComponent(out CharacterHealth characterHealth))
+			if (other.TryGetComponent(out CharacterHealth characterHealth))
+			{
+				_characterHealth = characterHealth;
+				_isInsideTrigger = true;
 				DealDamage(characterHealth);
+			}
+		}
+
+		private void OnTriggerExit2D(Collider2D other)
+		{
+			if (other.TryGetComponent(out CharacterHealth characterHealth)) 
+				_isInsideTrigger = false;
 		}
 
 		private void DealDamage(CharacterHealth characterHealth) => 
