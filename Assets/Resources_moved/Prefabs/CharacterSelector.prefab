@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextCharacterButton: {fileID: 2529319151046512763}
-  _previusCharacterButton: {fileID: 5909968392509408386}
+  _previousCharacterButton: {fileID: 5909968392509408386}
   _animator: {fileID: 7412998693022197086}
 --- !u!1 &1390392444598257751
 GameObject:

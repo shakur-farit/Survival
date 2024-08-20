@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -12,7 +14,7 @@ namespace Character.Selector
 	public class CharacterSelector : MonoBehaviour
 	{
 		[SerializeField] private Button _nextCharacterButton;
-		[SerializeField] private Button _previusCharacterButton;
+		[SerializeField] private Button _previousCharacterButton;
 		[SerializeField] private Animator _animator;
 
 		private List<CharacterStaticData> _charactersList;
@@ -33,9 +35,7 @@ namespace Character.Selector
 			_charactersList = _staticDataService.CharactersListStaticData.CharactersList;
 
 			_nextCharacterButton.onClick.AddListener(SetNextCharacter);
-			_previusCharacterButton.onClick.AddListener(SetPreviousCharacter);
-
-			UpdateButtons();
+			_previousCharacterButton.onClick.AddListener(SetPreviousCharacter);
 
 			SetStartCharacter();
 		}
@@ -80,13 +80,14 @@ namespace Character.Selector
 			CharacterWeaponData characterWeaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
 
 
-			foreach (CharacterStaticData character in _staticDataService.CharactersListStaticData.CharactersList)
-				if (type == character.CharacterType)
-				{
-					_persistentProgressService.Progress.CharacterData.CurrentCharacter = character;
+			CharacterStaticData selectedCharacter = _charactersList
+				.FirstOrDefault(character => character.CharacterType == type);
 
-					InitializeWeapon(character, characterWeaponData);
-				}
+			if (selectedCharacter != null)
+			{
+				_persistentProgressService.Progress.CharacterData.CurrentCharacter = selectedCharacter;
+				InitializeWeapon(selectedCharacter, characterWeaponData);
+			}
 		}
 
 		private void InitializeWeapon(CharacterStaticData character, CharacterWeaponData characterWeaponData)
@@ -94,36 +95,29 @@ namespace Character.Selector
 			if (_persistentProgressService.IsNew == false)
 				return;
 
-			foreach (WeaponStaticData weaponStaticData in _staticDataService.WeaponsListStaticData.WeaponsList)
-				if (character.DefaultWeapon == weaponStaticData.Type)
-				{
-					characterWeaponData.CurrentWeapon = weaponStaticData;
+			WeaponStaticData selectedWeapon = _staticDataService.WeaponsListStaticData.WeaponsList
+				.FirstOrDefault(weapon => character.DefaultWeapon == weapon.Type);
 
-					characterWeaponData.Range = weaponStaticData.Range;
-					characterWeaponData.Damage = weaponStaticData.Damage;
-					characterWeaponData.ShootsInterval = weaponStaticData.ShotsInterval;
-					characterWeaponData.MagazineSize = weaponStaticData.MagazineSize;
-					characterWeaponData.ReloadTime = weaponStaticData.ReloadTime;
-					characterWeaponData.Spread = weaponStaticData.SpreadMax;
-				}
+			if (selectedWeapon != null)
+			{
+				characterWeaponData.CurrentWeapon = selectedWeapon;
+				characterWeaponData.Range = selectedWeapon.Range;
+				characterWeaponData.Damage = selectedWeapon.Damage;
+				characterWeaponData.ShootsInterval = selectedWeapon.ShotsInterval;
+				characterWeaponData.MagazineSize = selectedWeapon.MagazineSize;
+				characterWeaponData.ReloadTime = selectedWeapon.ReloadTime;
+				characterWeaponData.Spread = selectedWeapon.SpreadMax;
+			}
 		}
 
 		private void UpdateButtons()
 		{
-			_nextCharacterButton.gameObject.SetActive(true);
-			_previusCharacterButton.gameObject.SetActive(true);
+			bool isSingleCharacter = _charactersList.Count == 1;
+			bool isAtFirstCharacter = _currentIndex == 0;
+			bool isAtLastCharacter = _currentIndex >= _charactersList.Count - 1;
 
-			if (_charactersList.Count == 1)
-			{
-				_nextCharacterButton.gameObject.SetActive(false);
-				_previusCharacterButton.gameObject.SetActive(false);
-			}
-
-			if (_currentIndex >= _charactersList.Count - 1) 
-				_nextCharacterButton.gameObject.SetActive(false);
-
-			if (_currentIndex == 0)
-				_previusCharacterButton.gameObject.SetActive(false);
+			_nextCharacterButton.gameObject.SetActive(!isSingleCharacter && !isAtLastCharacter);
+			_previousCharacterButton.gameObject.SetActive(!isSingleCharacter && !isAtFirstCharacter);
 		}
 	}
 }
