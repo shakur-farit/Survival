@@ -18,17 +18,11 @@ namespace Infrastructure.States
 		public void Enter() => 
 			OpenLevelCompleteWindow();
 
-		public void Exit()
-		{
+		public void Exit() => 
 			ClearShopUsedWeaponTypesList();
-			CloseLevelCompleteWindow();
-		}
 
 		private void OpenLevelCompleteWindow() =>
 			_windowService.Open(WindowType.LevelComplete);
-
-		private void CloseLevelCompleteWindow() =>
-			_windowService.Close(WindowType.LevelComplete);
 
 		private void ClearShopUsedWeaponTypesList() => 
 			_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Clear();

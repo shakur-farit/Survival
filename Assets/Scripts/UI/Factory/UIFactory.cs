@@ -15,6 +15,7 @@ namespace UI.Factory
 		private GameObject _weaponStatsWindow;
 		private GameObject _informationWindow;
 		private GameObject _dialogWindow;
+		private GameObject _pauseWindow;
 		public GameObject UIRoot { get; private set; }
 
 		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
@@ -64,6 +65,12 @@ namespace UI.Factory
 			_dialogWindow = await CreateObject(reference.DialogWindowAddress, UIRoot.transform);
 		}
 
+		public async UniTask CreatePauseWindow()
+		{
+			AssetsReference reference = await InitReference();
+			_pauseWindow = await CreateObject(reference.PauseWindowAddress, UIRoot.transform);
+		}
+
 		public void DestroyUIRoot() => 
 			Object.Destroy(UIRoot);
 
@@ -84,5 +91,8 @@ namespace UI.Factory
 
 		public void DestroyDialogWindow() => 
 			Object.Destroy(_dialogWindow);
+
+		public void DestroyPauseWindow() =>
+			Object.Destroy(_pauseWindow);
 	}
 }

@@ -19,6 +19,7 @@ namespace Infrastructure.Services.AssetsManagement
 		public string WeaponStatsWindowAddress;
 		public string InformationWindowAddress;
 		public string DialogWindowAddress;
+		public string PauseWindowAddress;
 		public string ShopItemAddress;
 		public string AmmoIconAddress;
 		public string HeartIconAddress;

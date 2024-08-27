@@ -8,6 +8,7 @@ namespace UI.Windows
 		GameOver,
 		WeaponStats,
 		Information,
-		Dialog
+		Dialog,
+		Pause
 	}
 }

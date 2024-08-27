@@ -34,11 +34,8 @@ namespace Infrastructure.States
 			await CreateCharacterSelector();
 		}
 
-		public void Exit()
-		{
-			CloserMainMenuWindow();
+		public void Exit() => 
 			DestroySelector();
-		}
 
 		private async UniTask OpenMainMenuWindow() => 
 			await _windowsService.Open(WindowType.MainMenu);
@@ -54,8 +51,5 @@ namespace Infrastructure.States
 
 		private void DestroySelector() => 
 			_characterSelectorFactory.Destroy();
-
-		private void CloserMainMenuWindow() => 
-			_windowsService.Close(WindowType.MainMenu);
 	}
 }

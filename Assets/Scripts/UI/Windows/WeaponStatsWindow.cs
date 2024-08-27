@@ -8,7 +8,7 @@ using Zenject;
 
 namespace UI.Windows
 {
-	public class WeaponStatsWindow : WindowBass
+	public class WeaponStatsWindow : WindowBase
 	{
 		[SerializeField] private Button _informationButton;
 		[SerializeField] private Image _weaponSprite;
@@ -32,7 +32,7 @@ namespace UI.Windows
 
 		protected override void OnAwake()
 		{
-			ActionButton.onClick.AddListener(CloseWindow);
+			base.OnAwake();
 
 			_informationButton.onClick.AddListener(OpenInformationWindow);
 
@@ -43,7 +43,7 @@ namespace UI.Windows
 			UpdateStats(weaponData);
 		}
 
-		private void CloseWindow() => 
+		 protected override void CloseWindow() => 
 			_windowsService.Close(WindowType.WeaponStats);
 
 		private void OpenInformationWindow() => 

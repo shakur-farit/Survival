@@ -9,7 +9,7 @@ using Zenject;
 
 namespace UI.Windows
 {
-	public class LevelCompleteWindow : WindowBass
+	public class LevelCompleteWindow : WindowBase
 	{
 		[SerializeField] private Button _weaponStatsButton;
 
@@ -27,12 +27,17 @@ namespace UI.Windows
 
 		protected override void OnAwake()
 		{
-			ActionButton.onClick.AddListener(StartNextLevel);
+			base.OnAwake();
+
+			CloseButton.onClick.AddListener(StartNextLevel);
 
 			_weaponStatsButton.onClick.AddListener(OpenWeaponStatsWindow);
 
 			CreateShopItems();
 		}
+
+		protected override void CloseWindow() => 
+			_windowsService.Close(WindowType.LevelComplete);
 
 		private void CreateShopItems()
 		{

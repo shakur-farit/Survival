@@ -3,7 +3,7 @@ using Zenject;
 
 namespace UI.Windows
 {
-	public class InformationWindow : WindowBass
+	public class InformationWindow : WindowBase
 	{
 		private IWindowsService _windowService;
 
@@ -11,10 +11,7 @@ namespace UI.Windows
 		public void Constructor(IWindowsService windowsService) => 
 			_windowService = windowsService;
 
-		protected override void OnAwake() => 
-			ActionButton.onClick.AddListener(CloseWindow);
-
-		private void CloseWindow() => 
+		protected override void CloseWindow() => 
 			_windowService.Close(WindowType.Information);
 	}
 }

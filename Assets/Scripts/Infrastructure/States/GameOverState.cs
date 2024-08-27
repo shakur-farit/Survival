@@ -43,12 +43,8 @@ namespace Infrastructure.States
 			ResetData();
 		}
 
-		public void Exit()
-		{
-			CloseGameOverWindow();
-
+		public void Exit() => 
 			DestroyUIRoot();
-		}
 
 		private async UniTask OpenGameOverWindow() => 
 			await _windowService.Open(WindowType.GameOver);
@@ -76,9 +72,6 @@ namespace Infrastructure.States
 
 			_enemyFactory.EnemiesList.Clear();
 		}
-
-		private void CloseGameOverWindow() => 
-			_windowService.Close(WindowType.GameOver);
 
 		private void DestroyUIRoot() => 
 			_uiFactory.DestroyUIRoot();

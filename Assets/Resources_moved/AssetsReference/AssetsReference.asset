@@ -26,6 +26,7 @@ MonoBehaviour:
   WeaponStatsWindowAddress: WeaponStatsWindow
   InformationWindowAddress: InformationWindow
   DialogWindowAddress: DialogWindow
+  PauseWindowAddress: PauseWindow
   ShopItemAddress: ShopItem
   AmmoIconAddress: AmmoIcon
   HeartIconAddress: HeartIcon

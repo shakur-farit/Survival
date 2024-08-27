@@ -6,7 +6,7 @@ using Zenject;
 
 namespace UI.Windows
 {
-	public class DialogWindow : WindowBass
+	public class DialogWindow : WindowBase
 	{
 		[SerializeField] private TextMeshProUGUI _text;
 
@@ -22,12 +22,11 @@ namespace UI.Windows
 
 		protected override void OnAwake()
 		{
-			ActionButton.onClick.AddListener(CloseWindow);
-
+			base.OnAwake();
 			UpdateText();
 		}
 
-		private void CloseWindow() => 
+		protected override void CloseWindow() => 
 			_windowsService.Close(WindowType.Dialog);
 
 		private void UpdateText() => 

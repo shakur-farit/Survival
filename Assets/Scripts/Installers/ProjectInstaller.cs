@@ -9,7 +9,6 @@ using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
 using Infrastructure.States;
-using Infrastructure.States.Factory;
 using Infrastructure.States.StatesMachine;
 using Score;
 using Zenject;
@@ -29,6 +28,7 @@ namespace Installers
 			RegisterDialogService();
 			RegisterScoreCounter();
 			RegisterScenesService();
+			RegisterPauseService();
 			RegisterStatesMachines();
 		}
 
@@ -48,6 +48,9 @@ namespace Installers
 			Container.Bind<CharacterInput>().AsSingle();
 			Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
 		}
+
+		private void RegisterPauseService() => 
+			Container.Bind<IPauseService>().To<PauseService>().AsSingle();
 
 		private void RegisterScoreCounter() => 
 			Container.Bind<IScoreCounter>().To<ScoreCounter>().AsSingle();

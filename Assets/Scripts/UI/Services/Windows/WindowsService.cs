@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UI.Factory;
 using UI.Windows;
+using UnityEngine;
 
 namespace UI.Services.Windows
 {
@@ -33,6 +34,9 @@ namespace UI.Services.Windows
 				case WindowType.Dialog:
 					await _uiFactory.CreateDialogWindow();
 					break;
+				case WindowType.Pause:
+					await _uiFactory.CreatePauseWindow();
+					break;
 			}
 		}
 
@@ -57,6 +61,9 @@ namespace UI.Services.Windows
 					break;
 				case WindowType.Dialog:
 					_uiFactory.DestroyDialogWindow();
+					break;
+				case WindowType.Pause:
+					_uiFactory.DestroyPauseWindow();
 					break;
 			}
 		}

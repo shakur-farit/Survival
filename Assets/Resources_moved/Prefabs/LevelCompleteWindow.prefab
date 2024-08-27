@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780f14b631bd84b41807667e0c61d33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionButton: {fileID: 8933917849499426632}
+  CloseButton: {fileID: 8933917849499426632}
   _weaponStatsButton: {fileID: 3990360975712498665}
 --- !u!1 &3283185807219202614
 GameObject:

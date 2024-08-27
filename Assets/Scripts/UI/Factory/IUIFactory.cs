@@ -15,6 +15,7 @@ namespace UI.Factory
 		UniTask CreateWeaponStatsWindow();
 		UniTask CreateInformationWindow();
 		UniTask CreateDialogWindow();
+		UniTask CreatePauseWindow();
 
 		void DestroyUIRoot();
 		void DestroyMainMenuWindow();
@@ -23,5 +24,6 @@ namespace UI.Factory
 		void DestroyWeaponStatsWindow();
 		void DestroyInformationWindow();
 		void DestroyDialogWindow();
+		void DestroyPauseWindow();
 	}
 }
