@@ -1,5 +1,6 @@
 using Character.Factory;
 using Enemy.Mediator;
+using Infrastructure.Services.Timer;
 using StaticData;
 using UnityEngine;
 using Utility;
@@ -16,12 +17,15 @@ namespace Enemy
 
 		private ICharacterFactory _characterFactory;
 		private IEnemySpeedMediator _speedMediator;
+		private IPauseService _pauseService;
 
 		[Inject]
-		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator)
+		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator,
+			IPauseService pauseService)
 		{
 			_characterFactory = characterFactory;
 			_speedMediator = mediator;
+			_pauseService = pauseService;
 		}
 
 		private void Awake()
@@ -30,10 +34,18 @@ namespace Enemy
 			_target = _characterFactory.Character;
 		}
 
-		private void Update() => 
-			Move();
+		private void Update() =>
+			TryMove();
 
-		public void SetupSpeed(EnemyStaticData staticData) => 
+		private void TryMove()
+		{
+			if (_pauseService.IsPaused)
+				return;
+
+			Move();
+		}
+
+		public void SetupSpeed(EnemyStaticData staticData) =>
 			_movementSpeed = staticData.MovementSpeed;
 
 		private void Move()
@@ -48,7 +60,7 @@ namespace Enemy
 			Vector3 difference = transform.position - _target.transform.position;
 			float distanceSquared = difference.sqrMagnitude;
 
-			if(distanceSquared < Constants.MinDistanceToTarget)
+			if (distanceSquared < Constants.MinDistanceToTarget)
 				return;
 
 			Vector2 direction = targetPosition - enemyPosition;

@@ -1,5 +1,6 @@
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
+using Infrastructure.Services.Timer;
 using UnityEngine;
 using Zenject;
 
@@ -12,12 +13,15 @@ namespace Ammo
 
 		private IPersistentProgressService _persistentProgressService;
 		private IRandomService _randomizer;
+		private IPauseService _pauseService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IRandomService randomizer)
+		public void Constructor(IPersistentProgressService persistentProgressService, IRandomService randomizer,
+			IPauseService pauseService)
 		{
 			_persistentProgressService = persistentProgressService;
 			_randomizer = randomizer;
+			_pauseService = pauseService;
 		}
 
 		private void Awake()
@@ -27,11 +31,24 @@ namespace Ammo
 			SetupSpread();
 		}
 
-		private void SetupMovementSpeed() => 
+		private void SetupMovementSpeed() =>
 			_movementSpeed = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.MovementSpeed;
 
-		private void Update() => 
+		private void Update() =>
+			TryMove();
+
+		private void TryMove()
+		{
+			if (_pauseService.IsPaused)
+				return;
+
+			Move();
+		}
+
+		private void Move()
+		{
 			transform.Translate(_movementSpeed, _spread, 0);
+		}
 
 		private void SetupSpread()
 		{

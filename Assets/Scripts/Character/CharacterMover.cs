@@ -5,6 +5,7 @@ using Character.States.Motion;
 using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.Timer;
 using UnityEngine;
 using Utility;
 using Zenject;
@@ -14,7 +15,7 @@ namespace Character
 	public class CharacterMover : MonoBehaviour
 	{
 		[SerializeField] private CharacterAnimator CharacterAnimator;
-		
+
 		private float _movementSpeed;
 		private bool _isMove;
 
@@ -23,20 +24,23 @@ namespace Character
 		private IMovementInputService _movementInputService;
 		private IPersistentProgressService _persistentProgressService;
 		private ICharacterMotionStatesSwitcher _characterMotionSwitcher;
+		private IPauseService _pauseService;
 
 		[Inject]
-		public void Construct(IMovementInputService movementInputService, IPersistentProgressService persistentProgressService,
-				ICharacterMotionStatesSwitcher characterMotionStatesSwitcher)
+		public void Construct(IMovementInputService movementInputService,
+			IPersistentProgressService persistentProgressService,
+			ICharacterMotionStatesSwitcher characterMotionStatesSwitcher, IPauseService pauseService)
 		{
 			_movementInputService = movementInputService;
 			_persistentProgressService = persistentProgressService;
 			_characterMotionSwitcher = characterMotionStatesSwitcher;
+			_pauseService = pauseService;
 		}
 
-		private void OnEnable() => 
+		private void OnEnable() =>
 			_movementInputService.OnEnable();
 
-		private void OnDestroy() => 
+		private void OnDestroy() =>
 			_movementInputService.OnDisable();
 
 		private void Awake()
@@ -52,20 +56,32 @@ namespace Character
 			SwitchToIdlingState();
 		}
 
-		private void FixedUpdate() => 
-			Move();
+		private void FixedUpdate() =>
+			TryMove();
 
-		private void SwitchToIdlingState() => 
+		private void TryMove()
+		{
+			if (_pauseService.IsPaused)
+				return;
+
+			Move();
+		}
+
+		private void SwitchToIdlingState() =>
 			_characterMotionSwitcher.SwitchState<CharacterIdlingState>(CharacterAnimator);
 
 		private void InitializeStateActions()
 		{
 			_stateActions = new Dictionary<Func<bool>, Action>
 			{
-				{ () => _movementInputService.MovementAxis.sqrMagnitude > Constants.Epsilon && !_isMove, 
-					SwitchCharacterState<CharacterMovingState> },
-				{ () => _movementInputService.MovementAxis.sqrMagnitude <= Constants.Epsilon && _isMove, 
-					SwitchCharacterState<CharacterIdlingState> }
+				{
+					() => _movementInputService.MovementAxis.sqrMagnitude > Constants.Epsilon && !_isMove,
+					SwitchCharacterState<CharacterMovingState>
+				},
+				{
+					() => _movementInputService.MovementAxis.sqrMagnitude <= Constants.Epsilon && _isMove,
+					SwitchCharacterState<CharacterIdlingState>
+				}
 			};
 		}
 
@@ -97,6 +113,6 @@ namespace Character
 		}
 
 		private void SetupMovementSpeed() =>
-				_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacter.MovementSpeed;
+			_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacter.MovementSpeed;
 	}
 }

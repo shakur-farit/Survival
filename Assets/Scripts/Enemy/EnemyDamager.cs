@@ -1,5 +1,6 @@
 using Character;
 using Enemy.Mediator;
+using Infrastructure.Services.Timer;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -13,17 +14,21 @@ namespace Enemy
 		private int _damage;
 		private bool _isInsideTrigger;
 		private CharacterHealth _characterHealth;
+		private IPauseService _pauseService;
 
 		[Inject]
-		public void Constructor(IEnemyDamagerMediator mediator) =>
+		public void Constructor(IEnemyDamagerMediator mediator, IPauseService pauseService)
+		{
 			_mediator = mediator;
+			_pauseService = pauseService;
+		}
 
 		private void Awake() =>
 			_mediator.RegisterDamager(this);
 
 		private void Update()
 		{
-			if(_isInsideTrigger)
+			if(_isInsideTrigger && _pauseService.IsPaused == false)
 				DealDamage(_characterHealth);
 		}
 
