@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
+using StaticData;
 using StaticData.Lists;
 
 namespace Infrastructure.Services.StaticData

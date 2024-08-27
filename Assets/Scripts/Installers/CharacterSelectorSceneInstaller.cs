@@ -1,5 +1,5 @@
-using Character.Selector;
 using Infrastructure.Services.ObjectCreator;
+using Selector.Factory;
 using Zenject;
 
 namespace Installers

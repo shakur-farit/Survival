@@ -1,4 +1,4 @@
-namespace Infrastructure.Services.Timer
+namespace Infrastructure.Services.PauseService
 {
 	public class PauseService : IPauseService
 	{

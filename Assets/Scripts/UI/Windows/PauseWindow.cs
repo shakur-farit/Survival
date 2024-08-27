@@ -1,3 +1,4 @@
+using Infrastructure.Services.PauseService;
 using Infrastructure.Services.Timer;
 using UI.Services.Windows;
 using UnityEngine;
@@ -36,14 +37,16 @@ namespace UI.Windows
 		private void UnpauseGame() => 
 			_pauseService.UnpauseGame();
 
-		private void OpenSettingsWindow()
-		{
-			Debug.Log("OpenSettings");
-		}
+		private void OpenSettingsWindow() => 
+			_windowsService.Open(WindowType.Settings);
 
 		private void QuitGame()
 		{
-			Debug.Log("Quit");
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
 		}
 	}
 }

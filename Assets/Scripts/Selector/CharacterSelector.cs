@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Character;
 using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
@@ -8,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Character.Selector
+namespace Selector
 {
 	public class CharacterSelector : MonoBehaviour
 	{

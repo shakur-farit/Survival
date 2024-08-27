@@ -9,6 +9,7 @@ namespace UI.Windows
 		WeaponStats,
 		Information,
 		Dialog,
-		Pause
+		Pause,
+		Settings
 	}
 }

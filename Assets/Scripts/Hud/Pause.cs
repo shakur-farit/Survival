@@ -1,3 +1,4 @@
+using Infrastructure.Services.PauseService;
 using Infrastructure.Services.Timer;
 using UI.Services.Windows;
 using UI.Windows;

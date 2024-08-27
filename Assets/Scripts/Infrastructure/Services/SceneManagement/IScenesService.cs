@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Infrastructure.States
+namespace Infrastructure.Services.SceneManagement
 {
 	public interface IScenesService
 	{

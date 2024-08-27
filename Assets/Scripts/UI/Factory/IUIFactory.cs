@@ -25,5 +25,7 @@ namespace UI.Factory
 		void DestroyInformationWindow();
 		void DestroyDialogWindow();
 		void DestroyPauseWindow();
+		UniTask CreateSettingsWindow();
+		void DestroySettingsWindow();
 	}
 }

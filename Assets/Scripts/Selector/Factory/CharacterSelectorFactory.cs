@@ -4,7 +4,7 @@ using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
-namespace Character.Selector
+namespace Selector.Factory
 {
 	public class CharacterSelectorFactory : FactoryBase, ICharacterSelectorFactory
 	{

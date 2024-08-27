@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Hud;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
 using LevelLogic;

@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Character.Selector
+namespace Selector.Factory
 {
 	public interface ICharacterSelectorFactory
 	{

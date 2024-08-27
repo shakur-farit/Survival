@@ -1,3 +1,4 @@
+using Infrastructure.Services.PauseService;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.Timer;

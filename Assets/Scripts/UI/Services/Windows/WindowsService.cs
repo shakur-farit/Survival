@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UI.Factory;
 using UI.Windows;
-using UnityEngine;
 
 namespace UI.Services.Windows
 {
@@ -37,6 +36,9 @@ namespace UI.Services.Windows
 				case WindowType.Pause:
 					await _uiFactory.CreatePauseWindow();
 					break;
+				case WindowType.Settings:
+					await _uiFactory.CreateSettingsWindow();
+					break;
 			}
 		}
 
@@ -64,6 +66,9 @@ namespace UI.Services.Windows
 					break;
 				case WindowType.Pause:
 					_uiFactory.DestroyPauseWindow();
+					break;
+				case WindowType.Settings:
+					_uiFactory.DestroySettingsWindow();
 					break;
 			}
 		}

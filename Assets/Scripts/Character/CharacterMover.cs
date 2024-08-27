@@ -4,9 +4,9 @@ using Character.States;
 using Character.States.Motion;
 using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Input;
+using Infrastructure.Services.PauseService;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.Timer;
-using UnityEngine;
+using UnityEngine; 
 using Utility;
 using Zenject;
 
