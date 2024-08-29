@@ -57,6 +57,7 @@ namespace Infrastructure
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<LoadStaticDataState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<LoadProgressState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<MainMenuState>());
+			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<ObjectsPoolCreateState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<LoadLevelState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<LevelCompleteState>());
 			_gameStatesRegistrar.RegisterState(_statesFactory.CreateGameStates<GameLoopState>());

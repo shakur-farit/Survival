@@ -18,6 +18,7 @@ using Spawn;
 using SpecialEffects.Factory;
 using UI.Factory;
 using UI.Services.Windows;
+using UI.Windows;
 using Zenject;
 
 namespace Installers
@@ -28,6 +29,7 @@ namespace Installers
 		{
 			RegisterFactories();
 			RegisterObjectsCreator();
+			RegisterObjectsPool();
 			RegisterWindowsService();
 			RegisterDeath();
 			RegisterMediators();
@@ -129,5 +131,8 @@ namespace Installers
 
 		private void RegisterWeaponReloader() => 
 			Container.Bind<IWeaponReloader>().To<WeaponReloader>().AsSingle();
+
+		private void RegisterObjectsPool() => 
+			Container.Bind<IObjectsPool>().To<ObjectsPool>().AsSingle();
 	}
 }

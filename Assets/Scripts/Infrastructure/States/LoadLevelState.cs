@@ -47,7 +47,7 @@ namespace Infrastructure.States
 		{
 			_timer.Completed += SpawnEnemies;
 
-			await SwitchToGameScene();
+			//await SwitchToGameScene();
 
 			LevelInitialize();
 			await CreateGameObjects();

@@ -36,7 +36,7 @@ namespace UI.Windows
 			if(_persistentProgressService.Progress.CharacterData.CurrentCharacter == null)
 				return;
 
-			_gameStatesSwitcher.SwitchState<LoadLevelState>();
+			_gameStatesSwitcher.SwitchState<ObjectsPoolCreateState>();
 		}
 	}
 }
