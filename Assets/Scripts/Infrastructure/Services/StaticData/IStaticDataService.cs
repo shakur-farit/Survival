@@ -12,6 +12,7 @@ namespace Infrastructure.Services.StaticData
 		LevelsListStaticData LevelsListStaticData { get; }
 		DropsListStaticData DropsListStaticData { get; }
 		ShopItemStaticData ShopItemStaticData { get; }
+		ObjectsPoolStaticData ObjectsPoolStaticData { get; }
 
 		UniTask Load();
 		UniTask WarmUp();

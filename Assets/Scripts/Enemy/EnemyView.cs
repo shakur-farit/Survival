@@ -15,7 +15,7 @@ namespace Enemy
 		public void Constructor(IEnemyViewMediator mediator) => 
 			_mediator = mediator;
 
-		private void Awake() => 
+		private void OnEnable() => 
 			_mediator.RegisterView(this);
 
 		public void SetupSprite(EnemyStaticData enemyStaticData) => 

@@ -19,5 +19,8 @@ namespace Enemy.States.StateMachine
 
 		public void RegisterState<TState>(TState state) where TState : IEnemyAnimatorState =>
 			_statesDictionary.Add(typeof(TState), state);
+
+		public void Clear() => 
+			_statesDictionary.Clear();
 	}
 }

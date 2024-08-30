@@ -25,7 +25,7 @@ namespace Enemy
 		public void Constructor(IEnemyAnimatorMediator mediator) => 
 			_mediator = mediator;
 
-		private void Awake() => 
+		private void OnEnable() => 
 			_mediator.RegisterAnimator(this);
 
 		public void SetupAnimator(EnemyStaticData staticData) => 

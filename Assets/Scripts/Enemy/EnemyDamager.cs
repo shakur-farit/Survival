@@ -24,7 +24,7 @@ namespace Enemy
 			_pauseService = pauseService;
 		}
 
-		private void Awake() =>
+		private void OnEnable() =>
 			_mediator.RegisterDamager(this);
 
 		private void Update()

@@ -1,9 +1,12 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace UI.Windows
+namespace Pool
 {
 	public interface IObjectsPool
 	{
-		void CreatePool(GameObject prefab, int poolSize);
+		UniTask CreatePool(string address, int poolSize);
+		GameObject UseObject(string address, Vector2 position);
+		void ReturnObject(string address, GameObject objectToReturn);
 	}
 }

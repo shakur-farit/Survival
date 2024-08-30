@@ -1,28 +1,31 @@
-using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
-namespace UI.Windows
+namespace Pool
 {
 	public class ObjectsPool : IObjectsPool
 	{
 		private Transform objectPoolTransform;
-		private Dictionary<int, Queue<GameObject>> poolDictionary = new();
+		private Dictionary<string, Queue<GameObject>> poolDictionary = new();
 
 		private readonly IObjectCreatorService _objectCreator;
+		private readonly IAssetsProvider _assetsProvider;
 
-		public ObjectsPool(IObjectCreatorService objectCreator)
+		public ObjectsPool(IObjectCreatorService objectCreator, IAssetsProvider assetsProvider)
 		{
 			_objectCreator = objectCreator;
+			_assetsProvider = assetsProvider;
 		}
 
-		public void CreatePool(GameObject prefab, int poolSize)
+		public async UniTask CreatePool(string address, int poolSize)
 		{
 			if (objectPoolTransform == null)
 				objectPoolTransform = new GameObject("Objects Pool").transform;
 
-			int poolKey = prefab.GetInstanceID();
+			GameObject prefab = await _assetsProvider.Load<GameObject>(address);
 
 			string prefabName = prefab.name;
 
@@ -30,9 +33,9 @@ namespace UI.Windows
 
 			parentTransform.transform.SetParent(objectPoolTransform);
 
-			if (poolDictionary.ContainsKey(poolKey) == false)
+			if (poolDictionary.ContainsKey(address) == false)
 			{
-				poolDictionary.Add(poolKey, new Queue<GameObject>());
+				poolDictionary.Add(address, new Queue<GameObject>());
 
 				for (int i = 0; i < poolSize; i++)
 				{
@@ -40,46 +43,37 @@ namespace UI.Windows
 
 					newObject.SetActive(false);
 
-					poolDictionary[poolKey].Enqueue(newObject);
+					poolDictionary[address].Enqueue(newObject);
 				}
 			}
 		}
 
-		public GameObject ReuseComponent(GameObject prefab, Vector3 position, Quaternion rotation)
+		public GameObject UseObject(string address, Vector2 position = default)
 		{
-			int poolKey = prefab.GetInstanceID();
+			Debug.Log(poolDictionary[address].Count);
 
-			if (!poolDictionary.ContainsKey(poolKey))
+			if (poolDictionary.ContainsKey(address) == false || poolDictionary[address].Count <= 0)
 			{
-				Debug.Log("No object pool for " + prefab);
+				Debug.Log($"There is no pool for {address}");
 				return null;
 			}
 
-			GameObject componentToReuse = GetComponentFromPool(poolKey);
-
-			ResetObject(position, rotation, componentToReuse, prefab);
-
-			return componentToReuse;
+			GameObject objectToUse = poolDictionary[address].Dequeue();
+			objectToUse.SetActive(true);
+			objectToUse.transform.position = position;
+			return objectToUse;
 		}
 
-		public GameObject GetComponentFromPool(int poolKey)
+		public void ReturnObject(string address, GameObject objectToReturn)
 		{
-			GameObject componentToReuse = poolDictionary[poolKey].Dequeue();
-			poolDictionary[poolKey].Enqueue(componentToReuse);
+			if (poolDictionary.ContainsKey(address) == false)
+				return;
 
-			if (componentToReuse.gameObject.activeSelf == true)
-			{
-				componentToReuse.gameObject.SetActive(false);
-			}
+			objectToReturn.SetActive(false);
+			poolDictionary[address].Enqueue(objectToReturn);
 
-			return componentToReuse;
-		}
+			Debug.Log(poolDictionary[address].Count);
 
-		public void ResetObject(Vector3 position, Quaternion rotation, GameObject componentToReuse, GameObject prefab)
-		{
-			componentToReuse.transform.position = position;
-			componentToReuse.transform.rotation = rotation;
-			componentToReuse.gameObject.transform.localScale = prefab.transform.localScale;
 		}
 	}
 }

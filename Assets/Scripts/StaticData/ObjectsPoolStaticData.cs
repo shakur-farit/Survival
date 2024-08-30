@@ -1,11 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI.Windows
+namespace StaticData
 {
-	[CreateAssetMenu(fileName = "Static Data", menuName = "Scriptable Object/Static Data/Objects Pool")]
+	[CreateAssetMenu(fileName = "Objects Pool Static Data", menuName = "Scriptable Object/Static Data/Objects Pool")]
 	public class ObjectsPoolStaticData : ScriptableObject
 	{
-		
+		public int EnemyPoolSize;
+		public int DropPoolSize;
+		public int HitEffectsPoolSize;
+		public int ShotEffectsPoolSize;
 	}
 }

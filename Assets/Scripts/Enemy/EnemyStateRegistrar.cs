@@ -17,7 +17,7 @@ namespace Enemy
 		public void Constructor( IStatesFactory stateFactory) => 
 			_statesFactory = stateFactory;
 
-		private void Awake()
+		private void OnEnable()
 		{
 			_statesRegistrar = stateMachine;
 
@@ -26,6 +26,8 @@ namespace Enemy
 
 		private void RegisterEnemyStates()
 		{
+			_statesRegistrar.Clear();
+
 			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpState>());
 			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpRightState>());
 			_statesRegistrar.RegisterState(_statesFactory.CreateEnemyStates<EnemyAimUpLeftState>());

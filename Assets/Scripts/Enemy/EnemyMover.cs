@@ -29,7 +29,7 @@ namespace Enemy
 			_pauseService = pauseService;
 		}
 
-		private void Awake()
+		private void OnEnable()
 		{
 			_speedMediator.RegisterMover(this);
 			_target = _characterFactory.Character;

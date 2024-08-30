@@ -20,7 +20,7 @@ namespace Enemy
 			_enemyDeath = enemyDeath;
 		}
 
-		private void Awake() => 
+		private void OnEnable() => 
 			_mediator.RegisterHealth(this);
 
 		public void TakeDamage(int damage)
