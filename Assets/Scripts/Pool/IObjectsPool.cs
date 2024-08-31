@@ -5,8 +5,8 @@ namespace Pool
 {
 	public interface IObjectsPool
 	{
-		UniTask CreatePool(string address, int poolSize);
-		GameObject UseObject(string address, Vector2 position);
-		void ReturnObject(string address, GameObject objectToReturn);
+		UniTask CreatePool(PoolType poolType);
+		UniTask<GameObject> UseObject(PoolType poolType, Vector2 position);
+		void ReturnObject(PoolType poolType, GameObject objectToReturn);
 	}
 }

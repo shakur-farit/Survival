@@ -6,7 +6,7 @@ namespace Infrastructure.Services.AssetsManagement
 	public class AssetsReference : ScriptableObject
 	{
 		public string CharacterAddress;
-		public string EnemyAddress;
+		//public string EnemyAddress;
 		public string AmmoAddress;
 		public string ShootSpecialEffetcAddress;
 		public string DropAddress;

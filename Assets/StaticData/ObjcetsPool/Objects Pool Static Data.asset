@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9c058a2d45d484797f775b69dafb92, type: 3}
   m_Name: Objects Pool Static Data
   m_EditorClassIdentifier: 
-  EnemyPoolSize: 30
-  DropPoolSize: 30
-  HitEffectsPoolSize: 30
-  ShotEffectsPoolSize: 30
+  PoolsList:
+  - PoolType: 1
+    PoolSize: 30
+    PooledPrefabAddress: Enemy
+    CanPoolIncrease: 0

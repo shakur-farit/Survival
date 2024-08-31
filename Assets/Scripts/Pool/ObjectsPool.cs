@@ -2,78 +2,102 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
+using Infrastructure.Services.StaticData;
+using StaticData;
 using UnityEngine;
 
 namespace Pool
 {
 	public class ObjectsPool : IObjectsPool
 	{
-		private Transform objectPoolTransform;
-		private Dictionary<string, Queue<GameObject>> poolDictionary = new();
+		private Transform _objectPoolTransform;
+		private Transform _parentTransform;
+
+		private Dictionary<PoolType, Queue<GameObject>>
+			poolDictionary = new();
 
 		private readonly IObjectCreatorService _objectCreator;
 		private readonly IAssetsProvider _assetsProvider;
+		private readonly IStaticDataService _staticDataService;
 
-		public ObjectsPool(IObjectCreatorService objectCreator, IAssetsProvider assetsProvider)
+		public ObjectsPool(IObjectCreatorService objectCreator, IAssetsProvider assetsProvider,
+			IStaticDataService staticDataService)
 		{
 			_objectCreator = objectCreator;
 			_assetsProvider = assetsProvider;
+			_staticDataService = staticDataService;
 		}
 
-		public async UniTask CreatePool(string address, int poolSize)
+		public async UniTask CreatePool(PoolType poolType)
 		{
-			if (objectPoolTransform == null)
-				objectPoolTransform = new GameObject("Objects Pool").transform;
+			if (_objectPoolTransform == null)
+				_objectPoolTransform = new GameObject("Objects Pool").transform;
 
-			GameObject prefab = await _assetsProvider.Load<GameObject>(address);
+			ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(poolType);
+
+			GameObject prefab = await _assetsProvider.Load<GameObject>(poolStruct.PooledPrefabAddress);
 
 			string prefabName = prefab.name;
 
-			Transform parentTransform = new GameObject(prefabName + "Anchor").transform;
-
-			parentTransform.transform.SetParent(objectPoolTransform);
-
-			if (poolDictionary.ContainsKey(address) == false)
+			if (poolDictionary.ContainsKey(poolType) == false)
 			{
-				poolDictionary.Add(address, new Queue<GameObject>());
+				_parentTransform = new GameObject(prefabName + "Anchor").transform;
 
-				for (int i = 0; i < poolSize; i++)
-				{
-					GameObject newObject = _objectCreator.Instantiate(prefab, parentTransform);
+				poolDictionary.Add(poolType, new Queue<GameObject>());
 
-					newObject.SetActive(false);
-
-					poolDictionary[address].Enqueue(newObject);
-				}
+				_parentTransform.transform.SetParent(_objectPoolTransform);
 			}
+
+			Debug.Log($"{poolDictionary} / {poolDictionary.Count} / {_parentTransform}");
+
+			if (poolType == poolStruct.PoolType)
+				for (int i = 0; i < poolStruct.PoolSize; i++)
+					CreateNewObject(poolType, prefab, _parentTransform);
 		}
 
-		public GameObject UseObject(string address, Vector2 position = default)
+		public async UniTask<GameObject> UseObject(PoolType poolType, Vector2 position = default)
 		{
-			Debug.Log(poolDictionary[address].Count);
-
-			if (poolDictionary.ContainsKey(address) == false || poolDictionary[address].Count <= 0)
+			if (poolDictionary.ContainsKey(poolType) == false || poolDictionary[poolType].Count <= 0)
 			{
-				Debug.Log($"There is no pool for {address}");
-				return null;
+				ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(poolType);
+
+				if (poolStruct.CanPoolIncrease) 
+					await CreatePool(poolType);
 			}
 
-			GameObject objectToUse = poolDictionary[address].Dequeue();
+			GameObject objectToUse = poolDictionary[poolType].Dequeue();
 			objectToUse.SetActive(true);
 			objectToUse.transform.position = position;
 			return objectToUse;
 		}
 
-		public void ReturnObject(string address, GameObject objectToReturn)
+		private ObjectsPoolStaticData.PoolStruct InitPoolStruct(PoolType poolType)
 		{
-			if (poolDictionary.ContainsKey(address) == false)
+			foreach (ObjectsPoolStaticData.PoolStruct poolStruct in _staticDataService.ObjectsPoolStaticData.PoolsList)
+				if (poolType == poolStruct.PoolType)
+					return poolStruct;
+
+			return null;
+		}
+
+		public void ReturnObject(PoolType poolType, GameObject objectToReturn)
+		{
+			if (poolDictionary.ContainsKey(poolType) == false)
 				return;
 
 			objectToReturn.SetActive(false);
-			poolDictionary[address].Enqueue(objectToReturn);
+			poolDictionary[poolType].Enqueue(objectToReturn);
 
-			Debug.Log(poolDictionary[address].Count);
+			Debug.Log(poolDictionary[poolType].Count);
+		}
 
+		private void CreateNewObject(PoolType poolType, GameObject prefab, Transform parentTransform)
+		{
+			GameObject newObject = _objectCreator.Instantiate(prefab, parentTransform);
+
+			newObject.SetActive(false);
+
+			poolDictionary[poolType].Enqueue(newObject);
 		}
 	}
 }

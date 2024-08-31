@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
@@ -22,16 +23,12 @@ namespace Enemy.Factory
 
 		public async UniTask<GameObject> Create(Vector2 position)
 		{
-			AssetsReference reference = await InitReference();
-			GameObject enemy = _objectsPool.UseObject(reference.EnemyAddress, position);
+			GameObject enemy = await _objectsPool.UseObject(PoolType.Enemy, position);
 			EnemiesList.Add(enemy);
 			return enemy;
 		}
 
-		public async void Destroy(GameObject gameObject)
-		{
-			AssetsReference reference = await InitReference();
-			_objectsPool.ReturnObject(reference.EnemyAddress, gameObject);
-		}
+		public void Destroy(GameObject gameObject) => 
+			_objectsPool.ReturnObject(PoolType.Enemy, gameObject);
 	}
 }

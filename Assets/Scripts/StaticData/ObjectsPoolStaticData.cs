@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Pool;
 using UnityEngine;
 
 namespace StaticData
@@ -5,9 +8,15 @@ namespace StaticData
 	[CreateAssetMenu(fileName = "Objects Pool Static Data", menuName = "Scriptable Object/Static Data/Objects Pool")]
 	public class ObjectsPoolStaticData : ScriptableObject
 	{
-		public int EnemyPoolSize;
-		public int DropPoolSize;
-		public int HitEffectsPoolSize;
-		public int ShotEffectsPoolSize;
+		public List<PoolStruct> PoolsList;
+
+		[Serializable]
+		public class PoolStruct
+		{
+			public PoolType PoolType;
+			public int PoolSize;
+			public string PooledPrefabAddress;
+			public bool CanPoolIncrease;
+		}
 	}
 }

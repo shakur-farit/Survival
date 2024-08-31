@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Enemy;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
@@ -44,8 +45,8 @@ namespace Infrastructure.States
 
 		private async UniTask CreateEnemiesPool()
 		{
-			AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			await _objectsPool.CreatePool(reference.EnemyAddress, _staticDataService.ObjectsPoolStaticData.EnemyPoolSize);
+			//AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
+			await _objectsPool.CreatePool(PoolType.Enemy);
 		}
 
 		public void Exit()
