@@ -2,7 +2,6 @@ using System;
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
 using Data;
-using Hud.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
 using SpecialEffects;
@@ -18,10 +17,10 @@ namespace Character.Shooting
 		public Action Shot;
 
 		[SerializeField] private Transform _weaponShootTransform;
+		[SerializeField] private Transform _weaponRotationPoint;
 
 		private bool _isShoot;
 		private bool _infinityAmmo;
-		//private bool _isReloading;
 		private int _shootInterval;
 
 		private IFireInputService _fireInputSystem;
@@ -35,7 +34,7 @@ namespace Character.Shooting
 		[Inject]
 		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory,
 			IPersistentProgressService persistentProgressService, ISpecialEffectsFactory sfxFactory,
-			IWeaponReloader weaponReloader, IAmmoIconFactory ammoIconFactory)
+			IWeaponReloader weaponReloader)
 		{
 			_fireInputSystem = fireInputSystem;
 			_ammoFactory = ammoFactory;
@@ -107,7 +106,7 @@ namespace Character.Shooting
 		}
 
 		private async UniTask CreateAmmo() =>
-			await _ammoFactory.Create(_weaponShootTransform);
+			await _ammoFactory.Create(_weaponShootTransform.position, _weaponRotationPoint.rotation);
 
 		private async UniTask<GameObject> CreateSpecialEffect() =>
 			await _sfxFactory.CreateShootEffect(_weaponShootTransform.position);
@@ -121,13 +120,7 @@ namespace Character.Shooting
 				view.Initialize(staticData);
 		}
 
-		private async UniTask ReloadWeapon()
-		{
-			//_isReloading = true;
-
+		private async UniTask ReloadWeapon() => 
 			await _weaponReloader.Reload();
-
-			//_isReloading = false;
-		}
 	}
 }

@@ -1,7 +1,6 @@
 using Infrastructure.Services.PauseService;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
-using Infrastructure.Services.Timer;
 using UnityEngine;
 using Zenject;
 
@@ -25,7 +24,7 @@ namespace Ammo
 			_pauseService = pauseService;
 		}
 
-		private void Awake()
+		private void OnEnable()
 		{
 			SetupMovementSpeed();
 
@@ -46,10 +45,8 @@ namespace Ammo
 			Move();
 		}
 
-		private void Move()
-		{
+		private void Move() => 
 			transform.Translate(_movementSpeed, _spread, 0);
-		}
 
 		private void SetupSpread()
 		{

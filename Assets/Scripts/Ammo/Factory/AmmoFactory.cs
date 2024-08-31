@@ -1,28 +1,20 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.ObjectCreator;
+using Pool;
 using UnityEngine;
 
 namespace Ammo.Factory
 {
-	public class AmmoFactory : FactoryBase, IAmmoFactory
+	public class AmmoFactory : IAmmoFactory
 	{
-		public AmmoFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) :
-			base(assetsProvider, objectsCreator)
-		{
-		}
+		private readonly IObjectsPool _objectsPool;
 
-		public async UniTask Create(Transform parentTransform)
-		{
-			AssetsReference reference = await InitReference();
+		public AmmoFactory(IObjectsPool objectsPool) => 
+			_objectsPool = objectsPool;
 
-			GameObject ammo = await CreateObject(reference.AmmoAddress, parentTransform);
-
-			ammo.transform.SetParent(null);
-		}
+		public async UniTask Create(Vector2 position, Quaternion rotation) => 
+			await _objectsPool.UseObject(PoolType.Ammo, position, rotation);
 
 		public void Destroy(GameObject gameObject) => 
-			Object.Destroy(gameObject);
+			_objectsPool.ReturnObject(PoolType.Ammo, gameObject);
 	}
 }

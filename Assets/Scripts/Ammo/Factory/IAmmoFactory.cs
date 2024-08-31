@@ -5,7 +5,7 @@ namespace Ammo.Factory
 {
 	public interface IAmmoFactory
 	{
-		UniTask Create(Transform parentTransform);
+		UniTask Create(Vector2 position, Quaternion rotation);
 		void Destroy(GameObject gameObject);
 	}
 }

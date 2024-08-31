@@ -1,7 +1,6 @@
 using Character.Factory;
 using Enemy.Mediator;
 using Infrastructure.Services.PauseService;
-using Infrastructure.Services.Timer;
 using StaticData;
 using UnityEngine;
 using Utility;

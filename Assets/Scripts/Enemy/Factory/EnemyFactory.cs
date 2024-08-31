@@ -1,24 +1,17 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.ObjectCreator;
 using Pool;
-using UI.Windows;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Enemy.Factory
 {
-	public class EnemyFactory : FactoryBase, IEnemyFactory
+	public class EnemyFactory : IEnemyFactory
 	{
 		private readonly IObjectsPool _objectsPool;
 
 		public List<GameObject> EnemiesList { get; set; } = new();
 
-		public EnemyFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator, IObjectsPool objectsPool) : 
-			base(assetsProvider, objectsCreator) =>
+		public EnemyFactory(IObjectsPool objectsPool) =>
 			_objectsPool = objectsPool;
 
 		public async UniTask<GameObject> Create(Vector2 position)

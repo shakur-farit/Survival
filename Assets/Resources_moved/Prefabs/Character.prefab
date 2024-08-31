@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponShootTransform: {fileID: 8586382567303437777}
+  _weaponRotationPoint: {fileID: 263007942131066340}
 --- !u!114 &2309936614292289735
 MonoBehaviour:
   m_ObjectHideFlags: 0

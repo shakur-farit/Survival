@@ -11,10 +11,11 @@ namespace Pool
 	public class ObjectsPool : IObjectsPool
 	{
 		private Transform _objectPoolTransform;
-		private Transform _parentTransform;
 
-		private Dictionary<PoolType, Queue<GameObject>>
-			poolDictionary = new();
+		private readonly Dictionary<PoolType, Queue<GameObject>> _poolDictionary = new();
+		private readonly Dictionary<PoolType, Transform> _parents = new();
+
+		private Transform _parentTransform;
 
 		private readonly IObjectCreatorService _objectCreator;
 		private readonly IAssetsProvider _assetsProvider;
@@ -30,8 +31,8 @@ namespace Pool
 
 		public async UniTask CreatePool(PoolType poolType)
 		{
-			if (_objectPoolTransform == null)
-				_objectPoolTransform = new GameObject("Objects Pool").transform;
+			if (_objectPoolTransform == null) 
+				_objectPoolTransform = new GameObject("Pool Group").transform;
 
 			ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(poolType);
 
@@ -39,25 +40,24 @@ namespace Pool
 
 			string prefabName = prefab.name;
 
-			if (poolDictionary.ContainsKey(poolType) == false)
+			if (_poolDictionary.ContainsKey(poolType) == false)
 			{
 				_parentTransform = new GameObject(prefabName + "Anchor").transform;
 
-				poolDictionary.Add(poolType, new Queue<GameObject>());
+				_parents.Add(poolType, _parentTransform);
+				_poolDictionary.Add(poolType, new Queue<GameObject>());
 
 				_parentTransform.transform.SetParent(_objectPoolTransform);
 			}
 
-			Debug.Log($"{poolDictionary} / {poolDictionary.Count} / {_parentTransform}");
-
 			if (poolType == poolStruct.PoolType)
 				for (int i = 0; i < poolStruct.PoolSize; i++)
-					CreateNewObject(poolType, prefab, _parentTransform);
+					CreateNewObject(poolType, prefab);
 		}
 
-		public async UniTask<GameObject> UseObject(PoolType poolType, Vector2 position = default)
+		public async UniTask<GameObject> UseObject(PoolType poolType, Vector2 position = default, Quaternion rotation = default)
 		{
-			if (poolDictionary.ContainsKey(poolType) == false || poolDictionary[poolType].Count <= 0)
+			if (_poolDictionary.ContainsKey(poolType) == false || _poolDictionary[poolType].Count <= 0)
 			{
 				ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(poolType);
 
@@ -65,9 +65,10 @@ namespace Pool
 					await CreatePool(poolType);
 			}
 
-			GameObject objectToUse = poolDictionary[poolType].Dequeue();
+			GameObject objectToUse = _poolDictionary[poolType].Dequeue();
 			objectToUse.SetActive(true);
 			objectToUse.transform.position = position;
+			objectToUse.transform.rotation = rotation;
 			return objectToUse;
 		}
 
@@ -82,22 +83,22 @@ namespace Pool
 
 		public void ReturnObject(PoolType poolType, GameObject objectToReturn)
 		{
-			if (poolDictionary.ContainsKey(poolType) == false)
+			if (_poolDictionary.ContainsKey(poolType) == false)
 				return;
 
 			objectToReturn.SetActive(false);
-			poolDictionary[poolType].Enqueue(objectToReturn);
-
-			Debug.Log(poolDictionary[poolType].Count);
+			_poolDictionary[poolType].Enqueue(objectToReturn);
 		}
 
-		private void CreateNewObject(PoolType poolType, GameObject prefab, Transform parentTransform)
+		private void CreateNewObject(PoolType poolType, GameObject prefab)
 		{
+			Transform parentTransform = _parents[poolType];
+
 			GameObject newObject = _objectCreator.Instantiate(prefab, parentTransform);
 
 			newObject.SetActive(false);
 
-			poolDictionary[poolType].Enqueue(newObject);
+			_poolDictionary[poolType].Enqueue(newObject);
 		}
 	}
 }

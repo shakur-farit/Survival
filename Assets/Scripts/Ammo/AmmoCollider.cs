@@ -1,4 +1,3 @@
-using System;
 using Character;
 using Character.Shooting;
 using Enemy;
@@ -29,13 +28,16 @@ namespace Ammo
 		}
 
 
-		private void Awake()
+		private void OnEnable()
 		{
 			SetupColliderRadius();
 			SetupDamage();
 			SetupSpecialEffect();
 			IsEnemyAmmo();
 		}
+
+		private void OnDisable() => 
+			_isCollided = false;
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{

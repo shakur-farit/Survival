@@ -1,4 +1,3 @@
-using System;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
@@ -15,7 +14,7 @@ namespace Ammo
 		public void Constructor(IPersistentProgressService persistentProgressService) => 
 			_persistentProgressService = persistentProgressService;
 
-		private void Awake() => 
+		private void OnEnable() => 
 			SetupView();
 
 		private void SetupView()

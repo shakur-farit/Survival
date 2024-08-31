@@ -4,5 +4,6 @@ namespace Pool
 	{
 		None = 0,
 		Enemy,
+		Ammo
 	}
 }
