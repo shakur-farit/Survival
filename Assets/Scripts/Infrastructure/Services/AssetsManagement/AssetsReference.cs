@@ -7,9 +7,9 @@ namespace Infrastructure.Services.AssetsManagement
 	{
 		public string CharacterAddress;
 		//public string EnemyAddress;
-		public string AmmoAddress;
+		//public string AmmoAddress;
 		public string ShootSpecialEffetcAddress;
-		public string DropAddress;
+		//public string DropAddress;
 		public string HudAddress;
 		public string UIRootAddress;
 		public string CharacterSelectorAddress;

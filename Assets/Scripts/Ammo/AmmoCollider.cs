@@ -30,14 +30,13 @@ namespace Ammo
 
 		private void OnEnable()
 		{
+			_isCollided = false;
+
 			SetupColliderRadius();
 			SetupDamage();
 			SetupSpecialEffect();
 			IsEnemyAmmo();
 		}
-
-		private void OnDisable() => 
-			_isCollided = false;
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
@@ -51,7 +50,10 @@ namespace Ammo
 
 		private void DestroyAmmoOnOutOfDetectedRange(Collider2D other)
 		{
-			if(other.TryGetComponent(out EnemyDetector detector))
+			if (_isCollided)
+				return;
+
+			if (other.TryGetComponent(out EnemyDetector detector)) 
 				DestroyAmmo();
 		}
 
@@ -81,8 +83,8 @@ namespace Ammo
 
 			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
 			{
-				DealDamageToEnemy(enemyHealth);
 				_isCollided = true;
+				DealDamageToEnemy(enemyHealth);
 			}
 		}
 
@@ -98,10 +100,10 @@ namespace Ammo
 			DestroyAmmoInHit();
 		}
 
-		private void DestroyAmmoInHit() => 
-			_ammoDestroy.DestroyInHit(gameObject, transform.position, _effectStaticData);
+		private async void DestroyAmmoInHit() => 
+			await _ammoDestroy.DestroyInHit(gameObject, transform.position, _effectStaticData);
 
-		private void DestroyAmmo() =>
+		private void DestroyAmmo() => 
 			_ammoDestroy.DestroyOnOutOfDetectedRange(gameObject);
 	}
 }

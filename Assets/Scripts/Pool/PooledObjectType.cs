@@ -1,9 +1,10 @@
 namespace Pool
 {
-	public enum PoolType
+	public enum PooledObjectType
 	{
 		None = 0,
 		Enemy,
-		Ammo
+		Ammo,
+		Drop
 	}
 }

@@ -15,7 +15,7 @@ namespace DropLogic
 		public void Constructor(IDropViewMediator mediator) => 
 			_mediator = mediator;
 
-		private void Awake() => 
+		private void OnEnable() => 
 			_mediator.RegisterView(this);
 
 		public void SetupView(DropStaticData dropStaticData) => 

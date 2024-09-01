@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Pool;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StaticData
 {
@@ -13,7 +14,7 @@ namespace StaticData
 		[Serializable]
 		public class PoolStruct
 		{
-			public PoolType PoolType;
+			[FormerlySerializedAs("PoolType")] public PooledObjectType pooledObjectType;
 			public int PoolSize;
 			public string PooledPrefabAddress;
 			public bool CanPoolIncrease;

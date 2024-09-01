@@ -8,21 +8,21 @@ namespace DropLogic
 	{
 		private Vector2 RotateEndValue => new(0f, 360f);
 
-		private void Start()
+		private void OnEnable()
 		{
 			Appear();
 			Rotate();
 		}
 
-		private void OnDestroy() => 
+		private void OnDisable() => 
 			DOTween.Kill(transform);
 
 		private void Rotate() =>
 			transform.DOLocalRotate(RotateEndValue, Constants.RotateDuration, RotateMode.FastBeyond360)
 				.SetLoops(Constants.ValueOfInfinity);
 
-		private void Appear() => 
-			transform.DOLocalJump(transform.position, Constants.JumpPower, 
+		private void Appear() =>
+			transform.DOLocalJump(transform.position, Constants.JumpPower,
 				Constants.JumpNumber, Constants.JumDuration).SetEase(Ease.OutBounce);
 	}
 }

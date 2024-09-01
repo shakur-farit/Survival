@@ -23,7 +23,7 @@ namespace Enemy
 		private void OnEnable() => 
 			_mediator.RegisterHealth(this);
 
-		public void TakeDamage(int damage)
+		public async void TakeDamage(int damage)
 		{
 			if(_current <= 0)
 				return;
@@ -31,7 +31,7 @@ namespace Enemy
 			_current -= damage;
 
 			if( _current <= 0 )
-				_enemyDeath.Die(gameObject, transform.position);
+				await _enemyDeath.Die(gameObject, transform.position);
 		}
 
 		public void SetupHealth(EnemyStaticData enemyStaticData) => 

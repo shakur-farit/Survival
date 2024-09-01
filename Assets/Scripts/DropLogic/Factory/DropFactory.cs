@@ -1,31 +1,27 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.ObjectCreator;
+using Pool;
 using UnityEngine;
 
 namespace DropLogic.Factory
 {
-	public class DropFactory : FactoryBase, IDropFactory
+	public class DropFactory : IDropFactory
 	{
-		public List<GameObject> DropsList { get; private set; } = new();
+		private readonly IObjectsPool _objectsPool;
 
-		protected DropFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
-			base(assetsProvider, objectsCreator)
-		{
-		}
+		public List<GameObject> DropsList { get; } = new();
+
+		protected DropFactory(IObjectsPool objectsPool) => 
+			_objectsPool = objectsPool;
 
 		public async UniTask Create(Vector2 position)
 		{
-			AssetsReference reference = await InitReference();
-
-			GameObject drop = await CreateObject(reference.DropAddress, position);
+			GameObject drop = await _objectsPool.UseObject(PooledObjectType.Drop, position);
 
 			DropsList.Add(drop);
 		}
 
 		public void Destroy(GameObject gameObject) => 
-			Object.Destroy(gameObject);
+			_objectsPool.ReturnObject(PooledObjectType.Drop, gameObject);
 	}
 }

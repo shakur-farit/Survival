@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Objects Pool Static Data
   m_EditorClassIdentifier: 
   PoolsList:
-  - PoolType: 1
-    PoolSize: 30
+  - pooledObjectType: 1
+    PoolSize: 10
     PooledPrefabAddress: Enemy
-    CanPoolIncrease: 0
+    CanPoolIncrease: 1
+  - pooledObjectType: 2
+    PoolSize: 5
+    PooledPrefabAddress: Ammo
+    CanPoolIncrease: 1
+  - pooledObjectType: 3
+    PoolSize: 10
+    PooledPrefabAddress: Drop
+    CanPoolIncrease: 1

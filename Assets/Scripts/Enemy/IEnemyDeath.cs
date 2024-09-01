@@ -1,9 +1,10 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Enemy
 {
 	public interface IEnemyDeath
 	{
-		void Die(GameObject gameObject, Vector2 transform);
+		UniTask Die(GameObject gameObject, Vector2 transform);
 	}
 }

@@ -46,7 +46,7 @@ namespace Infrastructure.States
 		private async UniTask CreateEnemiesPool()
 		{
 			//AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			await _objectsPool.CreatePool(PoolType.Enemy);
+			await _objectsPool.CreatePool(PooledObjectType.Enemy);
 		}
 
 		public void Exit()

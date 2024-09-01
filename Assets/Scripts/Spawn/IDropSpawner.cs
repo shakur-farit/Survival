@@ -1,9 +1,10 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Spawn
 {
 	public interface IDropSpawner
 	{
-		void Spawn(Vector2 position);
+		UniTask Spawn(Vector2 position);
 	}
 }

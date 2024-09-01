@@ -16,12 +16,12 @@ namespace Enemy.Factory
 
 		public async UniTask<GameObject> Create(Vector2 position)
 		{
-			GameObject enemy = await _objectsPool.UseObject(PoolType.Enemy, position);
+			GameObject enemy = await _objectsPool.UseObject(PooledObjectType.Enemy, position);
 			EnemiesList.Add(enemy);
 			return enemy;
 		}
 
 		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PoolType.Enemy, gameObject);
+			_objectsPool.ReturnObject(PooledObjectType.Enemy, gameObject);
 	}
 }

@@ -12,9 +12,9 @@ namespace Ammo.Factory
 			_objectsPool = objectsPool;
 
 		public async UniTask Create(Vector2 position, Quaternion rotation) => 
-			await _objectsPool.UseObject(PoolType.Ammo, position, rotation);
+			await _objectsPool.UseObject(PooledObjectType.Ammo, position, rotation);
 
 		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PoolType.Ammo, gameObject);
+			_objectsPool.ReturnObject(PooledObjectType.Ammo, gameObject);
 	}
 }

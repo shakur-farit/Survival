@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
@@ -20,7 +21,7 @@ namespace Spawn
 			_dropMediator = dropMediator;
 		}
 
-		public async void Spawn(Vector2 position)
+		public async UniTask Spawn(Vector2 position)
 		{
 			await _dropFactory.Create(position);
 
