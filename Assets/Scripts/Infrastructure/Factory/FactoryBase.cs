@@ -23,25 +23,11 @@ namespace Infrastructure.Factory
 			return ObjectsCreator.Instantiate(prefab);
 		}
 
-		protected async UniTask<GameObject> CreateObject(string objectAddress, Vector2 position)
-		{
-			GameObject prefab = await AssetsProvider.Load<GameObject>(objectAddress);
-
-			return ObjectsCreator.Instantiate(prefab, position);
-		}
-
 		protected async UniTask<GameObject> CreateObject(string objectAddress, Transform parentTransform)
 		{
 			GameObject prefab = await AssetsProvider.Load<GameObject>(objectAddress);
 
 			return ObjectsCreator.Instantiate(prefab, parentTransform);
-		}
-
-		protected async UniTask<GameObject> CreateObject(string objectAddress, Transform parentTransform, Vector2 position)
-		{
-			GameObject prefab = await AssetsProvider.Load<GameObject>(objectAddress);
-
-			return ObjectsCreator.Instantiate(prefab, parentTransform, position);
 		}
 
 		protected async UniTask<AssetsReference> InitReference() => 

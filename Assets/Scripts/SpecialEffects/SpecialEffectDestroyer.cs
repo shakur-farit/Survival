@@ -18,7 +18,7 @@ namespace SpecialEffects
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private async void Start() =>
+		private async void OnEnable() =>
 			await Destroy();
 
 		private async UniTask Destroy()

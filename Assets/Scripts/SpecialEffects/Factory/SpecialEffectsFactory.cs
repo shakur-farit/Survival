@@ -1,27 +1,20 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.ObjectCreator;
+using Pool;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace SpecialEffects.Factory
 {
-	public class SpecialEffectsFactory : FactoryBase, ISpecialEffectsFactory
+	public class SpecialEffectsFactory : ISpecialEffectsFactory
 	{
-		protected SpecialEffectsFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) :
-			base(assetsProvider, objectsCreator)
-		{
-		}
+		private readonly IObjectsPool _objectsPool;
 
-		public async UniTask<GameObject> CreateShootEffect(Vector2 position)
-		{
-			AssetsReference reference = await InitReference();
+		protected SpecialEffectsFactory(IObjectsPool objectsPool) => 
+			_objectsPool = objectsPool;
 
-			return await CreateObject(reference.ShootSpecialEffetcAddress, position);
-		}
+		public async UniTask<GameObject> CreateSpecialEffect(Vector2 position) => 
+			await _objectsPool.UseObject(PooledObjectType.SpecialEffect, position);
 
 		public void Destroy(GameObject gameObject) => 
-			Object.Destroy(gameObject);
+			_objectsPool.ReturnObject(PooledObjectType.SpecialEffect, gameObject);
 	}
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6716566410928673578}
   - component: {fileID: 7461369859526356590}
   m_Layer: 0
-  m_Name: ShootSpecialEffect
+  m_Name: SpecialEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -53,7 +53,7 @@ namespace Hud
 		private void ClearIconsList()
 		{
 			foreach (GameObject ammoIcon in _ammoIconFactory.AmmoIcons)
-				Destroy(ammoIcon);
+				_ammoIconFactory.Destroy(ammoIcon);
 
 			_ammoIconFactory.AmmoIcons.Clear();
 		}

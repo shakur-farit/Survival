@@ -55,7 +55,7 @@ namespace Pool
 					CreateNewObject(pooledObjectType, prefab);
 		}
 
-		public async UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Vector2 position = default, Quaternion rotation = default)
+		public async UniTask<GameObject> UseObject(PooledObjectType pooledObjectType)
 		{
 			if (_poolDictionary.ContainsKey(pooledObjectType) == false || _poolDictionary[pooledObjectType].Count <= 0)
 			{
@@ -66,9 +66,57 @@ namespace Pool
 			}
 
 			GameObject objectToUse = _poolDictionary[pooledObjectType].Dequeue();
+			objectToUse.SetActive(true);
+			return objectToUse;
+		}
+
+		public async UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Vector2 position)
+		{
+			if (_poolDictionary.ContainsKey(pooledObjectType) == false || _poolDictionary[pooledObjectType].Count <= 0)
+			{
+				ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(pooledObjectType);
+
+				if (poolStruct.CanPoolIncrease)
+					await CreatePool(pooledObjectType);
+			}
+
+			GameObject objectToUse = _poolDictionary[pooledObjectType].Dequeue();
+			objectToUse.transform.position = position;
+			objectToUse.SetActive(true);
+			return objectToUse;
+		}
+
+		public async UniTask<GameObject> UseObject(PooledObjectType pooledObjectType,
+			Vector2 position, Quaternion rotation)
+		{
+			if (_poolDictionary.ContainsKey(pooledObjectType) == false || _poolDictionary[pooledObjectType].Count <= 0)
+			{
+				ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(pooledObjectType);
+
+				if (poolStruct.CanPoolIncrease)
+					await CreatePool(pooledObjectType);
+			}
+
+			GameObject objectToUse = _poolDictionary[pooledObjectType].Dequeue();
 			objectToUse.transform.position = position;
 			objectToUse.transform.rotation = rotation;
 			objectToUse.SetActive(true);
+			return objectToUse;
+		}
+
+		public async UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Transform parentTransform)
+		{
+			if (_poolDictionary.ContainsKey(pooledObjectType) == false || _poolDictionary[pooledObjectType].Count <= 0)
+			{
+				ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(pooledObjectType);
+
+				if (poolStruct.CanPoolIncrease)
+					await CreatePool(pooledObjectType);
+			}
+
+			GameObject objectToUse = _poolDictionary[pooledObjectType].Dequeue();
+			objectToUse.SetActive(true);
+			objectToUse.transform.SetParent(parentTransform);
 			return objectToUse;
 		}
 

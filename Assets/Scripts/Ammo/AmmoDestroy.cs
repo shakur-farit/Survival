@@ -30,7 +30,7 @@ namespace Ammo
 
 		private async UniTask CreateHitEffect(Vector2 position, SpecialEffectStaticData effectStaticData)
 		{
-			GameObject shootEffect = await _specialEffectsFactory.CreateShootEffect(position);
+			GameObject shootEffect = await _specialEffectsFactory.CreateSpecialEffect(position);
 
 			if (shootEffect.TryGetComponent(out SpecialEffectData data))
 				data.Initialize(effectStaticData);

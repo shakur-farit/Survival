@@ -1,29 +1,28 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.ObjectCreator;
+using Pool;
 using UnityEngine;
 
 namespace Hud.Factory
 {
-	public class AmmoIconFactory : FactoryBase, IAmmoIconFactory
+	public class AmmoIconFactory : IAmmoIconFactory
 	{
 		private readonly List<GameObject> _ammoIcons = new();
+		private readonly IObjectsPool _objectsPool;
 
 		public List<GameObject> AmmoIcons => _ammoIcons;
 
-		protected AmmoIconFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
-			base(assetsProvider, objectsCreator)
-		{
-		}
+		protected AmmoIconFactory(IObjectsPool objectsPool) => 
+			_objectsPool = objectsPool;
 
 		public async UniTask Create(Transform parentTransform, Vector2 position)
 		{
-			AssetsReference reference = await InitReference();
-			GameObject icon = await CreateObject(reference.AmmoIconAddress, parentTransform);
+			GameObject icon = await _objectsPool.UseObject(PooledObjectType.AmmoIcon, parentTransform);
 			icon.transform.localPosition = position;
 			_ammoIcons.Add(icon);
 		}
+
+		public void Destroy(GameObject gameObject) => 
+			_objectsPool.ReturnObject(PooledObjectType.AmmoIcon, gameObject);
 	}
 }

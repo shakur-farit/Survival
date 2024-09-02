@@ -109,7 +109,7 @@ namespace Character.Shooting
 			await _ammoFactory.Create(_weaponShootTransform.position, _weaponRotationPoint.rotation);
 
 		private async UniTask<GameObject> CreateSpecialEffect() =>
-			await _sfxFactory.CreateShootEffect(_weaponShootTransform.position);
+			await _sfxFactory.CreateSpecialEffect(_weaponShootTransform.position);
 
 		private void InitializeSpecialEffect(GameObject shootEffect, SpecialEffectStaticData staticData)
 		{

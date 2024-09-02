@@ -8,5 +8,6 @@ namespace Hud.Factory
 	{
 		List<GameObject> HeartIcons { get; }
 		UniTask Create(Transform parentTransform, Vector2 position);
+		void Destroy(GameObject gameObject);
 	}
 }

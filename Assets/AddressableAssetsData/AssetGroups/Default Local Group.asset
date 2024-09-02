@@ -93,7 +93,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 70955e2df728ea740952a2586c7115aa
-    m_Address: ShootSpecialEffect
+    m_Address: SpecialEffect
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

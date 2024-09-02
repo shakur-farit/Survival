@@ -8,5 +8,6 @@ namespace Hud.Factory
 	{ 
 		UniTask Create(Transform parentTransform, Vector2 position);
 		List<GameObject> AmmoIcons { get; }
+		void Destroy(GameObject gameObject);
 	}
 }

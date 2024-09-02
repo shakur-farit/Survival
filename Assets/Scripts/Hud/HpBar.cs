@@ -58,7 +58,7 @@ namespace Hud
 		private void ClearIconsList()
 		{
 			foreach (GameObject heartIcon in _heartIconsFactory.HeartIcons)
-				Destroy(heartIcon);
+				_heartIconsFactory.Destroy(heartIcon);
 
 			_heartIconsFactory.HeartIcons.Clear();
 		}

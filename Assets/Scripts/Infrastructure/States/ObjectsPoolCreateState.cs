@@ -33,20 +33,9 @@ namespace Infrastructure.States
 		{
 			await SwitchToGameScene();
 
-			await CreateObjectsPool();
+			await CreateObjectsPools();
 
-			_gameStatesSwitcher.SwitchState<LoadLevelState>();
-		}
-
-		private async UniTask CreateObjectsPool()
-		{
-			await CreateEnemiesPool();
-		}
-
-		private async UniTask CreateEnemiesPool()
-		{
-			//AssetsReference reference = await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
-			await _objectsPool.CreatePool(PooledObjectType.Enemy);
+			SwitchToLoadLevelState();
 		}
 
 		public void Exit()
@@ -56,5 +45,31 @@ namespace Infrastructure.States
 
 		private async UniTask SwitchToGameScene() =>
 			await _scenesService.SwitchSceneTo(Constants.GameScene);
+
+		private async UniTask CreateObjectsPools()
+		{
+			await CreateEnemiesPool();
+			await CreateDropsPool();
+			await CreateAmmoPool();
+			await CreateSpecialEffectsPool();
+			await CreateAmmoIconsPool();
+		}
+
+		private async UniTask CreateEnemiesPool() => 
+			await _objectsPool.CreatePool(PooledObjectType.Enemy);
+
+		private async UniTask CreateDropsPool() => 
+			await _objectsPool.CreatePool(PooledObjectType.Drop);
+
+		private async UniTask CreateAmmoPool() => 
+			await _objectsPool.CreatePool(PooledObjectType.Ammo);
+
+		private async UniTask CreateSpecialEffectsPool() => 
+			await _objectsPool.CreatePool(PooledObjectType.SpecialEffect);
+		private async UniTask CreateAmmoIconsPool() =>
+			await _objectsPool.CreatePool(PooledObjectType.AmmoIcon);
+
+		private void SwitchToLoadLevelState() => 
+			_gameStatesSwitcher.SwitchState<LoadLevelState>();
 	}
 }
