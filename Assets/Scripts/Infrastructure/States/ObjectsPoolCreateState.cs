@@ -42,10 +42,10 @@ namespace Infrastructure.States
 			await CreateDropsPool();
 			await CreateAmmoPool();
 			await CreateSpecialEffectsPool();
-			await CreateAmmoIconsPool();
-			await CreateHeartIconsPool();
+			//await CreateAmmoIconsPool();
+			//await CreateHeartIconsPool();
 			await CreateCharacterPool();
-			await CreateShopItemsPool();
+			//await CreateShopItemsPool();
 		}
 
 		private async UniTask CreateEnemiesPool() => 

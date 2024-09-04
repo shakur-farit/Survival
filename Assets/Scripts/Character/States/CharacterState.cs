@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Character.States
 {
 	public abstract class CharacterState : ICharacterAnimatorState

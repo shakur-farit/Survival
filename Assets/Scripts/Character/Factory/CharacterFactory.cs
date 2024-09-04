@@ -17,6 +17,6 @@ namespace Character.Factory
 			Character = await _objectsPool.UseObject(PooledObjectType.Character);
 
 		public void Destroy() => 
-			_objectsPool.ReturnObject(PooledObjectType.Character,Character);
+			_objectsPool.ReturnObject(PooledObjectType.Character, Character);
 	}
 }

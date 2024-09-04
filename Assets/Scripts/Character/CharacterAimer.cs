@@ -1,6 +1,6 @@
+using System;
 using Character.States.Aim;
 using Character.States.StatesMachine.Aim;
-using Infrastructure.Services.Input;
 using System.Collections.Generic;
 using Character.States;
 using UnityEngine;
@@ -14,7 +14,6 @@ namespace Character
 		[SerializeField] private Transform _characterTransform;
 		[SerializeField] private CharacterAnimator _characterAnimator;
 
-		private IAimInputService _aimInputService;
 		private ICharacterAimStatesSwitcher _characterAimStatesSwitcher;
 
 		private Dictionary<string, AimStateInfo> _aimStates;
@@ -22,20 +21,11 @@ namespace Character
 		private Transform _targetTransform;
 
 		[Inject]
-		public void Constructor(IAimInputService aimInput, ICharacterAimStatesSwitcher characterAimStatesSwitcher)
-		{
-			_aimInputService = aimInput;
+		public void Constructor(ICharacterAimStatesSwitcher characterAimStatesSwitcher) => 
 			_characterAimStatesSwitcher = characterAimStatesSwitcher;
-		}
 
-		private void OnEnable() =>
-			_aimInputService.OnEnable();
-
-		private void OnDisable() => 
-			_aimInputService.OnDisable();
-
-		private void Awake() => 
-			_aimInputService.RegisterAimInputAction();
+		private void OnEnable() => 
+			_currentState = string.Empty;
 
 		private void Start() => 
 			InitializeAimStates();

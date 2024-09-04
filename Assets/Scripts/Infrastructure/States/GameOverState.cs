@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Enemy.Factory;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Pool;
 using Spawn;
 using UI.Factory;
 using UI.Services.Windows;
@@ -21,10 +22,12 @@ namespace Infrastructure.States
 		private readonly IEnemySpawner _enemySpawner;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IUIFactory _uiFactory;
+		private readonly IObjectsPool _objectsPool;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
 			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner, 
-			IPersistentProgressService persistentProgressService, IUIFactory uiFactory)
+			IPersistentProgressService persistentProgressService, IUIFactory uiFactory,
+			IObjectsPool objectsPool)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
@@ -33,6 +36,7 @@ namespace Infrastructure.States
 			_enemySpawner = enemySpawner;
 			_persistentProgressService = persistentProgressService;
 			_uiFactory = uiFactory;
+			_objectsPool = objectsPool;
 		}
 
 		public async void Enter()
@@ -41,6 +45,7 @@ namespace Infrastructure.States
 			StopEnemiesSpawn();
 			DestroyObjects();
 			ResetData();
+			ClearPoolObjects();
 		}
 
 		public void Exit() => 
@@ -82,5 +87,8 @@ namespace Infrastructure.States
 			_persistentProgressService.Progress.ScoreData.CurrentScore = Constants.Zero;
 			_persistentProgressService.Progress.EnemyData.DeadEnemies.Clear();
 		}
+
+		private void ClearPoolObjects() => 
+			_objectsPool.ClearDictionaries();
 	}
 }

@@ -136,6 +136,14 @@ namespace Pool
 
 			objectToReturn.SetActive(false);
 			_poolDictionary[pooledObjectType].Enqueue(objectToReturn);
+
+			ResetObject(objectToReturn);
+		}
+
+		public void ClearDictionaries()
+		{
+			_poolDictionary.Clear();
+			_parents.Clear();
 		}
 
 		private void CreateNewObject(PooledObjectType pooledObjectType, GameObject prefab)
@@ -148,5 +156,8 @@ namespace Pool
 
 			_poolDictionary[pooledObjectType].Enqueue(newObject);
 		}
+
+		private void ResetObject(GameObject objectToReset) => 
+			objectToReset.transform.position = Vector3.zero;
 	}
 }

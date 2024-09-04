@@ -3,20 +3,17 @@ using UnityEngine.InputSystem;
 
 namespace Infrastructure.Services.Input
 {
-	public class InputService : IMovementInputService, IAimInputService, IFireInputService
+	public class InputService : IMovementInputService, IFireInputService
 	{
 		private readonly CharacterInput _input;
 
 		private InputAction _moveAction;
-		private InputAction _aimAction;
 		private InputAction _fireAction;
 
 		private Vector2 _moveInput;
-		private Vector2 _aimInput;
 		private bool _isFireButtonPressed;
 
 		public  Vector2 MovementAxis => GetMovementInputAxis();
-		public Vector2 AimAxis => GetAimInputAxis();
 		public bool IsFireButtonPressed => _isFireButtonPressed;
 
 		public InputService(CharacterInput input) => 
@@ -36,14 +33,6 @@ namespace Infrastructure.Services.Input
 			_moveAction.canceled += context => _moveInput = Vector2.zero;
 		}
 
-		public void RegisterAimInputAction()
-		{
-			_aimAction = _input.Player.Aim;
-
-			_aimAction.performed += context => _aimInput = context.ReadValue<Vector2>();
-			_aimAction.canceled += context => _aimInput = Vector2.zero;
-		}
-
 		public void RegisterFireInputAction()
 		{
 			_fireAction = _input.Player.Fire;
@@ -53,8 +42,5 @@ namespace Infrastructure.Services.Input
 
 		private Vector2 GetMovementInputAxis() => 
 			new(_moveInput.x, _moveInput.y);
-
-		public Vector2 GetAimInputAxis() => 
-			new(_aimInput.x, _aimInput.y);
 	}
 }

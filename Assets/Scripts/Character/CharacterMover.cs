@@ -37,8 +37,14 @@ namespace Character
 			_pauseService = pauseService;
 		}
 
-		private void OnEnable() =>
+		private void OnEnable()
+		{
 			_movementInputService.OnEnable();
+
+			SetupMovementSpeed();
+
+			SwitchToIdlingState();
+		}
 
 		private void OnDestroy() =>
 			_movementInputService.OnDisable();
@@ -47,13 +53,6 @@ namespace Character
 		{
 			_movementInputService.RegisterMovementInputAction();
 			InitializeStateActions();
-		}
-
-		private void Start()
-		{
-			SetupMovementSpeed();
-
-			SwitchToIdlingState();
 		}
 
 		private void FixedUpdate() =>
@@ -100,6 +99,7 @@ namespace Character
 			{
 				if (stateAction.Key.Invoke())
 				{
+		
 					stateAction.Value.Invoke();
 					break;
 				}

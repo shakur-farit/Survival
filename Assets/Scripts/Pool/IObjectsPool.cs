@@ -11,5 +11,6 @@ namespace Pool
 		UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Vector2 position, Quaternion rotation); 
 		UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Transform parentTransform); 
 		void ReturnObject(PooledObjectType pooledObjectType, GameObject objectToReturn);
+		void ClearDictionaries();
 	}
 }
