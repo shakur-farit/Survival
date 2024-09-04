@@ -1,13 +1,11 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
-using UI.Windows;
 using UnityEngine;
 
 namespace UI.Factory
 {
-	public class UIFactory : FactoryBase, IUIFactory
+	public class UIFactory : IUIFactory
 	{
 		private GameObject _mainMenuWindow;
 		private GameObject _levelCompleteWindow;
@@ -18,64 +16,70 @@ namespace UI.Factory
 		private GameObject _pauseWindow;
 		private GameObject _settingsWindow;
 
-		public GameObject UIRoot { get; private set; }
+		private readonly IObjectCreatorService _objectsCreator;
+		private readonly IAssetsProvider _assetsProvider;
 
-		protected UIFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
-			base(assetsProvider, objectsCreator)
+		public UIFactory(IObjectCreatorService objectsCreator, IAssetsProvider assetsProvider)
 		{
+			_objectsCreator = objectsCreator;
+			_assetsProvider = assetsProvider;
 		}
+
+		public GameObject UIRoot { get; private set; }
 
 		public async UniTask CreateUIRoot()
 		{
-			AssetsReference reference = await InitReference();
-			UIRoot = await CreateObject(reference.UIRootAddress);
+			UIAssetsReference reference = await InitReference(); 
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.UIRootAddress);
+
+			UIRoot = _objectsCreator.Instantiate(prefab);
 		}
 
 		public async UniTask CreateMainMenuWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_mainMenuWindow = await CreateObject(reference.MainMenuWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateLevelCompleteWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_levelCompleteWindow = await CreateObject(reference.LevelCompleteWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateGameOverWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_gameOverWindow = await CreateObject(reference.GameOverWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateWeaponStatsWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_weaponStatsWindow = await CreateObject(reference.WeaponStatsWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateInformationWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_informationWindow = await CreateObject(reference.InformationWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateDialogWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_dialogWindow = await CreateObject(reference.DialogWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreatePauseWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_pauseWindow = await CreateObject(reference.PauseWindowAddress, UIRoot.transform);
 		}
 
 		public async UniTask CreateSettingsWindow()
 		{
-			AssetsReference reference = await InitReference();
+			UIAssetsReference reference = await InitReference();
 			_settingsWindow = await CreateObject(reference.SettingsWindowAddress, UIRoot.transform);
 		}
 
@@ -105,5 +109,15 @@ namespace UI.Factory
 
 		public void DestroySettingsWindow() =>
 			Object.Destroy(_settingsWindow);
+
+		protected async UniTask<GameObject> CreateObject(string objectAddress, Transform parentTransform)
+		{
+			GameObject prefab = await _assetsProvider.Load<GameObject>(objectAddress);
+
+			return _objectsCreator.Instantiate(prefab, parentTransform);
+		}
+
+		protected async UniTask<UIAssetsReference> InitReference() =>
+			await _assetsProvider.Load<UIAssetsReference>(AssetsReferenceAddress.UIAssetsReference);
 	}
 }

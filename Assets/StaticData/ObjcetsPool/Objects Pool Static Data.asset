@@ -37,3 +37,11 @@ MonoBehaviour:
     PoolSize: 10
     PooledPrefabAddress: HeartIcon
     CanPoolIncrease: 1
+  - pooledObjectType: 7
+    PoolSize: 1
+    PooledPrefabAddress: Character
+    CanPoolIncrease: 0
+  - pooledObjectType: 8
+    PoolSize: 3
+    PooledPrefabAddress: ShopItem
+    CanPoolIncrease: 0

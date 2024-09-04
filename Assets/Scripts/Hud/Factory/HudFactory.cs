@@ -1,25 +1,30 @@
-using System.Collections;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
 namespace Hud.Factory
 {
-	public class HudFactory : FactoryBase, IHudFactory
+	public class HudFactory : IHudFactory
 	{
+		private readonly IAssetsProvider _assetsProvider;
+		private readonly IObjectCreatorService _createObject;
+
 		public GameObject Hud { get; private set; }
 
-		public HudFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
-			base(assetsProvider, objectsCreator)
+		public HudFactory(IAssetsProvider assetsProvider, IObjectCreatorService createObject)
 		{
+			_assetsProvider = assetsProvider;
+			_createObject = createObject;
 		}
+
 
 		public async UniTask Create()
 		{
-			AssetsReference reference = await InitReference();
-			Hud = await CreateObject(reference.HudAddress);
+			UIAssetsReference reference = await _assetsProvider.Load<UIAssetsReference>(AssetsReferenceAddress.UIAssetsReference);
+			GameObject prefab = await _assetsProvider.Load<GameObject>(reference.HudAddress);
+
+			Hud = _createObject.Instantiate(prefab);
 		}
 
 		public void Destroy() => 

@@ -2,12 +2,9 @@ using UnityEngine;
 
 namespace Infrastructure.Services.AssetsManagement
 {
-	[CreateAssetMenu(fileName = "AssetsReference", menuName = "Scriptable Object/Assets Reference")]
-	public class AssetsReference : ScriptableObject
+	[CreateAssetMenu(fileName = "UIAssetsReference", menuName = "Scriptable Object/UI Assets Reference")]
+	public class UIAssetsReference : ScriptableObject
 	{
-		public string CharacterAddress;
-		public string CharacterSelectorAddress;
-		public string ShopItemAddress;
 		public string HudAddress;
 		public string UIRootAddress;
 		public string MainMenuWindowAddress;
@@ -18,5 +15,6 @@ namespace Infrastructure.Services.AssetsManagement
 		public string DialogWindowAddress;
 		public string PauseWindowAddress;
 		public string SettingsWindowAddress;
+		public string CharacterSelectorAddress;
 	}
 }

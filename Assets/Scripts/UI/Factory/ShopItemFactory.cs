@@ -1,22 +1,19 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.ObjectCreator;
+using Pool;
 using UnityEngine;
 
 namespace UI.Factory
 {
-	public class ShopItemFactory : FactoryBase, IShopItemFactory
+	public class ShopItemFactory : IShopItemFactory
 	{
-		protected ShopItemFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) : 
-			base(assetsProvider, objectsCreator)
-		{
-		}
+		private readonly IObjectsPool _objectsPool;
+
+		public ShopItemFactory(IObjectsPool objectsPool) => 
+			_objectsPool = objectsPool;
 
 		public async UniTask Create(Transform parentTransform, Vector2 position)
 		{
-			AssetsReference reference = await InitReference();
-			GameObject shopItem = await CreateObject(reference.ShopItemAddress, parentTransform);
+			GameObject shopItem = await _objectsPool.UseObject(PooledObjectType.ShopItem, parentTransform);
 
 			shopItem.transform.localPosition = position;
 		}

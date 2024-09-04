@@ -8,6 +8,8 @@ namespace Pool
 		Drop,
 		SpecialEffect,
 		AmmoIcon,
-		HeartIcon
+		HeartIcon,
+		Character,
+		ShopItem
 	}
 }

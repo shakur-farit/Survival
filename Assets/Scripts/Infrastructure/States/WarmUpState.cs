@@ -35,7 +35,7 @@ namespace Infrastructure.States
 
 		private async UniTask WarmUpAssets()
 		{
-			await _assetsProvider.Load<AssetsReference>(AssetsReferenceAddress.AssetsReference);
+			await _assetsProvider.Load<UIAssetsReference>(AssetsReferenceAddress.UIAssetsReference);
 			await _staticDataService.WarmUp();
 		}
 

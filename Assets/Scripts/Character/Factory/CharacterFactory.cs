@@ -1,27 +1,22 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Factory;
-using Infrastructure.Services.AssetsManagement;
-using Infrastructure.Services.ObjectCreator;
+using Pool;
 using UnityEngine;
 
 namespace Character.Factory
 {
-	public class CharacterFactory : FactoryBase, ICharacterFactory
+	public class CharacterFactory : ICharacterFactory
 	{
+		private readonly IObjectsPool _objectsPool;
+
 		public GameObject Character { get; private set; }
 
-		public CharacterFactory(IAssetsProvider assetsProvider, IObjectCreatorService objectsCreator) :
-			base(assetsProvider, objectsCreator)
-		{
-		}
+		public CharacterFactory(IObjectsPool objectsPool) => 
+			_objectsPool = objectsPool;
 
-		public async UniTask Create()
-		{
-			AssetsReference reference = await InitReference();
-			Character = await CreateObject(reference.CharacterAddress);
-		}
+		public async UniTask Create() => 
+			Character = await _objectsPool.UseObject(PooledObjectType.Character);
 
 		public void Destroy() => 
-			Object.Destroy(Character);
+			_objectsPool.ReturnObject(PooledObjectType.Character,Character);
 	}
 }
