@@ -42,7 +42,7 @@ namespace Infrastructure.States
 			await CreateDropsPool();
 			await CreateAmmoPool();
 			await CreateSpecialEffectsPool();
-			//await CreateAmmoIconsPool();
+			await CreateAmmoIconsPool();
 			//await CreateHeartIconsPool();
 			await CreateCharacterPool();
 			//await CreateShopItemsPool();

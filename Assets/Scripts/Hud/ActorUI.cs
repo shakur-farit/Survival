@@ -20,10 +20,10 @@ namespace Hud
 			_weaponRealoader = weaponReloader;
 
 		private void OnEnable() =>
-			_weaponRealoader.WeaponReloaded += UpdateAmmoIcons;
+			_weaponRealoader.WeaponReloaded += ReloadAmmoIcon;
 
 		private void OnDisable() =>
-			_weaponRealoader.WeaponReloaded -= UpdateAmmoIcons;
+			_weaponRealoader.WeaponReloaded -= ReloadAmmoIcon;
 
 		private void OnDestroy()
 		{
@@ -50,5 +50,8 @@ namespace Hud
 
 		private void UpdateAmmoIcons() => 
 			_ammoBar.UpdateAmmoIcons();
+
+		private void ReloadAmmoIcon() => 
+			_ammoBar.CreateAmmoIcons();
 	}
 }

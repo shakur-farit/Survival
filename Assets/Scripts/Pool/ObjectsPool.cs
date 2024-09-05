@@ -120,15 +120,6 @@ namespace Pool
 			return objectToUse;
 		}
 
-		private ObjectsPoolStaticData.PoolStruct InitPoolStruct(PooledObjectType pooledObjectType)
-		{
-			foreach (ObjectsPoolStaticData.PoolStruct poolStruct in _staticDataService.ObjectsPoolStaticData.PoolsList)
-				if (pooledObjectType == poolStruct.pooledObjectType)
-					return poolStruct;
-
-			return null;
-		}
-
 		public void ReturnObject(PooledObjectType pooledObjectType, GameObject objectToReturn)
 		{
 			if (_poolDictionary.ContainsKey(pooledObjectType) == false)
@@ -137,13 +128,22 @@ namespace Pool
 			objectToReturn.SetActive(false);
 			_poolDictionary[pooledObjectType].Enqueue(objectToReturn);
 
-			ResetObject(objectToReturn);
+			ResetObject(pooledObjectType, objectToReturn);
 		}
 
 		public void ClearDictionaries()
 		{
 			_poolDictionary.Clear();
 			_parents.Clear();
+		}
+
+		private ObjectsPoolStaticData.PoolStruct InitPoolStruct(PooledObjectType pooledObjectType)
+		{
+			foreach (ObjectsPoolStaticData.PoolStruct poolStruct in _staticDataService.ObjectsPoolStaticData.PoolsList)
+				if (pooledObjectType == poolStruct.pooledObjectType)
+					return poolStruct;
+
+			return null;
 		}
 
 		private void CreateNewObject(PooledObjectType pooledObjectType, GameObject prefab)
@@ -157,7 +157,12 @@ namespace Pool
 			_poolDictionary[pooledObjectType].Enqueue(newObject);
 		}
 
-		private void ResetObject(GameObject objectToReset) => 
+		private void ResetObject(PooledObjectType pooledObjectType, GameObject objectToReset)
+		{
 			objectToReset.transform.position = Vector3.zero;
+
+			if(objectToReset.transform.parent != _parents[pooledObjectType])
+				objectToReset.transform.SetParent(_parents[pooledObjectType]);
+		}
 	}
 }

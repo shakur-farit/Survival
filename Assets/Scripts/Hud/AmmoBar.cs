@@ -24,20 +24,24 @@ namespace Hud
 		private void Start() => 
 			CreateAmmoIcons();
 
+		private void OnDestroy() => 
+			ClearIconsList();
+
 		public void UpdateAmmoIcons()
 		{
 			int currentAmmoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount;
+			
 			List<GameObject> ammoIcons = _ammoIconFactory.AmmoIcons;
 
 			for (int i = 0; i < ammoIcons.Count; i++)
 				ammoIcons[i].SetActive(i < currentAmmoCount);
 		}
 
-		private void CreateAmmoIcons()
+		public void CreateAmmoIcons()
 		{
 			ClearIconsList();
 
-			int ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.MagazineSize;
+			int ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount;
 
 			Vector2 position = Vector2.zero;
 

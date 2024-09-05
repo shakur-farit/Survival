@@ -63,7 +63,7 @@ namespace Character.Shooting
 
 		private async void TryToShoot()
 		{
-			if (TargetDetected == false || _isShoot || _weaponReloader.IsReloading)
+			if ( _isShoot || _weaponReloader.IsReloading)
 				return;
 
 			if (_persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount <= 0 && _infinityAmmo == false)

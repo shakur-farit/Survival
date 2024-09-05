@@ -29,19 +29,11 @@ MonoBehaviour:
     PoolSize: 10
     PooledPrefabAddress: SpecialEffect
     CanPoolIncrease: 1
-  - pooledObjectType: 5
-    PoolSize: 35
-    PooledPrefabAddress: AmmoIcon
-    CanPoolIncrease: 1
-  - pooledObjectType: 6
-    PoolSize: 10
-    PooledPrefabAddress: HeartIcon
-    CanPoolIncrease: 1
   - pooledObjectType: 7
     PoolSize: 1
     PooledPrefabAddress: Character
     CanPoolIncrease: 0
-  - pooledObjectType: 8
-    PoolSize: 3
-    PooledPrefabAddress: ShopItem
-    CanPoolIncrease: 0
+  - pooledObjectType: 5
+    PoolSize: 35
+    PooledPrefabAddress: AmmoIcon
+    CanPoolIncrease: 1
