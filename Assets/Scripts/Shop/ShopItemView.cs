@@ -26,7 +26,7 @@ namespace Shop
 		private void Awake() => 
 			InitializeUpgradeDictionary();
 
-		private void Start() => 
+		private void OnEnable() => 
 			SetupView();
 
 		private void SetupView()

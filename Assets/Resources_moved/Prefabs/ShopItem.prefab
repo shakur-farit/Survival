@@ -446,9 +446,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4720707259035309753}
-  - component: {fileID: 5377549795475230229}
-  - component: {fileID: 8257083293970522531}
-  - component: {fileID: 8323776085578043122}
   - component: {fileID: 1481061726431007775}
   m_Layer: 5
   m_Name: ShopItem
@@ -478,48 +475,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5377549795475230229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3914317351830727803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cceeb0f13e4277e4286b9d9372138a58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponSprite: {fileID: 801376480242536258}
-  _upgradeSprite: {fileID: 3382092040345985876}
-  _priceText: {fileID: 1762631761935823326}
-  _initializer: {fileID: 8257083293970522531}
---- !u!114 &8257083293970522531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3914317351830727803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a221807a5127dbb4695d023601a5dafa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8323776085578043122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3914317351830727803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439df5349799c4542a177b7678aa65fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buyButton: {fileID: 1481061726431007775}
-  _initializer: {fileID: 8257083293970522531}
 --- !u!114 &1481061726431007775
 MonoBehaviour:
   m_ObjectHideFlags: 0

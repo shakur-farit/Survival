@@ -13,11 +13,23 @@ namespace Shop
 {
 	public class ShopItemInitializer : MonoBehaviour
 	{
+		private WeaponStaticData _weaponStaticData;
+
 		private IRandomService _randomizer;
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
 
-		public WeaponStaticData WeaponStaticData { get; private set; }
+		public WeaponStaticData WeaponStaticData
+		{
+			get
+			{
+				if (_weaponStaticData == null)
+					return _weaponStaticData = GetRandomWeaponStaticData();
+
+				return _weaponStaticData;
+			}
+		}
+
 		public WeaponUpgradeType WeaponUpgradeType { get; private set; }
 
 		[Inject]
@@ -29,14 +41,15 @@ namespace Shop
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private void Awake() =>
-			GetRandomWeaponStaticData();
+		private void OnDisable() =>
+			_weaponStaticData = null;
 
-		private void GetRandomWeaponStaticData()
+		private WeaponStaticData GetRandomWeaponStaticData()
 		{
+			WeaponStaticData weaponStaticData = null;
 			ShopData shopData = _persistentProgressService.Progress.ShopData;
 
-			while (WeaponStaticData == null)
+			while (weaponStaticData == null)
 			{
 				WeaponType randomWeaponType = GetRandomWeaponType();
 				WeaponUpgradeType randomUpgradeType = GetRandomUpgradeType();
@@ -49,12 +62,14 @@ namespace Shop
 				    shopData.UsedWeaponUpgradeTypes.Contains(randomUpgradeType))
 					continue;
 
-				WeaponStaticData = GetWeaponStaticDataByType(randomWeaponType);
+				weaponStaticData = GetWeaponStaticDataByType(randomWeaponType);
 				WeaponUpgradeType = randomUpgradeType;
 
 				shopData.UsedWeaponTypes.Add(randomWeaponType);
 				shopData.UsedWeaponUpgradeTypes.Add(randomUpgradeType);
 			}
+
+			return weaponStaticData;
 		}
 
 		private WeaponType GetRandomWeaponType()

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
 using UI.Factory;
@@ -13,6 +15,8 @@ namespace UI.Windows
 	{
 		[SerializeField] private Button _weaponStatsButton;
 
+		private Vector2 _startPosition = new(-600f, 0f);
+
 		private IGameStatesSwitcher _statesSwitcher;
 		private IWindowsService _windowsService;
 		private IShopItemFactory _shopItemFactory;
@@ -23,6 +27,14 @@ namespace UI.Windows
 			_statesSwitcher = statesSwitcher;
 			_windowsService = windowsService;
 			_shopItemFactory = shopItemFactory;
+		}
+
+		private void OnDestroy()
+		{
+			foreach (GameObject shopItem in _shopItemFactory.ShopItemList) 
+				_shopItemFactory.Destroy(shopItem);
+
+			_shopItemFactory.ShopItemList.Clear();
 		}
 
 		protected override void OnAwake()
@@ -41,13 +53,11 @@ namespace UI.Windows
 
 		private void CreateShopItems()
 		{
-			Vector2 position = new Vector2(-600f, 0f);
-
 			for (int i = 0; i < Constants.ItemsNumber; i++)
 			{
-				_shopItemFactory.Create(transform, position);
+				_shopItemFactory.Create(transform, _startPosition);
 
-				position.x += Constants.NextItemXPositionStep;
+				_startPosition.x += Constants.NextItemXPositionStep;
 			}
 		}
 

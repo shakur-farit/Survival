@@ -36,7 +36,7 @@ namespace Shop
 		private void Awake() => 
 			_buyButton.onClick.AddListener(BuyItem);
 
-		private void Start() => 
+		private void OnEnable() => 
 			SetupPrice();
 
 		private void BuyItem()

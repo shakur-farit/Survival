@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolsList:
   - pooledObjectType: 1
-    PoolSize: 10
+    PoolSize: 1
     PooledPrefabAddress: Enemy
     CanPoolIncrease: 1
   - pooledObjectType: 2
@@ -40,4 +40,8 @@ MonoBehaviour:
   - pooledObjectType: 6
     PoolSize: 10
     PooledPrefabAddress: HeartIcon
+    CanPoolIncrease: 1
+  - pooledObjectType: 8
+    PoolSize: 3
+    PooledPrefabAddress: ShopItem
     CanPoolIncrease: 1
