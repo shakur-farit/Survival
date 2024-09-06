@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Hud.Factory;
@@ -28,6 +29,9 @@ namespace Hud
 
 			UpdateHearthIcons();
 		}
+
+		private void OnDestroy() => 
+			ClearIconsList();
 
 		public void UpdateHearthIcons()
 		{

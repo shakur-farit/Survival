@@ -16,8 +16,6 @@ namespace Infrastructure.Services.AssetsManagement
 		public string PauseWindowAddress;
 		public string SettingsWindowAddress;
 		public string CharacterSelectorAddress;
-		public string AmmoIconAddress;
-		public string HeartIconAddress;
 		public string ShopItemAddress;
 	}
 }

@@ -43,7 +43,7 @@ namespace Infrastructure.States
 			await CreateAmmoPool();
 			await CreateSpecialEffectsPool();
 			await CreateAmmoIconsPool();
-			//await CreateHeartIconsPool();
+			await CreateHeartIconsPool();
 			await CreateCharacterPool();
 			//await CreateShopItemsPool();
 		}
