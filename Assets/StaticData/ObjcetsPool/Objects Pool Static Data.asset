@@ -18,7 +18,7 @@ MonoBehaviour:
     PooledPrefabAddress: Enemy
     CanPoolIncrease: 1
   - pooledObjectType: 2
-    PoolSize: 5
+    PoolSize: 3
     PooledPrefabAddress: Ammo
     CanPoolIncrease: 1
   - pooledObjectType: 3
@@ -34,7 +34,7 @@ MonoBehaviour:
     PooledPrefabAddress: Character
     CanPoolIncrease: 0
   - pooledObjectType: 5
-    PoolSize: 35
+    PoolSize: 3
     PooledPrefabAddress: AmmoIcon
     CanPoolIncrease: 1
   - pooledObjectType: 6
