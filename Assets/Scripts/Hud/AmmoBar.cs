@@ -24,7 +24,7 @@ namespace Hud
 		private void Start() => 
 			CreateAmmoIcons();
 
-		private void OnDestroy() => 
+		private void OnDisable() => 
 			ClearIconsList();
 
 		public void UpdateAmmoIcons()

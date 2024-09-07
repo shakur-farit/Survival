@@ -161,7 +161,7 @@ namespace Pool
 		{
 			objectToReset.transform.position = Vector3.zero;
 
-			if(objectToReset.transform.parent != _parents[pooledObjectType])
+			if (objectToReset.transform.parent != _parents[pooledObjectType])
 				objectToReset.transform.SetParent(_parents[pooledObjectType]);
 		}
 	}

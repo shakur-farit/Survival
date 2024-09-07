@@ -30,7 +30,7 @@ namespace Hud
 			UpdateHearthIcons();
 		}
 
-		private void OnDestroy() => 
+		private void OnDisable() => 
 			ClearIconsList();
 
 		public void UpdateHearthIcons()

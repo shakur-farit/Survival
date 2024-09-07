@@ -29,7 +29,7 @@ namespace UI.Windows
 			_shopItemFactory = shopItemFactory;
 		}
 
-		private void OnDestroy()
+		private void OnDisable()
 		{
 			foreach (GameObject shopItem in _shopItemFactory.ShopItemList) 
 				_shopItemFactory.Destroy(shopItem);

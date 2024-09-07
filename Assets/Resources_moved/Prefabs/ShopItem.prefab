@@ -447,6 +447,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4720707259035309753}
   - component: {fileID: 1481061726431007775}
+  - component: {fileID: 8125036258042786586}
+  - component: {fileID: 3188718819895132728}
+  - component: {fileID: 9156338404716521368}
   m_Layer: 5
   m_Name: ShopItem
   m_TagString: Untagged
@@ -519,6 +522,48 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8125036258042786586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914317351830727803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439df5349799c4542a177b7678aa65fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buyButton: {fileID: 1481061726431007775}
+  _initializer: {fileID: 3188718819895132728}
+--- !u!114 &3188718819895132728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914317351830727803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a221807a5127dbb4695d023601a5dafa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9156338404716521368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914317351830727803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cceeb0f13e4277e4286b9d9372138a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponSprite: {fileID: 801376480242536258}
+  _upgradeSprite: {fileID: 3382092040345985876}
+  _priceText: {fileID: 1762631761935823326}
+  _initializer: {fileID: 3188718819895132728}
 --- !u!1 &7866177975111141202
 GameObject:
   m_ObjectHideFlags: 0
