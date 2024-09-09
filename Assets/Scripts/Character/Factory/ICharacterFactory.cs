@@ -7,7 +7,7 @@ namespace Character.Factory
 	{
 		GameObject Character { get; }
 
-		UniTask Create();
+		void Create();
 		void Destroy();
 	}
 }

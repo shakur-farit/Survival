@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Hud;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
 using LevelLogic;
@@ -55,7 +54,7 @@ namespace Infrastructure.States
 
 		private async UniTask CreateGameObjects()
 		{
-			await CreateCharacter();
+			CreateCharacter();
 			await CreateHud();
 		}
 
@@ -68,8 +67,8 @@ namespace Infrastructure.States
 			_enemiesCounter.SetEnemiesNumberInLevel();
 		}
 
-		private async UniTask CreateCharacter() => 
-			await _characterFactory.Create();
+		private void CreateCharacter() => 
+			_characterFactory.Create();
 
 		private async UniTask CreateHud()
 		{

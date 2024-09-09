@@ -133,7 +133,12 @@ namespace Installers
 		private void RegisterWeaponReloader() => 
 			Container.Bind<IWeaponReloader>().To<WeaponReloader>().AsSingle();
 
-		private void RegisterObjectsPool() => 
+		private void RegisterObjectsPool()
+		{
 			Container.Bind<IObjectsPool>().To<ObjectsPool>().AsSingle();
+			Container.Bind<IObjectsPoolFactory>().To<ObjectsPoolFactory>().AsSingle();
+			Container.Bind<IPools>().To<Pools>().AsSingle();
+			Container.Bind<IPool>().To<Pool.Pool>().AsCached();
+		}
 	}
 }

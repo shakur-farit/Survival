@@ -11,12 +11,14 @@ namespace Infrastructure.States
 		private readonly IObjectsPool _objectsPool;
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IScenesService _scenesService;
+		private readonly IObjectsPoolFactory _objectsPoolFactory;
 
-		public ObjectsPoolCreateState(IObjectsPool objectsPool,IGameStatesSwitcher gameStatesSwitcher, IScenesService scenesService)
+		public ObjectsPoolCreateState(IObjectsPool objectsPool,IGameStatesSwitcher gameStatesSwitcher, IScenesService scenesService, IObjectsPoolFactory objectsPoolFactory)
 		{
 			_objectsPool = objectsPool;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_scenesService = scenesService;
+			_objectsPoolFactory = objectsPoolFactory;
 		}
 
 		public async void Enter()
@@ -66,8 +68,12 @@ namespace Infrastructure.States
 		private async UniTask CreateHeartIconsPool() =>
 			await _objectsPool.CreatePool(PooledObjectType.HeartIcon);
 
-		private async UniTask CreateCharacterPool() =>
-			await _objectsPool.CreatePool(PooledObjectType.Character);
+		private async UniTask CreateCharacterPool()
+		{
+			//await _objectsPool.CreatePool(PooledObjectType.Character);
+
+			await _objectsPoolFactory.CreatePool(PooledObjectType.Character);
+		}
 
 		private async UniTask CreateShopItemsPool() =>
 			await _objectsPool.CreatePool(PooledObjectType.ShopItem);
