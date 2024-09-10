@@ -6,7 +6,8 @@ namespace Pool
 	public interface IObjectsPoolFactory
 	{
 		UniTask CreatePool(PooledObjectType pooledObjectType);
-		GameObject UseObject(PooledObjectType pooledObjectType);
+		UniTask<GameObject> UseObject(PooledObjectType pooledObjectType);
+		UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Vector2 position);
 		void ClearPools();
 	}
 }

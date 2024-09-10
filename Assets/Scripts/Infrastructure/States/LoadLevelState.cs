@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Character;
 using Character.Factory;
 using Character.Shooting;
@@ -54,7 +55,7 @@ namespace Infrastructure.States
 
 		private async UniTask CreateGameObjects()
 		{
-			CreateCharacter();
+			await CreateCharacter();
 			await CreateHud();
 		}
 
@@ -67,8 +68,8 @@ namespace Infrastructure.States
 			_enemiesCounter.SetEnemiesNumberInLevel();
 		}
 
-		private void CreateCharacter() => 
-			_characterFactory.Create();
+		private async UniTask CreateCharacter() => 
+			await _characterFactory.Create();
 
 		private async UniTask CreateHud()
 		{

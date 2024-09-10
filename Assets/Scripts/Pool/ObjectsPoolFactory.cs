@@ -10,13 +10,14 @@ namespace Pool
 	public class ObjectsPoolFactory : IObjectsPoolFactory
 	{
 		private Transform _poolsGroupTransform;
+		private ObjectsPoolStaticData.PoolStruct _poolStruct;
 
 		private readonly IAssetsProvider _assetsProvider;
 		private readonly IStaticDataService _staticDataService;
 		private readonly IObjectCreatorService _objectCreator;
 		private readonly IPools _pools;
 
-		public ObjectsPoolFactory(IAssetsProvider assetsProvider, IStaticDataService staticDataService, 
+		public ObjectsPoolFactory(IAssetsProvider assetsProvider, IStaticDataService staticDataService,
 			IObjectCreatorService objectCreator, IPools pools)
 		{
 			_assetsProvider = assetsProvider;
@@ -30,19 +31,54 @@ namespace Pool
 			if (_poolsGroupTransform == null)
 				_poolsGroupTransform = new GameObject("Pool Group Test").transform;
 
-			ObjectsPoolStaticData.PoolStruct poolStruct = InitPoolStruct(pooledObjectType);
+			_poolStruct = InitPoolStruct(pooledObjectType);
 
-			GameObject newObject = await CreateNewObject(poolStruct);
+			GameObject newObject = await CreateNewObject(_poolStruct);
 
 			Debug.Log($"In Factory {pooledObjectType}");
 
-			_pools.CreatePool(pooledObjectType, newObject, poolStruct.PoolSize, _poolsGroupTransform);	
+			_pools.CreatePool(pooledObjectType, newObject, _poolStruct.PoolSize, _poolsGroupTransform);
 		}
 
-		public GameObject UseObject(PooledObjectType pooledObjectType) => 
-			 _pools.UseObject(pooledObjectType);
+		public async UniTask<GameObject> UseObject(PooledObjectType pooledObjectType)
+		{
+			GameObject newObject = _pools.UseObject(pooledObjectType);
 
-		public void ClearPools() => 
+			if (newObject == null)
+			{
+				_poolStruct = InitPoolStruct(pooledObjectType);
+
+				if (_poolStruct.CanPoolIncrease)
+				{
+					await CreatePool(pooledObjectType);
+					newObject = _pools.UseObject(pooledObjectType);
+				}
+			}
+
+			return newObject;
+		}
+
+		public async UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Vector2 position)
+		{
+			GameObject newObject = _pools.UseObject(pooledObjectType);
+
+			if (newObject == null)
+			{
+				_poolStruct = InitPoolStruct(pooledObjectType);
+
+				if (_poolStruct.CanPoolIncrease)
+				{
+					await CreatePool(pooledObjectType);
+					newObject = _pools.UseObject(pooledObjectType);
+				}
+			}
+
+			newObject.transform.position = position;
+
+			return newObject;
+		}
+
+		public void ClearPools() =>
 			_pools.ClearPools();
 
 		private async UniTask<GameObject> CreateNewObject(ObjectsPoolStaticData.PoolStruct poolStruct)

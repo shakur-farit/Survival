@@ -50,8 +50,13 @@ namespace Infrastructure.States
 			await CreateShopItemsPool();
 		}
 
-		private async UniTask CreateEnemiesPool() => 
+		private async UniTask CreateEnemiesPool()
+		{
 			await _objectsPool.CreatePool(PooledObjectType.Enemy);
+
+			//await _objectsPoolFactory.CreatePool(PooledObjectType.Enemy);
+
+		}
 
 		private async UniTask CreateDropsPool() => 
 			await _objectsPool.CreatePool(PooledObjectType.Drop);

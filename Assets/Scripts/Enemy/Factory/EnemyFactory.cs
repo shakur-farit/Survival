@@ -7,11 +7,12 @@ namespace Enemy.Factory
 {
 	public class EnemyFactory : IEnemyFactory
 	{
-		private readonly IObjectsPool _objectsPool;
+		//private readonly IObjectsPool _objectsPool;
+		private readonly IObjectsPoolFactory _objectsPool;
 
 		public List<GameObject> EnemiesList { get; set; } = new();
 
-		public EnemyFactory(IObjectsPool objectsPool) =>
+		public EnemyFactory(IObjectsPoolFactory objectsPool) =>
 			_objectsPool = objectsPool;
 
 		public async UniTask<GameObject> Create(Vector2 position)
@@ -21,7 +22,9 @@ namespace Enemy.Factory
 			return enemy;
 		}
 
-		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PooledObjectType.Enemy, gameObject);
+		public void Destroy(GameObject gameObject)
+		{
+			//_objectsPool.ReturnObject(PooledObjectType.Enemy, gameObject);
+		}
 	}
 }

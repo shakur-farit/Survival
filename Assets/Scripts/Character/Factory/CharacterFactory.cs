@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Pool;
 using UnityEngine;
@@ -14,8 +15,8 @@ namespace Character.Factory
 		public CharacterFactory(IObjectsPoolFactory objectsPool) => 
 			_objectsPool = objectsPool;
 
-		public void Create() => 
-			Character = _objectsPool.UseObject(PooledObjectType.Character);
+		public async UniTask Create() => 
+			Character = await _objectsPool.UseObject(PooledObjectType.Character);
 
 		public void Destroy()
 		{

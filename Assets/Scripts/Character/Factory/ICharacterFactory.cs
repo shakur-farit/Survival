@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Character.Factory
 	{
 		GameObject Character { get; }
 
-		void Create();
+		UniTask Create();
 		void Destroy();
 	}
 }
