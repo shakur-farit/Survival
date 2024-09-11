@@ -3,14 +3,18 @@ using UnityEngine;
 
 namespace Pool
 {
-	public class Pool : IPool
+	public class Pool
 	{
 		private readonly Queue<GameObject> _objectsPool = new();
 		private Transform _parentTransform;
 
 		public GameObject UseObject()
 		{
+			if (_objectsPool.Count == 0)
+				return null;
+
 			GameObject objectToUse = _objectsPool.Dequeue();
+
 			objectToUse.SetActive(true);
 			return objectToUse;
 		}
@@ -25,7 +29,7 @@ namespace Pool
 			_objectsPool.Enqueue(objectToReturn);
 		}
 
-		public void AddObject(GameObject objectToAdd, Transform poolsGroupTransform)
+		public void AddObject(GameObject objectToAdd, Transform poolsGroupTransform = null)
 		{
 			objectToAdd.SetActive(false);
 

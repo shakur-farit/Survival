@@ -9,5 +9,6 @@ namespace Pool
 		UniTask<GameObject> UseObject(PooledObjectType pooledObjectType);
 		UniTask<GameObject> UseObject(PooledObjectType pooledObjectType, Vector2 position);
 		void ClearPools();
+		void ReturnObject(PooledObjectType pooledObjectType, GameObject objectToReturn);
 	}
 }

@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.States.StatesMachine;
 using Pool;
+using UnityEngine;
 using Utility;
 
 namespace Infrastructure.States
@@ -50,13 +51,8 @@ namespace Infrastructure.States
 			await CreateShopItemsPool();
 		}
 
-		private async UniTask CreateEnemiesPool()
-		{
-			await _objectsPool.CreatePool(PooledObjectType.Enemy);
-
-			//await _objectsPoolFactory.CreatePool(PooledObjectType.Enemy);
-
-		}
+		private async UniTask CreateEnemiesPool() => 
+			await _objectsPoolFactory.CreatePool(PooledObjectType.Enemy);
 
 		private async UniTask CreateDropsPool() => 
 			await _objectsPool.CreatePool(PooledObjectType.Drop);
@@ -73,12 +69,8 @@ namespace Infrastructure.States
 		private async UniTask CreateHeartIconsPool() =>
 			await _objectsPool.CreatePool(PooledObjectType.HeartIcon);
 
-		private async UniTask CreateCharacterPool()
-		{
-			//await _objectsPool.CreatePool(PooledObjectType.Character);
-
+		private async UniTask CreateCharacterPool() => 
 			await _objectsPoolFactory.CreatePool(PooledObjectType.Character);
-		}
 
 		private async UniTask CreateShopItemsPool() =>
 			await _objectsPool.CreatePool(PooledObjectType.ShopItem);

@@ -138,7 +138,6 @@ namespace Installers
 			Container.Bind<IObjectsPool>().To<ObjectsPool>().AsSingle();
 			Container.Bind<IObjectsPoolFactory>().To<ObjectsPoolFactory>().AsSingle();
 			Container.Bind<IPools>().To<Pools>().AsSingle();
-			Container.Bind<IPool>().To<Pool.Pool>().AsCached();
 		}
 	}
 }

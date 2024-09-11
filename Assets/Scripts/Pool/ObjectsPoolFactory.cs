@@ -35,8 +35,6 @@ namespace Pool
 
 			GameObject newObject = await CreateNewObject(_poolStruct);
 
-			Debug.Log($"In Factory {pooledObjectType}");
-
 			_pools.CreatePool(pooledObjectType, newObject, _poolStruct.PoolSize, _poolsGroupTransform);
 		}
 
@@ -44,16 +42,8 @@ namespace Pool
 		{
 			GameObject newObject = _pools.UseObject(pooledObjectType);
 
-			if (newObject == null)
-			{
-				_poolStruct = InitPoolStruct(pooledObjectType);
-
-				if (_poolStruct.CanPoolIncrease)
-				{
-					await CreatePool(pooledObjectType);
-					newObject = _pools.UseObject(pooledObjectType);
-				}
-			}
+			if (newObject == null) 
+				newObject = await TryIncreasePool(pooledObjectType);
 
 			return newObject;
 		}
@@ -63,20 +53,15 @@ namespace Pool
 			GameObject newObject = _pools.UseObject(pooledObjectType);
 
 			if (newObject == null)
-			{
-				_poolStruct = InitPoolStruct(pooledObjectType);
-
-				if (_poolStruct.CanPoolIncrease)
-				{
-					await CreatePool(pooledObjectType);
-					newObject = _pools.UseObject(pooledObjectType);
-				}
-			}
+				newObject = await TryIncreasePool(pooledObjectType);
 
 			newObject.transform.position = position;
 
 			return newObject;
 		}
+
+		public void ReturnObject(PooledObjectType pooledObjectType, GameObject objectToReturn) => 
+			_pools.ReturnObject(pooledObjectType, objectToReturn);
 
 		public void ClearPools() =>
 			_pools.ClearPools();
@@ -95,6 +80,22 @@ namespace Pool
 					return poolStruct;
 
 			return null;
+		}
+
+		private async UniTask<GameObject> TryIncreasePool(PooledObjectType pooledObjectType)
+		{
+			GameObject newObject;
+			_poolStruct = InitPoolStruct(pooledObjectType);
+
+			if (_poolStruct.CanPoolIncrease)
+			{
+				newObject = await CreateNewObject(_poolStruct);
+
+				_pools.AddObject(pooledObjectType, newObject);
+			}
+
+			newObject = _pools.UseObject(pooledObjectType);
+			return newObject;
 		}
 	}
 }
