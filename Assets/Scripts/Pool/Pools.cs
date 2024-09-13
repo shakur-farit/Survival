@@ -21,21 +21,21 @@ namespace Pool
 				pool.ReturnObject(objectToReturn);
 		}
 
-		public void CreatePool(PooledObjectType pooledObjectType, GameObject newObject, int size, Transform poolsGroupTransform)
+		public void CreatePool(PooledObjectType pooledObjectType, GameObject newObject, Transform poolsGroupTransform)
 		{
-			if (_poolsDictionary.ContainsKey(pooledObjectType) == false)
+			if (_poolsDictionary.ContainsKey(pooledObjectType))
 			{
-				Pool pool = new Pool();
-
-				_poolsDictionary.Add(pooledObjectType, pool);
-
-				for (int i = 0; i < size; i++) 
-					pool.AddObject(newObject, poolsGroupTransform);
+				AddObject(pooledObjectType,newObject, poolsGroupTransform);
+				return;
 			}
+
+			Pool pool = new Pool();
+			_poolsDictionary.Add(pooledObjectType, pool);
+			AddObject(pooledObjectType, newObject, poolsGroupTransform);
 		}
 
-		public void AddObject(PooledObjectType pooledObjectType, GameObject newObject) => 
-			_poolsDictionary[pooledObjectType].AddObject(newObject);
+		public void AddObject(PooledObjectType pooledObjectType, GameObject newObject, Transform poolsGroupTransform) => 
+			_poolsDictionary[pooledObjectType].AddObject(newObject, poolsGroupTransform);
 
 		public void ClearPools() => 
 			_poolsDictionary.Clear();

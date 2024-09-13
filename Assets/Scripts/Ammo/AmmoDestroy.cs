@@ -21,16 +21,16 @@ namespace Ammo
 		public void DestroyOnOutOfDetectedRange(GameObject gameObject) => 
 			Destroy(gameObject);
 
-		public async UniTask DestroyInHit(GameObject gameObject, Vector2 position, SpecialEffectStaticData effectStaticData)
+		public void DestroyInHit(GameObject gameObject, Vector2 position, SpecialEffectStaticData effectStaticData)
 		{
 			Destroy(gameObject);
 
-			await CreateHitEffect(position, effectStaticData);
+			CreateHitEffect(position, effectStaticData);
 		}
 
-		private async UniTask CreateHitEffect(Vector2 position, SpecialEffectStaticData effectStaticData)
+		private void CreateHitEffect(Vector2 position, SpecialEffectStaticData effectStaticData)
 		{
-			GameObject shootEffect = await _specialEffectsFactory.CreateSpecialEffect(position);
+			GameObject shootEffect = _specialEffectsFactory.CreateSpecialEffect(position);
 
 			if (shootEffect.TryGetComponent(out SpecialEffectData data))
 				data.Initialize(effectStaticData);

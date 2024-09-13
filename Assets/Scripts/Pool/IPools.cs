@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pool
@@ -7,8 +6,8 @@ namespace Pool
 	{
 		GameObject UseObject(PooledObjectType pooledObjectType);
 		void ReturnObject(PooledObjectType pooledObjectType, GameObject objectToReturn);
-		void CreatePool(PooledObjectType type, GameObject newObject, int size, Transform poolsGroupTransform);
+		void CreatePool(PooledObjectType type, GameObject newObject, Transform poolsGroupTransform);
+		void AddObject(PooledObjectType pooledObjectType, GameObject newObject, Transform poolsGroupTransform);
 		void ClearPools();
-		void AddObject(PooledObjectType pooledObjectType, GameObject newObject);
 	}
 }

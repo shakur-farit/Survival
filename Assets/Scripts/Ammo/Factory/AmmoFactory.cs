@@ -6,15 +6,15 @@ namespace Ammo.Factory
 {
 	public class AmmoFactory : IAmmoFactory
 	{
-		private readonly IObjectsPool _objectsPool;
+		private readonly IPoolFactory _poolFactory;
 
-		public AmmoFactory(IObjectsPool objectsPool) => 
-			_objectsPool = objectsPool;
+		public AmmoFactory(IPoolFactory poolFactory) => 
+			_poolFactory = poolFactory;
 
-		public async UniTask Create(Vector2 position, Quaternion rotation) => 
-			await _objectsPool.UseObject(PooledObjectType.Ammo, position, rotation);
+		public void Create(Vector2 position, Quaternion rotation) => 
+			_poolFactory.UseObject(PooledObjectType.Ammo, position, rotation);
 
 		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PooledObjectType.Ammo, gameObject);
+			_poolFactory.ReturnObject(PooledObjectType.Ammo, gameObject);
 	}
 }

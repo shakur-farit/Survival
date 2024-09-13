@@ -6,17 +6,17 @@ namespace Character.Factory
 {
 	public class CharacterFactory : ICharacterFactory
 	{
-		private readonly IObjectsPoolFactory _objectsPoolFactory;
+		private readonly IPoolFactory _poolFactory;
 
 		public GameObject Character { get; private set; }
 
-		public CharacterFactory(IObjectsPoolFactory objectsPoolFactory) => 
-			_objectsPoolFactory = objectsPoolFactory;
+		public CharacterFactory(IPoolFactory poolFactory) => 
+			_poolFactory = poolFactory;
 
-		public async UniTask Create() => 
-			Character = await _objectsPoolFactory.UseObject(PooledObjectType.Character);
+		public void Create() => 
+			Character = _poolFactory.UseObject(PooledObjectType.Character);
 
 		public void Destroy() => 
-			_objectsPoolFactory.ReturnObject(PooledObjectType.Character, Character);
+			_poolFactory.ReturnObject(PooledObjectType.Character, Character);
 	}
 }

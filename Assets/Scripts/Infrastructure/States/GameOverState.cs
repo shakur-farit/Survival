@@ -22,12 +22,12 @@ namespace Infrastructure.States
 		private readonly IEnemySpawner _enemySpawner;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IUIFactory _uiFactory;
-		private readonly IObjectsPool _objectsPool;
+		private readonly IPoolFactory _poolFactory;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
 			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner, 
 			IPersistentProgressService persistentProgressService, IUIFactory uiFactory,
-			IObjectsPool objectsPool)
+			IPoolFactory poolFactory)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
@@ -36,7 +36,7 @@ namespace Infrastructure.States
 			_enemySpawner = enemySpawner;
 			_persistentProgressService = persistentProgressService;
 			_uiFactory = uiFactory;
-			_objectsPool = objectsPool;
+			_poolFactory = poolFactory;
 		}
 
 		public async void Enter()
@@ -89,6 +89,6 @@ namespace Infrastructure.States
 		}
 
 		private void ClearPoolObjects() => 
-			_objectsPool.ClearDictionaries();
+			_poolFactory.ClearPools();
 	}
 }

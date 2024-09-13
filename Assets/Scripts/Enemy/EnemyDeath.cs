@@ -27,14 +27,14 @@ namespace Enemy
 			_dropSpawner = dropSpawner;
 		}
 
-		public async UniTask Die(GameObject gameObject, Vector2 position)
+		public void Die(GameObject gameObject, Vector2 position)
 		{
 			EnemyData enemyData = _persistentProgressService.Progress.EnemyData;
 
 			RemoveFromCharacterRange(gameObject, enemyData);
 			AddToDeadEnemies(gameObject, enemyData);
 
-			await SpawnDrop(position);
+			SpawnDrop(position);
 
 			Destroy(gameObject);
 
@@ -47,8 +47,8 @@ namespace Enemy
 		private static void AddToDeadEnemies(GameObject gameObject, EnemyData enemyData) => 
 			enemyData.DeadEnemies.Add(gameObject);
 
-		private async UniTask SpawnDrop(Vector2 position) => 
-			await _dropSpawner.Spawn(position);
+		private void SpawnDrop(Vector2 position) => 
+			_dropSpawner.Spawn(position);
 
 		private void Destroy(GameObject gameObject) => 
 			_enemyFactory.Destroy(gameObject);

@@ -29,7 +29,7 @@ namespace Pool
 			_objectsPool.Enqueue(objectToReturn);
 		}
 
-		public void AddObject(GameObject objectToAdd, Transform poolsGroupTransform = null)
+		public void AddObject(GameObject objectToAdd, Transform poolsGroupTransform)
 		{
 			objectToAdd.SetActive(false);
 

@@ -89,8 +89,8 @@ namespace Character.Shooting
 
 			for (int i = 0; i < ammoAmount; i++)
 			{
-				await CreateAmmo();
-				GameObject shootEffect = await CreateSpecialEffect();
+				CreateAmmo();
+				GameObject shootEffect = CreateSpecialEffect();
 				InitializeSpecialEffect(shootEffect, weaponData.CurrentWeapon.specialEffect);
 
 				await UniTask.Delay(spawnInterval);
@@ -105,11 +105,11 @@ namespace Character.Shooting
 			Shot?.Invoke();
 		}
 
-		private async UniTask CreateAmmo() =>
-			await _ammoFactory.Create(_weaponShootTransform.position, _weaponRotationPoint.rotation);
+		private void CreateAmmo() =>
+			_ammoFactory.Create(_weaponShootTransform.position, _weaponRotationPoint.rotation);
 
-		private async UniTask<GameObject> CreateSpecialEffect() =>
-			await _sfxFactory.CreateSpecialEffect(_weaponShootTransform.position);
+		private GameObject CreateSpecialEffect() =>
+			_sfxFactory.CreateSpecialEffect(_weaponShootTransform.position);
 
 		private void InitializeSpecialEffect(GameObject shootEffect, SpecialEffectStaticData staticData)
 		{

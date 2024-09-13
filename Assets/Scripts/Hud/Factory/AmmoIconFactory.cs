@@ -9,22 +9,22 @@ namespace Hud.Factory
 	{
 		private readonly List<GameObject> _ammoIcons = new();
 
-		private readonly IObjectsPool _objectsPool;
+		private readonly IPoolFactory _poolFactory;
 
 		public List<GameObject> AmmoIcons => _ammoIcons;
 
-		protected AmmoIconFactory(IObjectsPool objectsPool) => 
-			_objectsPool = objectsPool;
+		protected AmmoIconFactory(IPoolFactory poolFactory) => 
+			_poolFactory = poolFactory;
 
-		public async UniTask Create(Transform parentTransform, Vector2 position)
+		public void Create(Transform parentTransform, Vector2 position)
 		{
-			GameObject icon = await _objectsPool.UseObject(PooledObjectType.AmmoIcon, parentTransform);
+			GameObject icon = _poolFactory.UseObject(PooledObjectType.AmmoIcon, parentTransform);
 			icon.transform.localPosition = position;
 
 			_ammoIcons.Add(icon);
 		}
 
 		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PooledObjectType.AmmoIcon, gameObject);
+			_poolFactory.ReturnObject(PooledObjectType.AmmoIcon, gameObject);
 	}
 }

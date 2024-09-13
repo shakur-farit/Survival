@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -23,9 +21,9 @@ namespace Hud
 			_persistentProgressService = persistentProgressService;
 		}
 
-		private async void Start()
+		private void Start()
 		{
-			await CreateStartHearthIcons();
+			CreateStartHearthIcons();
 
 			UpdateHearthIcons();
 		}
@@ -42,7 +40,7 @@ namespace Hud
 				hearts[i].SetActive(i < currentHealth);
 		}
 
-		private async UniTask CreateStartHearthIcons()
+		private void CreateStartHearthIcons()
 		{
 			ClearIconsList();
 
@@ -50,14 +48,14 @@ namespace Hud
 
 			for (int i = 0; i < _persistentProgressService.Progress.CharacterData.MaxHealth; i++)
 			{
-				await CreateHearthIcon(position);
+				CreateHearthIcon(position);
 
 				position.x += Constants.NextHearthIconXPositionStep;
 			}
 		}
 
-		private async UniTask CreateHearthIcon(Vector2 position) => 
-			await _heartIconsFactory.Create(_heartIconsHolder, position);
+		private void CreateHearthIcon(Vector2 position) => 
+			_heartIconsFactory.Create(_heartIconsHolder, position);
 
 		private void ClearIconsList()
 		{

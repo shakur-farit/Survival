@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using Pool;
 using UnityEngine;
 
@@ -7,21 +6,21 @@ namespace DropLogic.Factory
 {
 	public class DropFactory : IDropFactory
 	{
-		private readonly IObjectsPool _objectsPool;
+		private readonly IPoolFactory _poolFactory;
 
 		public List<GameObject> DropsList { get; } = new();
 
-		protected DropFactory(IObjectsPool objectsPool) => 
-			_objectsPool = objectsPool;
+		protected DropFactory(IPoolFactory poolFactory) => 
+			_poolFactory = poolFactory;
 
-		public async UniTask Create(Vector2 position)
+		public void Create(Vector2 position)
 		{
-			GameObject drop = await _objectsPool.UseObject(PooledObjectType.Drop, position);
+			GameObject drop = _poolFactory.UseObject(PooledObjectType.Drop, position);
 
 			DropsList.Add(drop);
 		}
 
 		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PooledObjectType.Drop, gameObject);
+			_poolFactory.ReturnObject(PooledObjectType.Drop, gameObject);
 	}
 }

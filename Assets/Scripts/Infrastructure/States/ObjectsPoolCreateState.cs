@@ -2,24 +2,21 @@ using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.States.StatesMachine;
 using Pool;
-using UnityEngine;
 using Utility;
 
 namespace Infrastructure.States
 {
 	public class ObjectsPoolCreateState : IGameState
 	{
-		private readonly IObjectsPool _objectsPool;
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IScenesService _scenesService;
-		private readonly IObjectsPoolFactory _objectsPoolFactory;
+		private readonly IPoolFactory _poolFactory;
 
-		public ObjectsPoolCreateState(IObjectsPool objectsPool,IGameStatesSwitcher gameStatesSwitcher, IScenesService scenesService, IObjectsPoolFactory objectsPoolFactory)
+		public ObjectsPoolCreateState(IGameStatesSwitcher gameStatesSwitcher, IScenesService scenesService, IPoolFactory poolFactory)
 		{
-			_objectsPool = objectsPool;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_scenesService = scenesService;
-			_objectsPoolFactory = objectsPoolFactory;
+			_poolFactory = poolFactory;
 		}
 
 		public async void Enter()
@@ -52,28 +49,28 @@ namespace Infrastructure.States
 		}
 
 		private async UniTask CreateEnemiesPool() => 
-			await _objectsPoolFactory.CreatePool(PooledObjectType.Enemy);
+			await _poolFactory.CreatePool(PooledObjectType.Enemy);
 
 		private async UniTask CreateDropsPool() => 
-			await _objectsPool.CreatePool(PooledObjectType.Drop);
+			await _poolFactory.CreatePool(PooledObjectType.Drop);
 
 		private async UniTask CreateAmmoPool() => 
-			await _objectsPool.CreatePool(PooledObjectType.Ammo);
+			await _poolFactory.CreatePool(PooledObjectType.Ammo);
 
 		private async UniTask CreateSpecialEffectsPool() => 
-			await _objectsPool.CreatePool(PooledObjectType.SpecialEffect);
+			await _poolFactory.CreatePool(PooledObjectType.SpecialEffect);
 
 		private async UniTask CreateAmmoIconsPool() =>
-			await _objectsPool.CreatePool(PooledObjectType.AmmoIcon);
+			await _poolFactory.CreatePool(PooledObjectType.AmmoIcon);
 
 		private async UniTask CreateHeartIconsPool() =>
-			await _objectsPool.CreatePool(PooledObjectType.HeartIcon);
+			await _poolFactory.CreatePool(PooledObjectType.HeartIcon);
 
 		private async UniTask CreateCharacterPool() => 
-			await _objectsPoolFactory.CreatePool(PooledObjectType.Character);
+			await _poolFactory.CreatePool(PooledObjectType.Character);
 
 		private async UniTask CreateShopItemsPool() =>
-			await _objectsPool.CreatePool(PooledObjectType.ShopItem);
+			await _poolFactory.CreatePool(PooledObjectType.ShopItem);
 
 		private void SwitchToLoadLevelState() => 
 			_gameStatesSwitcher.SwitchState<LoadLevelState>();

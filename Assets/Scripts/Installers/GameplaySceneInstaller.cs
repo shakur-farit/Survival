@@ -135,8 +135,7 @@ namespace Installers
 
 		private void RegisterObjectsPool()
 		{
-			Container.Bind<IObjectsPool>().To<ObjectsPool>().AsSingle();
-			Container.Bind<IObjectsPoolFactory>().To<ObjectsPoolFactory>().AsSingle();
+			Container.Bind<IPoolFactory>().To<PoolFactory>().AsSingle();
 			Container.Bind<IPools>().To<Pools>().AsSingle();
 		}
 	}

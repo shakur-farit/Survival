@@ -6,7 +6,7 @@ namespace Hud.Factory
 {
 	public interface IAmmoIconFactory
 	{ 
-		UniTask Create(Transform parentTransform, Vector2 position);
+		void Create(Transform parentTransform, Vector2 position);
 		List<GameObject> AmmoIcons { get; }
 		void Destroy(GameObject gameObject);
 	}

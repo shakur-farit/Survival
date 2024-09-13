@@ -6,15 +6,15 @@ namespace SpecialEffects.Factory
 {
 	public class SpecialEffectsFactory : ISpecialEffectsFactory
 	{
-		private readonly IObjectsPool _objectsPool;
+		private readonly IPoolFactory _poolFactory;
 
-		protected SpecialEffectsFactory(IObjectsPool objectsPool) => 
-			_objectsPool = objectsPool;
+		protected SpecialEffectsFactory(IPoolFactory poolFactory) => 
+			_poolFactory = poolFactory;
 
-		public async UniTask<GameObject> CreateSpecialEffect(Vector2 position) => 
-			await _objectsPool.UseObject(PooledObjectType.SpecialEffect, position);
+		public GameObject CreateSpecialEffect(Vector2 position) => 
+			_poolFactory.UseObject(PooledObjectType.SpecialEffect, position);
 
 		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PooledObjectType.SpecialEffect, gameObject);
+			_poolFactory.ReturnObject(PooledObjectType.SpecialEffect, gameObject);
 	}
 }

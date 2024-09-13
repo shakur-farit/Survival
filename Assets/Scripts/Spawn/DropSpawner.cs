@@ -21,9 +21,9 @@ namespace Spawn
 			_dropMediator = dropMediator;
 		}
 
-		public async UniTask Spawn(Vector2 position)
+		public void Spawn(Vector2 position)
 		{
-			await _dropFactory.Create(position);
+			_dropFactory.Create(position);
 
 			DropStaticData dropStaticData = _dropStaticDataInitializer.InitializeDropStaticData();
 

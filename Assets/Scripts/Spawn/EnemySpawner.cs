@@ -56,10 +56,10 @@ namespace Spawn
 			_enemies.ForEach(SpawnEnemy);
 		}
 
-		private async void SpawnEnemy(EnemyType enemyType)
+		private void SpawnEnemy(EnemyType enemyType)
 		{
 			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(-10f, 10f));
-			GameObject enemyObject = await _enemyFactory.Create(randomPosition);
+			GameObject enemyObject = _enemyFactory.Create(randomPosition);
 
 			if (enemyObject.TryGetComponent(out EnemyInitializer enemy))
 				enemy.Initialize(enemyType);

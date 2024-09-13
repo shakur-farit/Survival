@@ -100,8 +100,8 @@ namespace Ammo
 			DestroyAmmoInHit();
 		}
 
-		private async void DestroyAmmoInHit() => 
-			await _ammoDestroy.DestroyInHit(gameObject, transform.position, _effectStaticData);
+		private void DestroyAmmoInHit() => 
+			_ammoDestroy.DestroyInHit(gameObject, transform.position, _effectStaticData);
 
 		private void DestroyAmmo() => 
 			_ammoDestroy.DestroyOnOutOfDetectedRange(gameObject);

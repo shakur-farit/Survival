@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using Pool;
 using UnityEngine;
 
@@ -9,16 +8,16 @@ namespace UI.Factory
 	{
 		private readonly List<GameObject> _shopItemList = new();
 
-		private readonly IObjectsPool _objectsPool;
+		private readonly IPoolFactory _poolFactory;
 
 		public List<GameObject> ShopItemList => _shopItemList;
 
-		public ShopItemFactory(IObjectsPool objectsPool) => 
-			_objectsPool = objectsPool;
+		public ShopItemFactory(IPoolFactory poolFactory) => 
+			_poolFactory = poolFactory;
 
-		public async UniTask Create(Transform parentTransform, Vector2 position)
+		public void Create(Transform parentTransform, Vector2 position)
 		{
-			GameObject shopItem = await _objectsPool.UseObject(PooledObjectType.ShopItem, parentTransform);
+			GameObject shopItem = _poolFactory.UseObject(PooledObjectType.ShopItem, parentTransform);
 
 			shopItem.transform.localPosition = position;
 
@@ -26,6 +25,6 @@ namespace UI.Factory
 		}
 
 		public void Destroy(GameObject gameObject) => 
-			_objectsPool.ReturnObject(PooledObjectType.ShopItem, gameObject);
+			_poolFactory.ReturnObject(PooledObjectType.ShopItem, gameObject);
 	}
 }

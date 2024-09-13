@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Character;
 using Character.Factory;
 using Character.Shooting;
@@ -11,7 +10,6 @@ using Infrastructure.States.StatesMachine;
 using LevelLogic;
 using Spawn;
 using StaticData;
-using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -56,7 +54,7 @@ namespace Infrastructure.States
 
 		private async UniTask CreateGameObjects()
 		{
-			await CreateCharacter();
+			CreateCharacter();
 			await CreateHud();
 		}
 
@@ -69,8 +67,8 @@ namespace Infrastructure.States
 			_enemiesCounter.SetEnemiesNumberInLevel();
 		}
 
-		private async UniTask CreateCharacter() => 
-			await _characterFactory.Create();
+		private void CreateCharacter() => 
+			_characterFactory.Create();
 
 		private async UniTask CreateHud()
 		{
