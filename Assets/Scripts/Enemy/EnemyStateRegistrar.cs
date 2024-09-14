@@ -8,7 +8,7 @@ namespace Enemy
 {
 	public class EnemyStateRegistrar : MonoBehaviour
 	{
-		[SerializeField] private EnemyAimStateMachine stateMachine;
+		[SerializeField] private EnemyAimStateMachine _stateMachine;
 
 		private IEnemyAimStatesRegistrar _statesRegistrar;
 		private IStatesFactory _statesFactory;
@@ -17,9 +17,9 @@ namespace Enemy
 		public void Constructor( IStatesFactory stateFactory) => 
 			_statesFactory = stateFactory;
 
-		private void OnEnable()
+		private void Awake()
 		{
-			_statesRegistrar = stateMachine;
+			_statesRegistrar = _stateMachine;
 
 			RegisterEnemyStates();
 		}

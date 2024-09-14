@@ -39,6 +39,7 @@ namespace Installers
 			RegisterLevelServices();
 			RegisterWeaponReloader();
 			RegisterDropStaticDataInitializer();
+			RegisterDropAnimator();
 		}
 
 		private void RegisterFactories()
@@ -138,5 +139,8 @@ namespace Installers
 			Container.Bind<IPoolFactory>().To<PoolFactory>().AsSingle();
 			Container.Bind<IPools>().To<Pools>().AsSingle();
 		}
+
+		private void RegisterDropAnimator() => 
+			Container.Bind<IDropAnimator>().To<DropAnimator>().AsSingle();
 	}
 }

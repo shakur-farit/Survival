@@ -13,11 +13,13 @@ namespace DropLogic.Factory
 		protected DropFactory(IPoolFactory poolFactory) => 
 			_poolFactory = poolFactory;
 
-		public void Create(Vector2 position)
+		public GameObject Create(Vector2 position)
 		{
 			GameObject drop = _poolFactory.UseObject(PooledObjectType.Drop, position);
 
 			DropsList.Add(drop);
+
+			return drop;
 		}
 
 		public void Destroy(GameObject gameObject) => 

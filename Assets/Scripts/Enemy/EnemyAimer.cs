@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Enemy.States;
 using Enemy.States.StateMachine;
@@ -21,6 +22,9 @@ namespace Enemy
 
 			InitializeAimStates();
 		}
+
+		private void OnEnable() => 
+			_currentState = string.Empty;
 
 		public void Aim(float angleDegree)
 		{

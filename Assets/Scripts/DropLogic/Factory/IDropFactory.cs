@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace DropLogic.Factory
@@ -7,7 +6,7 @@ namespace DropLogic.Factory
 	public interface IDropFactory
 	{
 		List<GameObject> DropsList { get; }
-		void Create(Vector2 position);
+		GameObject Create(Vector2 position);
 		void Destroy(GameObject gameObject);
 	}
 }

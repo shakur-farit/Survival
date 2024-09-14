@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using Enemy;
 using Enemy.Factory;
 using Infrastructure.Services.Randomizer;
-using Shop;
 using StaticData;
 using UnityEngine;
 

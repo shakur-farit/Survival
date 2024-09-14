@@ -19,16 +19,6 @@ namespace Pool
 			return objectToUse;
 		}
 
-		public void ReturnObject(GameObject objectToReturn)
-		{
-			objectToReturn.SetActive(false);
-
-			if(objectToReturn.transform.parent != _parentTransform)
-				objectToReturn.transform.SetParent(_parentTransform);
-
-			_objectsPool.Enqueue(objectToReturn);
-		}
-
 		public void AddObject(GameObject objectToAdd, Transform poolsGroupTransform)
 		{
 			objectToAdd.SetActive(false);
@@ -45,6 +35,24 @@ namespace Pool
 
 			objectToAdd.transform.SetParent(_parentTransform);
 			_objectsPool.Enqueue(objectToAdd);
+		}
+
+		public void ReturnObject(GameObject objectToReturn)
+		{
+			objectToReturn.SetActive(false);
+
+			if(objectToReturn.transform.parent != _parentTransform)
+				objectToReturn.transform.SetParent(_parentTransform);
+
+			_objectsPool.Enqueue(objectToReturn);
+			
+			ResetObject(objectToReturn);
+		}
+
+		private static void ResetObject(GameObject objectToReturn)
+		{
+			objectToReturn.transform.position = default;
+			objectToReturn.transform.rotation = default;
 		}
 	}
 }

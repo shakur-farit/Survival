@@ -34,7 +34,7 @@ namespace Enemy
 			_target = _characterFactory.Character;
 		}
 
-		private void Update() =>
+		private void Update() => 
 			TryMove();
 
 		private void TryMove()

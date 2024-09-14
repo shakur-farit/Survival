@@ -39,8 +39,6 @@ namespace Pool
 
 			_prefabs[pooledObjectType] = await _assetsProvider.Load<GameObject>(_poolStruct.PooledPrefabAddress);
 
-			Debug.Log($"{_prefabs.Count} / {_prefabs[pooledObjectType].name}");
-
 			for (int i = 0; i < _poolStruct.PoolSize; i++)
 			{
 				GameObject newObject = CreateNewObject(_prefabs[pooledObjectType]);

@@ -11,16 +11,21 @@ namespace DropLogic
 		[FormerlySerializedAs("_drop")] [SerializeField] private DropData dropData;
 
 		private IDropFactory _dropFactory;
+		private IDropAnimator _dropAnimator;
 
 		[Inject]
-		public void Constructor(IDropFactory dropFactory) => 
+		public void Constructor(IDropFactory dropFactory, IDropAnimator animator)
+		{
 			_dropFactory = dropFactory;
+			_dropAnimator = animator;
+		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (other.TryGetComponent(out CharacterDropPickuper pickuper))
 			{
 				PickupDrop(pickuper);
+				StopAnimation();
 				Destroy();
 			}
 		}
@@ -33,5 +38,8 @@ namespace DropLogic
 			_dropFactory.DropsList.Remove(gameObject);
 			_dropFactory.Destroy(gameObject);
 		}
+
+		private void StopAnimation() => 
+			_dropAnimator.KillTwin(transform);
 	}
 }
