@@ -31,6 +31,8 @@ namespace Shop
 
 		private void SetupView()
 		{
+			_upgradeSprite.gameObject.SetActive(true);
+
 			WeaponStaticData weaponStaticData = _initializer.WeaponStaticData;
 
 			_weaponSprite.sprite = weaponStaticData.Sprite;
