@@ -29,10 +29,12 @@ namespace UI.Windows
 
 		private void OnDisable()
 		{
-			foreach (GameObject shopItem in _shopItemFactory.ShopItemList) 
-				_shopItemFactory.Destroy(shopItem);
+#if UNITY_EDITOR
+			if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+				return;
+#endif
 
-			_shopItemFactory.ShopItemList.Clear();
+			RemoveShopItems();
 		}
 
 		protected override void OnAwake()
@@ -64,5 +66,13 @@ namespace UI.Windows
 
 		private void StartNextLevel() =>
 			_statesSwitcher.SwitchState<LoadLevelState>();
+
+		private void RemoveShopItems()
+		{
+			foreach (GameObject shopItem in _shopItemFactory.ShopItemList)
+				_shopItemFactory.Destroy(shopItem);
+
+			_shopItemFactory.ShopItemList.Clear();
+		}
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using Character;
 using DropLogic.Factory;
 using UnityEngine;
@@ -20,12 +21,14 @@ namespace DropLogic
 			_dropAnimator = animator;
 		}
 
+		private void OnDisable() => 
+			StopAnimation();
+
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (other.TryGetComponent(out CharacterDropPickuper pickuper))
 			{
 				PickupDrop(pickuper);
-				StopAnimation();
 				Destroy();
 			}
 		}
