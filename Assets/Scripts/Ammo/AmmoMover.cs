@@ -31,7 +31,7 @@ namespace Ammo
 			SetupSpread();
 		}
 
-		private void SetupMovementSpeed() =>
+		private void SetupMovementSpeed() => 
 			_movementSpeed = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.MovementSpeed;
 
 		private void Update() =>

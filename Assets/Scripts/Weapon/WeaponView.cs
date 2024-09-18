@@ -8,7 +8,7 @@ namespace Weapon
 {
 	public class WeaponView : MonoBehaviour
 	{
-		public SpriteRenderer WeaponSpriteRenderer;
+		[SerializeField] private SpriteRenderer _weaponSpriteRenderer;
 
 		private IPersistentProgressService _persistentProgressService;
 		private IStaticDataService _staticDataService;
@@ -20,7 +20,7 @@ namespace Weapon
 			_staticDataService = staticDataService;
 		}
 
-		private void Start()
+		public void SetupView()
 		{
 			foreach (WeaponStaticData weapon in _staticDataService.WeaponsListStaticData.WeaponsList)
 			{
@@ -28,7 +28,7 @@ namespace Weapon
 				{
 					_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon = weapon;
 
-					WeaponSpriteRenderer.sprite = weapon.Sprite;
+					_weaponSpriteRenderer.sprite = weapon.Sprite;
 				}
 			}
 		}

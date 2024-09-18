@@ -43,7 +43,7 @@ namespace Character.Shooting
 			_weaponReloader = weaponReloader;
 		}
 
-		private void Awake()
+		private void OnEnable()
 		{
 			_fireInputSystem.RegisterFireInputAction();
 
@@ -52,7 +52,6 @@ namespace Character.Shooting
 			_shootInterval = weaponData.ShootsInterval;
 			weaponData.CurrentAmmoCount = weaponData.MagazineSize;
 			_infinityAmmo = weaponData.CurrentWeapon.IsInfinityAmmo;
-
 		}
 
 		private void Update()
@@ -63,7 +62,7 @@ namespace Character.Shooting
 
 		private async void TryToShoot()
 		{
-			if ( _isShoot || _weaponReloader.IsReloading)
+			if (TargetDetected == false || _isShoot || _weaponReloader.IsReloading)
 				return;
 
 			if (_persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount <= 0 && _infinityAmmo == false)
@@ -105,7 +104,7 @@ namespace Character.Shooting
 			Shot?.Invoke();
 		}
 
-		private void CreateAmmo() =>
+		private void CreateAmmo() => 
 			_ammoFactory.Create(_weaponShootTransform.position, _weaponRotationPoint.rotation);
 
 		private GameObject CreateSpecialEffect() =>

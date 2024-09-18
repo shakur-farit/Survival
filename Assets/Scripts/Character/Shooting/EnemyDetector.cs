@@ -1,6 +1,7 @@
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using Zenject;
 
@@ -20,11 +21,9 @@ namespace Character.Shooting
 		public void Constructor(IPersistentProgressService persistentProgressService) => 
 			_persistentProgressService = persistentProgressService;
 
-		private void Awake()
-		{
+		private void OnEnable() =>
 			_circleCollider.radius =
 				_persistentProgressService.Progress.CharacterData.WeaponData.Range;
-		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{

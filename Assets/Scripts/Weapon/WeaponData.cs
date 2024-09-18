@@ -21,10 +21,7 @@ namespace Weapon
 			_staticDataService = staticDataService;
 		}
 
-		private void Awake() => 
-			SetupWeapon();
-
-		private void SetupWeapon()
+		public void SetupWeapon()
 		{
 			WeaponType currentWeaponType = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Type;
 			WeaponStaticData currentWeapon = _staticDataService.WeaponsListStaticData.WeaponsList
@@ -34,7 +31,7 @@ namespace Weapon
 			{
 				_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon = currentWeapon;
 
-				_weaponShootPoint.position = currentWeapon.ShootPoint;
+				_weaponShootPoint.localPosition = currentWeapon.ShootPoint;
 			}
 		}
 	}

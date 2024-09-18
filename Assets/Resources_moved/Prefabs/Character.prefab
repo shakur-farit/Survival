@@ -264,7 +264,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2214818999445400285}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0acc242acbf895145aae9a38e7879015, type: 3}
   m_Name: 
@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 6514956025599437399}
   - component: {fileID: 3462600473983923906}
   - component: {fileID: 8152230782425536593}
+  - component: {fileID: 915390412193861671}
   - component: {fileID: 4276383437017267173}
   - component: {fileID: 5623037930186665064}
   - component: {fileID: 6366150534435710473}
@@ -389,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a6373e6c28b8e4e993c7d98b402c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponSpriteRenderer: {fileID: 3100151591007234152}
+  _weaponSpriteRenderer: {fileID: 3100151591007234152}
 --- !u!114 &8152230782425536593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +404,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponShootPoint: {fileID: 8586382567303437777}
+--- !u!114 &915390412193861671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2287838410393570457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7da95461166f0e4493c2d2c56395237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 8152230782425536593}
+  _view: {fileID: 3462600473983923906}
 --- !u!114 &4276383437017267173
 MonoBehaviour:
   m_ObjectHideFlags: 0
