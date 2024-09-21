@@ -17,6 +17,10 @@ namespace StaticData
 		
 		[Range(0, 30)]public int TimeToStart;
 		[Range(0, 30)]public int TimeToCompleteLevel;
+
+		public Vector2 CharacterSpawnPosition;
+		public Vector2 MinEnemySpawnPosiotion;
+		public Vector2 MaxEnemySpawnPosiotion;
 	}
 
 	[Serializable]

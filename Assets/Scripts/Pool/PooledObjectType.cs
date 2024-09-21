@@ -10,6 +10,7 @@ namespace Pool
 		AmmoIcon,
 		HeartIcon,
 		Character,
-		ShopItem
+		ShopItem,
+		VirtualCamera
 	}
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.States.StatesMachine;
@@ -46,6 +47,7 @@ namespace Infrastructure.States
 			await CreateHeartIconsPool();
 			await CreateCharacterPool();
 			await CreateShopItemsPool();
+			await CreteVirtualCamera();
 		}
 
 		private async UniTask CreateEnemiesPool() => 
@@ -71,6 +73,9 @@ namespace Infrastructure.States
 
 		private async UniTask CreateShopItemsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.ShopItem);
+
+		private async UniTask CreteVirtualCamera() => 
+			await _poolFactory.CreatePool(PooledObjectType.VirtualCamera);
 
 		private void SwitchToLoadLevelState() => 
 			_gameStatesSwitcher.SwitchState<LoadLevelState>();

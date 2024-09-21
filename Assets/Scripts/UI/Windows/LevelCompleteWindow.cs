@@ -1,5 +1,6 @@
 using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
+using Shop.Factory;
 using UI.Factory;
 using UI.Services.Windows;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace UI.Windows
 		private void OnDisable()
 		{
 #if UNITY_EDITOR
-			if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+			if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode == false)
 				return;
 #endif
 

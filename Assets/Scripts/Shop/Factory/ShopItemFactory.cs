@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Pool;
 using UnityEngine;
 
-namespace UI.Factory
+namespace Shop.Factory
 {
 	public class ShopItemFactory : IShopItemFactory
 	{

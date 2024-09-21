@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI.Factory
+namespace Shop.Factory
 {
 	public interface IShopItemFactory
 	{

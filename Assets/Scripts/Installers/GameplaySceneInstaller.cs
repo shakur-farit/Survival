@@ -1,5 +1,6 @@
 using Ammo;
 using Ammo.Factory;
+using Camera;
 using Character;
 using Character.Factory;
 using Character.Shooting;
@@ -15,6 +16,7 @@ using Infrastructure.States.Factory;
 using LevelLogic;
 using Pool;
 using Selector.Factory;
+using Shop.Factory;
 using Spawn;
 using SpecialEffects.Factory;
 using UI.Factory;
@@ -56,6 +58,7 @@ namespace Installers
 			RegisterHeartIconsFactory();
 			RegisterShopItemFactory();
 			RegisterSelectorFactory();
+			RegisterVirtualCameraFactory();
 		}
 
 		private void RegisterMediators()
@@ -124,6 +127,9 @@ namespace Installers
 
 		private void RegisterSelectorFactory() =>
 			Container.Bind<ICharacterSelectorFactory>().To<CharacterSelectorFactory>().AsSingle();
+
+		private void RegisterVirtualCameraFactory() => 
+			Container.Bind<IVirtualCameraFactory>().To<VirtualCameraFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();

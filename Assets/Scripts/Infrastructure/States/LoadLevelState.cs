@@ -1,3 +1,4 @@
+using Camera;
 using Character;
 using Character.Factory;
 using Character.Shooting;
@@ -23,11 +24,12 @@ namespace Infrastructure.States
 		private readonly ILevelInitializer _levelInitializer;
 		private readonly ICountDownTimer _timer;
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
+		private readonly IVirtualCameraFactory _virtualCameraFactory;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
 			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
 			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer, 
-			IGameStatesSwitcher gameStatesSwitcher)
+			IGameStatesSwitcher gameStatesSwitcher, IVirtualCameraFactory virtualCameraFactory)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
@@ -37,6 +39,7 @@ namespace Infrastructure.States
 			_levelInitializer = levelInitializer;
 			_timer = timer;
 			_gameStatesSwitcher = gameStatesSwitcher;
+			_virtualCameraFactory = virtualCameraFactory;
 		}
 
 		public async void Enter()
@@ -56,6 +59,7 @@ namespace Infrastructure.States
 		{
 			CreateCharacter();
 			await CreateHud();
+			CreateVirtualCamera();
 		}
 
 		private async UniTask StartTimer() => 
@@ -78,6 +82,9 @@ namespace Infrastructure.States
 			_hudFactory.Hud.GetComponent<ActorUI>()
 				.SetShooter(_characterFactory.Character.GetComponent<Shooter>());
 		}
+
+		private void CreateVirtualCamera() => 
+			_virtualCameraFactory.Create();
 
 		private async void SpawnEnemies()
 		{
