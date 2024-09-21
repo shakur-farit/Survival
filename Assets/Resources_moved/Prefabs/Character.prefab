@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6415936365622873015}
   - component: {fileID: 8997875494318012210}
   - component: {fileID: 848134825718536704}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3756928866371259729}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponAnchorPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2643643489258521389}
   - component: {fileID: 4288739608410875299}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 4234203879209648726}
   - component: {fileID: 3116366109445135548}
   - component: {fileID: 2809956282604488770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 2309936614292289735}
   - component: {fileID: 3945861052911227128}
   - component: {fileID: 1891088030605241881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 263007942131066340}
   - component: {fileID: 6305372218424452076}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponRotationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,7 +631,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8586382567303437777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponShootPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406428626916254422}
   - component: {fileID: 1536107770253181898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HandNoWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -747,7 +747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3128146351042918599}
   - component: {fileID: 3100151591007234152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

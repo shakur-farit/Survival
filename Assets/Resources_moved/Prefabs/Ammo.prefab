@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2863550217381986784}
   - component: {fileID: 6390910501267623108}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 468312769
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 4df9cc7131cd27f4288bca5e76c82034, type: 3}
   m_Color: {r: 0.7735849, g: 0.20834655, b: 0.1715023, a: 1}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1564749175262534872}
   - component: {fileID: 6046585954958194308}
   - component: {fileID: 8452613444044616169}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

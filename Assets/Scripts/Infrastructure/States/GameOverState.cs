@@ -1,3 +1,4 @@
+using Camera;
 using Character.Factory;
 using Cysharp.Threading.Tasks;
 using Enemy.Factory;
@@ -23,11 +24,12 @@ namespace Infrastructure.States
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IUIFactory _uiFactory;
 		private readonly IPoolFactory _poolFactory;
+		private readonly IVirtualCameraFactory _virtualCameraFactory;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
 			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner, 
 			IPersistentProgressService persistentProgressService, IUIFactory uiFactory,
-			IPoolFactory poolFactory)
+			IPoolFactory poolFactory, IVirtualCameraFactory virtualCameraFactory)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
@@ -37,6 +39,7 @@ namespace Infrastructure.States
 			_persistentProgressService = persistentProgressService;
 			_uiFactory = uiFactory;
 			_poolFactory = poolFactory;
+			_virtualCameraFactory = virtualCameraFactory;
 		}
 
 		public async void Enter()
@@ -59,6 +62,7 @@ namespace Infrastructure.States
 
 		private void DestroyObjects()
 		{
+			DestroyVirtualCamera();
 			DestroyCharacter();
 			DestroyHud();
 			DestroyEnemies();
@@ -80,6 +84,9 @@ namespace Infrastructure.States
 
 		private void DestroyUIRoot() => 
 			_uiFactory.DestroyUIRoot();
+
+		private void DestroyVirtualCamera() => 
+			_virtualCameraFactory.Destroy();
 
 		private void ResetData()
 		{

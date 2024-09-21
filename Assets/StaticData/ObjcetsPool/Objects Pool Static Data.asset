@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolsList:
   - pooledObjectType: 1
-    PoolSize: 1
+    PoolSize: 5
     PooledPrefabAddress: Enemy
     CanPoolIncrease: 1
   - pooledObjectType: 2
-    PoolSize: 3
+    PoolSize: 5
     PooledPrefabAddress: Ammo
     CanPoolIncrease: 1
   - pooledObjectType: 3
@@ -34,7 +34,7 @@ MonoBehaviour:
     PooledPrefabAddress: Character
     CanPoolIncrease: 0
   - pooledObjectType: 5
-    PoolSize: 3
+    PoolSize: 35
     PooledPrefabAddress: AmmoIcon
     CanPoolIncrease: 1
   - pooledObjectType: 6

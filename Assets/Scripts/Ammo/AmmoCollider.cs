@@ -40,8 +40,6 @@ namespace Ammo
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			TryDealDamageToCharacter(other);
-
 			TryDealDamageToEnemy(other);
 		}
 
@@ -70,35 +68,22 @@ namespace Ammo
 		private void IsEnemyAmmo() => 
 			_isEnemy = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.IsEnemy;
 
-		private void TryDealDamageToCharacter(Collider2D other)
-		{
-			if (_isEnemy && other.gameObject.TryGetComponent(out CharacterHealth characterHealth))
-				DealDamageToCharacter(characterHealth);
-		}
-
 		private void TryDealDamageToEnemy(Collider2D other)
 		{
 			if (_isCollided)
 				return;
 
-			if (_isEnemy == false && other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
+			if (other.gameObject.TryGetComponent(out EnemyHealth enemyHealth))
 			{
 				_isCollided = true;
 				DealDamageToEnemy(enemyHealth);
 			}
-		}
 
-		private void DealDamageToCharacter(CharacterHealth characterHealth)
-		{
-			characterHealth.TakeDamage(_damage);
 			DestroyAmmoInHit();
 		}
 
-		private void DealDamageToEnemy(EnemyHealth enemyHealth)
-		{
+		private void DealDamageToEnemy(EnemyHealth enemyHealth) => 
 			enemyHealth.TakeDamage(_damage);
-			DestroyAmmoInHit();
-		}
 
 		private void DestroyAmmoInHit() => 
 			_ammoDestroy.DestroyInHit(gameObject, transform.position, _effectStaticData);

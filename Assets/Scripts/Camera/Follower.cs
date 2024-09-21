@@ -15,11 +15,8 @@ namespace Camera
 		public void Constructor(ICharacterFactory characterFactory) => 
 			_characterFactory = characterFactory;
 
-		private void OnEnable()
-		{
-			Debug.Log(_characterFactory.Character);
+		private void OnEnable() => 
 			FollowCameraToCharacter(_characterFactory.Character);
-		}
 
 		private void FollowCameraToCharacter(GameObject character)
 		{

@@ -3,6 +3,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Enemy;
 using Enemy.Factory;
+using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using StaticData;
 using UnityEngine;
@@ -17,11 +18,14 @@ namespace Spawn
 
 		private readonly IRandomService _randomService;
 		private readonly IEnemyFactory _enemyFactory;
+		private readonly IPersistentProgressService _persistentProgressService;
 
-		public EnemySpawner(IRandomService randomService, IEnemyFactory enemyFactory)
+		public EnemySpawner(IRandomService randomService, IEnemyFactory enemyFactory,
+			IPersistentProgressService persistentProgressService)
 		{
 			_randomService = randomService;
 			_enemyFactory = enemyFactory;
+			_persistentProgressService = persistentProgressService;
 		}
 
 		public async UniTask Spawn(LevelStaticData levelStaticData)
@@ -57,7 +61,14 @@ namespace Spawn
 
 		private void SpawnEnemy(EnemyType enemyType)
 		{
-			Vector2 randomPosition = new Vector2(_randomService.Next(-10f, 10f), _randomService.Next(-10f, 10f));
+			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
+
+			float minX = levelStaticData.MinEnemySpawnPosiotion.x;
+			float maxX = levelStaticData.MaxEnemySpawnPosiotion.x;
+			float minY = levelStaticData.MinEnemySpawnPosiotion.y;
+			float maxY = levelStaticData.MaxEnemySpawnPosiotion.y;
+
+			Vector2 randomPosition = new Vector2(_randomService.Next(minX, maxX), _randomService.Next(minY, maxY));
 			GameObject enemyObject = _enemyFactory.Create(randomPosition);
 
 			if (enemyObject.TryGetComponent(out EnemyInitializer enemy))
