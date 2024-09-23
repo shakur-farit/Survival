@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 4234203879209648726}
   - component: {fileID: 3116366109445135548}
   - component: {fileID: 2809956282604488770}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: EnemyDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

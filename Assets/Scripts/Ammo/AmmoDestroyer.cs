@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace Ammo
 {
-	public class AmmoDestroy : IAmmoDestroy
+	public class AmmoDestroyer : IAmmoDestroyer
 	{
 		private readonly IAmmoFactory _ammoFactory;
 		private readonly ISpecialEffectsFactory _specialEffectsFactory;
 
-		public AmmoDestroy(IAmmoFactory ammoFactory, ISpecialEffectsFactory specialEffectsFactory)
+		public AmmoDestroyer(IAmmoFactory ammoFactory, ISpecialEffectsFactory specialEffectsFactory)
 		{
 			_ammoFactory = ammoFactory;
 			_specialEffectsFactory = specialEffectsFactory;
