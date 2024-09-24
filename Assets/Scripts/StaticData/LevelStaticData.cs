@@ -25,6 +25,9 @@ namespace StaticData
 
 		public List<TileInfo> GroundTilesList;
 		public List<TileInfo> DecorationOneTilesList;
+		public List<TileInfo> DecorationTwoTilesList;
+		public List<TileInfo> FrontTilesList;
+		public List<TileInfo> CollisionTilesList;
 	}
 
 	[Serializable]

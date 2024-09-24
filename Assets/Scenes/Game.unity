@@ -454,7 +454,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1015267657
+--- !u!1001 &831056539
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -462,14 +462,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2392474134793431149, guid: a6b40b0e359271b41a1105907003dd73, type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2392474134793431149, guid: a6b40b0e359271b41a1105907003dd73, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: a35e9f660aeac4b4188308b3cef079f7, type: 3}
     - target: {fileID: 2905241026972217924, guid: a6b40b0e359271b41a1105907003dd73, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -510,17 +502,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6083001023812511273, guid: a6b40b0e359271b41a1105907003dd73, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7149179337646631958, guid: a6b40b0e359271b41a1105907003dd73, type: 3}
       propertyPath: m_Name
       value: RoomTemplate
       objectReference: {fileID: 0}
-    - target: {fileID: 7655230611761842571, guid: a6b40b0e359271b41a1105907003dd73, type: 3}
-      propertyPath: m_ColliderPaths.Array.size
-      value: 1
+    - target: {fileID: 7531288216384927260, guid: a6b40b0e359271b41a1105907003dd73, type: 3}
+      propertyPath: isEnable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -584,4 +572,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 567438303}
   - {fileID: 2069207364}
-  - {fileID: 1015267657}
+  - {fileID: 831056539}

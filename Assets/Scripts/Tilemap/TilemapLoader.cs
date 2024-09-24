@@ -16,7 +16,7 @@ namespace LevelLogic
 		public void Constructor(IStaticDataService staticDataService) => 
 			_staticDataService = staticDataService;
 
-		private void Awake() => 
+		private void Awake() =>
 			LoadLevel();
 
 		public void LoadLevel()

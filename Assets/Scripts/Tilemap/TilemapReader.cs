@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Data;
+﻿using System.Collections.Generic;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,33 +9,37 @@ namespace LevelLogic
 	public class TilemapReader : MonoBehaviour
 	{
 		public Tilemap groundTilemap;
-		public Tilemap decorationTilemap;
-
+		public Tilemap decorationOneTilemap;
+		public Tilemap decorationTwoTilemap;
+		public Tilemap frontTilemap;
+		public Tilemap collisionTilemap;
+		public int index;
+		public bool isEnable;
 		private IStaticDataService _staticDataService;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService)
-		{
+		public void Constructor(IStaticDataService staticDataService) => 
 			_staticDataService = staticDataService;
-		}
 
-		//private void Awake() => 
-		//	ReadTilemap();
+		private void Awake()
+		{
+			if(isEnable)
+				ReadTilemap();
+		}
 
 		public void ReadTilemap()
 		{
 			List<TileInfo> groundTileInfos = GetTileInfoFromTilemap(groundTilemap);
+			List<TileInfo> decorationOneTileInfos = GetTileInfoFromTilemap(decorationOneTilemap);
+			List<TileInfo> decorationTwoTileInfos = GetTileInfoFromTilemap(decorationTwoTilemap);
+			List<TileInfo> frontTileInfos = GetTileInfoFromTilemap(frontTilemap);
+			List<TileInfo> collisionTileInfos = GetTileInfoFromTilemap(collisionTilemap);
 
-			List<TileInfo> decorationTileInfos = GetTileInfoFromTilemap(decorationTilemap);
-
-			//foreach (var groundTileInfo in groundTileInfos)
-			//	_staticDataService.LevelsListStaticData.LevelsList[0].GroundTilesList.Add(groundTileInfo);
-
-			//foreach (var groundTileInfo in decorationTileInfos)
-			//	_staticDataService.LevelsListStaticData.LevelsList[0].DecorationOneTilesList.Add(groundTileInfo);
-
-			_staticDataService.LevelsListStaticData.LevelsList[0].GroundTilesList = groundTileInfos;
-			_staticDataService.LevelsListStaticData.LevelsList[0].DecorationOneTilesList = decorationTileInfos;
+			_staticDataService.LevelsListStaticData.LevelsList[index].GroundTilesList = groundTileInfos;
+			_staticDataService.LevelsListStaticData.LevelsList[index].DecorationOneTilesList = decorationOneTileInfos;
+			_staticDataService.LevelsListStaticData.LevelsList[index].DecorationTwoTilesList= decorationTwoTileInfos;
+			_staticDataService.LevelsListStaticData.LevelsList[index].FrontTilesList = frontTileInfos;
+			_staticDataService.LevelsListStaticData.LevelsList[index].CollisionTilesList= collisionTileInfos;
 		}
 
 		private List<TileInfo> GetTileInfoFromTilemap(Tilemap tilemap)
