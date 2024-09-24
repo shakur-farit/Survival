@@ -16,9 +16,9 @@ namespace Camera
 			_characterFactory = characterFactory;
 
 		private void OnEnable() => 
-			FollowCameraToCharacter(_characterFactory.Character);
+			FollowToCharacter(_characterFactory.Character);
 
-		private void FollowCameraToCharacter(GameObject character)
+		private void FollowToCharacter(GameObject character)
 		{
 			if(character == null)
 				return;
