@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -20,8 +21,8 @@ namespace LevelLogic
 			_staticDataService = staticDataService;
 		}
 
-		private void Awake() => 
-			ReadTilemap();
+		//private void Awake() => 
+		//	ReadTilemap();
 
 		public void ReadTilemap()
 		{
