@@ -1,14 +1,12 @@
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
-using UnityEngine;
+using Utility;
 
 namespace LevelLogic
 {
 	public class LevelInitializer : ILevelInitializer
 	{
-		private const int NextLevelStep = 1;
-
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IStaticDataService _staticDataService;
 
@@ -20,7 +18,7 @@ namespace LevelLogic
 
 		public void SetupLevelStaticData()
 		{
-			Level level = (Level)(_persistentProgressService.Progress.LevelData.PreviousLevel + NextLevelStep);
+			Level level = (Level)(_persistentProgressService.Progress.LevelData.PreviousLevel + Constants.NextLevelStep);
 
 			foreach (LevelStaticData levelStaticData in _staticDataService.LevelsListStaticData.LevelsList)
 				if (level == levelStaticData.Level)

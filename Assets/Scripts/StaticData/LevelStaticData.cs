@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enemy;
 using LevelLogic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace StaticData
 {
@@ -21,6 +22,9 @@ namespace StaticData
 		public Vector2 CharacterSpawnPosition;
 		public Vector2 MinEnemySpawnPosiotion;
 		public Vector2 MaxEnemySpawnPosiotion;
+
+		public List<TileInfo> GroundTilesList;
+		public List<TileInfo> DecorationOneTilesList;
 	}
 
 	[Serializable]

@@ -43,7 +43,7 @@ namespace Utility
 		public const float NextHearthIconXPositionStep = 60f;
 
 
-		// Timer values
+		// Timer value
 		public const int OneSecond = 1000;
 
 
@@ -52,14 +52,14 @@ namespace Utility
 		public const int ItemsNumber = 3;
 
 
-		// Character's sprite blink values
+		// Character's sprite blink value
 		public const float CharacterSpriteBlinkDuration = 0.15f;
 
 
 		// Level values
 		public const int NextLevelStep = 1;
 
-		// Scenes name
+		// Scene names
 		public const string MainMenuScene = "MainMenu";
 		public const string GameScene = "Game";
 	}

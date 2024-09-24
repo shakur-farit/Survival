@@ -16,10 +16,14 @@ MonoBehaviour:
   WavesOnLevel:
   - EnemiesInWave:
     - Type: 1
-      Number: 25
+      Number: 10
+    - Type: 2
+      Number: 7
   WaveCooldown: 5000
   TimeToStart: 0
   TimeToCompleteLevel: 2
   CharacterSpawnPosition: {x: 14.5, y: -9}
   MinEnemySpawnPosiotion: {x: -8, y: 3.5}
   MaxEnemySpawnPosiotion: {x: 37, y: -20.5}
+  GroundTilesList: []
+  DecorationOneTilesList: []
