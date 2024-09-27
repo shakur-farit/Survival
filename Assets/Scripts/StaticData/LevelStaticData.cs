@@ -23,11 +23,11 @@ namespace StaticData
 		public Vector2 MinEnemySpawnPosiotion;
 		public Vector2 MaxEnemySpawnPosiotion;
 
-		public List<TileInfo> GroundTilesList;
-		public List<TileInfo> DecorationOneTilesList;
-		public List<TileInfo> DecorationTwoTilesList;
-		public List<TileInfo> FrontTilesList;
-		public List<TileInfo> CollisionTilesList;
+		public TilemapData GroundTilesList;
+		public TilemapData DecorationOneTilesList;
+		public TilemapData DecorationTwoTilesList;
+		public TilemapData FrontTilesList;
+		public TilemapData CollisionTilesList;
 	}
 
 	[Serializable]
@@ -41,5 +41,13 @@ namespace StaticData
 	{
 		public EnemyType Type;
 		[Range(1, 100)] public int Number;
+	}
+
+	[Serializable]
+	public class TilemapData
+	{
+		public Vector3Int[] tilePositions;
+		public TileBase[] tiles;
+		public Matrix4x4[] transforms;
 	}
 }

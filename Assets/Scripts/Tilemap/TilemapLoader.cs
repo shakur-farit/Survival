@@ -1,5 +1,8 @@
-﻿using Infrastructure.Services.StaticData;
+﻿using System;
+using Infrastructure.Services.PersistentProgress;
+using StaticData;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Zenject;
 
@@ -8,25 +11,40 @@ namespace LevelLogic
 	public class TilemapLoader : MonoBehaviour
 	{
 		public Tilemap groundTilemap;
-		public Tilemap decorationTilemap;
+		public Tilemap decorationOneTilemap;
+		public Tilemap decorationTwoTilemap;
+		public Tilemap frontTilemap;
+		public Tilemap collisionTwoTilemap;
 
-		private IStaticDataService _staticDataService;
+		private IPersistentProgressService _progressService;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService) => 
-			_staticDataService = staticDataService;
+		public void Constructor(IPersistentProgressService progressService) => 
+			_progressService = progressService;
 
-		private void Awake() =>
-			LoadLevel();
-
-		public void LoadLevel()
+		private void Update()
 		{
-			groundTilemap.ClearAllTiles();
-			//decorationTilemap.ClearAllTiles();
+			if (Input.GetKeyDown(KeyCode.L))
+				LoadTilemapData();
+		}
 
-			foreach (var tileInfo in _staticDataService.LevelsListStaticData.LevelsList[0].GroundTilesList)
+		private void LoadTilemapData()
+		{
+			LoadTilemap(groundTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.GroundTilesList);
+			LoadTilemap(decorationOneTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.DecorationOneTilesList);
+			LoadTilemap(decorationTwoTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.DecorationTwoTilesList);
+			LoadTilemap(frontTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.FrontTilesList);
+			LoadTilemap(collisionTwoTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.CollisionTilesList);
+		}
+
+		private void LoadTilemap(Tilemap tilemap, TilemapData data)
+		{
+			tilemap.ClearAllTiles();
+
+			for (int i = 0; i < data.tilePositions.Length; i++)
 			{
-				groundTilemap.SetTile(tileInfo.position, tileInfo.tile);
+				tilemap.SetTile(data.tilePositions[i], data.tiles[i]);
+				tilemap.SetTransformMatrix(data.tilePositions[i], data.transforms[i]);
 			}
 		}
 	}

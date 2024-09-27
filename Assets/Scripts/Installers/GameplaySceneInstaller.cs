@@ -21,7 +21,6 @@ using Spawn;
 using SpecialEffects.Factory;
 using UI.Factory;
 using UI.Services.Windows;
-using UI.Windows;
 using Zenject;
 
 namespace Installers
@@ -59,6 +58,7 @@ namespace Installers
 			RegisterShopItemFactory();
 			RegisterSelectorFactory();
 			RegisterVirtualCameraFactory();
+			RegisterTilemapFactory();
 		}
 
 		private void RegisterMediators()
@@ -130,6 +130,9 @@ namespace Installers
 
 		private void RegisterVirtualCameraFactory() => 
 			Container.Bind<IVirtualCameraFactory>().To<VirtualCameraFactory>().AsSingle();
+
+		private void RegisterTilemapFactory() => 
+			Container.Bind<IRoomFactory>().To<RoomFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();

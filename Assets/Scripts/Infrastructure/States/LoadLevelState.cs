@@ -11,6 +11,7 @@ using Infrastructure.States.StatesMachine;
 using LevelLogic;
 using Spawn;
 using StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -25,11 +26,13 @@ namespace Infrastructure.States
 		private readonly ICountDownTimer _timer;
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IVirtualCameraFactory _virtualCameraFactory;
+		private readonly IRoomFactory _roomFactory;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
 			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
 			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer, 
-			IGameStatesSwitcher gameStatesSwitcher, IVirtualCameraFactory virtualCameraFactory)
+			IGameStatesSwitcher gameStatesSwitcher, IVirtualCameraFactory virtualCameraFactory,
+			IRoomFactory roomFactory)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
@@ -40,6 +43,7 @@ namespace Infrastructure.States
 			_timer = timer;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_virtualCameraFactory = virtualCameraFactory;
+			_roomFactory = roomFactory;
 		}
 
 		public async void Enter()
@@ -57,6 +61,7 @@ namespace Infrastructure.States
 
 		private async UniTask CreateGameObjects()
 		{
+			CreateRoom();
 			CreateCharacter();
 			await CreateHud();
 			CreateVirtualCamera();
@@ -69,6 +74,12 @@ namespace Infrastructure.States
 		{
 			_levelInitializer.SetupLevelStaticData();
 			_enemiesCounter.SetEnemiesNumberInLevel();
+		}
+
+		private void CreateRoom()
+		{
+			Debug.Log("ceate room");
+			_roomFactory.Create();
 		}
 
 		private void CreateCharacter() => 

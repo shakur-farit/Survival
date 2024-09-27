@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Enemy.Factory;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
+using LevelLogic;
 using Pool;
 using Spawn;
 using UI.Factory;
@@ -25,11 +26,13 @@ namespace Infrastructure.States
 		private readonly IUIFactory _uiFactory;
 		private readonly IPoolFactory _poolFactory;
 		private readonly IVirtualCameraFactory _virtualCameraFactory;
+		private readonly IRoomFactory _tilemapfactory;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
 			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner, 
 			IPersistentProgressService persistentProgressService, IUIFactory uiFactory,
-			IPoolFactory poolFactory, IVirtualCameraFactory virtualCameraFactory)
+			IPoolFactory poolFactory, IVirtualCameraFactory virtualCameraFactory, 
+			IRoomFactory tilemapfactory)
 		{
 			_windowService = windowService;
 			_characterFactory = characterFactory;
@@ -40,6 +43,7 @@ namespace Infrastructure.States
 			_uiFactory = uiFactory;
 			_poolFactory = poolFactory;
 			_virtualCameraFactory = virtualCameraFactory;
+			_tilemapfactory = tilemapfactory;
 		}
 
 		public async void Enter()
@@ -66,6 +70,7 @@ namespace Infrastructure.States
 			DestroyCharacter();
 			DestroyHud();
 			DestroyEnemies();
+			DestroyTilemap();
 		}
 
 		private void DestroyCharacter() =>
@@ -81,6 +86,9 @@ namespace Infrastructure.States
 
 			_enemyFactory.EnemiesList.Clear();
 		}
+
+		private void DestroyTilemap() => 
+			_tilemapfactory.Destroy();
 
 		private void DestroyUIRoot() => 
 			_uiFactory.DestroyUIRoot();

@@ -49,3 +49,7 @@ MonoBehaviour:
     PoolSize: 1
     PooledPrefabAddress: VirtualCamera
     CanPoolIncrease: 0
+  - pooledObjectType: 10
+    PoolSize: 1
+    PooledPrefabAddress: Room
+    CanPoolIncrease: 0
