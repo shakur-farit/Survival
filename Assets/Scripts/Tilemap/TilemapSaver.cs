@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Infrastructure.Services.PersistentProgress;
+﻿using System.Collections.Generic;
 using Infrastructure.Services.StaticData;
 using StaticData;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Zenject;
@@ -34,7 +33,12 @@ namespace LevelLogic
 			SaveTilemap(decorationTwoTilemap, _progressService.LevelsListStaticData.LevelsList[index].DecorationTwoTilesList);
 			SaveTilemap(frontTilemap, _progressService.LevelsListStaticData.LevelsList[index].FrontTilesList);
 			SaveTilemap(collisionTilemap, _progressService.LevelsListStaticData.LevelsList[index].CollisionTilesList);
-		}	
+
+#if UNITY_EDITOR
+			EditorUtility.SetDirty(_progressService.LevelsListStaticData.LevelsList[index]);
+			AssetDatabase.SaveAssets();
+#endif
+		}
 
 		private void SaveTilemap(Tilemap tilemap, TilemapData data)
 		{
