@@ -9,5 +9,6 @@ namespace Data
 		public int PreviousLevel;
 		public LevelStaticData CurrentLevelStaticData;
 		public int EnemiesNumberInLevele;
+		public RoomData RoomData;
 	}
 }

@@ -8460,7 +8460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1107499574310059573}
-  - component: {fileID: 6457141633956642373}
+  - component: {fileID: 2364131605123370874}
   m_Layer: 0
   m_Name: LevelOneRoom_2
   m_TagString: Untagged
@@ -8485,7 +8485,7 @@ Transform:
   - {fileID: 8836756183044801663}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6457141633956642373
+--- !u!114 &2364131605123370874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8494,15 +8494,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2884936308046869166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf3053267eddce248a31cb0d2f543d30, type: 3}
+  m_Script: {fileID: 11500000, guid: cacf4f2f265a0424f84a5f4beb7b2e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundTilemap: {fileID: 3740684041768266846}
-  decorationOneTilemap: {fileID: 4023317348775583175}
-  decorationTwoTilemap: {fileID: 7811027443303190229}
-  frontTilemap: {fileID: 920472151650739175}
-  collisionTilemap: {fileID: 6081425461174057855}
-  index: 0
+  GroundTilemap: {fileID: 3740684041768266846}
+  DecorationOneTilemap: {fileID: 4023317348775583175}
+  DecorationTwoTilemap: {fileID: 7811027443303190229}
+  FrontTilemap: {fileID: 920472151650739175}
+  CollisionTilemap: {fileID: 6081425461174057855}
+  LevelIndex: 0
+  RoomIndex: 1
 --- !u!1 &3926556546770647692
 GameObject:
   m_ObjectHideFlags: 0

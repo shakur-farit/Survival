@@ -23,7 +23,7 @@ namespace Character.Factory
 
 		public void Create()
 		{
-			Vector2 position = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData.CharacterSpawnPosition;
+			Vector2 position = _persistentProgressService.Progress.LevelData.RoomData.CharacterSpawnPosition;
 
 			Character = _poolFactory.UseObject(PooledObjectType.Character, position);
 

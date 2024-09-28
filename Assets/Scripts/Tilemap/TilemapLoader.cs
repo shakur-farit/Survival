@@ -1,8 +1,6 @@
-﻿using System;
-using Infrastructure.Services.PersistentProgress;
+﻿using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Zenject;
 
@@ -22,19 +20,21 @@ namespace LevelLogic
 		public void Constructor(IPersistentProgressService progressService) => 
 			_progressService = progressService;
 
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.L))
-				LoadTilemapData();
-		}
+		private void OnEnable() => 
+			LoadTilemapData();
 
 		private void LoadTilemapData()
 		{
-			LoadTilemap(groundTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.GroundTilesList);
-			LoadTilemap(decorationOneTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.DecorationOneTilesList);
-			LoadTilemap(decorationTwoTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.DecorationTwoTilesList);
-			LoadTilemap(frontTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.FrontTilesList);
-			LoadTilemap(collisionTwoTilemap, _progressService.Progress.LevelData.CurrentLevelStaticData.CollisionTilesList);
+			RoomData roomData = _progressService.Progress.LevelData.RoomData;
+			
+			if(roomData == null)
+				return;
+
+			LoadTilemap(groundTilemap, roomData.GroundTilesList);
+			LoadTilemap(decorationOneTilemap, roomData.DecorationOneTilesList);
+			LoadTilemap(decorationTwoTilemap, roomData.DecorationTwoTilesList);
+			LoadTilemap(frontTilemap, roomData.FrontTilesList);
+			LoadTilemap(collisionTwoTilemap, roomData.CollisionTilesList);
 		}
 
 		private void LoadTilemap(Tilemap tilemap, TilemapData data)

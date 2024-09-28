@@ -10,12 +10,14 @@ namespace LevelLogic
 {
 	public class TilemapSaver : MonoBehaviour
 	{
-		public Tilemap groundTilemap;
-		public Tilemap decorationOneTilemap;
-		public Tilemap decorationTwoTilemap;
-		public Tilemap frontTilemap;
-		public Tilemap collisionTilemap;
-		public int index;
+		public Tilemap GroundTilemap;
+		public Tilemap DecorationOneTilemap;
+		public Tilemap DecorationTwoTilemap;
+		public Tilemap FrontTilemap;
+		public Tilemap CollisionTilemap;
+
+		public int LevelIndex;
+		public int RoomIndex;
 
 		private IStaticDataService _progressService;
 
@@ -28,14 +30,34 @@ namespace LevelLogic
 
 		public void SaveTilemapData()
 		{
-			SaveTilemap(groundTilemap, _progressService.LevelsListStaticData.LevelsList[index].GroundTilesList);
-			SaveTilemap(decorationOneTilemap, _progressService.LevelsListStaticData.LevelsList[index].DecorationOneTilesList);
-			SaveTilemap(decorationTwoTilemap, _progressService.LevelsListStaticData.LevelsList[index].DecorationTwoTilesList);
-			SaveTilemap(frontTilemap, _progressService.LevelsListStaticData.LevelsList[index].FrontTilesList);
-			SaveTilemap(collisionTilemap, _progressService.LevelsListStaticData.LevelsList[index].CollisionTilesList);
+			var levelData = _progressService.LevelsListStaticData.LevelsList[LevelIndex];
+
+			while(RoomIndex >= levelData.RoomsDataList.Count)
+			{
+				Debug.Log(levelData.RoomsDataList.Count);
+				levelData.RoomsDataList.Add(new RoomData());
+				Debug.Log(levelData.RoomsDataList.Count);
+			}
+
+			_progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].GroundTilesList =
+				new TilemapData();
+			_progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].DecorationOneTilesList =
+				new TilemapData();
+			_progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].DecorationTwoTilesList =
+				new TilemapData();
+			_progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].FrontTilesList =
+				new TilemapData();
+			_progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].CollisionTilesList =
+				new TilemapData();
+
+			SaveTilemap(GroundTilemap, _progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].GroundTilesList);
+			SaveTilemap(DecorationOneTilemap, _progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].DecorationOneTilesList);
+			SaveTilemap(DecorationTwoTilemap, _progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].DecorationTwoTilesList);
+			SaveTilemap(FrontTilemap, _progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].FrontTilesList);
+			SaveTilemap(CollisionTilemap, _progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].CollisionTilesList);
 
 #if UNITY_EDITOR
-			EditorUtility.SetDirty(_progressService.LevelsListStaticData.LevelsList[index]);
+			EditorUtility.SetDirty(_progressService.LevelsListStaticData.LevelsList[LevelIndex]);
 			AssetDatabase.SaveAssets();
 #endif
 		}
@@ -61,7 +83,7 @@ namespace LevelLogic
 					}
 				}
 			}
-
+			
 			data.tilePositions = positions.ToArray();
 			data.tiles = tiles.ToArray();
 			data.transforms = transforms.ToArray();

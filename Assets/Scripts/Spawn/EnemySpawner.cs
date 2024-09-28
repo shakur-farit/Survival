@@ -61,12 +61,12 @@ namespace Spawn
 
 		private void SpawnEnemy(EnemyType enemyType)
 		{
-			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
+			RoomData roomData = _persistentProgressService.Progress.LevelData.RoomData;
 
-			float minX = levelStaticData.MinEnemySpawnPosiotion.x;
-			float maxX = levelStaticData.MaxEnemySpawnPosiotion.x;
-			float minY = levelStaticData.MinEnemySpawnPosiotion.y;
-			float maxY = levelStaticData.MaxEnemySpawnPosiotion.y;
+			float minX = roomData.MinEnemySpawnPosiotion.x;
+			float maxX = roomData.MaxEnemySpawnPosiotion.x;
+			float minY = roomData.MinEnemySpawnPosiotion.y;
+			float maxY = roomData.MaxEnemySpawnPosiotion.y;
 
 			Vector2 randomPosition = new Vector2(_randomService.Next(minX, maxX), _randomService.Next(minY, maxY));
 			GameObject enemyObject = _enemyFactory.Create(randomPosition);

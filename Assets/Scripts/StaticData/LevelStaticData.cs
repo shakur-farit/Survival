@@ -19,15 +19,7 @@ namespace StaticData
 		[Range(0, 30)]public int TimeToStart;
 		[Range(0, 30)]public int TimeToCompleteLevel;
 
-		public Vector2 CharacterSpawnPosition;
-		public Vector2 MinEnemySpawnPosiotion;
-		public Vector2 MaxEnemySpawnPosiotion;
-
-		public TilemapData GroundTilesList;
-		public TilemapData DecorationOneTilesList;
-		public TilemapData DecorationTwoTilesList;
-		public TilemapData FrontTilesList;
-		public TilemapData CollisionTilesList;
+		public List<RoomData> RoomsDataList;
 	}
 
 	[Serializable]
@@ -41,6 +33,20 @@ namespace StaticData
 	{
 		public EnemyType Type;
 		[Range(1, 100)] public int Number;
+	}
+
+	[Serializable]
+	public class RoomData
+	{
+		public TilemapData GroundTilesList;
+		public TilemapData DecorationOneTilesList;
+		public TilemapData DecorationTwoTilesList;
+		public TilemapData FrontTilesList;
+		public TilemapData CollisionTilesList;
+
+		public Vector2 CharacterSpawnPosition;
+		public Vector2 MinEnemySpawnPosiotion;
+		public Vector2 MaxEnemySpawnPosiotion;
 	}
 
 	[Serializable]
