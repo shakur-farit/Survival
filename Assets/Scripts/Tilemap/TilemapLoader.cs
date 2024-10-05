@@ -25,6 +25,8 @@ namespace LevelLogic
 
 		private void LoadTilemapData()
 		{
+			Debug.Log($"Load map form {_progressService.Progress.LevelData.RoomData}");
+
 			RoomData roomData = _progressService.Progress.LevelData.RoomData;
 			
 			if(roomData == null)
