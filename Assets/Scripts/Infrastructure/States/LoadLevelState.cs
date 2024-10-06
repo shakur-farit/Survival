@@ -76,11 +76,8 @@ namespace Infrastructure.States
 			_enemiesCounter.SetEnemiesNumberInLevel();
 		}
 
-		private void CreateRoom()
-		{
-			Debug.Log("ceate room");
+		private void CreateRoom() => 
 			_roomFactory.Create();
-		}
 
 		private void CreateCharacter() => 
 			_characterFactory.Create();

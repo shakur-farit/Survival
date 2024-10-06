@@ -27,6 +27,8 @@ namespace Character.Factory
 
 			Character = _poolFactory.UseObject(PooledObjectType.Character, position);
 
+			Character.transform.position = _persistentProgressService.Progress.LevelData.RoomData.CharacterSpawnPosition;
+
 			CharacterUsed?.Invoke(Character.transform);
 		}
 

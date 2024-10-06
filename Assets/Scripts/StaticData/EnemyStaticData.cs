@@ -1,5 +1,6 @@
 using Enemy;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace StaticData
 {
@@ -9,6 +10,8 @@ namespace StaticData
 		public EnemyType Type;
 		public Sprite Sprite;
 		public RuntimeAnimatorController Animator;
+		public TileBase TileToMovement;
+		public TileBase TileToSpawn;
 		[Range(0f, 10f)] public float MovementSpeed;
 		[Range(1, 100)] public int CurrentHealth;
 		[Range(0, 10)] public int Damage;

@@ -15,6 +15,8 @@ MonoBehaviour:
   Type: 1
   Sprite: {fileID: -8023197995696302144, guid: a53e0a6238da01b4a9189f65aeb58998, type: 3}
   Animator: {fileID: 9100000, guid: 19b6ff9fbadc74e479b63068d33eb245, type: 2}
+  TileToMovement: {fileID: 0}
+  TileToSpawn: {fileID: 11400000, guid: 3ce5fb260af53d24887b55c3d50041e2, type: 2}
   MovementSpeed: 1
   CurrentHealth: 3
   Damage: 0
