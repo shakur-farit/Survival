@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enemy;
 using LevelLogic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace StaticData
@@ -18,6 +19,10 @@ namespace StaticData
 		
 		[Range(0, 30)]public int TimeToStart;
 		[Range(0, 30)]public int TimeToCompleteLevel;
+
+		public TileBase EnemySpawnAndMovementTile;
+
+		public float StartSafeZonaRadius;
 
 		public List<RoomData> RoomsDataList;
 	}
