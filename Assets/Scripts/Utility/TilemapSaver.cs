@@ -30,14 +30,10 @@ namespace LevelLogic
 
 		public void SaveTilemapData()
 		{
-			var levelData = _progressService.LevelsListStaticData.LevelsList[LevelIndex];
+			LevelStaticData levelData = _progressService.LevelsListStaticData.LevelsList[LevelIndex];
 
-			while(RoomIndex >= levelData.RoomsDataList.Count)
-			{
-				Debug.Log(levelData.RoomsDataList.Count);
+			while(RoomIndex >= levelData.RoomsDataList.Count) 
 				levelData.RoomsDataList.Add(new RoomData());
-				Debug.Log(levelData.RoomsDataList.Count);
-			}
 
 			_progressService.LevelsListStaticData.LevelsList[LevelIndex].RoomsDataList[RoomIndex].GroundTilesList =
 				new TilemapData();
