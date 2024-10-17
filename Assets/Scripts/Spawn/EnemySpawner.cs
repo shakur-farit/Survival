@@ -57,12 +57,12 @@ namespace Spawn
 		{
 			var roomData = _persistentProgressService.Progress.LevelData.RoomData;
 			var tilemapData = roomData.CollisionTilesList;
-			var requiredTile = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData.EnemySpawnAndMovementTile;
+			var requiredTile = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData.EnemySpawnTile;
 
-			float minX = roomData.MinEnemySpawnPosiotion.x;
-			float maxX = roomData.MaxEnemySpawnPosiotion.x;
-			float minY = roomData.MinEnemySpawnPosiotion.y;
-			float maxY = roomData.MaxEnemySpawnPosiotion.y;
+			float minX = roomData.TilemapLowerBounds.x;
+			float maxX = roomData.TilemapUpperBounds.x;
+			float minY = roomData.TilemapLowerBounds.y;
+			float maxY = roomData.TilemapUpperBounds.y;
 
 			_validSpawnPositions = tilemapData.tilePositions
 				.Where((pos, i) => IsPositionValid(pos, tilemapData.tiles[i], requiredTile, minX, maxX, minY, maxY))

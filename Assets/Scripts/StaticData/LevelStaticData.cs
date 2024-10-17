@@ -14,13 +14,14 @@ namespace StaticData
 		public Level Level;
 		public List<WavesOnLevelInfo> WavesOnLevel;
 
-		[Tooltip("Time to next wave. Value is a milliseconds")]
-		[Range(0, 10000)] public int WaveCooldown;
-		
-		[Range(0, 30)]public int TimeToStart;
-		[Range(0, 30)]public int TimeToCompleteLevel;
+		[Tooltip("Time to next wave. Value is a milliseconds")] [Range(0, 10000)]
+		public int WaveCooldown;
 
-		public TileBase EnemySpawnAndMovementTile;
+		[Range(0, 30)] public int TimeToStart;
+		[Range(0, 30)] public int TimeToCompleteLevel;
+
+		public TileBase EnemySpawnTile;
+		public TileBase EnemyMovementTile;
 
 		public float StartSafeZonaRadius;
 
@@ -50,8 +51,9 @@ namespace StaticData
 		public TilemapData CollisionTilesList;
 
 		public Vector2 CharacterSpawnPosition;
-		public Vector2 MinEnemySpawnPosiotion;
-		public Vector2 MaxEnemySpawnPosiotion;
+
+		public Vector2 TilemapLowerBounds;
+		public Vector2 TilemapUpperBounds;
 	}
 
 	[Serializable]

@@ -16,11 +16,12 @@ MonoBehaviour:
   WavesOnLevel:
   - EnemiesInWave:
     - Type: 1
-      Number: 40
+      Number: 2
   WaveCooldown: 5000
   TimeToStart: 0
   TimeToCompleteLevel: 2
-  EnemySpawnAndMovementTile: {fileID: 11400000, guid: 3ce5fb260af53d24887b55c3d50041e2, type: 2}
+  EnemySpawnTile: {fileID: 11400000, guid: 3ce5fb260af53d24887b55c3d50041e2, type: 2}
+  EnemyMovementTile: {fileID: 11400000, guid: 3ce5fb260af53d24887b55c3d50041e2, type: 2}
   StartSafeZonaRadius: 5
   RoomsDataList:
   - GroundTilesList:
@@ -40382,8 +40383,8 @@ MonoBehaviour:
         e32: 0
         e33: 1
     CharacterSpawnPosition: {x: 10, y: -4}
-    MinEnemySpawnPosiotion: {x: -60, y: -60}
-    MaxEnemySpawnPosiotion: {x: 60, y: 60}
+    TilemapLowerBounds: {x: -60, y: -60}
+    TilemapUpperBounds: {x: 60, y: 60}
   - GroundTilesList:
       tilePositions:
       - {x: 0, y: -15, z: 0}
@@ -78025,8 +78026,8 @@ MonoBehaviour:
         e32: 0
         e33: 1
     CharacterSpawnPosition: {x: 50, y: 0}
-    MinEnemySpawnPosiotion: {x: -60, y: -60}
-    MaxEnemySpawnPosiotion: {x: 60, y: 60}
+    TilemapLowerBounds: {x: -60, y: -60}
+    TilemapUpperBounds: {x: 60, y: 60}
   - GroundTilesList:
       tilePositions:
       - {x: 0, y: -15, z: 0}
@@ -122922,5 +122923,5 @@ MonoBehaviour:
         e32: 0
         e33: 1
     CharacterSpawnPosition: {x: 2.5, y: 4}
-    MinEnemySpawnPosiotion: {x: -60, y: -60}
-    MaxEnemySpawnPosiotion: {x: 60, y: 60}
+    TilemapLowerBounds: {x: -60, y: -60}
+    TilemapUpperBounds: {x: 60, y: 60}
