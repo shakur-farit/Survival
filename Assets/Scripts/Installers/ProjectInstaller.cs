@@ -32,12 +32,6 @@ namespace Installers
 			RegisterScenesService();
 			RegisterPauseService();
 			RegisterStatesMachines();
-			RegisterAStar();
-		}
-
-		private void RegisterAStar()
-		{
-			Container.Bind<INode>().To<Node>().AsTransient();
 		}
 
 		private void RegisterTimer() => 

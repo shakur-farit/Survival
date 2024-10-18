@@ -62,5 +62,8 @@ namespace Utility
 		// Scene names
 		public const string MainMenuScene = "MainMenu";
 		public const string GameScene = "Game";
+		
+		// Grid values
+		public const float CellSize = 1;
 	}
 }

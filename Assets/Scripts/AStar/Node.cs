@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace AStar
 {
-	public class Node : INode
+	public class Node
 	{
 		private int _xCoordinate;
 		private int _yCoordinate;

@@ -1,5 +1,6 @@
 using Ammo;
 using Ammo.Factory;
+using AStar;
 using Camera;
 using Character;
 using Character.Factory;
@@ -41,6 +42,7 @@ namespace Installers
 			RegisterWeaponReloader();
 			RegisterDropStaticDataInitializer();
 			RegisterDropAnimator();
+			RegisterPathfinding();
 		}
 
 		private void RegisterFactories()
@@ -59,6 +61,7 @@ namespace Installers
 			RegisterSelectorFactory();
 			RegisterVirtualCameraFactory();
 			RegisterTilemapFactory();
+			RegisterNodeFactory();
 		}
 
 		private void RegisterMediators()
@@ -84,6 +87,12 @@ namespace Installers
 		{
 			Container.Bind<IEnemySpawner>().To<EnemySpawner>().AsSingle();
 			Container.Bind<IDropSpawner>().To<DropSpawner>().AsSingle();
+		}
+
+		private void RegisterPathfinding()
+		{
+			Container.Bind<IPathfindingGrid>().To<PathfindingGrid>().AsSingle();
+			Container.Bind<IAStarPathfinder>().To<AStarPathfinder>().AsSingle();
 		}
 
 		private void RegisterDropStaticDataInitializer() => 
@@ -151,5 +160,8 @@ namespace Installers
 
 		private void RegisterDropAnimator() => 
 			Container.Bind<IDropAnimator>().To<DropAnimator>().AsSingle();
+
+		private void RegisterNodeFactory() => 
+			Container.Bind<INodeFactory>().To<NodeFactory>().AsSingle();
 	}
 }

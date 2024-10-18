@@ -1,4 +1,5 @@
-﻿using Infrastructure.Services.PersistentProgress;
+﻿using AStar;
+using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -15,13 +16,20 @@ namespace LevelLogic
 		public Tilemap collisionTwoTilemap;
 
 		private IPersistentProgressService _progressService;
+		private IPathfindingGrid _grid;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService progressService) => 
+		public void Constructor(IPersistentProgressService progressService, IPathfindingGrid grid)
+		{
 			_progressService = progressService;
+			_grid = grid;
+		}
 
-		private void OnEnable() => 
+		private void OnEnable()
+		{
 			LoadTilemapData();
+			_grid.GenerateGrid();
+		}
 
 		private void LoadTilemapData()
 		{
