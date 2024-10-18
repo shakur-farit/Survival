@@ -25325,6 +25325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2905241026972217924}
   - component: {fileID: 8741286290917863196}
+  - component: {fileID: 468762243499749593}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -25366,3 +25367,19 @@ MonoBehaviour:
   decorationTwoTilemap: {fileID: 3970917471815627268}
   frontTilemap: {fileID: 369958547268072507}
   collisionTwoTilemap: {fileID: 1954060849539470681}
+--- !u!114 &468762243499749593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149179337646631958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c14e6101752814989dd3fa7f989a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topRightCorner: {x: 60, y: 60}
+  bottomLeftCorner: {x: -60, y: -60}
+  cellSize: 1
+  gridColor: {r: 0, g: 1, b: 0, a: 1}

@@ -52,8 +52,8 @@ namespace StaticData
 
 		public Vector2 CharacterSpawnPosition;
 
-		public Vector2 TilemapLowerBounds;
-		public Vector2 TilemapUpperBounds;
+		public Vector2Int TilemapLowerBounds;
+		public Vector2Int TilemapUpperBounds;
 	}
 
 	[Serializable]

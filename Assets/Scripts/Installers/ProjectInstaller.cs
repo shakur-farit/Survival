@@ -1,3 +1,4 @@
+using AStar;
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using Enemy.States.StateMachine;
@@ -10,7 +11,6 @@ using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
-using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
 using Score;
 using Zenject;
@@ -32,6 +32,12 @@ namespace Installers
 			RegisterScenesService();
 			RegisterPauseService();
 			RegisterStatesMachines();
+			RegisterAStar();
+		}
+
+		private void RegisterAStar()
+		{
+			Container.Bind<INode>().To<Node>().AsTransient();
 		}
 
 		private void RegisterTimer() => 
