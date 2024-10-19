@@ -64,6 +64,6 @@ namespace Utility
 		public const string GameScene = "Game";
 		
 		// Grid values
-		public const float CellSize = 1;
+		public const float CellSize = 1f;
 	}
 }

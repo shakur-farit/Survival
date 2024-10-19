@@ -15,7 +15,6 @@ namespace Pool
 
 			GameObject objectToUse = _objectsPool.Dequeue();
 
-			objectToUse.SetActive(true);
 			return objectToUse;
 		}
 

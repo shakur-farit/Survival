@@ -69,9 +69,6 @@ namespace Spawn
 				.Select(pos => new Vector2(pos.x + 0.5f, pos.y + 0.5f))
 				.Where(pos => Vector2.Distance(pos, safeZoneCenter) > safeZoneRadius)
 				.ToList();
-
-			if (_validSpawnPositions.Count == 0)
-				Debug.LogWarning("Ќет допустимых позиций дл€ спавна врагов.");
 		}
 
 		private bool IsPositionValid(Vector3Int position, TileBase tile, TileBase requiredTile,
@@ -100,17 +97,16 @@ namespace Spawn
 		private void SpawnEnemy(EnemyType enemyType)
 		{
 			if (_validSpawnPositions.Count == 0)
-			{
-				Debug.LogWarning("Ќет доступных позиций дл€ спавна врагов.");
 				return;
-			}
 
 			int randomIndex = _randomService.Next(0, _validSpawnPositions.Count);
 			Vector2 spawnPosition = _validSpawnPositions[randomIndex];
 
 			GameObject enemyObject = _enemyFactory.Create(spawnPosition);
+
 			if (enemyObject.TryGetComponent(out EnemyInitializer enemy))
 				enemy.Initialize(enemyType);
+			
 			if (enemyObject.TryGetComponent(out EnemyAnimator animator))
 				animator.StartMoving();
 		}

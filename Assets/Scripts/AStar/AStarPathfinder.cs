@@ -15,24 +15,16 @@ namespace AStar
 
 		public List<Node> FindPath(Vector2Int start, Vector2Int target)
 		{
-			Debug.Log(start + " / " + target);
-
 			Node startNode = _pathfindingGrid.GetNode(start.x, start.y);
 			Node targetNode = _pathfindingGrid.GetNode(target.x, target.y);
 
+			Debug.Log($"{startNode} -- {targetNode}");
+			Debug.Log($"{startNode.IsWalkable} -- {targetNode.IsWalkable}");
+
 			if (startNode == null || targetNode == null)
-			{
-				Debug.Log($"{startNode} / {targetNode}");
 				return null;
-			}
 
-			if (!startNode.IsWalkable || !targetNode.IsWalkable)
-			{
-				Debug.Log($"{startNode.IsWalkable} / {targetNode.IsWalkable}");
-				return null;
-			}
-
-			if (startNode == null || targetNode == null || targetNode.IsWalkable == false)
+			if (startNode.IsWalkable == false || targetNode.IsWalkable == false)
 				return null;
 
 			HashSet<Node> openSet = new HashSet<Node>();

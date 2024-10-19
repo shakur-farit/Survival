@@ -5,7 +5,6 @@ using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using Infrastructure.Services.StaticData;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Pool
 {
@@ -53,6 +52,8 @@ namespace Pool
 			if (newObject == null) 
 				newObject = TryIncreasePool(pooledObjectType);
 
+			newObject.SetActive(true);
+
 			return newObject;
 		}
 
@@ -64,6 +65,8 @@ namespace Pool
 				newObject = TryIncreasePool(pooledObjectType);
 
 			newObject.transform.position = position;
+
+			newObject.SetActive(true);
 
 			return newObject;
 		}
@@ -78,6 +81,8 @@ namespace Pool
 			newObject.transform.position = position;
 			newObject.transform.rotation = rotation;
 
+			newObject.SetActive(true);
+
 			return newObject;
 		}
 
@@ -89,7 +94,9 @@ namespace Pool
 				newObject = TryIncreasePool(pooledObjectType);
 
 			newObject.transform.SetParent(parentTransform);
-			
+
+			newObject.SetActive(true);
+
 			return newObject;
 		}
 

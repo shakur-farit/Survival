@@ -43,7 +43,7 @@ namespace AStar
 					_grid[x, y].InitializeNode(x, y, isWalkable);
 
 					if(isWalkable)
-						Debug.Log($"{x} , {y}");
+						Debug.Log(x + " -- " + y);
 				}
 			}
 
@@ -54,8 +54,6 @@ namespace AStar
 		{
 			if (x < 0 || x >= _gridWidth || y < 0 || y >= _gridHeight)
 				return null;
-			
-			Debug.Log($"{x}, {y}");
 
 			return _grid[x, y];
 		}
@@ -92,8 +90,9 @@ namespace AStar
 			return false;
 		}
 
-		private Vector2 GetWorldPosition(int xCoordinate, int yCoordinate) =>
-			new Vector2(xCoordinate, yCoordinate) * Constants.CellSize + _lowerBounds;
+		public Vector2 GetWorldPosition(int xCoordinate, int yCoordinate) =>
+			new(xCoordinate * Constants.CellSize + _lowerBounds.x + Constants.CellSize / 2,
+				yCoordinate * Constants.CellSize + _lowerBounds.y + Constants.CellSize / 2);
 
 		private void DrawGrid()
 		{
