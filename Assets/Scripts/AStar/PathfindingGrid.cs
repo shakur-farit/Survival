@@ -41,6 +41,9 @@ namespace AStar
 					_grid[x, y] = _nodeFactory.CreateNode();
 
 					_grid[x, y].InitializeNode(x, y, isWalkable);
+
+					if(isWalkable)
+						Debug.Log($"{x} , {y}");
 				}
 			}
 
@@ -51,6 +54,8 @@ namespace AStar
 		{
 			if (x < 0 || x >= _gridWidth || y < 0 || y >= _gridHeight)
 				return null;
+			
+			Debug.Log($"{x}, {y}");
 
 			return _grid[x, y];
 		}

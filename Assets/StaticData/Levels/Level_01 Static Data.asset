@@ -16,7 +16,7 @@ MonoBehaviour:
   WavesOnLevel:
   - EnemiesInWave:
     - Type: 1
-      Number: 2
+      Number: 1
   WaveCooldown: 5000
   TimeToStart: 0
   TimeToCompleteLevel: 2
@@ -40382,7 +40382,7 @@ MonoBehaviour:
         e31: 0
         e32: 0
         e33: 1
-    CharacterSpawnPosition: {x: 10, y: -4}
+    CharacterSpawnPosition: {x: 10, y: 4}
     TilemapLowerBounds: {x: -1, y: -17}
     TilemapUpperBounds: {x: 27, y: 39}
   - GroundTilesList:
@@ -122922,6 +122922,6 @@ MonoBehaviour:
         e31: 0
         e32: 0
         e33: 1
-    CharacterSpawnPosition: {x: 2.5, y: 4}
+    CharacterSpawnPosition: {x: 4, y: 4}
     TilemapLowerBounds: {x: 0, y: -17}
     TilemapUpperBounds: {x: 60, y: 14}

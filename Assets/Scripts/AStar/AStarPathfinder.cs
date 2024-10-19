@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace AStar
 {
@@ -14,8 +15,22 @@ namespace AStar
 
 		public List<Node> FindPath(Vector2Int start, Vector2Int target)
 		{
+			Debug.Log(start + " / " + target);
+
 			Node startNode = _pathfindingGrid.GetNode(start.x, start.y);
 			Node targetNode = _pathfindingGrid.GetNode(target.x, target.y);
+
+			if (startNode == null || targetNode == null)
+			{
+				Debug.Log($"{startNode} / {targetNode}");
+				return null;
+			}
+
+			if (!startNode.IsWalkable || !targetNode.IsWalkable)
+			{
+				Debug.Log($"{startNode.IsWalkable} / {targetNode.IsWalkable}");
+				return null;
+			}
 
 			if (startNode == null || targetNode == null || targetNode.IsWalkable == false)
 				return null;
@@ -55,7 +70,8 @@ namespace AStar
 
 					cameFrom[neighbor] = current;
 					gScore[neighbor] = tentativeGScore;
-					fScore[neighbor] = gScore[neighbor] + Heuristic(new Vector2Int(neighbor.XCoordinate, neighbor.YCoordinate), target);
+					fScore[neighbor] = gScore[neighbor] +
+					                   Heuristic(new Vector2Int(neighbor.XCoordinate, neighbor.YCoordinate), target);
 				}
 			}
 
@@ -103,7 +119,7 @@ namespace AStar
 			return neighbors;
 		}
 
-		private float Heuristic(Vector2Int a, Vector2Int b) => 
+		private float Heuristic(Vector2Int a, Vector2Int b) =>
 			Vector2Int.Distance(a, b);
 
 		private List<Node> ReconstructPath(Dictionary<Node, Node> cameFrom, Node current)

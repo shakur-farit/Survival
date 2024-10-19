@@ -1,3 +1,4 @@
+using AStar;
 using Character.Factory;
 using Enemy.Mediator;
 using Infrastructure.Services.PauseService;
@@ -18,20 +19,31 @@ namespace Enemy
 		private ICharacterFactory _characterFactory;
 		private IEnemySpeedMediator _speedMediator;
 		private IPauseService _pauseService;
+		private IAStarPathfinder _pathfinder;
+		private IPathfindingGrid _grid;
 
 		[Inject]
 		public void Constructor(ICharacterFactory characterFactory, IEnemySpeedMediator mediator,
-			IPauseService pauseService)
+			IPauseService pauseService, IAStarPathfinder pathfinder, IPathfindingGrid grid)
 		{
 			_characterFactory = characterFactory;
 			_speedMediator = mediator;
 			_pauseService = pauseService;
+			_pathfinder = pathfinder;
+			_grid = grid;
 		}
 
 		private void OnEnable()
 		{
 			_speedMediator.RegisterMover(this);
 			_target = _characterFactory.Character;
+
+			AStarPathfinderTest test = new AStarPathfinderTest(_grid, _pathfinder);
+
+			if(_target == null)
+				return;
+
+			test.RunTest(new Vector2(8,4), _target.transform.position);
 		}
 
 		private void Update() => 
