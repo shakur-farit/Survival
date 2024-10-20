@@ -7,18 +7,15 @@ namespace Utility
 		public const int ValueOfInfinity = -1;
 		public const int Zero = 0;
 
-
 		// Drop animation values
 		public const int JumpPower = 2;
 		public const int JumpNumber = 1;
 		public const float JumDuration = 0.5f;
 		public const int RotateDuration = 2;
 
-
 		// Weapon reloading text animation values
 		public const float TextBlinkDuration = 0.5f;
 		public const float EndValue = 0;
-
 
 		// Character aiming angle values
 		public const float UpAndUpRightBorder = 67f;
@@ -31,10 +28,8 @@ namespace Utility
 		public const float LeftNegativeBorder = -180f;
 		public const float LeftPositiveBorder = 180f;
 
-
 		// Minimal distance to target for enemy move
 		public const float MinDistanceToTarget = 0.25f;
-
 
 		// Hud values
 		public const float NextBulletIconYPositionStep = 15f;
@@ -42,19 +37,15 @@ namespace Utility
 		public const int MaxBulletIconsInColumn = 20;
 		public const float NextHearthIconXPositionStep = 60f;
 
-
 		// Timer value
 		public const int OneSecond = 1000;
-
 
 		// Shop items values
 		public const float NextItemXPositionStep = 600f;
 		public const int ItemsNumber = 3;
 
-
 		// Character's sprite blink value
 		public const float CharacterSpriteBlinkDuration = 0.15f;
-
 
 		// Level values
 		public const int NextLevelStep = 1;
@@ -62,8 +53,10 @@ namespace Utility
 		// Scene names
 		public const string MainMenuScene = "MainMenu";
 		public const string GameScene = "Game";
-		
-		// Grid values
+
+		// Pathfinding values
 		public const float CellSize = 1f;
+		public const float TargetPositionThreshold = 0.5f;
+		public const float PathUpdateCooldown = 0.5f;
 	}
 }

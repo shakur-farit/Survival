@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Zenject;
 
 namespace AStar
 {
@@ -8,35 +8,23 @@ namespace AStar
 	{
 		private readonly IPathfindingGrid _pathfindingGrid;
 
-		public AStarPathfinder(IPathfindingGrid pathfindingGrid)
-		{
+		public AStarPathfinder(IPathfindingGrid pathfindingGrid) =>
 			_pathfindingGrid = pathfindingGrid;
-		}
 
 		public List<Node> FindPath(Vector2Int start, Vector2Int target)
 		{
 			Node startNode = _pathfindingGrid.GetNode(start.x, start.y);
 			Node targetNode = _pathfindingGrid.GetNode(target.x, target.y);
 
-			Debug.Log($"{startNode} -- {targetNode}");
-			Debug.Log($"{startNode.IsWalkable} -- {targetNode.IsWalkable}");
-
-			if (startNode == null || targetNode == null)
+			if (startNode == null || targetNode == null || startNode.IsWalkable == false || targetNode.IsWalkable == false)
 				return null;
 
-			if (startNode.IsWalkable == false || targetNode.IsWalkable == false)
-				return null;
+			HashSet<Node> openSet = new() { startNode };
+			HashSet<Node> closedSet = new();
 
-			HashSet<Node> openSet = new HashSet<Node>();
-			HashSet<Node> closedSet = new HashSet<Node>();
-			openSet.Add(startNode);
-
-			Dictionary<Node, Node> cameFrom = new Dictionary<Node, Node>();
-			Dictionary<Node, float> gScore = new Dictionary<Node, float>();
-			Dictionary<Node, float> fScore = new Dictionary<Node, float>();
-
-			gScore[startNode] = 0;
-			fScore[startNode] = Heuristic(start, target);
+			Dictionary<Node, Node> cameFrom = new();
+			Dictionary<Node, float> gScore = new() { [startNode] = 0 };
+			Dictionary<Node, float> fScore = new() { [startNode] = Heuristic(start, target) };
 
 			while (openSet.Count > 0)
 			{
@@ -50,81 +38,67 @@ namespace AStar
 
 				foreach (Node neighbor in GetNeighbors(current))
 				{
-					if (closedSet.Contains(neighbor) || !neighbor.IsWalkable)
+					if (closedSet.Contains(neighbor) || neighbor.IsWalkable == false)
 						continue;
 
-					float tentativeGScore = gScore[current] + 1;
+					float tentativeGScore = gScore[current] + GetDistance(current, neighbor);
 
-					if (!openSet.Contains(neighbor))
-						openSet.Add(neighbor);
-					else if (tentativeGScore >= gScore[current])
+					openSet.Add(neighbor);
+
+					if (tentativeGScore >= gScore.GetValueOrDefault(neighbor, float.MaxValue))
 						continue;
 
 					cameFrom[neighbor] = current;
 					gScore[neighbor] = tentativeGScore;
-					fScore[neighbor] = gScore[neighbor] +
-					                   Heuristic(new Vector2Int(neighbor.XCoordinate, neighbor.YCoordinate), target);
+					fScore[neighbor] = tentativeGScore + Heuristic(
+						new Vector2Int(neighbor.XCoordinate, neighbor.YCoordinate), target);
 				}
 			}
 
 			return null;
 		}
 
-		private Node GetLowestFScoreNode(HashSet<Node> openSet, Dictionary<Node, float> fScore)
+		private Node GetLowestFScoreNode(HashSet<Node> openSet, Dictionary<Node, float> fScore) =>
+			openSet.Aggregate((lowestNode, node) =>
+				fScore.GetValueOrDefault(node, float.MaxValue) < fScore.GetValueOrDefault(lowestNode, float.MaxValue)
+					? node
+					: lowestNode);
+
+		private IEnumerable<Node> GetNeighbors(Node node)
 		{
-			Node lowestNode = null;
-			float lowestScore = float.MaxValue;
-
-			foreach (var node in openSet)
+			(int x, int y)[] offsets = 
 			{
-				float score = fScore.TryGetValue(node, out var value) ? value : float.MaxValue;
-				if (score < lowestScore)
-				{
-					lowestScore = score;
-					lowestNode = node;
-				}
-			}
+				(0, 1), (1, 0), (0, -1), (-1, 0), 
+				(1, 1), (1, -1), (-1, 1), (-1, -1)
 
-			return lowestNode;
+			};
+
+			foreach ((int x, int y) offset in offsets)
+			{
+				Node neighbor = _pathfindingGrid.GetNode(node.XCoordinate + offset.x, node.YCoordinate + offset.y);
+				
+				if (neighbor != null)
+					yield return neighbor;
+			}
 		}
 
-		private List<Node> GetNeighbors(Node node)
-		{
-			List<Node> neighbors = new List<Node>();
+		private float GetDistance(Node a, Node b) =>
+			Mathf.Abs(a.XCoordinate - b.XCoordinate) == 1 &&
+			Mathf.Abs(a.YCoordinate - b.YCoordinate) == 1 ? 1.414f : 1f;
 
-			for (int x = -1; x <= 1; x++)
-			{
-				for (int y = -1; y <= 1; y++)
-				{
-					if (x == 0 && y == 0)
-						continue;
-
-					if (Mathf.Abs(x) + Mathf.Abs(y) == 1)
-					{
-						Node neighbor = _pathfindingGrid.GetNode(node.XCoordinate + x, node.YCoordinate + y);
-						if (neighbor != null)
-							neighbors.Add(neighbor);
-					}
-				}
-			}
-
-			return neighbors;
-		}
-
-		private float Heuristic(Vector2Int a, Vector2Int b) =>
-			Vector2Int.Distance(a, b);
+		private float Heuristic(Vector2Int start, Vector2Int end) =>
+			Vector2Int.Distance(start, end);
 
 		private List<Node> ReconstructPath(Dictionary<Node, Node> cameFrom, Node current)
 		{
-			List<Node> totalPath = new List<Node> { current };
+			List<Node> path = new();
 
 			while (cameFrom.TryGetValue(current, out current))
-			{
-				totalPath.Add(current);
-			}
+				path.Add(current);
 
-			totalPath.Reverse();
-			return totalPath;
+			path.Reverse();
+			
+			return path;
 		}
 	}
 }

@@ -41,13 +41,8 @@ namespace AStar
 					_grid[x, y] = _nodeFactory.CreateNode();
 
 					_grid[x, y].InitializeNode(x, y, isWalkable);
-
-					if(isWalkable)
-						Debug.Log(x + " -- " + y);
 				}
 			}
-
-			DrawGrid();
 		}
 
 		public Node GetNode(int x, int y)
@@ -93,26 +88,5 @@ namespace AStar
 		public Vector2 GetWorldPosition(int xCoordinate, int yCoordinate) =>
 			new(xCoordinate * Constants.CellSize + _lowerBounds.x + Constants.CellSize / 2,
 				yCoordinate * Constants.CellSize + _lowerBounds.y + Constants.CellSize / 2);
-
-		private void DrawGrid()
-		{
-			for (int x = 0; x < _gridWidth; x++)
-			{
-				for (int y = 0; y < _gridHeight; y++)
-				{
-					Node node = _grid[x, y];
-
-					Vector3 worldPosition = GetWorldPosition(x, y);
-
-					Color nodeColor = node.IsWalkable ? Color.green : Color.red;
-
-					Debug.DrawLine(worldPosition, worldPosition + new Vector3(Constants.CellSize, 0, 0), nodeColor, 100f);
-					Debug.DrawLine(worldPosition, worldPosition + new Vector3(0, Constants.CellSize, 0), nodeColor, 100f);
-				}
-			}
-
-			Debug.DrawLine(GetWorldPosition(0, _gridHeight), GetWorldPosition(_gridWidth, _gridHeight), Color.green, 100f);
-			Debug.DrawLine(GetWorldPosition(_gridWidth, 0), GetWorldPosition(_gridWidth, _gridHeight), Color.green, 100f);
-		}
 	}
 }

@@ -19,6 +19,8 @@ namespace Enemy
 		private GameObject _target;
 		private List<Node> _path;
 		private int _currentPathIndex;
+		private Vector2 _lastTargetPosition;
+		private float _timeSinceLastPathUpdate;
 
 		private ICharacterFactory _characterFactory;
 		private IEnemySpeedMediator _speedMediator;
@@ -45,12 +47,18 @@ namespace Enemy
 			_speedMediator.RegisterMover(this);
 			_target = _characterFactory.Character;
 
-			if(_target != null )
+			if (_target != null)
+			{
+				_lastTargetPosition = _target.transform.position;
 				CalculatePath();
+			}
 		}
 
-		private void Update() => 
+		private void Update()
+		{
 			TryMove();
+			CheckForTargetPositionChange();
+		}
 
 		private void TryMove()
 		{
@@ -68,20 +76,15 @@ namespace Enemy
 			Vector2Int start = GetGridPosition(transform.position);
 			Vector2Int end = GetGridPosition(_target.transform.position);
 
-			Debug.Log(start);
-			Debug.Log(end);
+			List<Node> newPath = _pathfinder.FindPath(start, end);
 
-			_path = _pathfinder.FindPath(start, end);
-
-			if (_path != null && _path.Count > 0)
+			if (newPath != null && newPath.Count > 0)
 			{
+				_path = newPath;
 				_currentPathIndex = 0;
-				Debug.Log("Path found and set.");
 			}
-			else
-			{
-				Debug.LogWarning("Path not found!");
-			}
+
+			Debug.Log("Calculate");
 		}
 
 		private Vector2Int GetGridPosition(Vector2 worldPosition)
@@ -96,31 +99,6 @@ namespace Enemy
 
 		private void Move()
 		{
-			//	if (_target == null)
-			//		return;
-
-			//	Vector2 targetPosition = _target.transform.position;
-			//	Vector2 enemyPosition = transform.position;
-
-
-			//	Vector3 difference = transform.position - _target.transform.position;
-			//	float distanceSquared = difference.sqrMagnitude;
-
-			//	if (distanceSquared < Constants.MinDistanceToTarget)
-			//		return;
-
-			//	Vector2 direction = targetPosition - enemyPosition;
-			//	direction.Normalize();
-
-			//	float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-			//	enemyPosition = Vector2.MoveTowards(enemyPosition,
-			//		targetPosition, _movementSpeed * Time.deltaTime);
-
-			//	transform.position = enemyPosition;
-
-			//	_aimer.Aim(angle);
-
 			if (_currentPathIndex >= _path.Count)
 				return;
 
@@ -142,6 +120,26 @@ namespace Enemy
 
 			transform.position = enemyPosition;
 			_aimer.Aim(angle);
+		}
+
+		private void CheckForTargetPositionChange()
+		{
+			if (_target == null)
+				return;
+
+			_timeSinceLastPathUpdate += Time.deltaTime;
+
+			Vector2 currentTargetPosition = _target.transform.position;
+
+			bool isTargetChangePosition = 
+				Vector2.Distance(_lastTargetPosition, currentTargetPosition) > Constants.TargetPositionThreshold;
+			
+			if (isTargetChangePosition && _timeSinceLastPathUpdate >= Constants.PathUpdateCooldown)
+			{
+				_lastTargetPosition = currentTargetPosition;
+				CalculatePath();
+				_timeSinceLastPathUpdate = 0;
+			}
 		}
 	}
 }
