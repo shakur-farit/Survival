@@ -56,7 +56,8 @@ namespace Utility
 
 		// Pathfinding values
 		public const float CellSize = 1f;
-		public const float TargetPositionThreshold = 0.5f;
-		public const float PathUpdateCooldown = 0.5f;
+		public const float TargetPositionThreshold = 1f;
+		public const float PathUpdateCooldown = 1f;
+		public const float MinDistanceToNode = 0.5f;
 	}
 }

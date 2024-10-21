@@ -76,6 +76,11 @@ namespace Enemy
 			Vector2Int start = GetGridPosition(transform.position);
 			Vector2Int end = GetGridPosition(_target.transform.position);
 
+			Node targetNode = _grid.GetNode(end.x, end.y);
+
+			if (targetNode == null || targetNode.IsWalkable == false)
+				return;
+
 			List<Node> newPath = _pathfinder.FindPath(start, end);
 
 			if (newPath != null && newPath.Count > 0)
@@ -84,7 +89,7 @@ namespace Enemy
 				_currentPathIndex = 0;
 			}
 
-			Debug.Log("Calculate");
+			Debug.Log("Path calculated");
 		}
 
 		private Vector2Int GetGridPosition(Vector2 worldPosition)
@@ -112,13 +117,10 @@ namespace Enemy
 				return;
 			}
 
-			Vector2 direction = targetPosition - enemyPosition;
-			direction.Normalize();
+			Vector2 direction = (targetPosition - enemyPosition).normalized;
+			transform.position += (Vector3)direction * _movementSpeed * Time.deltaTime;
 
 			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-			enemyPosition = Vector2.MoveTowards(enemyPosition, targetPosition, _movementSpeed * Time.deltaTime);
-
-			transform.position = enemyPosition;
 			_aimer.Aim(angle);
 		}
 
@@ -131,13 +133,27 @@ namespace Enemy
 
 			Vector2 currentTargetPosition = _target.transform.position;
 
-			bool isTargetChangePosition = 
+			bool isTargetChangePosition =
 				Vector2.Distance(_lastTargetPosition, currentTargetPosition) > Constants.TargetPositionThreshold;
-			
+
 			if (isTargetChangePosition && _timeSinceLastPathUpdate >= Constants.PathUpdateCooldown)
 			{
 				_lastTargetPosition = currentTargetPosition;
-				CalculatePath();
+
+				if (_path == null || _currentPathIndex >= _path.Count)
+				{
+					CalculatePath();
+				}
+				else
+				{
+					if (Vector2.Distance(transform.position,
+						    _grid.GetWorldPosition(_path[_currentPathIndex].XCoordinate, _path[_currentPathIndex].YCoordinate))
+					    > Constants.MinDistanceToNode)
+					{
+						CalculatePath();
+					}
+				}
+
 				_timeSinceLastPathUpdate = 0;
 			}
 		}
