@@ -21,6 +21,7 @@ namespace Enemy
 		private int _currentPathIndex;
 		private Vector2 _lastTargetPosition;
 		private float _timeSinceLastPathUpdate;
+		private bool _isRebuildingPath;
 
 		private ICharacterFactory _characterFactory;
 		private IEnemySpeedMediator _speedMediator;
@@ -73,6 +74,9 @@ namespace Enemy
 
 		private void BuildPath()
 		{
+			if (_target == null)
+				return;
+
 			Vector2Int start = GetGridPosition(transform.position);
 			Vector2Int end = GetGridPosition(_target.transform.position);
 
@@ -81,13 +85,9 @@ namespace Enemy
 			if (targetNode == null || targetNode.IsWalkable == false)
 				return;
 
-			List<Node> newPath = _pathfinder.FindPath(start, end);
+			_path = _pathfinder.FindPath(start, end);
 
-			if (newPath != null && newPath.Count > 0)
-			{
-				_path = newPath;
-				_currentPathIndex = 0;
-			}
+			_currentPathIndex = 0;
 
 			Debug.Log("Path calculated");
 		}
@@ -104,50 +104,32 @@ namespace Enemy
 
 		private void Move()
 		{
-			Vector2 enemyPosition = transform.position;
-			Vector2 targetPosition = _target.transform.position;
-
-			float distanceToTarget = Vector2.Distance(enemyPosition, targetPosition);
-
-			if (_currentPathIndex >= _path.Count - 1 || distanceToTarget < Constants.MinDistanceToTarget)
-			{
-				Vector2 directionToTarget = targetPosition - enemyPosition;
-
-				if (distanceToTarget > Constants.MinDistanceToTarget)
-					MoveTowards(enemyPosition, targetPosition, directionToTarget);
-				else
-					Debug.Log("Reached target.");
-
+			if (_currentPathIndex >= _path.Count)
 				return;
-			}
 
 			Node currentNode = _path[_currentPathIndex];
-			Vector2 targetPositionOnGrid = _grid.GetWorldPosition(currentNode.XCoordinate, currentNode.YCoordinate);
 
-			if (Vector2.Distance(enemyPosition, targetPositionOnGrid) < Constants.MinDistanceToNextNode)
+			if (!currentNode.IsWalkable)
+				return;
+
+			Vector2 targetPosition = _grid.GetWorldPosition(currentNode.XCoordinate, currentNode.YCoordinate);
+			Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+
+			transform.position = Vector2.MoveTowards(transform.position,
+				targetPosition, _movementSpeed * Time.deltaTime);
+
+			if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
 			{
 				_currentPathIndex++;
-				return;
 			}
 
-			Vector2 direction = targetPositionOnGrid - enemyPosition;
-			MoveTowards(enemyPosition, targetPositionOnGrid, direction);
-		}
-
-		private void MoveTowards(Vector2 currentPos, Vector2 targetPos, Vector2 direction)
-		{
-			direction.Normalize();
 			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-			Vector2 newPosition = Vector2.MoveTowards(currentPos, targetPos, _movementSpeed * Time.deltaTime);
-			transform.position = newPosition;
-
 			_aimer.Aim(angle);
 		}
 
 		private void RebuildPath()
 		{
-			if (_target == null)
+			if (_target == null || _isRebuildingPath)
 				return;
 
 			_timeSinceLastPathUpdate += Time.deltaTime;
@@ -160,22 +142,12 @@ namespace Enemy
 			if (isTargetChangePosition && _timeSinceLastPathUpdate >= Constants.PathUpdateCooldown)
 			{
 				_lastTargetPosition = currentTargetPosition;
+				_isRebuildingPath = true;
 
-				if (_path == null || _currentPathIndex >= _path.Count)
-				{
-					BuildPath();
-				}
-				else
-				{
-					if (Vector2.Distance(transform.position,
-						    _grid.GetWorldPosition(_path[_currentPathIndex].XCoordinate, _path[_currentPathIndex].YCoordinate))
-					    > Constants.MinDistanceToNode)
-					{
-						BuildPath();
-					}
-				}
+				BuildPath();
 
 				_timeSinceLastPathUpdate = 0;
+				_isRebuildingPath = false;
 			}
 		}
 	}
