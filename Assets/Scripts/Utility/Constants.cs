@@ -55,7 +55,7 @@ namespace Utility
 		public const string GameScene = "Game";
 
 		// Pathfinding values
-		public const float CellSize = 1f;
+		public const float CellSize = 0.5f;
 		public const float TargetPositionThreshold = 0.5f;
 		public const float PathUpdateCooldown = 1f;
 		public const float MinDistanceToNode = 0.5f;

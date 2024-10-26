@@ -5,6 +5,7 @@ using StaticData;
 using System.Collections.Generic;
 using AStar;
 using Infrastructure.Services.PersistentProgress;
+using TMPro;
 using UnityEngine;
 using Utility;
 using Zenject;
@@ -87,9 +88,9 @@ namespace Enemy
 
 			_path = _pathfinder.FindPath(start, end);
 
-			_currentPathIndex = 0;
+			Debug.Log(_target.transform.position);
 
-			Debug.Log("Path calculated");
+			_currentPathIndex = 0;
 		}
 
 		private Vector2Int GetGridPosition(Vector2 worldPosition)
@@ -109,7 +110,7 @@ namespace Enemy
 
 			Node currentNode = _path[_currentPathIndex];
 
-			if (!currentNode.IsWalkable)
+			if (currentNode.IsWalkable == false)
 				return;
 
 			Vector2 targetPosition = _grid.GetWorldPosition(currentNode.XCoordinate, currentNode.YCoordinate);
@@ -118,10 +119,8 @@ namespace Enemy
 			transform.position = Vector2.MoveTowards(transform.position,
 				targetPosition, _movementSpeed * Time.deltaTime);
 
-			if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
-			{
+			if (Vector2.Distance(transform.position, targetPosition) < 0.1f) 
 				_currentPathIndex++;
-			}
 
 			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 			_aimer.Aim(angle);
@@ -149,6 +148,37 @@ namespace Enemy
 				_timeSinceLastPathUpdate = 0;
 				_isRebuildingPath = false;
 			}
+		}
+
+		private void OnDrawGizmos()
+		{
+			// Убедимся, что путь инициализирован и содержит узлы
+			if (_path == null || _path.Count == 0)
+				return;
+
+			// Устанавливаем цвет Gizmos для отображения пути
+			Gizmos.color = Color.green;
+
+			// Рисуем линии между узлами пути
+			for (int i = 0; i < _path.Count - 1; i++)
+			{
+				Vector2 start = _grid.GetWorldPosition(_path[i].XCoordinate, _path[i].YCoordinate);
+				Vector2 end = _grid.GetWorldPosition(_path[i + 1].XCoordinate, _path[i + 1].YCoordinate);
+
+				// Рисуем линию между текущей нодой и следующей
+				Gizmos.DrawLine(start, end);
+			}
+
+			// Отмечаем начальную и конечную точки для наглядности
+			Vector2 firstNodePosition = _grid.GetWorldPosition(_path[0].XCoordinate, _path[0].YCoordinate);
+			Vector2 lastNodePosition = _grid.GetWorldPosition(_path[_path.Count - 1].XCoordinate, _path[_path.Count - 1].YCoordinate);
+
+			// Устанавливаем разные цвета для начальной и конечной точек
+			Gizmos.color = Color.blue;
+			Gizmos.DrawSphere(firstNodePosition, 0.2f); // Начальная точка
+
+			Gizmos.color = Color.red;
+			Gizmos.DrawSphere(lastNodePosition, 0.2f); // Конечная точка
 		}
 	}
 }

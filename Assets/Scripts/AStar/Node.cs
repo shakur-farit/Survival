@@ -2,19 +2,15 @@ namespace AStar
 {
 	public class Node
 	{
-		private int _xCoordinate;
-		private int _yCoordinate;
-		private bool _isWalkable;
-
-		public int XCoordinate => _xCoordinate;
-		public int YCoordinate => _yCoordinate;
-		public bool IsWalkable => _isWalkable;
+		public int XCoordinate { get; private set; }
+		public int YCoordinate { get; private set; }
+		public bool IsWalkable { get; private set; }
 
 		public void InitializeNode(int xCoordinate, int yCoordinate, bool isWalkable)
 		{
-			_xCoordinate = xCoordinate;
-			_yCoordinate = yCoordinate;
-			_isWalkable = isWalkable;
+			XCoordinate = xCoordinate;
+			YCoordinate = yCoordinate;
+			IsWalkable = isWalkable;
 		}
 	}
 }

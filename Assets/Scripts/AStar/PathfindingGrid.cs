@@ -11,9 +11,13 @@ namespace AStar
 	{
 		private Vector2Int _upperBounds;
 		private Vector2Int _lowerBounds;
+
 		private int _gridWidth;
 		private int _gridHeight;
 		private Node[,] _grid;
+
+		public int GridWidth => _gridWidth;
+		public int GridHeight => _gridHeight;
 
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly INodeFactory _nodeFactory;
@@ -53,6 +57,10 @@ namespace AStar
 			return _grid[x, y];
 		}
 
+		public Vector2 GetWorldPosition(int xCoordinate, int yCoordinate) =>
+			new(xCoordinate * Constants.CellSize + _lowerBounds.x + Constants.CellSize / 2,
+				yCoordinate * Constants.CellSize + _lowerBounds.y + Constants.CellSize / 2);
+
 		private void InitializeGridSize()
 		{
 			RoomData roomData = _persistentProgressService.Progress.LevelData.RoomData;
@@ -63,8 +71,8 @@ namespace AStar
 			_upperBounds = roomData.TilemapUpperBounds;
 			_lowerBounds = roomData.TilemapLowerBounds;
 
-			_gridWidth = Mathf.RoundToInt((_upperBounds.x - _lowerBounds.x) / Constants.CellSize);
-			_gridHeight = Mathf.RoundToInt((_upperBounds.y - _lowerBounds.y) / Constants.CellSize);
+			_gridWidth = Mathf.FloorToInt((_upperBounds.x - _lowerBounds.x) / Constants.CellSize);
+			_gridHeight = Mathf.FloorToInt((_upperBounds.y - _lowerBounds.y) / Constants.CellSize);
 		}
 
 		private bool IsWalkableNode(Vector2 worldPosition)
@@ -84,9 +92,5 @@ namespace AStar
 
 			return false;
 		}
-
-		public Vector2 GetWorldPosition(int xCoordinate, int yCoordinate) =>
-			new(xCoordinate * Constants.CellSize + _lowerBounds.x + Constants.CellSize / 2,
-				yCoordinate * Constants.CellSize + _lowerBounds.y + Constants.CellSize / 2);
 	}
 }

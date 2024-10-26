@@ -7,5 +7,7 @@ namespace AStar
 		void GenerateGrid();
 		Node GetNode(int x, int y);
 		Vector2 GetWorldPosition(int xCoordinate, int yCoordinate);
+		int GridWidth { get; }
+		int GridHeight { get; }
 	}
 }
