@@ -50,11 +50,11 @@ TagManager:
   - name: Decoration1
     uniqueID: 675852707
     locked: 0
-  - name: Decoration2
-    uniqueID: 1698883483
-    locked: 0
   - name: Instance
     uniqueID: 468312769
+    locked: 0
+  - name: Decoration2
+    uniqueID: 1698883483
     locked: 0
   - name: Front
     uniqueID: 1739105551

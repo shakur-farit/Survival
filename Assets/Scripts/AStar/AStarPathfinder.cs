@@ -16,8 +16,6 @@ namespace AStar
 			Node startNode = _pathfindingGrid.GetNode(start.x, start.y);
 			Node targetNode = _pathfindingGrid.GetNode(target.x, target.y);
 
-			Debug.Log($"{_pathfindingGrid.GetWorldPosition(targetNode.XCoordinate, targetNode.YCoordinate)}");
-
 			if (startNode == null || targetNode == null || startNode.IsWalkable == false || targetNode.IsWalkable == false)
 				return null;
 

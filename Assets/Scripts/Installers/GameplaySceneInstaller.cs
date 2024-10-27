@@ -93,6 +93,7 @@ namespace Installers
 		{
 			Container.Bind<IPathfindingGrid>().To<PathfindingGrid>().AsSingle();
 			Container.Bind<IAStarPathfinder>().To<AStarPathfinder>().AsSingle();
+			Container.Bind<IEnemyPathfinder>().To<EnemyPathfinder>().AsTransient();
 		}
 
 		private void RegisterDropStaticDataInitializer() => 
