@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Camera
+namespace Camera.Factory
 {
 	public interface IVirtualCameraFactory
 	{

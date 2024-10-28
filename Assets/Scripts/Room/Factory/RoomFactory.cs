@@ -1,7 +1,7 @@
 ﻿using Pool;
 using UnityEngine;
 
-namespace LevelLogic
+namespace Room.Factory
 {
 	public class RoomFactory : IRoomFactory
 	{

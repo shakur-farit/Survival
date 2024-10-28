@@ -1,4 +1,4 @@
-using Camera;
+using Camera.Factory;
 using Character;
 using Character.Factory;
 using Character.Shooting;
@@ -9,9 +9,9 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
 using LevelLogic;
+using Room.Factory;
 using Spawn;
 using StaticData;
-using UnityEngine;
 
 namespace Infrastructure.States
 {

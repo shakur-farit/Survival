@@ -1,4 +1,4 @@
-﻿namespace LevelLogic
+﻿namespace Room.Factory
 {
 	public interface IRoomFactory
 	{

@@ -69,6 +69,11 @@ namespace Spawn
 				.Select(pos => new Vector2(pos.x + 0.5f, pos.y + 0.5f))
 				.Where(pos => Vector2.Distance(pos, safeZoneCenter) > safeZoneRadius)
 				.ToList();
+
+			if (_validSpawnPositions == null)
+			{
+				Debug.Log("Have no valid spawn pos");
+			}
 		}
 
 		private bool IsPositionValid(Vector3Int position, TileBase tile, TileBase requiredTile,

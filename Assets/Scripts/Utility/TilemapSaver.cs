@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Zenject;
 
-namespace LevelLogic
+namespace Utility
 {
 	public class TilemapSaver : MonoBehaviour
 	{

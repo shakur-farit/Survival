@@ -1,7 +1,9 @@
+using Camera.Factory;
 using Character.Factory;
 using DropLogic.Factory;
 using Hud.Factory;
 using LevelLogic;
+using Room.Factory;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -12,14 +14,16 @@ namespace Infrastructure.States
 		private readonly IHudFactory _hudFactory;
 		private readonly IDropFactory _dropFactory;
 		private readonly IRoomFactory _roomFactory;
+		private readonly IVirtualCameraFactory _cameraFactory;
 
 		public GameLoopState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
-			IDropFactory dropFactory, IRoomFactory roomFactory)
+			IDropFactory dropFactory, IRoomFactory roomFactory, IVirtualCameraFactory cameraFactory)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
 			_dropFactory = dropFactory;
 			_roomFactory = roomFactory;
+			_cameraFactory = cameraFactory;
 		}
 
 		public void Enter()
@@ -36,6 +40,7 @@ namespace Infrastructure.States
 			DestroyCharacter();
 			DestroyDrops();
 			DestroyRoom();
+			DestroyCamera();
 		}
 
 		private void DestroyCharacter() =>
@@ -54,5 +59,8 @@ namespace Infrastructure.States
 
 		private void DestroyRoom() => 
 			_roomFactory.Destroy();
+
+		private void DestroyCamera() => 
+			_cameraFactory.Destroy();
 	}
 }

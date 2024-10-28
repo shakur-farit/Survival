@@ -1,7 +1,7 @@
 using Pool;
 using UnityEngine;
 
-namespace Camera
+namespace Camera.Factory
 {
 	public class VirtualCameraFactory : IVirtualCameraFactory
 	{

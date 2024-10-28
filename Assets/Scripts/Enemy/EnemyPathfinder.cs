@@ -35,6 +35,17 @@ namespace Enemy
 			Vector2Int start = GetGridPosition(enemy.transform.position);
 			Vector2Int end = GetGridPosition(target.transform.position);
 
+			Node startNode = _grid.GetNode(start.x, start.y);
+
+			if (startNode == null || startNode.IsWalkable == false)
+			{
+				start = FindNearestWalkableNode(start);
+				startNode = _grid.GetNode(start.x, start.y);
+
+				if (startNode == null)
+					return;
+			}
+
 			Node targetNode = _grid.GetNode(end.x, end.y);
 
 			if (targetNode == null || targetNode.IsWalkable == false)
@@ -47,6 +58,7 @@ namespace Enemy
 			}
 
 			Path = _pathfinder.FindPath(start, end);
+
 			_lastTargetPosition = target.transform.position;
 
 			CurrentPathIndex = 0;
@@ -58,7 +70,6 @@ namespace Enemy
 				return;
 
 			_timeSinceLastPathUpdate += Time.deltaTime;
-
 
 			if (Vector2.Distance(_lastTargetPosition, target.transform.position) > Constants.TargetPositionThreshold &&
 			    _timeSinceLastPathUpdate >= Constants.PathUpdateCooldown)
@@ -94,13 +105,13 @@ namespace Enemy
 			return new Vector2Int(x, y);
 		}
 
-		private Vector2Int FindNearestWalkableNode(Vector2Int targetPosition)
+		private Vector2Int FindNearestWalkableNode(Vector2Int position)
 		{
 			Queue<Vector2Int> nodesToCheck = new Queue<Vector2Int>();
 			HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
 
-			nodesToCheck.Enqueue(targetPosition);
-			visited.Add(targetPosition);
+			nodesToCheck.Enqueue(position);
+			visited.Add(position);
 
 			while (nodesToCheck.Count > 0)
 			{
@@ -122,7 +133,7 @@ namespace Enemy
 				}
 			}
 
-			return targetPosition;
+			return position;
 		}
 	}
 }
