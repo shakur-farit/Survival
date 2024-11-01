@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using Weapon;
 
 namespace StaticData
@@ -11,7 +10,9 @@ namespace StaticData
 		public WeaponType Type;
 		public Sprite Sprite;
 		public AmmoStaticData Ammo;
-		public SpecialEffectStaticData specialEffect;
+		public ShootSpecialEffectStaticData shootSpecialEffect;
+		public AudioClip ShotSoundEffect;
+		public AudioClip ReloadSoundEffect;
 		public Vector2 ShootPoint;
 		[Range(0f, 50f)] public float Range;
 		[Range(0, 10)] public int Damage;

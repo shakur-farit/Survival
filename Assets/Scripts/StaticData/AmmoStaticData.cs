@@ -7,7 +7,7 @@ namespace StaticData
 	{
 		public Sprite Sprite;
 		public Material Material;
-		public SpecialEffectStaticData HitSpecialEffect;
+		public HitSpecialEffectStaticData HitSpecialEffect;
 		[Range(0.01f, 5f)]public float MovementSpeed;
 		[Range(0.05f, 5f)]public float ColliderRadius;
 		public bool IsEnemy;

@@ -1,8 +1,5 @@
 using Ammo.Factory;
-using Cysharp.Threading.Tasks;
-using SpecialEffects;
 using SpecialEffects.Factory;
-using StaticData;
 using UnityEngine;
 
 namespace Ammo
@@ -10,9 +7,9 @@ namespace Ammo
 	public class AmmoDestroyer : IAmmoDestroyer
 	{
 		private readonly IAmmoFactory _ammoFactory;
-		private readonly ISpecialEffectsFactory _specialEffectsFactory;
+		private readonly IHitSpecialEffectsFactory _specialEffectsFactory;
 
-		public AmmoDestroyer(IAmmoFactory ammoFactory, ISpecialEffectsFactory specialEffectsFactory)
+		public AmmoDestroyer(IAmmoFactory ammoFactory, IHitSpecialEffectsFactory specialEffectsFactory)
 		{
 			_ammoFactory = ammoFactory;
 			_specialEffectsFactory = specialEffectsFactory;
@@ -21,23 +18,15 @@ namespace Ammo
 		public void DestroyOnOutOfDetectedRange(GameObject gameObject) => 
 			Destroy(gameObject);
 
-		public void DestroyInHit(GameObject gameObject, Vector2 position, SpecialEffectStaticData effectStaticData)
+		public void DestroyInHit(GameObject gameObject, Vector2 position)
 		{
 			Destroy(gameObject);
 
-			CreateHitEffect(position, effectStaticData);
+			CreateHitEffect(position);
 		}
 
-		private void CreateHitEffect(Vector2 position, SpecialEffectStaticData effectStaticData)
-		{
-			GameObject shootEffect = _specialEffectsFactory.CreateSpecialEffect(position);
-
-			if (shootEffect.TryGetComponent(out SpecialEffectData data))
-				data.Initialize(effectStaticData);
-
-			if (shootEffect.TryGetComponent(out SpecialEffectView view))
-				view.Initialize(effectStaticData);
-		}
+		private void CreateHitEffect(Vector2 position) => 
+			_specialEffectsFactory.Create(position);
 
 		private void Destroy(GameObject gameObject) => 
 			_ammoFactory.Destroy(gameObject);

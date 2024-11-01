@@ -15,7 +15,9 @@ MonoBehaviour:
   Type: 2
   Sprite: {fileID: 21300000, guid: 957e7c5a4532c7b4fa28cd31bf5aee5d, type: 3}
   Ammo: {fileID: 11400000, guid: 81e4e8bdd68204d4592dfd5201eea5e8, type: 2}
-  specialEffect: {fileID: 11400000, guid: 1bf736deecba6954797496064042e7c7, type: 2}
+  shootSpecialEffect: {fileID: 11400000, guid: 1bf736deecba6954797496064042e7c7, type: 2}
+  ShotSoundEffect: {fileID: 8300000, guid: 87cb7c4792ca3624fbf3c9d9ef50cf79, type: 3}
+  ReloadSoundEffect: {fileID: 8300000, guid: 8bf4219f6394996469312e55ac2af0d1, type: 3}
   ShootPoint: {x: 1.31, y: 0.23}
   Range: 5
   Damage: 1

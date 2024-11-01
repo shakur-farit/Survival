@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 248510550e229044bbe04e94b0085b76, type: 3}
+  m_Script: {fileID: 11500000, guid: fc79c0b5256675a438f5ac7c0c617510, type: 3}
   m_Name: Blueish Smoke Shoot Special Effect Static Data
   m_EditorClassIdentifier: 
   Lifetime: 1500

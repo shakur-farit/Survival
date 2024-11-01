@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.States.StatesMachine;
@@ -41,7 +42,8 @@ namespace Infrastructure.States
 			await CreateEnemiesPool();
 			await CreateDropsPool();
 			await CreateAmmoPool();
-			await CreateSpecialEffectsPool();
+			await CreateShootSpecialEffectsPool();
+			await CreateHitSpecialEffectsPool();
 			await CreateAmmoIconsPool();
 			await CreateHeartIconsPool();
 			await CreateCharacterPool();
@@ -59,8 +61,11 @@ namespace Infrastructure.States
 		private async UniTask CreateAmmoPool() => 
 			await _poolFactory.CreatePool(PooledObjectType.Ammo);
 
-		private async UniTask CreateSpecialEffectsPool() => 
-			await _poolFactory.CreatePool(PooledObjectType.SpecialEffect);
+		private async UniTask CreateShootSpecialEffectsPool() => 
+			await _poolFactory.CreatePool(PooledObjectType.ShootSpecialEffect);
+
+		private async UniTask CreateHitSpecialEffectsPool() => 
+			await _poolFactory.CreatePool(PooledObjectType.HitSpecialEffect);
 
 		private async UniTask CreateAmmoIconsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.AmmoIcon);

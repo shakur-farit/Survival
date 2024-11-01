@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: c3be09077243891458bdbf46a57d2e8a, type: 3}
   Material: {fileID: 2100000, guid: 33a55999e44f4724191171c59fc64319, type: 2}
-  HitSpecialEffect: {fileID: 11400000, guid: 5449bc3ede901344498a8c3673239d7e, type: 2}
+  HitSpecialEffect: {fileID: 11400000, guid: d17531b5dc3112c4b87a15ff1df3ff35, type: 2}
   MovementSpeed: 0.15
-  LiveTime: 1000
   ColliderRadius: 0.135
   IsEnemy: 0

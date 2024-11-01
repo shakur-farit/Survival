@@ -21,6 +21,7 @@ using Room.Factory;
 using Selector.Factory;
 using Shop.Factory;
 using Spawn;
+using SpecialEffects;
 using SpecialEffects.Factory;
 using UI.Factory;
 using UI.Services.Windows;
@@ -56,7 +57,9 @@ namespace Installers
 			RegisterHUDFactory();
 			RegisterUIFactory();
 			RegisterAmmoFactory();
-			RegisterSpecialEffectsFactory();
+			RegisterShootSpecialEffectsFactory();
+			RegisterHitSpecialEffectsFactory();
+			RegisterSoundEffectsFactory();
 			RegisterBulletIconsFactory();
 			RegisterHeartIconsFactory();
 			RegisterShopItemFactory();
@@ -128,8 +131,14 @@ namespace Installers
 		private void RegisterAmmoFactory() => 
 			Container.Bind<IAmmoFactory>().To<AmmoFactory>().AsSingle();
 
-		private void RegisterSpecialEffectsFactory() => 
-			Container.Bind<ISpecialEffectsFactory>().To<SpecialEffectsFactory>().AsSingle();
+		private void RegisterShootSpecialEffectsFactory() => 
+			Container.Bind<IShootSpecialEffectsFactory>().To<ShootSpecialEffectsFactory>().AsSingle();
+
+		private void RegisterHitSpecialEffectsFactory() =>
+			Container.Bind<IHitSpecialEffectsFactory>().To<HitSpecialEffectsFactory>().AsSingle();
+
+		private void RegisterSoundEffectsFactory() => 
+			Container.Bind<ISoundEffectFactory>().To<SoundEffectFactory>().AsSingle();
 
 		private void RegisterBulletIconsFactory() =>
 			Container.Bind<IAmmoIconFactory>().To<AmmoIconFactory>().AsSingle();

@@ -14,7 +14,6 @@ namespace Ammo
 
 		private int _damage;
 		private bool _isCollided;
-		private SpecialEffectStaticData _effectStaticData;
 
 		private IPersistentProgressService _persistentProgressService;
 		private IAmmoDestroyer _ammoDestroyer;
@@ -36,7 +35,6 @@ namespace Ammo
 
 			_collider.radius = ammoData.ColliderRadius;
 			_damage = weaponData.Damage;
-			_effectStaticData = ammoData.HitSpecialEffect;
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
@@ -60,7 +58,7 @@ namespace Ammo
 		}
 
 		private void DestroyAmmoOnHit() => 
-			_ammoDestroyer.DestroyInHit(gameObject, transform.position, _effectStaticData);
+			_ammoDestroyer.DestroyInHit(gameObject, transform.position);
 
 		private void TryDealDamageToEnemy(Collider2D other)
 		{

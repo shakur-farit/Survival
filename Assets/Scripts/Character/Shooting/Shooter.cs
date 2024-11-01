@@ -26,14 +26,14 @@ namespace Character.Shooting
 		private IFireInputService _fireInputSystem;
 		private IAmmoFactory _ammoFactory;
 		private IPersistentProgressService _persistentProgressService;
-		private ISpecialEffectsFactory _sfxFactory;
+		private IShootSpecialEffectsFactory _sfxFactory;
 		private IWeaponReloader _weaponReloader;
 
 		public bool TargetDetected { get; set; }
 
 		[Inject]
 		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory,
-			IPersistentProgressService persistentProgressService, ISpecialEffectsFactory sfxFactory,
+			IPersistentProgressService persistentProgressService, IShootSpecialEffectsFactory sfxFactory,
 			IWeaponReloader weaponReloader)
 		{
 			_fireInputSystem = fireInputSystem;
@@ -89,8 +89,7 @@ namespace Character.Shooting
 			for (int i = 0; i < ammoAmount; i++)
 			{
 				CreateAmmo();
-				GameObject shootEffect = CreateSpecialEffect();
-				InitializeSpecialEffect(shootEffect, weaponData.CurrentWeapon.specialEffect);
+				CreateSpecialEffect();
 
 				await UniTask.Delay(spawnInterval);
 			}
@@ -107,17 +106,8 @@ namespace Character.Shooting
 		private void CreateAmmo() => 
 			_ammoFactory.Create(_weaponShootTransform.position, _weaponRotationPoint.rotation);
 
-		private GameObject CreateSpecialEffect() =>
-			_sfxFactory.CreateSpecialEffect(_weaponShootTransform.position);
-
-		private void InitializeSpecialEffect(GameObject shootEffect, SpecialEffectStaticData staticData)
-		{
-			if (shootEffect.TryGetComponent(out SpecialEffectData data))
-				data.Initialize(staticData);
-
-			if (shootEffect.TryGetComponent(out SpecialEffectView view))
-				view.Initialize(staticData);
-		}
+		private void CreateSpecialEffect() =>
+			_sfxFactory.Create(_weaponShootTransform.position);
 
 		private async UniTask ReloadWeapon() => 
 			await _weaponReloader.Reload();
