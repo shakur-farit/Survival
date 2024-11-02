@@ -9,6 +9,7 @@ using Character.Shooting;
 using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
+using Effects.SoundEffects.Shoot;
 using Effects.SoundEffects.Shoot.Factory;
 using Effects.SpecialEffects.Hit.Factory;
 using Effects.SpecialEffects.Shoot.Factory;
@@ -58,9 +59,8 @@ namespace Installers
 			RegisterHUDFactory();
 			RegisterUIFactory();
 			RegisterAmmoFactory();
-			RegisterShootSpecialEffectsFactory();
-			RegisterHitSpecialEffectsFactory();
-			RegisterShootSoundEffectsFactory();
+			RegisterSpecialEffectsFactories();
+			RegisterSoundEffectsFactories();
 			RegisterBulletIconsFactory();
 			RegisterHeartIconsFactory();
 			RegisterShopItemFactory();
@@ -132,14 +132,17 @@ namespace Installers
 		private void RegisterAmmoFactory() => 
 			Container.Bind<IAmmoFactory>().To<AmmoFactory>().AsSingle();
 
-		private void RegisterShootSpecialEffectsFactory() => 
+		private void RegisterSpecialEffectsFactories()
+		{
 			Container.Bind<IShootSpecialEffectsFactory>().To<ShootSpecialEffectsFactory>().AsSingle();
-
-		private void RegisterHitSpecialEffectsFactory() =>
 			Container.Bind<IHitSpecialEffectsFactory>().To<HitSpecialEffectsFactory>().AsSingle();
+		}
 
-		private void RegisterShootSoundEffectsFactory() => 
+		private void RegisterSoundEffectsFactories()
+		{
+			Container.Bind<IReloadSoundEffectFactory>().To<ReloadSoundEffectFactory>().AsSingle();
 			Container.Bind<IShotSoundEffectFactory>().To<ShotSoundEffectFactory>().AsSingle();
+		}
 
 		private void RegisterBulletIconsFactory() =>
 			Container.Bind<IAmmoIconFactory>().To<AmmoIconFactory>().AsSingle();

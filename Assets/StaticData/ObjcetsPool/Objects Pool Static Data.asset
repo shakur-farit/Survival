@@ -49,7 +49,7 @@ MonoBehaviour:
     PoolSize: 35
     PooledPrefabAddress: AmmoIcon
     CanPoolIncrease: 1
-  - pooledObjectType: 8
+  - pooledObjectType: 10
     PoolSize: 10
     PooledPrefabAddress: HeartIcon
     CanPoolIncrease: 1

@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Data;
+using Effects.SoundEffects.Shoot.Factory;
 using Infrastructure.Services.PersistentProgress;
 
 namespace Character.Shooting
@@ -13,9 +14,13 @@ namespace Character.Shooting
 		public bool IsReloading { get; private set; }
 
 		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly IReloadSoundEffectFactory _soundEffect;
 
-		public WeaponReloader(IPersistentProgressService persistentProgressService) => 
+		public WeaponReloader(IPersistentProgressService persistentProgressService, IReloadSoundEffectFactory soundEffect)
+		{
 			_persistentProgressService = persistentProgressService;
+			_soundEffect = soundEffect;
+		}
 
 		public async UniTask Reload()
 		{
@@ -28,11 +33,15 @@ namespace Character.Shooting
 
 			IsReloading = true;
 
+			_soundEffect.Create();
+
 			await UniTask.Delay(weaponData.ReloadTime);
 
 			weaponData.CurrentAmmoCount = weaponData.MagazineSize;
 
 			WeaponReloaded?.Invoke();
+
+			_soundEffect.Destroy();
 
 			IsReloading = false;
 		}
