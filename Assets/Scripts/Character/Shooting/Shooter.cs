@@ -2,10 +2,10 @@ using System;
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
 using Data;
+using Effects.SoundEffects.Shoot.Factory;
+using Effects.SpecialEffects.Shoot.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
-using SpecialEffects;
-using SpecialEffects.Factory;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -28,19 +28,21 @@ namespace Character.Shooting
 		private IPersistentProgressService _persistentProgressService;
 		private IShootSpecialEffectsFactory _sfxFactory;
 		private IWeaponReloader _weaponReloader;
+		private IShotSoundEffectFactory _shotSoundEffect;
 
 		public bool TargetDetected { get; set; }
 
 		[Inject]
 		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory,
 			IPersistentProgressService persistentProgressService, IShootSpecialEffectsFactory sfxFactory,
-			IWeaponReloader weaponReloader)
+			IWeaponReloader weaponReloader, IShotSoundEffectFactory shotSoundEffect)
 		{
 			_fireInputSystem = fireInputSystem;
 			_ammoFactory = ammoFactory;
 			_persistentProgressService = persistentProgressService;
 			_sfxFactory = sfxFactory;
 			_weaponReloader = weaponReloader;
+			_shotSoundEffect = shotSoundEffect;
 		}
 
 		private void OnEnable()
@@ -90,6 +92,7 @@ namespace Character.Shooting
 			{
 				CreateAmmo();
 				CreateSpecialEffect();
+				CreateSoundEffect();
 
 				await UniTask.Delay(spawnInterval);
 			}
@@ -108,6 +111,9 @@ namespace Character.Shooting
 
 		private void CreateSpecialEffect() =>
 			_sfxFactory.Create(_weaponShootTransform.position);
+
+		private void CreateSoundEffect() => 
+			_shotSoundEffect.Create();
 
 		private async UniTask ReloadWeapon() => 
 			await _weaponReloader.Reload();

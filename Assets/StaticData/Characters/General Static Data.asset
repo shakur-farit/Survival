@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: General Static Data
   m_EditorClassIdentifier: 
   CharacterType: 1
-  DefaultWeapon: 5
+  DefaultWeapon: 3
   MovementSpeed: 3
   StartHealth: 6
   MaxHealth: 10

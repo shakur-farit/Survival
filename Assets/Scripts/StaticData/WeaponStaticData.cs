@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Weapon;
 
 namespace StaticData
@@ -10,7 +11,7 @@ namespace StaticData
 		public WeaponType Type;
 		public Sprite Sprite;
 		public AmmoStaticData Ammo;
-		public ShootSpecialEffectStaticData shootSpecialEffect;
+		public ShotSpecialEffectStaticData ShotSpecialEffect;
 		public AudioClip ShotSoundEffect;
 		public AudioClip ReloadSoundEffect;
 		public Vector2 ShootPoint;

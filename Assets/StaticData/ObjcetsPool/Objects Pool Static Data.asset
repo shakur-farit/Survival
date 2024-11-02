@@ -27,7 +27,7 @@ MonoBehaviour:
     CanPoolIncrease: 1
   - pooledObjectType: 4
     PoolSize: 10
-    PooledPrefabAddress: ShootSpecialEffect
+    PooledPrefabAddress: ShotSpecialEffect
     CanPoolIncrease: 1
   - pooledObjectType: 5
     PoolSize: 5
@@ -35,13 +35,17 @@ MonoBehaviour:
     CanPoolIncrease: 1
   - pooledObjectType: 6
     PoolSize: 5
-    PooledPrefabAddress: SoundEffect
+    PooledPrefabAddress: ShotSoundEffect
     CanPoolIncrease: 1
-  - pooledObjectType: 9
+  - pooledObjectType: 8
+    PoolSize: 1
+    PooledPrefabAddress: ReloadSoundEffect
+    CanPoolIncrease: 0
+  - pooledObjectType: 11
     PoolSize: 1
     PooledPrefabAddress: Character
     CanPoolIncrease: 0
-  - pooledObjectType: 7
+  - pooledObjectType: 9
     PoolSize: 35
     PooledPrefabAddress: AmmoIcon
     CanPoolIncrease: 1
@@ -49,15 +53,15 @@ MonoBehaviour:
     PoolSize: 10
     PooledPrefabAddress: HeartIcon
     CanPoolIncrease: 1
-  - pooledObjectType: 10
+  - pooledObjectType: 12
     PoolSize: 3
     PooledPrefabAddress: ShopItem
     CanPoolIncrease: 1
-  - pooledObjectType: 11
+  - pooledObjectType: 13
     PoolSize: 1
     PooledPrefabAddress: VirtualCamera
     CanPoolIncrease: 0
-  - pooledObjectType: 12
+  - pooledObjectType: 14
     PoolSize: 1
     PooledPrefabAddress: Room
     CanPoolIncrease: 0

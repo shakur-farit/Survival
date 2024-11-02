@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.States.StatesMachine;
@@ -42,8 +41,10 @@ namespace Infrastructure.States
 			await CreateEnemiesPool();
 			await CreateDropsPool();
 			await CreateAmmoPool();
-			await CreateShootSpecialEffectsPool();
+			await CreateShotSpecialEffectsPool();
 			await CreateHitSpecialEffectsPool();
+			await CreateShotSoundEffectsPool();
+			await CreateReloadSoundEffectsPool();
 			await CreateAmmoIconsPool();
 			await CreateHeartIconsPool();
 			await CreateCharacterPool();
@@ -61,11 +62,18 @@ namespace Infrastructure.States
 		private async UniTask CreateAmmoPool() => 
 			await _poolFactory.CreatePool(PooledObjectType.Ammo);
 
-		private async UniTask CreateShootSpecialEffectsPool() => 
-			await _poolFactory.CreatePool(PooledObjectType.ShootSpecialEffect);
+		private async UniTask CreateShotSpecialEffectsPool() => 
+			await _poolFactory.CreatePool(PooledObjectType.ShotSpecialEffect);
 
 		private async UniTask CreateHitSpecialEffectsPool() => 
 			await _poolFactory.CreatePool(PooledObjectType.HitSpecialEffect);
+
+		private async UniTask CreateShotSoundEffectsPool() => 
+			await _poolFactory.CreatePool(PooledObjectType.ShotSoundEffect);
+
+		private async UniTask CreateReloadSoundEffectsPool() =>
+			await _poolFactory.CreatePool(PooledObjectType.ReloadSoundEffect);
+
 
 		private async UniTask CreateAmmoIconsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.AmmoIcon);

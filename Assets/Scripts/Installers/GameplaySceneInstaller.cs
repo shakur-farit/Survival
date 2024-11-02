@@ -9,6 +9,9 @@ using Character.Shooting;
 using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
+using Effects.SoundEffects.Shoot.Factory;
+using Effects.SpecialEffects.Hit.Factory;
+using Effects.SpecialEffects.Shoot.Factory;
 using Enemy;
 using Enemy.Factory;
 using Enemy.Mediator;
@@ -21,8 +24,6 @@ using Room.Factory;
 using Selector.Factory;
 using Shop.Factory;
 using Spawn;
-using SpecialEffects;
-using SpecialEffects.Factory;
 using UI.Factory;
 using UI.Services.Windows;
 using Zenject;
@@ -59,7 +60,7 @@ namespace Installers
 			RegisterAmmoFactory();
 			RegisterShootSpecialEffectsFactory();
 			RegisterHitSpecialEffectsFactory();
-			RegisterSoundEffectsFactory();
+			RegisterShootSoundEffectsFactory();
 			RegisterBulletIconsFactory();
 			RegisterHeartIconsFactory();
 			RegisterShopItemFactory();
@@ -137,8 +138,8 @@ namespace Installers
 		private void RegisterHitSpecialEffectsFactory() =>
 			Container.Bind<IHitSpecialEffectsFactory>().To<HitSpecialEffectsFactory>().AsSingle();
 
-		private void RegisterSoundEffectsFactory() => 
-			Container.Bind<ISoundEffectFactory>().To<SoundEffectFactory>().AsSingle();
+		private void RegisterShootSoundEffectsFactory() => 
+			Container.Bind<IShotSoundEffectFactory>().To<ShotSoundEffectFactory>().AsSingle();
 
 		private void RegisterBulletIconsFactory() =>
 			Container.Bind<IAmmoIconFactory>().To<AmmoIconFactory>().AsSingle();

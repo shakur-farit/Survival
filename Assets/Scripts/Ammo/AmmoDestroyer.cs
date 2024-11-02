@@ -1,5 +1,5 @@
 using Ammo.Factory;
-using SpecialEffects.Factory;
+using Effects.SpecialEffects.Hit.Factory;
 using UnityEngine;
 
 namespace Ammo
