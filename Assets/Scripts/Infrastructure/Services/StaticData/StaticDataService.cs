@@ -25,7 +25,6 @@ namespace Infrastructure.Services.StaticData
 		public ShopItemStaticData ShopItemStaticData { get; private set; }
 		public ObjectsPoolStaticData ObjectsPoolStaticData { get; private set; }
 
-
 		public StaticDataService(IAssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
 

@@ -1,4 +1,5 @@
 using System;
+using StaticData;
 
 namespace Data
 {
@@ -10,5 +11,6 @@ namespace Data
 		public LevelData LevelData = new();
 		public ShopData ShopData = new();
 		public ScoreData ScoreData = new();
+		public SoundData SoundData = new();
 	}
 }

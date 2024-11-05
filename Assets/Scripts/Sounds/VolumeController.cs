@@ -1,9 +1,11 @@
-using UnityEngine;
+using System;
 
 namespace Sounds
 {
-	public class VolumeController : MonoBehaviour
+	public class VolumeController
 	{
-    
+		public event Action VolumeChanged;
+
+
 	}
 }
