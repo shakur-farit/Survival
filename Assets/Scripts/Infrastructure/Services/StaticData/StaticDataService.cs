@@ -14,6 +14,7 @@ namespace Infrastructure.Services.StaticData
 		private const string DropsListStaticDataAddress = "Drops List";
 		private const string ShopItemStaticDataAddress = "Shop Item Static Data";
 		private const string ObjectsPoolStaticDataAddress = "Objects Pool Static Data";
+		private const string SoundsStaticDataAddress = "Sounds Static Data";
 
 		private readonly IAssetsProvider _assetsProvider;
 
@@ -24,6 +25,7 @@ namespace Infrastructure.Services.StaticData
 		public DropsListStaticData DropsListStaticData { get; private set; }
 		public ShopItemStaticData ShopItemStaticData { get; private set; }
 		public ObjectsPoolStaticData ObjectsPoolStaticData { get; private set; }
+		public SoundsStaticData SoundsStaticData { get; private set; }
 
 		public StaticDataService(IAssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
@@ -37,6 +39,7 @@ namespace Infrastructure.Services.StaticData
 			DropsListStaticData = await _assetsProvider.Load<DropsListStaticData>(DropsListStaticDataAddress);
 			ShopItemStaticData = await _assetsProvider.Load<ShopItemStaticData>(ShopItemStaticDataAddress);
 			ObjectsPoolStaticData = await _assetsProvider.Load<ObjectsPoolStaticData>(ObjectsPoolStaticDataAddress);
+			SoundsStaticData  = await _assetsProvider.Load<SoundsStaticData>(SoundsStaticDataAddress);
 		}
 
 		public async UniTask WarmUp()
@@ -48,6 +51,7 @@ namespace Infrastructure.Services.StaticData
 			await _assetsProvider.Load<DropsListStaticData>(DropsListStaticDataAddress);
 			await _assetsProvider.Load<ShopItemStaticData>(ShopItemStaticDataAddress);
 			await _assetsProvider.Load<ObjectsPoolStaticData>(ObjectsPoolStaticDataAddress);
+			await _assetsProvider.Load<SoundsStaticData>(SoundsStaticDataAddress);
 		}
 	}
 }

@@ -62,5 +62,6 @@ namespace Utility
 		
 		// Sound values
 		public const int SoundsLifetime = 1000;
+		public const int VolumeStep = 1;
 	}
 }
