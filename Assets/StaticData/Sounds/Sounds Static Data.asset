@@ -18,4 +18,4 @@ MonoBehaviour:
   MaxMusicVolume: 10
   MaxSoundEffectsVolume: 10
   CurrentMusicVolume: 0
-  CurrentSoundEffectsVolume: 5
+  CurrentSoundEffectsVolume: 7

@@ -4,12 +4,13 @@ using Utility;
 
 namespace Sounds
 {
-	public class VolumeController
+	public class VolumeController : IVolumeController
 	{
-		public event Action SoundEffetcsVolumeChanged;
+		public event Action SoundEffectsVolumeChanged;
 		public event Action MusicVolumeChanged;
 
-		public int SoundEffectsVolume { get; private set; }
+		private int _soundEffectsVolume;
+		private bool _isScaled;
 
 		private readonly IStaticDataService _staticDataService;
 
@@ -17,38 +18,57 @@ namespace Sounds
 		{
 			_staticDataService = staticDataService;
 
-
-			InitializeVolume();
+			_soundEffectsVolume = _staticDataService.SoundsStaticData.CurrentSoundEffectsVolume;
 		}
 
-		private void InitializeVolume()
+		public float GetScaledSoundEffectsVolume()
 		{
 			int currentSoundEffectsVolume = _staticDataService.SoundsStaticData.CurrentSoundEffectsVolume;
 			int maxSoundEffectsVolume = _staticDataService.SoundsStaticData.MaxSoundEffectsVolume;
+			
+			_isScaled = true;
 
-			SoundEffectsVolume = currentSoundEffectsVolume / maxSoundEffectsVolume;
+			return _soundEffectsVolume = currentSoundEffectsVolume / maxSoundEffectsVolume;
 		}
 
-		private void AddSoundEffectsVolume()
+		public int GetNonScaledSoundEffectsVolume()
 		{
-			SoundEffectsVolume += Constants.VolumeStep;
+			if (_isScaled == false)
+				return _soundEffectsVolume;
+
+			int maxSoundEffectsVolume = _staticDataService.SoundsStaticData.MaxSoundEffectsVolume;
+			int currentSoundEffectsVolume = _staticDataService.SoundsStaticData.CurrentSoundEffectsVolume;
+
+			_soundEffectsVolume *= maxSoundEffectsVolume;
+
+			_isScaled = false;
+
+			if (_soundEffectsVolume > maxSoundEffectsVolume)
+				return currentSoundEffectsVolume;
+
+			return _soundEffectsVolume;
+		}
+
+		public void AddSoundEffectsVolume()
+		{
+			_soundEffectsVolume += Constants.VolumeStep;
 
 			int maxSoundEffectsVolume = _staticDataService.SoundsStaticData.MaxSoundEffectsVolume;
 
-			if(SoundEffectsVolume >= maxSoundEffectsVolume)
-				SoundEffectsVolume = maxSoundEffectsVolume;
+			if(_soundEffectsVolume >= maxSoundEffectsVolume)
+				_soundEffectsVolume = maxSoundEffectsVolume;
 
-			SoundEffetcsVolumeChanged?.Invoke();
+			SoundEffectsVolumeChanged?.Invoke();
 		}
 
-		private void RemoveSoundEffectsVolume()
+		public void RemoveSoundEffectsVolume()
 		{
-			SoundEffectsVolume -= Constants.VolumeStep;
+			_soundEffectsVolume -= Constants.VolumeStep;
 
-			if (SoundEffectsVolume <= 0)
-				SoundEffectsVolume = 0;
+			if (_soundEffectsVolume <= 0)
+				_soundEffectsVolume = 0;
 
-			SoundEffetcsVolumeChanged?.Invoke();
+			SoundEffectsVolumeChanged?.Invoke();
 		}
 	}
 }

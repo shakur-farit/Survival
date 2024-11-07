@@ -52,6 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CloseButton: {fileID: 1545861804595840317}
+  _addSoundEffectVolumeButton: {fileID: 8171152239599823429}
+  _removeSoundEffectVolumeButton: {fileID: 334976714291850740}
+  _addMusicVolumeButton: {fileID: 0}
+  _removeMusicVolumeButton: {fileID: 0}
+  _soundEffectsVolumeText: {fileID: 8163393423193032831}
+  _musicVolumeText: {fileID: 2269727092109750375}
 --- !u!1 &1285732650596715482
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +70,7 @@ GameObject:
   - component: {fileID: 7189441431389351898}
   - component: {fileID: 334976714291850740}
   m_Layer: 5
-  m_Name: DownButton
+  m_Name: RemoveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +236,7 @@ GameObject:
   - component: {fileID: 2799571549804398087}
   - component: {fileID: 7010721742204692550}
   m_Layer: 5
-  m_Name: DownText
+  m_Name: RemoveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,7 +579,7 @@ GameObject:
   - component: {fileID: 2107953933848876080}
   - component: {fileID: 7269402691133755695}
   m_Layer: 5
-  m_Name: UpText
+  m_Name: AddText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,7 +1057,7 @@ GameObject:
   - component: {fileID: 2584796765827006875}
   - component: {fileID: 8171152239599823429}
   m_Layer: 5
-  m_Name: UpButton
+  m_Name: AddButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1405,7 +1411,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2649710fee943d844bcea62022b1f4cf, type: 2}
   m_sharedMaterial: {fileID: 8120199949304618070, guid: 2649710fee943d844bcea62022b1f4cf, type: 2}
@@ -1448,7 +1454,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1629,7 +1635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2649710fee943d844bcea62022b1f4cf, type: 2}
   m_sharedMaterial: {fileID: 8120199949304618070, guid: 2649710fee943d844bcea62022b1f4cf, type: 2}
@@ -1672,7 +1678,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

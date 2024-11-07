@@ -1,4 +1,3 @@
-using AStar;
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using Enemy.States.StateMachine;
@@ -13,6 +12,7 @@ using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
 using Score;
+using Sounds;
 using Zenject;
 
 namespace Installers
@@ -32,6 +32,7 @@ namespace Installers
 			RegisterScenesService();
 			RegisterPauseService();
 			RegisterStatesMachines();
+			RegisterVolumeController();
 		}
 
 		private void RegisterTimer() => 
@@ -74,5 +75,8 @@ namespace Installers
 
 		private void RegisterRandomizer() =>
 			Container.Bind<IRandomService>().To<RandomService>().AsSingle();
+
+		private void RegisterVolumeController() => 
+			Container.Bind<IVolumeController>().To<VolumeController>().AsSingle();
 	}
 }
