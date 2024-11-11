@@ -34,7 +34,7 @@ MonoBehaviour:
     PooledPrefabAddress: HitSpecialEffect
     CanPoolIncrease: 1
   - pooledObjectType: 6
-    PoolSize: 5
+    PoolSize: 1
     PooledPrefabAddress: ShotSoundEffect
     CanPoolIncrease: 1
   - pooledObjectType: 8

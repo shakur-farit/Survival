@@ -1,3 +1,4 @@
+using System;
 using Sounds;
 using TMPro;
 using UI.Services.Windows;
@@ -27,10 +28,11 @@ namespace UI.Windows
 			_volumeController = volumeController;
 		}
 
-		private void OnEnable()
-		{
+		private void OnEnable() => 
 			_volumeController.SoundEffectsVolumeChanged += UpdateSoundEffectsVolumeText;
-		}
+
+		private void OnDisable() => 
+			_volumeController.SoundEffectsVolumeChanged -= UpdateSoundEffectsVolumeText;
 
 		protected override void OnAwake()
 		{
@@ -51,10 +53,7 @@ namespace UI.Windows
 		private void RemoveSoundEffectsVolume() => 
 			_volumeController.RemoveSoundEffectsVolume();
 
-		private void UpdateSoundEffectsVolumeText()
-		{
-			Debug.Log(_volumeController.GetNonScaledSoundEffectsVolume());
+		private void UpdateSoundEffectsVolumeText() => 
 			_soundEffectsVolumeText.text = _volumeController.GetNonScaledSoundEffectsVolume().ToString();
-		}
 	}
 }

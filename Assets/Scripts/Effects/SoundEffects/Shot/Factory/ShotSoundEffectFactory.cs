@@ -10,10 +10,10 @@ namespace Effects.SoundEffects.Shoot.Factory
 		protected ShotSoundEffectFactory(IPoolFactory poolFactory) =>
 			_poolFactory = poolFactory;
 
-		public void Create() =>
+		public void Create() => 
 			_poolFactory.UseObject(PooledObjectType.ShotSoundEffect);
 
-		public void Destroy(GameObject gameObject) =>
+		public void Destroy(GameObject gameObject) => 
 			_poolFactory.ReturnObject(PooledObjectType.ShotSoundEffect, gameObject);
 	}
 }

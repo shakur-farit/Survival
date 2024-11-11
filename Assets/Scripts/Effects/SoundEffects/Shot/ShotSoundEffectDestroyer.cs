@@ -1,8 +1,8 @@
-using System;
 using Cysharp.Threading.Tasks;
 using Effects.SoundEffects.Shoot.Factory;
 using UnityEngine;
 using Utility;
+using Zenject;
 
 namespace Effects.SoundEffects.Shoot
 {
@@ -10,15 +10,16 @@ namespace Effects.SoundEffects.Shoot
 	{
 		private IShotSoundEffectFactory _soundEffect;
 
+		[Inject]
 		public void Constructor(IShotSoundEffectFactory soundEffect) => 
 			_soundEffect = soundEffect;
 
 		private void OnEnable() => 
 			Destroy();
 
-		private void Destroy()
+		private async void Destroy()
 		{
-			 UniTask.Delay(Constants.SoundsLifetime);
+			 await UniTask.Delay(Constants.SoundsLifetime);
 
 			_soundEffect.Destroy(gameObject);
 		}

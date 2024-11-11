@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829985761953955059}
   - component: {fileID: 4397767104413317223}
+  - component: {fileID: 6990759555367764478}
   - component: {fileID: 6905039799515497970}
   m_Layer: 10
   m_Name: ShotSoundEffect
@@ -46,6 +47,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 6905039799515497970}
+--- !u!114 &6990759555367764478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6539570766999889727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95420386b74220643863e5db7735c6db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &6905039799515497970
 AudioSource:
   m_ObjectHideFlags: 0
