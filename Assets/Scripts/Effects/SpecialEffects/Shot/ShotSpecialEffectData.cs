@@ -1,7 +1,7 @@
 using StaticData;
 using UnityEngine;
 
-namespace Effects.SpecialEffects.Shoot
+namespace Effects.SpecialEffects.Shot
 {
 	public class ShotSpecialEffectData : MonoBehaviour
 	{

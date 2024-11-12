@@ -1,5 +1,5 @@
 using System;
-using Sounds;
+using Soundtrack;
 using TMPro;
 using UI.Services.Windows;
 using UnityEngine;
@@ -19,10 +19,10 @@ namespace UI.Windows
 		[SerializeField] private TextMeshProUGUI _musicVolumeText;
 
 		private IWindowsService _windowsService;
-		private IVolumeController _volumeController;
+		private ISoundEffectsVolumeController _volumeController;
 
 		[Inject]
-		public void Constructor(IWindowsService windowsService, IVolumeController volumeController)
+		public void Constructor(IWindowsService windowsService, ISoundEffectsVolumeController volumeController)
 		{
 			_windowsService = windowsService;
 			_volumeController = volumeController;
@@ -54,6 +54,6 @@ namespace UI.Windows
 			_volumeController.RemoveSoundEffectsVolume();
 
 		private void UpdateSoundEffectsVolumeText() => 
-			_soundEffectsVolumeText.text = _volumeController.GetNonScaledSoundEffectsVolume().ToString();
+			_soundEffectsVolumeText.text = _volumeController.SoundEffectsVolume.ToString();
 	}
 }

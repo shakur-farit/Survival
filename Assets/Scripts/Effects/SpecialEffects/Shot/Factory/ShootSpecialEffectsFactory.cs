@@ -1,7 +1,7 @@
 using Pool;
 using UnityEngine;
 
-namespace Effects.SpecialEffects.Shoot.Factory
+namespace Effects.SpecialEffects.Shot.Factory
 {
 	public class ShootSpecialEffectsFactory : IShootSpecialEffectsFactory
 	{

@@ -25,7 +25,7 @@ namespace Infrastructure.Services.StaticData
 		public DropsListStaticData DropsListStaticData { get; private set; }
 		public ShopItemStaticData ShopItemStaticData { get; private set; }
 		public ObjectsPoolStaticData ObjectsPoolStaticData { get; private set; }
-		public SoundsStaticData SoundsStaticData { get; private set; }
+		public SoundtrackStaticData SoundtrackStaticData { get; private set; }
 
 		public StaticDataService(IAssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
@@ -39,7 +39,7 @@ namespace Infrastructure.Services.StaticData
 			DropsListStaticData = await _assetsProvider.Load<DropsListStaticData>(DropsListStaticDataAddress);
 			ShopItemStaticData = await _assetsProvider.Load<ShopItemStaticData>(ShopItemStaticDataAddress);
 			ObjectsPoolStaticData = await _assetsProvider.Load<ObjectsPoolStaticData>(ObjectsPoolStaticDataAddress);
-			SoundsStaticData  = await _assetsProvider.Load<SoundsStaticData>(SoundsStaticDataAddress);
+			SoundtrackStaticData  = await _assetsProvider.Load<SoundtrackStaticData>(SoundsStaticDataAddress);
 		}
 
 		public async UniTask WarmUp()
@@ -51,7 +51,7 @@ namespace Infrastructure.Services.StaticData
 			await _assetsProvider.Load<DropsListStaticData>(DropsListStaticDataAddress);
 			await _assetsProvider.Load<ShopItemStaticData>(ShopItemStaticDataAddress);
 			await _assetsProvider.Load<ObjectsPoolStaticData>(ObjectsPoolStaticDataAddress);
-			await _assetsProvider.Load<SoundsStaticData>(SoundsStaticDataAddress);
+			await _assetsProvider.Load<SoundtrackStaticData>(SoundsStaticDataAddress);
 		}
 	}
 }

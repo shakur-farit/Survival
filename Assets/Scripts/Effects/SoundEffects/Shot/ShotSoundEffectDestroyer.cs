@@ -1,10 +1,10 @@
 using Cysharp.Threading.Tasks;
-using Effects.SoundEffects.Shoot.Factory;
+using Effects.SoundEffects.Shot.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Shoot
+namespace Effects.SoundEffects.Shot
 {
 	public class ShotSoundEffectDestroyer : MonoBehaviour
 	{

@@ -1,10 +1,10 @@
 using Cysharp.Threading.Tasks;
-using Effects.SpecialEffects.Shoot.Factory;
+using Effects.SpecialEffects.Shot.Factory;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
 
-namespace Effects.SpecialEffects.Shoot
+namespace Effects.SpecialEffects.Shot
 {
 	public class ShotSpecialEffectDestroyer : MonoBehaviour
 	{

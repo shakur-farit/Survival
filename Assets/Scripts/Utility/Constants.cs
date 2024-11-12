@@ -60,8 +60,9 @@ namespace Utility
 		public const float PathUpdateCooldown = 1f;
 		public const float MinDistanceToNextNode = 0.25f;
 		
-		// Sound values
+		// Soundtrack values
 		public const int SoundsLifetime = 1000;
 		public const int VolumeStep = 1;
+		public const float MusicFadeDuration = 1f;
 	}
 }

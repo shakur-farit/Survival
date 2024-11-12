@@ -17,5 +17,6 @@ namespace Infrastructure.Services.AssetsManagement
 		public string SettingsWindowAddress;
 		public string CharacterSelectorAddress;
 		public string ShopItemAddress;
+		public string MusicSource;
 	}
 }

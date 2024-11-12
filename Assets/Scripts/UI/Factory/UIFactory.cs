@@ -110,14 +110,14 @@ namespace UI.Factory
 		public void DestroySettingsWindow() =>
 			Object.Destroy(_settingsWindow);
 
-		protected async UniTask<GameObject> CreateObject(string objectAddress, Transform parentTransform)
+		private async UniTask<GameObject> CreateObject(string objectAddress, Transform parentTransform)
 		{
 			GameObject prefab = await _assetsProvider.Load<GameObject>(objectAddress);
 
 			return _objectsCreator.Instantiate(prefab, parentTransform);
 		}
 
-		protected async UniTask<UIAssetsReference> InitReference() =>
+		private async UniTask<UIAssetsReference> InitReference() =>
 			await _assetsProvider.Load<UIAssetsReference>(AssetsReferenceAddress.UIAssetsReference);
 	}
 }

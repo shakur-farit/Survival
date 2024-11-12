@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Effects.SoundEffects.Shoot.Factory
+namespace Effects.SoundEffects.Reload.Factory
 {
 	public interface IReloadSoundEffectFactory
 	{

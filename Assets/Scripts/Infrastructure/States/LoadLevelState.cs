@@ -10,6 +10,7 @@ using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
 using LevelLogic;
 using Room.Factory;
+using Soundtrack;
 using Spawn;
 using StaticData;
 
@@ -27,12 +28,13 @@ namespace Infrastructure.States
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IVirtualCameraFactory _virtualCameraFactory;
 		private readonly IRoomFactory _roomFactory;
+		private readonly IMusicSwitcher _musicSwitcher;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
 			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
 			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer, 
 			IGameStatesSwitcher gameStatesSwitcher, IVirtualCameraFactory virtualCameraFactory,
-			IRoomFactory roomFactory)
+			IRoomFactory roomFactory, IMusicSwitcher musicSwitcher)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
@@ -44,6 +46,7 @@ namespace Infrastructure.States
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_virtualCameraFactory = virtualCameraFactory;
 			_roomFactory = roomFactory;
+			_musicSwitcher = musicSwitcher;
 		}
 
 		public async void Enter()
@@ -96,10 +99,15 @@ namespace Infrastructure.States
 
 		private async void SpawnEnemies()
 		{
+			PlayEnemyBattleMusic();
+
 			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
 
 			await _enemySpawner.Spawn(levelStaticData);
 		}
+
+		private void PlayEnemyBattleMusic() => 
+			_musicSwitcher.PlayEnemyBattle();
 
 		private void EnterToGameLoopState() => 
 			_gameStatesSwitcher.SwitchState<GameLoopState>();

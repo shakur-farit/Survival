@@ -3,7 +3,7 @@ using StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Effects.SpecialEffects.Shoot
+namespace Effects.SpecialEffects.Shot
 {
 	public class ActorShotSpecialEffect : MonoBehaviour
 	{

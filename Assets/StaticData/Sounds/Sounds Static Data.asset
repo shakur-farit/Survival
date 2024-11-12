@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05527173f538c564c9593e9eb5ae586c, type: 3}
   m_Name: Sounds Static Data
   m_EditorClassIdentifier: 
-  MasterMixerGroup: {fileID: 24300002, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
-  OnFullSnapshot: {fileID: 24500006, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
-  LowSnapshot: {fileID: 8893122114324796974, guid: 2ac509b551addfb48950fbdc0d9cefb4, type: 2}
+  BossBattle: {fileID: 8300000, guid: 70298172d88ca2b4fb08d70a5c52c99b, type: 3}
+  EnemyBattle: {fileID: 8300000, guid: 033988f2511ca894b998a058ba905d14, type: 3}
+  DungeonMelancholy: {fileID: 8300000, guid: 7c65c6045b7ddae45aa34ecdc3810f34, type: 3}
+  ClearedRoom: {fileID: 8300000, guid: cbebb64a953d47441be2e3a7eac340a8, type: 3}
+  MainMenu: {fileID: 8300000, guid: 6e5e6cab5960f5e40b7c242f52c3313d, type: 3}
   MaxMusicVolume: 10
   MaxSoundEffectsVolume: 10
-  CurrentMusicVolume: 0
+  CurrentMusicVolume: 7
   CurrentSoundEffectsVolume: 7

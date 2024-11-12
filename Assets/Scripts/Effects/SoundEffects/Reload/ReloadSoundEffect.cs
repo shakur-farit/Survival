@@ -1,19 +1,19 @@
 using Infrastructure.Services.PersistentProgress;
-using Sounds;
+using Soundtrack;
 using UnityEngine;
 using Zenject;
 
-namespace Effects.SoundEffects.Shoot
+namespace Effects.SoundEffects.Reload
 {
 	public class ReloadSoundEffect : MonoBehaviour
 	{
 		[SerializeField] private AudioSource _audioSource;
 
 		private IPersistentProgressService _persistentProgressService;
-		private IVolumeController _volumeController;
+		private ISoundEffectsVolumeController _volumeController;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IVolumeController volumeController)
+		public void Constructor(IPersistentProgressService persistentProgressService, ISoundEffectsVolumeController volumeController)
 		{
 			_persistentProgressService = persistentProgressService;
 			_volumeController = volumeController;
@@ -29,6 +29,6 @@ namespace Effects.SoundEffects.Shoot
 			_audioSource.clip = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.ReloadSoundEffect;
 
 		private void UpdateVolume() =>
-			_audioSource.volume = _volumeController.GetScaledSoundEffectsVolume();
+			_audioSource.volume = _volumeController.ScaledSoundEffectsVolume;
 	}
 }

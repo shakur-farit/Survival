@@ -1,7 +1,7 @@
 using Pool;
 using UnityEngine;
 
-namespace Effects.SoundEffects.Shoot.Factory
+namespace Effects.SoundEffects.Shot.Factory
 {
 	public class ShotSoundEffectFactory : IShotSoundEffectFactory
 	{

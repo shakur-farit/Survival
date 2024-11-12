@@ -12,7 +12,7 @@ using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
 using Infrastructure.States.StatesMachine;
 using Score;
-using Sounds;
+using Soundtrack;
 using Zenject;
 
 namespace Installers
@@ -32,7 +32,7 @@ namespace Installers
 			RegisterScenesService();
 			RegisterPauseService();
 			RegisterStatesMachines();
-			RegisterVolumeController();
+			RegisterSoundtrackServices();
 		}
 
 		private void RegisterTimer() => 
@@ -76,7 +76,10 @@ namespace Installers
 		private void RegisterRandomizer() =>
 			Container.Bind<IRandomService>().To<RandomService>().AsSingle();
 
-		private void RegisterVolumeController() => 
-			Container.Bind<IVolumeController>().To<VolumeController>().AsSingle();
+		private void RegisterSoundtrackServices()
+		{
+			Container.BindInterfacesAndSelfTo<VolumeController>().AsSingle();
+			Container.Bind<IMusicSwitcher>().To<MusicSwitcher>().AsSingle();
+		}
 	}
 }

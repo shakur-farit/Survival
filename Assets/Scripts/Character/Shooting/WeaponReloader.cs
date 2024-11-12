@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Data;
-using Effects.SoundEffects.Shoot.Factory;
+using Effects.SoundEffects.Reload.Factory;
 using Infrastructure.Services.PersistentProgress;
 
 namespace Character.Shooting

@@ -1,7 +1,6 @@
 using Ammo;
 using Ammo.Factory;
 using AStar;
-using Camera;
 using Camera.Factory;
 using Character;
 using Character.Factory;
@@ -9,10 +8,10 @@ using Character.Shooting;
 using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
-using Effects.SoundEffects.Shoot;
-using Effects.SoundEffects.Shoot.Factory;
+using Effects.SoundEffects.Reload.Factory;
+using Effects.SoundEffects.Shot.Factory;
 using Effects.SpecialEffects.Hit.Factory;
-using Effects.SpecialEffects.Shoot.Factory;
+using Effects.SpecialEffects.Shot.Factory;
 using Enemy;
 using Enemy.Factory;
 using Enemy.Mediator;
@@ -24,6 +23,7 @@ using Pool;
 using Room.Factory;
 using Selector.Factory;
 using Shop.Factory;
+using Soundtrack;
 using Spawn;
 using UI.Factory;
 using UI.Services.Windows;
@@ -68,6 +68,7 @@ namespace Installers
 			RegisterVirtualCameraFactory();
 			RegisterTilemapFactory();
 			RegisterNodeFactory();
+			RegisterMusicSourceFactory();
 		}
 
 		private void RegisterMediators()
@@ -158,6 +159,9 @@ namespace Installers
 
 		private void RegisterTilemapFactory() => 
 			Container.Bind<IRoomFactory>().To<RoomFactory>().AsSingle();
+
+		private void RegisterMusicSourceFactory() => 
+			Container.Bind<IMusicSourceFactory>().To<MusicSourceFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();
