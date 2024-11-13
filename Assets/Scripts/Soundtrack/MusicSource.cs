@@ -70,7 +70,7 @@ namespace Soundtrack
 				await UniTask.Yield();
 			}
 
-			_audioSource.volume = _volumeController.MusicVolume;
+			UpdateVolume();
 		}
 
 		private void UpdateVolume() => 
