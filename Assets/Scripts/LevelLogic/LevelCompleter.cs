@@ -3,6 +3,7 @@ using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.States;
 using Infrastructure.States.StatesMachine;
+using Soundtrack;
 using Utility;
 
 namespace LevelLogic
@@ -12,13 +13,15 @@ namespace LevelLogic
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly ICountDownTimer _timer;
+		private readonly IMusicSwitcher _musicSwitcher;
 
 		public LevelCompleter(IGameStatesSwitcher gameStatesSwitcher,
-			IPersistentProgressService persistentProgressService, ICountDownTimer timer)
+			IPersistentProgressService persistentProgressService, ICountDownTimer timer, IMusicSwitcher musicSwitcher)
 		{
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_persistentProgressService = persistentProgressService;
 			_timer = timer;
+			_musicSwitcher = musicSwitcher;
 		}
 
 		public void TryCompleteLevel()
@@ -39,8 +42,12 @@ namespace LevelLogic
 		private static void ClearDeadEnemiesList(EnemyData enemyData) => 
 			enemyData.DeadEnemies.Clear();
 
-		private void StartTimer() => 
+		private void StartTimer()
+		{
+			_musicSwitcher.PlayClearedRoom();
+
 			_timer.Start(_persistentProgressService.Progress.LevelData.CurrentLevelStaticData.TimeToCompleteLevel);
+		}
 
 		private void EnterToLevelCompleteState()
 		{

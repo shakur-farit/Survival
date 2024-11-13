@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using Data;
 using Enemy.Factory;
 using Infrastructure.Services.PersistentProgress;

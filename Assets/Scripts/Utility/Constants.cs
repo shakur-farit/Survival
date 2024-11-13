@@ -63,6 +63,6 @@ namespace Utility
 		// Soundtrack values
 		public const int SoundsLifetime = 1000;
 		public const int VolumeStep = 1;
-		public const float MusicFadeDuration = 1f;
+		public const float MusicFadeDuration = 1.5f;
 	}
 }

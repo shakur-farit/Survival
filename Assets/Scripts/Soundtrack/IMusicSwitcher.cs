@@ -9,5 +9,7 @@ namespace Soundtrack
 		AudioClip CurrentMusic { get; }
 		void PlayMainMenu();
 		void PlayEnemyBattle();
+		void PlayDungeonMelancholy();
+		void PlayClearedRoom();
 	}
 }

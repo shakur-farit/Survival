@@ -54,8 +54,8 @@ MonoBehaviour:
   CloseButton: {fileID: 1545861804595840317}
   _addSoundEffectVolumeButton: {fileID: 8171152239599823429}
   _removeSoundEffectVolumeButton: {fileID: 334976714291850740}
-  _addMusicVolumeButton: {fileID: 0}
-  _removeMusicVolumeButton: {fileID: 0}
+  _addMusicVolumeButton: {fileID: 3410845691428894123}
+  _removeMusicVolumeButton: {fileID: 6729057260080724751}
   _soundEffectsVolumeText: {fileID: 8163393423193032831}
   _musicVolumeText: {fileID: 2269727092109750375}
 --- !u!1 &1285732650596715482
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 7901093653444907992}
   - component: {fileID: 4212687120200050818}
   m_Layer: 5
-  m_Name: DownText
+  m_Name: RemoveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -923,7 +923,7 @@ GameObject:
   - component: {fileID: 3324048042951300511}
   - component: {fileID: 1052834484773179459}
   m_Layer: 5
-  m_Name: UpText
+  m_Name: AddText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1147,7 +1147,7 @@ GameObject:
   - component: {fileID: 5753053881132071968}
   - component: {fileID: 3410845691428894123}
   m_Layer: 5
-  m_Name: UpButton
+  m_Name: AddButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1492,7 +1492,7 @@ GameObject:
   - component: {fileID: 7321582891369176559}
   - component: {fileID: 6729057260080724751}
   m_Layer: 5
-  m_Name: DownButton
+  m_Name: RemoveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

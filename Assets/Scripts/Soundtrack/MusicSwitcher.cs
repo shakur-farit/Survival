@@ -28,5 +28,19 @@ namespace Soundtrack
 
 			MusicChanged?.Invoke();
 		}
+
+		public void PlayDungeonMelancholy()
+		{
+			CurrentMusic = _staticDataService.SoundtrackStaticData.DungeonMelancholy;
+
+			MusicChanged?.Invoke();
+		}
+
+		public void PlayClearedRoom()
+		{
+			CurrentMusic = _staticDataService.SoundtrackStaticData.ClearedRoom;
+
+			MusicChanged?.Invoke();
+		}
 	}
 }

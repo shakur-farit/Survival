@@ -18,8 +18,8 @@ MonoBehaviour:
     - Type: 1
       Number: 2
   WaveCooldown: 5000
-  TimeToStart: 0
-  TimeToCompleteLevel: 2
+  TimeToStart: 5
+  TimeToCompleteLevel: 10
   EnemySpawnTile: {fileID: 11400000, guid: 3ce5fb260af53d24887b55c3d50041e2, type: 2}
   EnemyMovementTile: {fileID: 11400000, guid: 3ce5fb260af53d24887b55c3d50041e2, type: 2}
   StartSafeZonaRadius: 5

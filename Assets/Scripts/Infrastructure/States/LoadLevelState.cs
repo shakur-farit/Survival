@@ -51,6 +51,8 @@ namespace Infrastructure.States
 
 		public async void Enter()
 		{
+			_musicSwitcher.PlayClearedRoom();
+
 			_timer.Completed += SpawnEnemies;
 
 			LevelInitialize();

@@ -54,6 +54,8 @@ namespace Soundtrack
 				elapsedTime += Time.deltaTime;
 				await UniTask.Yield();
 			}
+
+			_audioSource.volume = 0;
 		}
 
 		private async void FadeIn()
@@ -67,9 +69,11 @@ namespace Soundtrack
 				elapsedTime += Time.deltaTime;
 				await UniTask.Yield();
 			}
+
+			_audioSource.volume = _volumeController.MusicVolume;
 		}
 
 		private void UpdateVolume() => 
-			_audioSource.volume = _volumeController.MusicVolume;
+			_audioSource.volume = _volumeController.ScaledMusicVolume;
 	}
 }
