@@ -1,5 +1,6 @@
 using Infrastructure.States;
-using Infrastructure.States.StatesMachine;
+using Infrastructure.States.GameStates;
+using Infrastructure.States.GameStates.StatesMachine;
 using UI.Services.Windows;
 using Zenject;
 

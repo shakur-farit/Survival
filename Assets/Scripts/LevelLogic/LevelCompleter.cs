@@ -2,7 +2,8 @@ using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.States;
-using Infrastructure.States.StatesMachine;
+using Infrastructure.States.GameStates;
+using Infrastructure.States.GameStates.StatesMachine;
 using Soundtrack;
 using Utility;
 

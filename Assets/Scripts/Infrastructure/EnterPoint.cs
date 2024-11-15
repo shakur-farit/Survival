@@ -4,7 +4,8 @@ using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using Infrastructure.States;
 using Infrastructure.States.Factory;
-using Infrastructure.States.StatesMachine;
+using Infrastructure.States.GameStates;
+using Infrastructure.States.GameStates.StatesMachine;
 using UnityEngine;
 using Zenject;
 

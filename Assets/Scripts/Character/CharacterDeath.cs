@@ -1,6 +1,7 @@
 using Character.Factory;
 using Infrastructure.States;
-using Infrastructure.States.StatesMachine;
+using Infrastructure.States.GameStates;
+using Infrastructure.States.GameStates.StatesMachine;
 
 namespace Character
 {

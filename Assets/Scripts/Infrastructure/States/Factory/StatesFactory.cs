@@ -1,5 +1,7 @@
 using Character.States;
 using Enemy.States;
+using Infrastructure.States.GameLoopStates;
+using Infrastructure.States.GameStates;
 using Zenject;
 
 namespace Infrastructure.States.Factory
@@ -18,6 +20,9 @@ namespace Infrastructure.States.Factory
 			_instantiator.Instantiate<TState>();
 
 		public TState CreateEnemyStates<TState>() where TState : IEnemyAnimatorState => 
+			_instantiator.Instantiate<TState>();
+
+		public TState CreateGameLoopStates<TState>() where TState : IGameLoopState => 
 			_instantiator.Instantiate<TState>();
 	}
 }

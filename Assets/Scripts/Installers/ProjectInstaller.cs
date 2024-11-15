@@ -10,7 +10,7 @@ using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
-using Infrastructure.States.StatesMachine;
+using Infrastructure.States.GameStates.StatesMachine;
 using Score;
 using Soundtrack;
 using Zenject;
