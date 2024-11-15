@@ -7,6 +7,7 @@ using Hud;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
+using Infrastructure.States.GameLoopStates.StatesMachine;
 using Infrastructure.States.GameStates.StatesMachine;
 using LevelLogic;
 using Room.Factory;
@@ -29,12 +30,13 @@ namespace Infrastructure.States.GameStates
 		private readonly IVirtualCameraFactory _virtualCameraFactory;
 		private readonly IRoomFactory _roomFactory;
 		private readonly IMusicSwitcher _musicSwitcher;
+		private readonly IGameLoopStatesSwitcher _gameStateLoopSwitcher;
 
 		public LoadLevelState(ICharacterFactory characterFactory, IHudFactory hudFactory, 
 			IEnemySpawner enemySpawner, IPersistentProgressService persistentProgressService, 
 			IEnemiesCounter enemiesCounter, ILevelInitializer levelInitializer, ICountDownTimer timer, 
 			IGameStatesSwitcher gameStatesSwitcher, IVirtualCameraFactory virtualCameraFactory,
-			IRoomFactory roomFactory, IMusicSwitcher musicSwitcher)
+			IRoomFactory roomFactory, IMusicSwitcher musicSwitcher, IGameLoopStatesSwitcher gameStateLoopSwitcher)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
@@ -47,22 +49,25 @@ namespace Infrastructure.States.GameStates
 			_virtualCameraFactory = virtualCameraFactory;
 			_roomFactory = roomFactory;
 			_musicSwitcher = musicSwitcher;
+			_gameStateLoopSwitcher = gameStateLoopSwitcher;
 		}
 
 		public async void Enter()
 		{
-			_musicSwitcher.PlayClearedRoom();
+			//_musicSwitcher.PlayClearedRoom();
 
-			_timer.Completed += SpawnEnemies;
+			//_timer.Completed += SpawnEnemies;
 
 			LevelInitialize();
 			await CreateGameObjects();
-			await StartTimer();
-			EnterToGameLoopState();
+			//await StartTimer();
+			EnterToLevelStartState();
 		}
 
-		public void Exit() => 
-			_timer.Completed -= SpawnEnemies;
+		public void Exit()
+		{
+			//_timer.Completed -= SpawnEnemies;
+		}
 
 		private async UniTask CreateGameObjects()
 		{
@@ -72,8 +77,8 @@ namespace Infrastructure.States.GameStates
 			CreateVirtualCamera();
 		}
 
-		private async UniTask StartTimer() => 
-			await _timer.Start(_persistentProgressService.Progress.LevelData.CurrentLevelStaticData.TimeToStart);
+		//private async UniTask StartTimer() => 
+		//	await _timer.Start(_persistentProgressService.Progress.LevelData.CurrentLevelStaticData.TimeToStart);
 
 		private void LevelInitialize()
 		{
@@ -99,19 +104,19 @@ namespace Infrastructure.States.GameStates
 		private void CreateVirtualCamera() => 
 			_virtualCameraFactory.Create();
 
-		private async void SpawnEnemies()
-		{
-			PlayEnemyBattleMusic();
+		//private async void SpawnEnemies()
+		//{
+		//	PlayEnemyBattleMusic();
 
-			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
+		//	LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
 
-			await _enemySpawner.Spawn(levelStaticData);
-		}
+		//	await _enemySpawner.Spawn(levelStaticData);
+		//}
 
-		private void PlayEnemyBattleMusic() => 
-			_musicSwitcher.PlayEnemyBattle();
+		//private void PlayEnemyBattleMusic() => 
+		//	_musicSwitcher.PlayEnemyBattle();
 
-		private void EnterToGameLoopState() => 
-			_gameStatesSwitcher.SwitchState<GameLoopState>();
+		private void EnterToLevelStartState() => 
+			_gameStateLoopSwitcher.SwitchState<LevelStartState>();
 	}
 }
