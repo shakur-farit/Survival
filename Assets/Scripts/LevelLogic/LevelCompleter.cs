@@ -2,6 +2,7 @@ using Data;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.States;
+using Infrastructure.States.GameLoopStates.StatesMachine;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
 using Soundtrack;
@@ -15,14 +16,17 @@ namespace LevelLogic
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly ICountDownTimer _timer;
 		private readonly IMusicSwitcher _musicSwitcher;
+		private readonly ILevelLoopStatesSwitcher _levelLoopStatesSwitcher;
 
 		public LevelCompleter(IGameStatesSwitcher gameStatesSwitcher,
-			IPersistentProgressService persistentProgressService, ICountDownTimer timer, IMusicSwitcher musicSwitcher)
+			IPersistentProgressService persistentProgressService, ICountDownTimer timer, 
+			IMusicSwitcher musicSwitcher, ILevelLoopStatesSwitcher levelLoopStatesSwitcher)
 		{
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_persistentProgressService = persistentProgressService;
 			_timer = timer;
 			_musicSwitcher = musicSwitcher;
+			_levelLoopStatesSwitcher = levelLoopStatesSwitcher;
 		}
 
 		public void TryCompleteLevel()
@@ -32,34 +36,14 @@ namespace LevelLogic
 
 			if (enemiesNumberInLevel == enemyData.DeadEnemies.Count)
 			{
-				_timer.Completed += EnterToLevelCompleteState;
-
 				ClearDeadEnemiesList(enemyData);
 
-				StartTimer();
+				_levelLoopStatesSwitcher.SwitchState<LevelEndState>();
 			}
 		}
 
 		private static void ClearDeadEnemiesList(EnemyData enemyData) => 
 			enemyData.DeadEnemies.Clear();
 
-		private void StartTimer()
-		{
-			_musicSwitcher.PlayClearedRoom();
-
-			_timer.Start(_persistentProgressService.Progress.LevelData.CurrentLevelStaticData.TimeToCompleteLevel);
-		}
-
-		private void EnterToLevelCompleteState()
-		{
-			_timer.Completed -= EnterToLevelCompleteState;
-
-			SetupNextLevel();
-
-			_gameStatesSwitcher.SwitchState<LevelCompleteState>();
-		}
-
-		private void SetupNextLevel() => 
-			_persistentProgressService.Progress.LevelData.PreviousLevel += Constants.NextLevelStep;
 	}
 }

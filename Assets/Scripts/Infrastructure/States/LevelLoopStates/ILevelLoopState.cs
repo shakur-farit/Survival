@@ -1,6 +1,6 @@
 namespace Infrastructure.States.GameLoopStates
 {
-	public interface IGameLoopState
+	public interface ILevelLoopState
 	{
 		void Enter();
 		void Exit();

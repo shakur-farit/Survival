@@ -4,32 +4,34 @@ using Infrastructure.Services.Timer;
 using Infrastructure.States.GameLoopStates;
 using Infrastructure.States.GameLoopStates.StatesMachine;
 using Soundtrack;
+using UnityEngine;
 
 namespace Infrastructure.States.GameStates
 {
-	public class LevelStartState : IGameLoopState
+	public class LevelStartState : ILevelLoopState
 	{
 		private readonly IMusicSwitcher _musicSwitcher;
 		private readonly ICountDownTimer _timer;
-		private readonly IGameLoopStatesSwitcher _gameLoopStatesSwitcher;
+		private readonly ILevelLoopStatesSwitcher _levelLoopStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
 
 		public LevelStartState(IMusicSwitcher musicSwitcher, ICountDownTimer timer, 
-			IGameLoopStatesSwitcher gameLoopStatesSwitcher, IPersistentProgressService persistentProgressService)
+			ILevelLoopStatesSwitcher levelLoopStatesSwitcher, IPersistentProgressService persistentProgressService)
 		{
 			_musicSwitcher = musicSwitcher;
 			_timer = timer;
-			_gameLoopStatesSwitcher = gameLoopStatesSwitcher;
+			_levelLoopStatesSwitcher = levelLoopStatesSwitcher;
 			_persistentProgressService = persistentProgressService;
 		}
 
 		public async void Enter()
 		{
+			_timer.Completed += SwitchToEnemyBattleState;
+			Debug.Log(GetType());
+
 			_musicSwitcher.PlayClearedRoom();
 
 			await StartTimer();
-
-			_timer.Completed += SwitchToEnemyBattleState;
 		}
 
 		public void Exit() => 
@@ -39,6 +41,6 @@ namespace Infrastructure.States.GameStates
 			await _timer.Start(_persistentProgressService.Progress.LevelData.CurrentLevelStaticData.TimeToStart);
 
 		private void SwitchToEnemyBattleState() => 
-			_gameLoopStatesSwitcher.SwitchState<EnemyBattleState>();
+			_levelLoopStatesSwitcher.SwitchState<EnemyBattleState>();
 	}
 }

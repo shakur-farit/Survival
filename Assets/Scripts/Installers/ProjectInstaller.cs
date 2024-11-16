@@ -10,6 +10,7 @@ using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
+using Infrastructure.States.GameLoopStates.StatesMachine;
 using Infrastructure.States.GameStates.StatesMachine;
 using Score;
 using Soundtrack;
@@ -44,6 +45,7 @@ namespace Installers
 			Container.BindInterfacesAndSelfTo<CharacterMotionStatesMachine>().AsSingle();
 			Container.BindInterfacesAndSelfTo<CharacterAimStatesMachine>().AsSingle();
 			Container.BindInterfacesAndSelfTo<EnemyAimStateMachine>().AsTransient();
+			Container.BindInterfacesAndSelfTo<LevelLoopStatesMachine>().AsSingle();
 		}
 
 		private void RegisterInputService()

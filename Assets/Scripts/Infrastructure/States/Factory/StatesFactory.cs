@@ -22,7 +22,7 @@ namespace Infrastructure.States.Factory
 		public TState CreateEnemyStates<TState>() where TState : IEnemyAnimatorState => 
 			_instantiator.Instantiate<TState>();
 
-		public TState CreateGameLoopStates<TState>() where TState : IGameLoopState => 
+		public TState CreateLevelLoopStates<TState>() where TState : ILevelLoopState => 
 			_instantiator.Instantiate<TState>();
 	}
 }

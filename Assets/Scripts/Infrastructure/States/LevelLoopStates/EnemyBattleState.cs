@@ -3,10 +3,11 @@ using Infrastructure.States.GameLoopStates;
 using Soundtrack;
 using Spawn;
 using StaticData;
+using UnityEngine;
 
 namespace Infrastructure.States.GameStates
 {
-	internal class EnemyBattleState : IGameLoopState
+	internal class EnemyBattleState : ILevelLoopState
 	{
 		private readonly IEnemySpawner _enemySpawner;
 		private readonly IMusicSwitcher _musicSwitcher;
@@ -22,6 +23,9 @@ namespace Infrastructure.States.GameStates
 
 		public void Enter()
 		{
+			Debug.Log(GetType());
+
+
 			SpawnEnemies();
 			PlayEnemyBattleMusic();
 
