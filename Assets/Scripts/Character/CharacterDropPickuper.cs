@@ -9,11 +9,11 @@ namespace Character
 	{
 		[SerializeField] private CharacterHealth _health;
 
-		private IScoreCounter _scoreCounter;
+		private ICoinCounter _coinCounter;
 
 		[Inject]
-		public void Constructor(IScoreCounter scoreCounter) => 
-			_scoreCounter = scoreCounter;
+		public void Constructor(ICoinCounter coinCounter) => 
+			_coinCounter = coinCounter;
 
 		public void PickupDrop(DropType dropType, int dropValue)
 		{
@@ -30,7 +30,7 @@ namespace Character
 		private void AddScore(DropType dropType, int dropValue)
 		{
 			if (dropType == DropType.Coin) 
-				_scoreCounter.AddScore(dropValue);
+				_coinCounter.AddCoin(dropValue);
 		}
 	}
 }

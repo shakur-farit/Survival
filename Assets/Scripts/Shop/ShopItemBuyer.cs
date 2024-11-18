@@ -18,16 +18,16 @@ namespace Shop
 
 		private int _price;
 
-		private IScoreCounter _scoreCounter;
+		private ICoinCounter _coinCounter;
 		private IPersistentProgressService _persistentProgressService;
 		private IDialogService _dialogService;
 		private IWindowsService _windowsService;
 
 		[Inject]
-		public void Constructor(IScoreCounter scoreCounter, IPersistentProgressService persistentProgressService,
+		public void Constructor(ICoinCounter coinCounter, IPersistentProgressService persistentProgressService,
 			IDialogService dialogService, IWindowsService windowsService)
 		{
-			_scoreCounter = scoreCounter;
+			_coinCounter = coinCounter;
 			_persistentProgressService = persistentProgressService;
 			_dialogService = dialogService;
 			_windowsService = windowsService;
@@ -41,7 +41,7 @@ namespace Shop
 
 		private void BuyItem()
 		{
-			if (_price > _persistentProgressService.Progress.ScoreData.CurrentScore)
+			if (_price > _persistentProgressService.Progress.CoinData.CurrentCoinCount)
 			{
 				OpenDialogWindow("You have not enough coins");
 
@@ -190,7 +190,7 @@ namespace Shop
 		}
 
 		private void RemoveScore() => 
-			_scoreCounter.RemoveScore(_price);
+			_coinCounter.RemoveCoin(_price);
 
 		private void SetupPrice() =>
 			_price = _initializer.WeaponStaticData.Price;

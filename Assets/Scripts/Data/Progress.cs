@@ -1,5 +1,6 @@
 using System;
 using StaticData;
+using UnityEngine.Serialization;
 
 namespace Data
 {
@@ -10,7 +11,7 @@ namespace Data
 		public EnemyData EnemyData = new();
 		public LevelData LevelData = new();
 		public ShopData ShopData = new();
-		public ScoreData ScoreData = new();
+		[FormerlySerializedAs("ScoreData")] public ScoreData CoinData = new();
 		public SoundData SoundData = new();
 	}
 }

@@ -58,7 +58,7 @@ namespace Installers
 			Container.Bind<IPauseService>().To<PauseService>().AsSingle();
 
 		private void RegisterScoreCounter() => 
-			Container.Bind<IScoreCounter>().To<ScoreCounter>().AsSingle();
+			Container.Bind<ICoinCounter>().To<CoinCounter>().AsSingle();
 
 		private void RegisterPersistentProgressServices() =>
 			Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();

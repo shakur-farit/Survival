@@ -995,7 +995,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1007089484014471029, guid: cb8ebbe811e833b48951cde086fe37c1, type: 3}
       propertyPath: m_Name
-      value: Score
+      value: Coin
       objectReference: {fileID: 0}
     - target: {fileID: 8472355787268659219, guid: cb8ebbe811e833b48951cde086fe37c1, type: 3}
       propertyPath: m_Pivot.x

@@ -109,7 +109,7 @@ namespace Infrastructure.States.GameStates
 		private void ResetData()
 		{
 			_persistentProgressService.Progress.LevelData.PreviousLevel = Constants.Zero;
-			_persistentProgressService.Progress.ScoreData.CurrentScore = Constants.Zero;
+			_persistentProgressService.Progress.CoinData.CurrentCoinCount = Constants.Zero;
 			_persistentProgressService.Progress.EnemyData.DeadEnemies.Clear();
 		}
 
