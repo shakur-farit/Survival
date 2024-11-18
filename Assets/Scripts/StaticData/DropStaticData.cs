@@ -8,6 +8,7 @@ namespace StaticData
 	{
 		public DropType Type;
 		public Sprite Sprite;
+		public AudioClip PickupingSound;
 		public int Value;
 		public int DropChance;
 	}

@@ -6,7 +6,6 @@ using Effects.SoundEffects.Shot.Factory;
 using Effects.SpecialEffects.Shot.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
-using StaticData;
 using UnityEngine;
 using Zenject;
 

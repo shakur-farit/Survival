@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   Sprite: {fileID: 21300000, guid: 93356131eec0f44458223985928ac6e3, type: 3}
+  PickupingSound: {fileID: 8300000, guid: 69fdfaaa6c632454a9776c33e63326a7, type: 3}
   Value: 1
   DropChance: 20
