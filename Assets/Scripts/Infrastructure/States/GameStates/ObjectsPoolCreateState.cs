@@ -45,6 +45,8 @@ namespace Infrastructure.States.GameStates
 			await CreateHitSpecialEffectsPool();
 			await CreateShotSoundEffectsPool();
 			await CreateReloadSoundEffectsPool();
+			await CreateHealthPickupSoundEffectsPool();
+			await CreateCoinPickupSoundEffectsPool();
 			await CreateAmmoIconsPool();
 			await CreateHeartIconsPool();
 			await CreateCharacterPool();
@@ -73,6 +75,12 @@ namespace Infrastructure.States.GameStates
 
 		private async UniTask CreateReloadSoundEffectsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.ReloadSoundEffect);
+
+		private async UniTask CreateHealthPickupSoundEffectsPool() =>
+			await _poolFactory.CreatePool(PooledObjectType.HealthPickupSoundEffect);
+
+		private async UniTask CreateCoinPickupSoundEffectsPool() =>
+			await _poolFactory.CreatePool(PooledObjectType.CoinPickupSoundEffect);
 
 
 		private async UniTask CreateAmmoIconsPool() =>

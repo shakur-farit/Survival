@@ -11,6 +11,8 @@ namespace Pool
 		ShotSoundEffect,
 		HitSoundEffect,
 		ReloadSoundEffect,
+		HealthPickupSoundEffect,
+		CoinPickupSoundEffect,
 		AmmoIcon,
 		HeartIcon,
 		Character,

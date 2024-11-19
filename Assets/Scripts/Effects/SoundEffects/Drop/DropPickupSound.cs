@@ -1,6 +1,5 @@
-using DropLogic.Mediator;
+using Effects.SoundEffects.Shot.Factory;
 using Soundtrack;
-using StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -13,10 +12,8 @@ namespace Effects.SoundEffects.Shot
 		private ISoundEffectsVolumeController _volumeController;
 
 		[Inject]
-		public void Constructor(ISoundEffectsVolumeController volumeController)
-		{
+		public void Constructor(ISoundEffectsVolumeController volumeController) => 
 			_volumeController = volumeController;
-		}
 
 		private void OnEnable() => 
 			UpdateVolume();

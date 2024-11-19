@@ -9,6 +9,7 @@ using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
 using Effects.SoundEffects.Reload.Factory;
+using Effects.SoundEffects.Shot;
 using Effects.SoundEffects.Shot.Factory;
 using Effects.SpecialEffects.Hit.Factory;
 using Effects.SpecialEffects.Shot.Factory;
@@ -143,6 +144,8 @@ namespace Installers
 		{
 			Container.Bind<IReloadSoundEffectFactory>().To<ReloadSoundEffectFactory>().AsSingle();
 			Container.Bind<IShotSoundEffectFactory>().To<ShotSoundEffectFactory>().AsSingle();
+			Container.Bind<IHealthPickupSoundEffectFactory>().To<HealthPickupSoundEffectFactory>().AsSingle();
+			Container.Bind<ICoinPickupSoundEffectFactory>().To<CoinPickupSoundEffectFactory>().AsSingle();
 		}
 
 		private void RegisterBulletIconsFactory() =>
