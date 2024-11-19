@@ -146,6 +146,7 @@ namespace Installers
 			Container.Bind<IShotSoundEffectFactory>().To<ShotSoundEffectFactory>().AsSingle();
 			Container.Bind<IHealthPickupSoundEffectFactory>().To<HealthPickupSoundEffectFactory>().AsSingle();
 			Container.Bind<ICoinPickupSoundEffectFactory>().To<CoinPickupSoundEffectFactory>().AsSingle();
+			Container.Bind<IClickSoundEffectFactory>().To<ClickSoundEffectFactory>().AsSingle();
 		}
 
 		private void RegisterBulletIconsFactory() =>

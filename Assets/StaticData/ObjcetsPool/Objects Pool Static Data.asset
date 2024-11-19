@@ -73,3 +73,7 @@ MonoBehaviour:
     PoolSize: 1
     PooledPrefabAddress: Room
     CanPoolIncrease: 0
+  - pooledObjectType: 17
+    PoolSize: 5
+    PooledPrefabAddress: ClickSoundEffect
+    CanPoolIncrease: 1

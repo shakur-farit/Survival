@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.States.GameStates.StatesMachine;
 using Pool;
+using UnityEngine;
 using Utility;
 
 namespace Infrastructure.States.GameStates
@@ -38,6 +40,8 @@ namespace Infrastructure.States.GameStates
 
 		private async UniTask CreateObjectsPools()
 		{
+			Debug.Log("Here6");
+
 			await CreateEnemiesPool();
 			await CreateDropsPool();
 			await CreateAmmoPool();
@@ -47,6 +51,7 @@ namespace Infrastructure.States.GameStates
 			await CreateReloadSoundEffectsPool();
 			await CreateHealthPickupSoundEffectsPool();
 			await CreateCoinPickupSoundEffectsPool();
+			await CreateClickSoundEffectsPool();
 			await CreateAmmoIconsPool();
 			await CreateHeartIconsPool();
 			await CreateCharacterPool();
@@ -82,6 +87,11 @@ namespace Infrastructure.States.GameStates
 		private async UniTask CreateCoinPickupSoundEffectsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.CoinPickupSoundEffect);
 
+		private async UniTask CreateClickSoundEffectsPool()
+		{
+			Debug.Log("Here3");
+			await _poolFactory.CreatePool(PooledObjectType.ClickSoundEffect);
+		}
 
 		private async UniTask CreateAmmoIconsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.AmmoIcon);

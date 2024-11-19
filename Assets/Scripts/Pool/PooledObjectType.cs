@@ -18,6 +18,7 @@ namespace Pool
 		Character,
 		ShopItem,
 		VirtualCamera,
-		Room
+		Room,
+		ClickSoundEffect
 	}
 }

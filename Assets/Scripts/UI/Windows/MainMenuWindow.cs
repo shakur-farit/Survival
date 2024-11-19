@@ -1,3 +1,4 @@
+using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.States;
 using Infrastructure.States.GameStates;
@@ -16,14 +17,16 @@ namespace UI.Windows
 		private IPersistentProgressService _persistentProgressService;
 		private IGameStatesSwitcher _gameStatesSwitcher;
 		private IWindowsService _windowsService;
+		private IClickSoundEffectFactory _clickSoundFactory;
 
 		[Inject]
 		public void Constructor(IPersistentProgressService persistentProgressService, IGameStatesSwitcher gameStatesSwitcher,
-			IWindowsService windowsService)
+			IWindowsService windowsService, IClickSoundEffectFactory clickSoundFactory)
 		{
 			_persistentProgressService = persistentProgressService;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_windowsService = windowsService;
+			_clickSoundFactory = clickSoundFactory;
 		}
 
 		protected override void OnAwake()
@@ -32,6 +35,7 @@ namespace UI.Windows
 
 			CloseButton.onClick.AddListener(StartGame);
 			_settingsButton.onClick.AddListener(OpenSettingsWindow);
+			_settingsButton.onClick.AddListener(MakeClick);
 		}
 
 		protected override void CloseWindow() => 
@@ -47,5 +51,11 @@ namespace UI.Windows
 
 		private void OpenSettingsWindow() => 
 			_windowsService.Open(WindowType.Settings);
+
+		private void MakeClick()
+		{
+			Debug.Log("Here");
+			_clickSoundFactory.Create();
+		}
 	}
 }

@@ -43,6 +43,9 @@ namespace Pool
 				GameObject newObject = CreateNewObject(_prefabs[pooledObjectType]);
 				_pools.CreatePool(pooledObjectType, newObject, _poolsGroupTransform);
 			}
+
+			if(pooledObjectType == PooledObjectType.ClickSoundEffect)
+				Debug.Log("Here4");
 		}
 
 		public GameObject UseObject(PooledObjectType pooledObjectType)

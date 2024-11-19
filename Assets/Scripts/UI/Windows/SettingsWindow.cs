@@ -1,3 +1,4 @@
+using Effects.SoundEffects.Shot;
 using Soundtrack;
 using TMPro;
 using UI.Services.Windows;
@@ -19,14 +20,16 @@ namespace UI.Windows
 		private IWindowsService _windowsService;
 		private ISoundEffectsVolumeController _soundEffectsVolumeController;
 		private IMusicVolumeController _musicVolumeController;
+		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
 		public void Constructor(IWindowsService windowsService, ISoundEffectsVolumeController soundEffectsVolumeController,
-			IMusicVolumeController musicVolumeController)
+			IMusicVolumeController musicVolumeController, IClickSoundEffectFactory clickSoundEffectFactory)
 		{
 			_windowsService = windowsService;
 			_soundEffectsVolumeController = soundEffectsVolumeController;
 			_musicVolumeController = musicVolumeController;
+			_clickSoundEffectFactory = clickSoundEffectFactory;
 
 		}
 
@@ -50,10 +53,14 @@ namespace UI.Windows
 			UpdateMusicVolumeText();
 
 			_addSoundEffectVolumeButton.onClick.AddListener(AddSoundEffectsVolume);
+			_addSoundEffectVolumeButton.onClick.AddListener(MakeClick);
 			_removeSoundEffectVolumeButton.onClick.AddListener(RemoveSoundEffectsVolume);
+			_removeSoundEffectVolumeButton.onClick.AddListener(MakeClick);
 
 			_addMusicVolumeButton.onClick.AddListener(AddSMusicVolume);
+			_addMusicVolumeButton.onClick.AddListener(MakeClick);
 			_removeMusicVolumeButton.onClick.AddListener(RemoveMusicVolume);
+			_removeMusicVolumeButton.onClick.AddListener(MakeClick);
 		}
 
 		protected override void CloseWindow() => 
@@ -76,5 +83,8 @@ namespace UI.Windows
 
 		private void UpdateMusicVolumeText() => 
 			_musicVolumeText.text = _musicVolumeController.MusicVolume.ToString();
+
+		private void MakeClick() => 
+			_clickSoundEffectFactory.Create();
 	}
 }
