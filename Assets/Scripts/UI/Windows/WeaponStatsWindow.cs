@@ -1,4 +1,5 @@
 using Data;
+using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
 using TMPro;
 using UI.Services.Windows;
@@ -22,6 +23,7 @@ namespace UI.Windows
 
 		private IWindowsService _windowsService;
 		private IPersistentProgressService _persistentProgressService;
+		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
 		public void Constructor(IWindowsService windowsService, IPersistentProgressService persistentProgressService)
@@ -64,5 +66,9 @@ namespace UI.Windows
 			_reloadTimeValueText.text = weaponData.ReloadTime.ToString();
 			_accuracyValueText.text = weaponData.Spread.ToString();
 		}
+
+		private void MakeClickSound() =>
+			_clickSoundEffectFactory.Create();
+
 	}
 }

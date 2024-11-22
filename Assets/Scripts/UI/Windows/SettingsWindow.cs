@@ -53,14 +53,14 @@ namespace UI.Windows
 			UpdateMusicVolumeText();
 
 			_addSoundEffectVolumeButton.onClick.AddListener(AddSoundEffectsVolume);
-			_addSoundEffectVolumeButton.onClick.AddListener(MakeClick);
+			_addSoundEffectVolumeButton.onClick.AddListener(MakeClickSound);
 			_removeSoundEffectVolumeButton.onClick.AddListener(RemoveSoundEffectsVolume);
-			_removeSoundEffectVolumeButton.onClick.AddListener(MakeClick);
+			_removeSoundEffectVolumeButton.onClick.AddListener(MakeClickSound);
 
 			_addMusicVolumeButton.onClick.AddListener(AddSMusicVolume);
-			_addMusicVolumeButton.onClick.AddListener(MakeClick);
+			_addMusicVolumeButton.onClick.AddListener(MakeClickSound);
 			_removeMusicVolumeButton.onClick.AddListener(RemoveMusicVolume);
-			_removeMusicVolumeButton.onClick.AddListener(MakeClick);
+			_removeMusicVolumeButton.onClick.AddListener(MakeClickSound);
 		}
 
 		protected override void CloseWindow() => 
@@ -84,7 +84,7 @@ namespace UI.Windows
 		private void UpdateMusicVolumeText() => 
 			_musicVolumeText.text = _musicVolumeController.MusicVolume.ToString();
 
-		private void MakeClick() => 
+		private void MakeClickSound() => 
 			_clickSoundEffectFactory.Create();
 	}
 }
