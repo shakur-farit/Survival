@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Character;
 using Data;
+using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using StaticData;
@@ -22,12 +23,15 @@ namespace Selector
 
 		private IStaticDataService _staticDataService;
 		private IPersistentProgressService _persistentProgressService;
+		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService)
+		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService,
+			IClickSoundEffectFactory clickSoundEffectFactory)
 		{
 			_staticDataService = staticDataService;
 			_persistentProgressService = persistentProgressService;
+			_clickSoundEffectFactory = clickSoundEffectFactory;
 		}
 
 		private void Awake()
@@ -35,7 +39,9 @@ namespace Selector
 			_charactersList = _staticDataService.CharactersListStaticData.CharactersList;
 
 			_nextCharacterButton.onClick.AddListener(SetNextCharacter);
+			_nextCharacterButton.onClick.AddListener(MakeClickSound);
 			_previousCharacterButton.onClick.AddListener(SetPreviousCharacter);
+			_previousCharacterButton.onClick.AddListener(MakeClickSound);
 
 			SetStartCharacter();
 		}
@@ -49,7 +55,7 @@ namespace Selector
 
 		private void SetNextCharacter()
 		{
-			if (_currentIndex < _charactersList.Count - 1) 
+			if (_currentIndex < _charactersList.Count - 1)
 				_currentIndex++;
 
 			SetCharacter(_currentIndex);
@@ -69,7 +75,7 @@ namespace Selector
 		private void SetCharacter(int currentIndex)
 		{
 			CharacterStaticData characterData = _charactersList[currentIndex];
-			
+
 			_animator.runtimeAnimatorController = characterData.Controller;
 
 			InitializeCharacter(characterData.CharacterType);
@@ -119,5 +125,8 @@ namespace Selector
 			_nextCharacterButton.gameObject.SetActive(!isSingleCharacter && !isAtLastCharacter);
 			_previousCharacterButton.gameObject.SetActive(!isSingleCharacter && !isAtFirstCharacter);
 		}
+
+		private void MakeClickSound() =>
+			_clickSoundEffectFactory.Create();
 	}
 }

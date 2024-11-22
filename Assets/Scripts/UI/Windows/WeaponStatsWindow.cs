@@ -37,6 +37,7 @@ namespace UI.Windows
 			base.OnAwake();
 
 			_informationButton.onClick.AddListener(OpenInformationWindow);
+			_informationButton.onClick.AddListener(MakeClickSound);
 
 			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
 
@@ -69,6 +70,5 @@ namespace UI.Windows
 
 		private void MakeClickSound() =>
 			_clickSoundEffectFactory.Create();
-
 	}
 }

@@ -35,11 +35,15 @@ namespace UI.Windows
 
 			CloseButton.onClick.AddListener(StartGame);
 			_settingsButton.onClick.AddListener(OpenSettingsWindow);
-			_settingsButton.onClick.AddListener(MakeClick);
+			_settingsButton.onClick.AddListener(MakeClickSound);
 		}
 
-		protected override void CloseWindow() => 
+		protected override void CloseWindow()
+		{
+			MakeClickSound();
+
 			_windowsService.Close(WindowType.MainMenu);
+		}
 
 		private void StartGame()
 		{
@@ -52,7 +56,7 @@ namespace UI.Windows
 		private void OpenSettingsWindow() => 
 			_windowsService.Open(WindowType.Settings);
 
-		private void MakeClick() => 
+		private void MakeClickSound() => 
 			_clickSoundFactory.Create();
 	}
 }
