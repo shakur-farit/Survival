@@ -52,10 +52,7 @@ namespace UI.Windows
 		private void OpenSettingsWindow() => 
 			_windowsService.Open(WindowType.Settings);
 
-		private void MakeClick()
-		{
-			Debug.Log("Here");
+		private void MakeClick() => 
 			_clickSoundFactory.Create();
-		}
 	}
 }

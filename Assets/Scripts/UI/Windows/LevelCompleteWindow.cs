@@ -1,8 +1,7 @@
-using Infrastructure.States;
+using Effects.SoundEffects.Shot;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
 using Shop.Factory;
-using UI.Factory;
 using UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,13 +19,16 @@ namespace UI.Windows
 		private IGameStatesSwitcher _statesSwitcher;
 		private IWindowsService _windowsService;
 		private IShopItemFactory _shopItemFactory;
+		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(IGameStatesSwitcher statesSwitcher, IWindowsService windowsService, IShopItemFactory shopItemFactory)
+		public void Constructor(IGameStatesSwitcher statesSwitcher, IWindowsService windowsService, IShopItemFactory shopItemFactory,
+			IClickSoundEffectFactory clickSoundEffectFactory)
 		{
 			_statesSwitcher = statesSwitcher;
 			_windowsService = windowsService;
 			_shopItemFactory = shopItemFactory;
+			_clickSoundEffectFactory = clickSoundEffectFactory;
 		}
 
 		private void OnDisable()
@@ -44,8 +46,10 @@ namespace UI.Windows
 			base.OnAwake();
 
 			CloseButton.onClick.AddListener(StartNextLevel);
+			CloseButton.onClick.AddListener(MakeClickSound);
 
 			_weaponStatsButton.onClick.AddListener(OpenWeaponStatsWindow);
+			_weaponStatsButton.onClick.AddListener(MakeClickSound);
 
 			CreateShopItems();
 		}
@@ -76,5 +80,8 @@ namespace UI.Windows
 
 			_shopItemFactory.ShopItemList.Clear();
 		}
+
+		private void MakeClickSound() =>
+			_clickSoundEffectFactory.Create();
 	}
 }

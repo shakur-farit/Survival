@@ -1,10 +1,12 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
+using Pool;
 using Selector.Factory;
 using Soundtrack;
 using UI.Factory;
 using UI.Services.Windows;
 using UI.Windows;
+using UnityEngine;
 using Utility;
 
 namespace Infrastructure.States.GameStates
@@ -17,10 +19,11 @@ namespace Infrastructure.States.GameStates
 		private readonly ICharacterSelectorFactory _characterSelectorFactory;
 		private readonly IMusicSourceFactory _musicSourceFactory;
 		private readonly IMusicSwitcher _musicSwitcher;
+		private readonly IPoolFactory _poolFactory;
 
 		public MainMenuState(IWindowsService windowsService, IUIFactory uiFactory, 
 			IScenesService scenesService, ICharacterSelectorFactory characterSelectorFactory, 
-			IMusicSourceFactory musicSourceFactory, IMusicSwitcher musicSwitcher)
+			IMusicSourceFactory musicSourceFactory, IMusicSwitcher musicSwitcher, IPoolFactory poolFactory)
 		{
 			_windowsService = windowsService;
 			_uiFactory = uiFactory;
@@ -28,6 +31,7 @@ namespace Infrastructure.States.GameStates
 			_characterSelectorFactory = characterSelectorFactory;
 			_musicSourceFactory = musicSourceFactory;
 			_musicSwitcher = musicSwitcher;
+			_poolFactory = poolFactory;
 		}
 
 		public async void Enter()
@@ -35,6 +39,7 @@ namespace Infrastructure.States.GameStates
 			await SwitchToMainMenuScene();
 			await CreateUIRoot();
 			await OpenMainMenuWindow();
+			await CreateClickSoundEffectsPool();
 			await CreateCharacterSelector();
 			await CreateMusicHolder();
 			PlayMainMenuMusic();
@@ -60,6 +65,9 @@ namespace Infrastructure.States.GameStates
 
 		private void PlayMainMenuMusic() => 
 			_musicSwitcher.PlayMainMenu();
+
+		private async UniTask CreateClickSoundEffectsPool() => 
+			await _poolFactory.CreatePool(PooledObjectType.ClickSoundEffect);
 
 		private void DestroySelector() => 
 			_characterSelectorFactory.Destroy();

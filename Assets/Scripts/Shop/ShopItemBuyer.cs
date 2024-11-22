@@ -1,4 +1,5 @@
 using Data;
+using Effects.SoundEffects.Shot;
 using Infrastructure.Services.Dialog;
 using Infrastructure.Services.PersistentProgress;
 using Score;
@@ -22,19 +23,24 @@ namespace Shop
 		private IPersistentProgressService _persistentProgressService;
 		private IDialogService _dialogService;
 		private IWindowsService _windowsService;
+		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
 		public void Constructor(ICoinCounter coinCounter, IPersistentProgressService persistentProgressService,
-			IDialogService dialogService, IWindowsService windowsService)
+			IDialogService dialogService, IWindowsService windowsService, IClickSoundEffectFactory clickSoundEffectFactory)
 		{
 			_coinCounter = coinCounter;
 			_persistentProgressService = persistentProgressService;
 			_dialogService = dialogService;
 			_windowsService = windowsService;
+			_clickSoundEffectFactory = clickSoundEffectFactory;
 		}
 
-		private void Awake() => 
+		private void Awake()
+		{
 			_buyButton.onClick.AddListener(BuyItem);
+			_buyButton.onClick.AddListener(MakeClickSound);
+		}
 
 		private void OnEnable() => 
 			SetupPrice();
@@ -200,5 +206,9 @@ namespace Shop
 			_dialogService.UpdateText(text);
 			_windowsService.Open(WindowType.Dialog);
 		}
+
+		private void MakeClickSound() =>
+			_clickSoundEffectFactory.Create();
+
 	}
 }

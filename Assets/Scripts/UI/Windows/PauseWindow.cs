@@ -1,5 +1,5 @@
+using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PauseService;
-using Infrastructure.Services.Timer;
 using UI.Services.Windows;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,12 +14,15 @@ namespace UI.Windows
 
 		private IWindowsService _windowsService;
 		private IPauseService _pauseService;
+		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(IWindowsService windowsService, IPauseService pauseService)
+		public void Constructor(IWindowsService windowsService, IPauseService pauseService, 
+			IClickSoundEffectFactory clickSoundEffectFactory)
 		{
 			_windowsService = windowsService;
 			_pauseService = pauseService;
+			_clickSoundEffectFactory = clickSoundEffectFactory;
 		}
 
 		protected override void OnAwake()
@@ -27,8 +30,11 @@ namespace UI.Windows
 			base.OnAwake();
 
 			CloseButton.onClick.AddListener(UnpauseGame);
+			CloseButton.onClick.AddListener(MakeClickSound);
 			_settingsButton.onClick.AddListener(OpenSettingsWindow);
+			_settingsButton.onClick.AddListener(MakeClickSound);
 			_quitButton.onClick.AddListener(QuitGame);
+			_quitButton.onClick.AddListener(MakeClickSound);
 		}
 
 		protected override void CloseWindow() => 
@@ -48,5 +54,9 @@ namespace UI.Windows
         Application.Quit();
 #endif
 		}
+
+		private void MakeClickSound() =>
+			_clickSoundEffectFactory.Create();
+
 	}
 }
