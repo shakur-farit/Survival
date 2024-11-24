@@ -1,4 +1,5 @@
 using Ammo.Factory;
+using Effects.SoundEffects.Shot;
 using Effects.SpecialEffects.Hit.Factory;
 using UnityEngine;
 
@@ -8,11 +9,14 @@ namespace Ammo
 	{
 		private readonly IAmmoFactory _ammoFactory;
 		private readonly IHitSpecialEffectsFactory _specialEffectsFactory;
+		private IHitSoundEffectFactory _hitSoundEffectFactory;
 
-		public AmmoDestroyer(IAmmoFactory ammoFactory, IHitSpecialEffectsFactory specialEffectsFactory)
+		public AmmoDestroyer(IAmmoFactory ammoFactory, IHitSpecialEffectsFactory specialEffectsFactory,
+			IHitSoundEffectFactory hitSoundEffectFactory)
 		{
 			_ammoFactory = ammoFactory;
 			_specialEffectsFactory = specialEffectsFactory;
+			_hitSoundEffectFactory = hitSoundEffectFactory;
 		}
 
 		public void DestroyOnOutOfDetectedRange(GameObject gameObject) => 
@@ -22,11 +26,15 @@ namespace Ammo
 		{
 			Destroy(gameObject);
 
-			CreateHitEffect(position);
+			CreateHitSpecialEffect(position);
+			CreateHitSoundEffect();
 		}
 
-		private void CreateHitEffect(Vector2 position) => 
+		private void CreateHitSpecialEffect(Vector2 position) => 
 			_specialEffectsFactory.Create(position);
+
+		private void CreateHitSoundEffect() => 
+			_hitSoundEffectFactory.Create();
 
 		private void Destroy(GameObject gameObject) => 
 			_ammoFactory.Destroy(gameObject);

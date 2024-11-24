@@ -1,7 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEngine;
+using Infrastructure.Services.PauseService;
 using Utility;
 
 namespace Infrastructure.Services.Timer
@@ -12,6 +11,12 @@ namespace Infrastructure.Services.Timer
 
 		public event Action Started;
 		public event Action Completed;
+
+		private readonly IPauseService _pauseService;
+
+
+		public TimerService(IPauseService pauseService) => 
+			_pauseService = pauseService;
 
 		public async UniTask Start(int durationInSeconds)
 		{

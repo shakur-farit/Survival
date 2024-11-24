@@ -10,11 +10,8 @@ namespace Effects.SoundEffects.Shot
 		protected ClickSoundEffectFactory(IPoolFactory poolFactory) =>
 			_poolFactory = poolFactory;
 
-		public void Create()
-		{
-			Debug.Log("Her2");
+		public void Create() => 
 			_poolFactory.UseObject(PooledObjectType.ClickSoundEffect);
-		}
 
 		public void Destroy(GameObject gameObject) =>
 			_poolFactory.ReturnObject(PooledObjectType.ClickSoundEffect, gameObject);

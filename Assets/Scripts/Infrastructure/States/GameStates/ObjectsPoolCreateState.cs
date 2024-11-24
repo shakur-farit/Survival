@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.States.GameStates.StatesMachine;
@@ -43,6 +44,7 @@ namespace Infrastructure.States.GameStates
 			await CreateShotSpecialEffectsPool();
 			await CreateHitSpecialEffectsPool();
 			await CreateShotSoundEffectsPool();
+			await CreateHitSoundEffectsPool();
 			await CreateReloadSoundEffectsPool();
 			await CreateHealthPickupSoundEffectsPool();
 			await CreateCoinPickupSoundEffectsPool();
@@ -71,6 +73,9 @@ namespace Infrastructure.States.GameStates
 
 		private async UniTask CreateShotSoundEffectsPool() => 
 			await _poolFactory.CreatePool(PooledObjectType.ShotSoundEffect);
+
+		private async UniTask CreateHitSoundEffectsPool() => 
+			await _poolFactory.CreatePool(PooledObjectType.HitSoundEffect);
 
 		private async UniTask CreateReloadSoundEffectsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.ReloadSoundEffect);
