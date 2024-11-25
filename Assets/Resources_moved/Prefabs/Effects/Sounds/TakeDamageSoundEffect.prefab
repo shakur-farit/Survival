@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1829985761953955059}
   - component: {fileID: 6905039799515497970}
-  - component: {fileID: 4712325612207630411}
-  - component: {fileID: 8508238079561938213}
+  - component: {fileID: 4535541627779737126}
+  - component: {fileID: 4120141762438200852}
   m_Layer: 10
-  m_Name: HitSoundEffect
+  m_Name: TakeDamageSoundEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f9517356afb533a41b9e7cb6f155031e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0394d86d2cdeeec4393b2716ba29ecab, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -130,7 +130,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4712325612207630411
+--- !u!114 &4535541627779737126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,11 +139,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6539570766999889727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27080298c974f22438b85419d9da1eb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 32d71052fbbc650479b1f7c3c7c755aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 6905039799515497970}
---- !u!114 &8508238079561938213
+--- !u!114 &4120141762438200852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,6 +152,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6539570766999889727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c347c57ec501d4cad9602e43d38337, type: 3}
+  m_Script: {fileID: 11500000, guid: f81cda222329ae443af4c04af32efa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -19,6 +19,7 @@ namespace Pool
 		ShopItem,
 		VirtualCamera,
 		Room,
-		ClickSoundEffect
+		ClickSoundEffect,
+		TakeDamageSoundEffect
 	}
 }

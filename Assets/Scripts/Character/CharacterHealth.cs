@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Data;
+using Effects.SoundEffects.Shot;
 using Infrastructure.Services.Health;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
@@ -18,12 +19,15 @@ namespace Character
 
 		private IPersistentProgressService _persistentProgressService;
 		private ICharacterDeath _characterDeath;
+		private ITakeDamageSoundEffectFactory _takeDamageSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService progressService, ICharacterDeath characterDeath)
+		public void Constructor(IPersistentProgressService progressService, ICharacterDeath characterDeath,
+			ITakeDamageSoundEffectFactory takeDamageSoundEffectFactory)
 		{
 			_persistentProgressService = progressService;
 			_characterDeath = characterDeath;
+			_takeDamageSoundEffectFactory = takeDamageSoundEffectFactory;
 		}
 
 		private void Awake() => 
@@ -55,6 +59,8 @@ namespace Character
 			HealthChanged?.Invoke();
 
 			_blinker.BlinkOnDamaged();
+
+			_takeDamageSoundEffectFactory.Create();
 
 			if (character.CurrentHealth <= 0)
 			{

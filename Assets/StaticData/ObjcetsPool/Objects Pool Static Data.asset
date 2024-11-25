@@ -81,3 +81,7 @@ MonoBehaviour:
     PoolSize: 5
     PooledPrefabAddress: ClickSoundEffect
     CanPoolIncrease: 1
+  - pooledObjectType: 18
+    PoolSize: 1
+    PooledPrefabAddress: TakeDamageSoundEffect
+    CanPoolIncrease: 1
