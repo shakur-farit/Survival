@@ -1,11 +1,10 @@
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.States.GameLoopStates;
 using Soundtrack;
 using Spawn;
 using StaticData;
 using UnityEngine;
 
-namespace Infrastructure.States.GameStates
+namespace Infrastructure.States.LevelLoopStates
 {
 	internal class EnemyBattleState : ILevelLoopState
 	{

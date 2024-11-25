@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Effects.SoundEffects.Drop.Health.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.Drop.Health
 {
 	public class HealthDropSoundEffectDestroyer : MonoBehaviour
 	{

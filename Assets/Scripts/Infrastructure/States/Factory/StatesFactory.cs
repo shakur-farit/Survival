@@ -1,7 +1,7 @@
 using Character.States;
 using Enemy.States;
-using Infrastructure.States.GameLoopStates;
 using Infrastructure.States.GameStates;
+using Infrastructure.States.LevelLoopStates;
 using Zenject;
 
 namespace Infrastructure.States.Factory

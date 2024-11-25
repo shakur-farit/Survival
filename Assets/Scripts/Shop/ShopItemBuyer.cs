@@ -1,8 +1,9 @@
+using Coin;
 using Data;
+using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.Services.Dialog;
 using Infrastructure.Services.PersistentProgress;
-using Score;
 using StaticData;
 using UI.Services.Windows;
 using UI.Windows;

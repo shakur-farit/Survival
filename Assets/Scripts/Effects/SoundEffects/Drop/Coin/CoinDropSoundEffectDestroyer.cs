@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Effects.SoundEffects.Drop.Coin.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.Drop.Coin
 {
 	public class CoinDropSoundEffectDestroyer : MonoBehaviour
 	{

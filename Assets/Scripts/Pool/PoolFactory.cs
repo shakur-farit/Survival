@@ -69,6 +69,9 @@ namespace Pool
 
 			newObject.transform.position = position;
 
+			if(pooledObjectType == PooledObjectType.HitSpecialEffect)
+				Debug.Log(newObject.transform.position);
+
 			newObject.SetActive(true);
 
 			return newObject;

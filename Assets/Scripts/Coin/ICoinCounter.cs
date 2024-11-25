@@ -1,6 +1,6 @@
 using System;
 
-namespace Score
+namespace Coin
 {
 	public interface ICoinCounter
 	{

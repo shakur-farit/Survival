@@ -1,4 +1,4 @@
-namespace Infrastructure.States.GameLoopStates.StatesMachine
+namespace Infrastructure.States.LevelLoopStates.StatesMachine
 {
 	public interface ILevelLoopStatesSwitcher
 	{

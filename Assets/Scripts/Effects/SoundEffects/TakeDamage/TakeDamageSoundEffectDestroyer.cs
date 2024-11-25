@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Effects.SoundEffects.TakeDamage.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.TakeDamage
 {
 	public class TakeDamageSoundEffectDestroyer : MonoBehaviour
 	{

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.Hit.Factory
 {
 	public interface IHitSoundEffectFactory
 	{

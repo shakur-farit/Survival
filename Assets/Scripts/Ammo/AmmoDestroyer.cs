@@ -1,4 +1,5 @@
 using Ammo.Factory;
+using Effects.SoundEffects.Hit.Factory;
 using Effects.SoundEffects.Shot;
 using Effects.SpecialEffects.Hit.Factory;
 using UnityEngine;

@@ -1,12 +1,11 @@
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
-using Infrastructure.States.GameLoopStates;
-using Infrastructure.States.GameLoopStates.StatesMachine;
+using Infrastructure.States.LevelLoopStates.StatesMachine;
 using Soundtrack;
 using UnityEngine;
 
-namespace Infrastructure.States.GameStates
+namespace Infrastructure.States.LevelLoopStates
 {
 	public class LevelStartState : ILevelLoopState
 	{

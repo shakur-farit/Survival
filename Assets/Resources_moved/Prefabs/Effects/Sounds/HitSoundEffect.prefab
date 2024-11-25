@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829985761953955059}
   - component: {fileID: 6905039799515497970}
-  - component: {fileID: 4712325612207630411}
+  - component: {fileID: 6406632317069854122}
   - component: {fileID: 8508238079561938213}
   m_Layer: 10
   m_Name: HitSoundEffect
@@ -130,7 +130,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4712325612207630411
+--- !u!114 &6406632317069854122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6539570766999889727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27080298c974f22438b85419d9da1eb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1700626671cc1fb408d7dfd53c7228c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 6905039799515497970}

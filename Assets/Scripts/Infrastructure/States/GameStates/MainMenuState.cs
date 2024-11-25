@@ -3,6 +3,7 @@ using Infrastructure.Services.SceneManagement;
 using Pool;
 using Selector.Factory;
 using Soundtrack;
+using Soundtrack.Factory;
 using UI.Factory;
 using UI.Services.Windows;
 using UI.Windows;

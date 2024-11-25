@@ -1,7 +1,8 @@
 using Data;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.States.GameLoopStates.StatesMachine;
 using Infrastructure.States.GameStates;
+using Infrastructure.States.LevelLoopStates;
+using Infrastructure.States.LevelLoopStates.StatesMachine;
 
 namespace LevelLogic
 {

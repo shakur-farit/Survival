@@ -1,4 +1,4 @@
-namespace Infrastructure.States.GameLoopStates
+namespace Infrastructure.States.LevelLoopStates
 {
 	public interface ILevelLoopState
 	{

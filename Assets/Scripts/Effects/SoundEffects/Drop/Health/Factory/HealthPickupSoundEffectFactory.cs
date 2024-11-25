@@ -1,7 +1,7 @@
 using Pool;
 using UnityEngine;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.Drop.Health.Factory
 {
 	public class HealthPickupSoundEffectFactory : IHealthPickupSoundEffectFactory
 	{

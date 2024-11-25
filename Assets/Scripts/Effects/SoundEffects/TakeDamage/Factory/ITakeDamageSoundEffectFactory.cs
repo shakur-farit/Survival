@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.TakeDamage.Factory
 {
 	public interface ITakeDamageSoundEffectFactory
 	{

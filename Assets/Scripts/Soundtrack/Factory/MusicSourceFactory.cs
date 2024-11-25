@@ -3,7 +3,7 @@ using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.ObjectCreator;
 using UnityEngine;
 
-namespace Soundtrack
+namespace Soundtrack.Factory
 {
 	public class MusicSourceFactory : IMusicSourceFactory
 	{

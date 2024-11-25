@@ -19,5 +19,5 @@ MonoBehaviour:
   MainMenu: {fileID: 8300000, guid: 6e5e6cab5960f5e40b7c242f52c3313d, type: 3}
   MaxMusicVolume: 10
   MaxSoundEffectsVolume: 10
-  CurrentMusicVolume: 7
-  CurrentSoundEffectsVolume: 7
+  CurrentMusicVolume: 4
+  CurrentSoundEffectsVolume: 5

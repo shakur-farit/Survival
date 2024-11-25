@@ -27,7 +27,7 @@ namespace Soundtrack
 			UpdateVolume();
 		}
 
-		private void OnDestroy()
+		private void OnDisable()
 		{
 			_musicSwitcher.MusicChanged -= SwitchMusic;
 			_volumeController.MusicVolumeChanged -= UpdateVolume;

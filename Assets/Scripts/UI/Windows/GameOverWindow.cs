@@ -1,3 +1,4 @@
+using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;

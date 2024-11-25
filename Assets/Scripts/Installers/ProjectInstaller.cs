@@ -1,5 +1,6 @@
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
+using Coin;
 using Enemy.States.StateMachine;
 using Infrastructure.Services.AssetsManagement;
 using Infrastructure.Services.Dialog;
@@ -10,9 +11,8 @@ using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
-using Infrastructure.States.GameLoopStates.StatesMachine;
 using Infrastructure.States.GameStates.StatesMachine;
-using Score;
+using Infrastructure.States.LevelLoopStates.StatesMachine;
 using Soundtrack;
 using Zenject;
 

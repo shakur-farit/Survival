@@ -1,3 +1,4 @@
+using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.States;
@@ -12,8 +13,6 @@ namespace UI.Windows
 {
 	public class MainMenuWindow : WindowBase
 	{
-		[SerializeField] private Button _settingsButton;
-		
 		private IPersistentProgressService _persistentProgressService;
 		private IGameStatesSwitcher _gameStatesSwitcher;
 		private IWindowsService _windowsService;
@@ -34,8 +33,6 @@ namespace UI.Windows
 			base.OnAwake();
 
 			CloseButton.onClick.AddListener(StartGame);
-			_settingsButton.onClick.AddListener(OpenSettingsWindow);
-			_settingsButton.onClick.AddListener(MakeClickSound);
 		}
 
 		protected override void CloseWindow()
@@ -52,9 +49,6 @@ namespace UI.Windows
 
 			_gameStatesSwitcher.SwitchState<ObjectsPoolCreateState>();
 		}
-
-		private void OpenSettingsWindow() => 
-			_windowsService.Open(WindowType.Settings);
 
 		private void MakeClickSound() => 
 			_clickSoundFactory.Create();

@@ -10,8 +10,11 @@ namespace Effects.SpecialEffects.Hit.Factory
 		protected HitSpecialEffectsFactory(IPoolFactory poolFactory) =>
 			_poolFactory = poolFactory;
 
-		public void Create(Vector2 position) =>
+		public void Create(Vector2 position)
+		{
+			Debug.Log(position);
 			_poolFactory.UseObject(PooledObjectType.HitSpecialEffect, position);
+		}
 
 		public void Destroy(GameObject gameObject) =>
 			_poolFactory.ReturnObject(PooledObjectType.HitSpecialEffect, gameObject);

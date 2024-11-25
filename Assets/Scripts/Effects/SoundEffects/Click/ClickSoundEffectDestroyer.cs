@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Effects.SoundEffects.Click.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.Click
 {
 	public class ClickSoundEffectDestroyer : MonoBehaviour
 	{

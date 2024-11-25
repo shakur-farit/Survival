@@ -7,6 +7,7 @@ using Infrastructure.Services.PersistentProgress;
 using Pool;
 using Room.Factory;
 using Soundtrack;
+using Soundtrack.Factory;
 using Spawn;
 using UI.Factory;
 using UI.Services.Windows;

@@ -3,9 +3,10 @@ using Character.States.Motion;
 using Character.States.StatesMachine.Aim;
 using Character.States.StatesMachine.Motion;
 using Infrastructure.States.Factory;
-using Infrastructure.States.GameLoopStates.StatesMachine;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
+using Infrastructure.States.LevelLoopStates;
+using Infrastructure.States.LevelLoopStates.StatesMachine;
 using UnityEngine;
 using Zenject;
 

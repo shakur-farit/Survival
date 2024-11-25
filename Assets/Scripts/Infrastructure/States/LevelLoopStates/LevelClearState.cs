@@ -2,12 +2,11 @@ using Camera.Factory;
 using Character.Factory;
 using DropLogic.Factory;
 using Hud.Factory;
-using Infrastructure.States.GameLoopStates;
 using Infrastructure.States.GameStates.StatesMachine;
 using Room.Factory;
 using UnityEngine;
 
-namespace Infrastructure.States.GameStates
+namespace Infrastructure.States.LevelLoopStates
 {
 	public class LevelClearState : ILevelLoopState
 	{

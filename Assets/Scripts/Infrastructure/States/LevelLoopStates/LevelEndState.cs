@@ -1,13 +1,13 @@
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
-using Infrastructure.States.GameLoopStates;
-using Infrastructure.States.GameLoopStates.StatesMachine;
+using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
+using Infrastructure.States.LevelLoopStates.StatesMachine;
 using Soundtrack;
 using UnityEngine;
 using Utility;
 
-namespace Infrastructure.States.GameStates
+namespace Infrastructure.States.LevelLoopStates
 {
 	public class LevelEndState : ILevelLoopState
 	{

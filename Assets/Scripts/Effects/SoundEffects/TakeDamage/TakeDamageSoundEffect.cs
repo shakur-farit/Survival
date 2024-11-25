@@ -2,7 +2,7 @@ using Soundtrack;
 using UnityEngine;
 using Zenject;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.TakeDamage
 {
 	public class TakeDamageSoundEffect : MonoBehaviour
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Infrastructure.States.GameLoopStates.StatesMachine
+namespace Infrastructure.States.LevelLoopStates.StatesMachine
 {
 	public class LevelLoopStatesMachine : ILevelLoopStatesSwitcher, ILevelLoopStatesRegistrar
 	{

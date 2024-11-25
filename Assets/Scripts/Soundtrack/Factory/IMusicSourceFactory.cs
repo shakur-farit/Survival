@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Soundtrack
+namespace Soundtrack.Factory
 {
 	public interface IMusicSourceFactory
 	{

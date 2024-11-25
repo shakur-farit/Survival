@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Effects.SoundEffects.Shot
+namespace Effects.SoundEffects.Click.Factory
 {
 	public interface IClickSoundEffectFactory
 	{

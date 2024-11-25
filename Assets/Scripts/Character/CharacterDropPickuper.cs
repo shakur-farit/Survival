@@ -1,6 +1,8 @@
+using Coin;
 using DropLogic;
+using Effects.SoundEffects.Drop.Coin.Factory;
+using Effects.SoundEffects.Drop.Health.Factory;
 using Effects.SoundEffects.Shot;
-using Score;
 using UnityEngine;
 using Zenject;
 

@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Data;
 using Effects.SoundEffects.Shot;
+using Effects.SoundEffects.TakeDamage.Factory;
 using Infrastructure.Services.Health;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;

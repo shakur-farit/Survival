@@ -26,6 +26,10 @@ namespace Infrastructure.Services.Timer
 
 			while (_timeLeft > 0)
 			{
+
+				while (_pauseService.IsPaused) 
+					await UniTask.Yield();
+
 				await UniTask.Delay(Constants.OneSecond);
 				_timeLeft--;
 			}

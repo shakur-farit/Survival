@@ -1,9 +1,8 @@
 using System;
 using Data;
 using Infrastructure.Services.PersistentProgress;
-using UnityEngine;
 
-namespace Score
+namespace Coin
 {
 	public class CoinCounter : ICoinCounter
 	{

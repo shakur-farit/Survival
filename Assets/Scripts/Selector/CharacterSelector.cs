@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Character;
 using Data;
+using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
