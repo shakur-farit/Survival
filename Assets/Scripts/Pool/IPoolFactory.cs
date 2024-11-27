@@ -14,5 +14,6 @@ namespace Pool
 
 		void ClearPools();
 		void ReturnObject(PooledObjectType pooledObjectType, GameObject objectToReturn);
+		void DestroyPoolsGroup();
 	}
 }

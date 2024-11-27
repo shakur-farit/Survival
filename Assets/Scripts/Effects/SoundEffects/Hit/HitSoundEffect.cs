@@ -2,9 +2,9 @@ using Soundtrack;
 using UnityEngine;
 using Zenject;
 
-namespace Effects.SoundEffects.Hit
+namespace Effects.SoundEffects.TakeDamage
 {
-	public class NewBehaviourScript : MonoBehaviour
+	public class HitSoundEffect : MonoBehaviour
 	{
 		[SerializeField] private AudioSource _audioSource;
 

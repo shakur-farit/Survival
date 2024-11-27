@@ -15,6 +15,5 @@ namespace Effects.SoundEffects.TakeDamage.Factory
 
 		public void Destroy(GameObject gameObject) =>
 			_poolFactory.ReturnObject(PooledObjectType.TakeDamageSoundEffect, gameObject);
-
 	}
 }

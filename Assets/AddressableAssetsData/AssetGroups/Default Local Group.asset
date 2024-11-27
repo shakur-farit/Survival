@@ -202,13 +202,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d7185900a06cfb841aa7706b9fd753f9
-    m_Address: HitSoundEffect
+  - m_GUID: 3f8c8b25f18548b49a1cd113095bcae1
+    m_Address: TakeDamageSoundEffect
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3f8c8b25f18548b49a1cd113095bcae1
-    m_Address: TakeDamageSoundEffect
+  - m_GUID: d7185900a06cfb841aa7706b9fd753f9
+    m_Address: HitSoundEffect
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

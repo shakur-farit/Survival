@@ -1,17 +1,17 @@
 using Cysharp.Threading.Tasks;
-using Effects.SoundEffects.Click.Factory;
+using Effects.SoundEffects.TakeDamage.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Hit
+namespace Effects.SoundEffects.TakeDamage
 {
 	public class HitSoundEffectDestroyer : MonoBehaviour
 	{
-		private IClickSoundEffectFactory _soundEffect;
+		private IHitSoundEffectFactory _soundEffect;
 
 		[Inject]
-		public void Constructor(IClickSoundEffectFactory soundEffect) =>
+		public void Constructor(IHitSoundEffectFactory soundEffect) =>
 			_soundEffect = soundEffect;
 
 		private void OnEnable() =>

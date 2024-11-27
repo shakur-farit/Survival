@@ -74,7 +74,7 @@ namespace Infrastructure.States.GameStates
 		private async UniTask CreateShotSoundEffectsPool() => 
 			await _poolFactory.CreatePool(PooledObjectType.ShotSoundEffect);
 
-		private async UniTask CreateHitSoundEffectsPool() => 
+		private async UniTask CreateHitSoundEffectsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.HitSoundEffect);
 
 		private async UniTask CreateTakeDamageSoundEffectsPool() =>

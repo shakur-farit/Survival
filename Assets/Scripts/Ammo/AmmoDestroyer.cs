@@ -1,6 +1,5 @@
 using Ammo.Factory;
-using Effects.SoundEffects.Hit.Factory;
-using Effects.SoundEffects.Shot;
+using Effects.SoundEffects.TakeDamage.Factory;
 using Effects.SpecialEffects.Hit.Factory;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace Ammo
 	{
 		private readonly IAmmoFactory _ammoFactory;
 		private readonly IHitSpecialEffectsFactory _specialEffectsFactory;
-		private IHitSoundEffectFactory _hitSoundEffectFactory;
+		private readonly IHitSoundEffectFactory _hitSoundEffectFactory;
 
 		public AmmoDestroyer(IAmmoFactory ammoFactory, IHitSpecialEffectsFactory specialEffectsFactory,
 			IHitSoundEffectFactory hitSoundEffectFactory)
@@ -34,7 +33,7 @@ namespace Ammo
 		private void CreateHitSpecialEffect(Vector2 position) => 
 			_specialEffectsFactory.Create(position);
 
-		private void CreateHitSoundEffect() => 
+		private void CreateHitSoundEffect() =>
 			_hitSoundEffectFactory.Create();
 
 		private void Destroy(GameObject gameObject) => 

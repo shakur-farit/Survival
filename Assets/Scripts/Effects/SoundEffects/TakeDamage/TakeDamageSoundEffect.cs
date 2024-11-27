@@ -19,6 +19,5 @@ namespace Effects.SoundEffects.TakeDamage
 
 		private void UpdateVolume() =>
 			_audioSource.volume = _volumeController.ScaledSoundEffectsVolume;
-
 	}
 }

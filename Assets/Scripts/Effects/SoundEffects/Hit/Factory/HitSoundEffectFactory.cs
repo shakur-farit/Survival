@@ -1,7 +1,7 @@
 using Pool;
 using UnityEngine;
 
-namespace Effects.SoundEffects.Hit.Factory
+namespace Effects.SoundEffects.TakeDamage.Factory
 {
 	public class HitSoundEffectFactory : IHitSoundEffectFactory
 	{

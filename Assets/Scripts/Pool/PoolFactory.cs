@@ -45,7 +45,7 @@ namespace Pool
 			{
 				GameObject newObject = CreateNewObject(_prefabs[pooledObjectType]);
 				_pools.CreatePool(pooledObjectType, newObject, _poolsGroupTransform);
-			} ;
+			};
 		}
 
 		public GameObject UseObject(PooledObjectType pooledObjectType)
@@ -111,6 +111,9 @@ namespace Pool
 
 		public void ClearPools() =>
 			_pools.ClearPools();
+
+		public void DestroyPoolsGroup() => 
+			Object.Destroy(_poolsGroupTransform);
 
 		private GameObject CreateNewObject(GameObject prefab)
 		{

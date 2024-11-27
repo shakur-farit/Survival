@@ -67,6 +67,7 @@ namespace Infrastructure.States.GameStates
 		{
 			DestroyUIRoot();
 			DestroyMusicSource();
+			DestroyPoolsGroup();
 		}
 
 		private async UniTask OpenGameOverWindow() => 
@@ -119,5 +120,8 @@ namespace Infrastructure.States.GameStates
 
 		private void DestroyMusicSource() => 
 			_musicSourceFactory.Destroy();
+
+		private void DestroyPoolsGroup() => 
+			_poolFactory.DestroyPoolsGroup();
 	}
 }
