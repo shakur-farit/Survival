@@ -1,4 +1,5 @@
 using Data;
+using Data.Persistent;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.GameStates.StatesMachine;

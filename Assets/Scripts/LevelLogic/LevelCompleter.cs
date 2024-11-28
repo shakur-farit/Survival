@@ -1,5 +1,7 @@
 using Data;
+using Data.Transient;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.LevelLoopStates;
 using Infrastructure.States.LevelLoopStates.StatesMachine;
@@ -8,19 +10,19 @@ namespace LevelLogic
 {
 	public class LevelCompleter : ILevelCompleter
 	{
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 		private readonly ILevelLoopStatesSwitcher _levelLoopStatesSwitcher;
 
-		public LevelCompleter(IPersistentProgressService persistentProgressService,  ILevelLoopStatesSwitcher levelLoopStatesSwitcher)
+		public LevelCompleter(ITransientGameDataService transientGameDataService,  ILevelLoopStatesSwitcher levelLoopStatesSwitcher)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_levelLoopStatesSwitcher = levelLoopStatesSwitcher;
 		}
 
 		public void TryCompleteLevel()
 		{
-			EnemyData enemyData = _persistentProgressService.Progress.EnemyData;
-			int enemiesNumberInLevel = _persistentProgressService.Progress.LevelData.EnemiesNumberInLevele;
+			EnemyData enemyData = _transientGameDataService.Data.EnemyData;
+			int enemiesNumberInLevel = _transientGameDataService.Data.LevelData.EnemiesNumberInLevele;
 
 			if (enemiesNumberInLevel == enemyData.DeadEnemies.Count)
 			{

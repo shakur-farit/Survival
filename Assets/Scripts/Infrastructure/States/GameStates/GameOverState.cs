@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Enemy.Factory;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using Pool;
 using Room.Factory;
 using Soundtrack;
@@ -24,7 +25,7 @@ namespace Infrastructure.States.GameStates
 		private readonly IHudFactory _hudFactory;
 		private readonly IEnemyFactory _enemyFactory;
 		private readonly IEnemySpawner _enemySpawner;
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 		private readonly IUIFactory _uiFactory;
 		private readonly IPoolFactory _poolFactory;
 		private readonly IVirtualCameraFactory _virtualCameraFactory;
@@ -33,8 +34,8 @@ namespace Infrastructure.States.GameStates
 		private readonly IMusicSourceFactory _musicSourceFactory;
 
 		public GameOverState(IWindowsService windowService, ICharacterFactory characterFactory, 
-			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner, 
-			IPersistentProgressService persistentProgressService, IUIFactory uiFactory,
+			IHudFactory hudFactory, IEnemyFactory enemyFactory, IEnemySpawner enemySpawner,
+			ITransientGameDataService transientGameDataService, IUIFactory uiFactory,
 			IPoolFactory poolFactory, IVirtualCameraFactory virtualCameraFactory, 
 			IRoomFactory tilemapFactory, IMusicSwitcher musicSwitcher, IMusicSourceFactory musicSourceFactory)
 		{
@@ -43,7 +44,7 @@ namespace Infrastructure.States.GameStates
 			_hudFactory = hudFactory;
 			_enemyFactory = enemyFactory;
 			_enemySpawner = enemySpawner;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_uiFactory = uiFactory;
 			_poolFactory = poolFactory;
 			_virtualCameraFactory = virtualCameraFactory;
@@ -110,9 +111,9 @@ namespace Infrastructure.States.GameStates
 
 		private void ResetData()
 		{
-			_persistentProgressService.Progress.LevelData.PreviousLevel = Constants.Zero;
-			_persistentProgressService.Progress.CoinData.CurrentCoinCount = Constants.Zero;
-			_persistentProgressService.Progress.EnemyData.DeadEnemies.Clear();
+			_transientGameDataService.Data.LevelData.PreviousLevel = Constants.Zero;
+			_transientGameDataService.Data.CoinData.CurrentCoinCount = Constants.Zero;
+			_transientGameDataService.Data.EnemyData.DeadEnemies.Clear();
 		}
 
 		private void ClearPoolObjects() => 

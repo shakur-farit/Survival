@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using Soundtrack;
 using UnityEngine;
 using Zenject;
@@ -9,13 +10,13 @@ namespace Effects.SoundEffects.Reload
 	{
 		[SerializeField] private AudioSource _audioSource;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private ISoundEffectsVolumeController _volumeController;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, ISoundEffectsVolumeController volumeController)
+		public void Constructor(ITransientGameDataService transientGameDataService, ISoundEffectsVolumeController volumeController)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_volumeController = volumeController;
 		}
 
@@ -26,7 +27,7 @@ namespace Effects.SoundEffects.Reload
 			_volumeController.SoundEffectsVolumeChanged -= UpdateVolume;
 
 		private void OnEnable() =>
-			_audioSource.clip = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.ReloadSoundEffect;
+			_audioSource.clip = _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.ReloadSoundEffect;
 
 		private void UpdateVolume() =>
 			_audioSource.volume = _volumeController.ScaledSoundEffectsVolume;

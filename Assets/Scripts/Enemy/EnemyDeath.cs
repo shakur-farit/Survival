@@ -1,6 +1,8 @@
 using Data;
+using Data.Transient;
 using Enemy.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using LevelLogic;
 using Spawn;
 using UnityEngine;
@@ -11,24 +13,24 @@ namespace Enemy
 	public class EnemyDeath : IEnemyDeath
 	{
 		private IEnemyFactory _enemyFactory;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private ILevelCompleter _levelCompleter;
 		private IDropSpawner _dropSpawner;
 
 
 		[Inject]
-		public void Constructor(IEnemyFactory enemyFactory, IPersistentProgressService persistentProgressService, 
+		public void Constructor(IEnemyFactory enemyFactory, ITransientGameDataService transientGameDataService, 
 			ILevelCompleter levelCompleter, IDropSpawner dropSpawner)
 		{
 			_enemyFactory = enemyFactory;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_levelCompleter = levelCompleter;
 			_dropSpawner = dropSpawner;
 		}
 
 		public void Die(GameObject gameObject, Vector2 position)
 		{
-			EnemyData enemyData = _persistentProgressService.Progress.EnemyData;
+			EnemyData enemyData = _transientGameDataService.Data.EnemyData;
 
 			RemoveFromCharacterRange(gameObject, enemyData);
 			AddToDeadEnemies(gameObject, enemyData);

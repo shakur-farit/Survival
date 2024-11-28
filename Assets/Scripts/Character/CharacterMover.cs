@@ -6,6 +6,7 @@ using Character.States.StatesMachine.Motion;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PauseService;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine; 
 using Utility;
 using Zenject;
@@ -22,17 +23,17 @@ namespace Character
 		private Dictionary<Func<bool>, Action> _stateActions;
 
 		private IMovementInputService _movementInputService;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private ICharacterMotionStatesSwitcher _characterMotionSwitcher;
 		private IPauseService _pauseService;
 
 		[Inject]
 		public void Construct(IMovementInputService movementInputService,
-			IPersistentProgressService persistentProgressService,
+			ITransientGameDataService transientGameDataService,
 			ICharacterMotionStatesSwitcher characterMotionStatesSwitcher, IPauseService pauseService)
 		{
 			_movementInputService = movementInputService;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_characterMotionSwitcher = characterMotionStatesSwitcher;
 			_pauseService = pauseService;
 		}
@@ -113,6 +114,6 @@ namespace Character
 		}
 
 		private void SetupMovementSpeed() =>
-			_movementSpeed = _persistentProgressService.Progress.CharacterData.CurrentCharacter.MovementSpeed;
+			_movementSpeed = _transientGameDataService.Data.CharacterData.CurrentCharacter.MovementSpeed;
 	}
 }

@@ -1,6 +1,7 @@
 using System.Linq;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -11,25 +12,25 @@ namespace Weapon
 	{
 		[SerializeField] private Transform _weaponShootPoint;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IStaticDataService _staticDataService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
+		public void Constructor(ITransientGameDataService transientGameDataService, IStaticDataService staticDataService)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_staticDataService = staticDataService;
 		}
 
 		public void SetupWeapon()
 		{
-			WeaponType currentWeaponType = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Type;
+			WeaponType currentWeaponType = _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.Type;
 			WeaponStaticData currentWeapon = _staticDataService.WeaponsListStaticData.WeaponsList
 				.FirstOrDefault(weapon => weapon.Type == currentWeaponType);
 
 			if (currentWeapon != null)
 			{
-				_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon = currentWeapon;
+				_transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon = currentWeapon;
 
 				_weaponShootPoint.localPosition = currentWeapon.ShootPoint;
 			}

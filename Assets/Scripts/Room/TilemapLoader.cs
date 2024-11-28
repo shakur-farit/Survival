@@ -1,9 +1,9 @@
 ﻿using AStar;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Utility;
 using Zenject;
 
 namespace Room
@@ -16,13 +16,13 @@ namespace Room
 		public Tilemap frontTilemap;
 		public Tilemap collisionTwoTilemap;
 
-		private IPersistentProgressService _progressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IPathfindingGrid _grid;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService progressService, IPathfindingGrid grid)
+		public void Constructor(ITransientGameDataService transientGameDataService, IPathfindingGrid grid)
 		{
-			_progressService = progressService;
+			_transientGameDataService = transientGameDataService;
 			_grid = grid;
 		}
 
@@ -34,7 +34,7 @@ namespace Room
 
 		private void LoadTilemapData()
 		{
-			RoomData roomData = _progressService.Progress.LevelData.RoomData;
+			RoomData roomData = _transientGameDataService.Data.LevelData.RoomData;
 			
 			if(roomData == null)
 				return;

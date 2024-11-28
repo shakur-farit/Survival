@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -10,13 +11,13 @@ namespace Coin
 		[SerializeField] private TextMeshProUGUI _coinText;
 		
 		private ICoinCounter _coinCounter;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		[Inject]
-		public void Constructor(ICoinCounter coinCounter,IPersistentProgressService persistentProgressService)
+		public void Constructor(ICoinCounter coinCounter, ITransientGameDataService transientGameDataService)
 		{
 			_coinCounter = coinCounter;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 		}
 
 		private void OnEnable() => 
@@ -29,6 +30,6 @@ namespace Coin
 			UpdateCoinText();
 
 		private void UpdateCoinText() => 
-			_coinText.text = _persistentProgressService.Progress.CoinData.CurrentCoinCount.ToString();
+			_coinText.text = _transientGameDataService.Data.CoinData.CurrentCoinCount.ToString();
 	}
 }

@@ -1,7 +1,7 @@
-using System;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
 using System.Collections.Generic;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Zenject;
 
@@ -15,15 +15,15 @@ namespace Character.Shooting
 
 		private readonly List<EnemyHealth> _enemiesList = new();
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
+		public void Constructor(ITransientGameDataService transientGameDataService) => 
+			_transientGameDataService = transientGameDataService;
 
 		private void OnEnable() =>
 			_circleCollider.radius =
-				_persistentProgressService.Progress.CharacterData.WeaponData.Range;
+				_transientGameDataService.Data.CharacterData.WeaponData.Range;
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{

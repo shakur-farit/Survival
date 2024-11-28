@@ -1,28 +1,25 @@
 using Effects.SoundEffects.Click.Factory;
-using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
-using Infrastructure.States;
+using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
 using UI.Services.Windows;
-using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace UI.Windows
 {
 	public class MainMenuWindow : WindowBase
 	{
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IGameStatesSwitcher _gameStatesSwitcher;
 		private IWindowsService _windowsService;
 		private IClickSoundEffectFactory _clickSoundFactory;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IGameStatesSwitcher gameStatesSwitcher,
+		public void Constructor(ITransientGameDataService transientGameDataService, IGameStatesSwitcher gameStatesSwitcher,
 			IWindowsService windowsService, IClickSoundEffectFactory clickSoundFactory)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_windowsService = windowsService;
 			_clickSoundFactory = clickSoundFactory;
@@ -44,7 +41,7 @@ namespace UI.Windows
 
 		private void StartGame()
 		{
-			if(_persistentProgressService.Progress.CharacterData.CurrentCharacter == null)
+			if(_transientGameDataService.Data.CharacterData.CurrentCharacter == null)
 				return;
 
 			_gameStatesSwitcher.SwitchState<ObjectsPoolCreateState>();

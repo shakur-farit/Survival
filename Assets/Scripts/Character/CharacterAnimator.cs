@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -19,15 +20,15 @@ namespace Character
 		private readonly int _aimLeft = Animator.StringToHash("aimLeft");
 		private readonly int _aimDown = Animator.StringToHash("aimDown");
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
+		public void Constructor(ITransientGameDataService transientGameDataService) => 
+			_transientGameDataService = transientGameDataService;
 
 		private void Awake()
 		{
-			CharacterStaticData currentCharacterStaticData = _persistentProgressService.Progress.CharacterData.CurrentCharacter;
+			CharacterStaticData currentCharacterStaticData = _transientGameDataService.Data.CharacterData.CurrentCharacter;
 
 			_animator.runtimeAnimatorController = currentCharacterStaticData.Controller;
 		}

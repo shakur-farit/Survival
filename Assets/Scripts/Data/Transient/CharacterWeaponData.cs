@@ -1,7 +1,7 @@
 using System;
 using StaticData;
 
-namespace Data
+namespace Data.Transient
 {
 	[Serializable]
 	public class CharacterWeaponData

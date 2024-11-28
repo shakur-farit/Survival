@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AStar;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Utility;
 
@@ -14,17 +15,17 @@ namespace Enemy
 
 		private readonly IPathfindingGrid _grid;
 		private readonly IAStarPathfinder _pathfinder;
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 
 		public int CurrentPathIndex { get; set; }
 		public List<Node> Path { get; private set; }
 
 		public EnemyPathfinder(IPathfindingGrid grid, IAStarPathfinder pathfinder,
-			IPersistentProgressService persistentProgressService)
+			ITransientGameDataService transientGameDataService)
 		{
 			_grid = grid;
 			_pathfinder = pathfinder;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 		}
 
 		public void BuildPath(GameObject enemy, GameObject target)
@@ -97,7 +98,7 @@ namespace Enemy
 
 		private Vector2Int GetGridPosition(Vector2 worldPosition)
 		{
-			Vector2Int lowerBound = _persistentProgressService.Progress.LevelData.RoomData.TilemapLowerBounds;
+			Vector2Int lowerBound = _transientGameDataService.Data.LevelData.RoomData.TilemapLowerBounds;
 
 			int x = Mathf.FloorToInt((worldPosition.x - lowerBound.x) / Constants.CellSize);
 			int y = Mathf.FloorToInt((worldPosition.y - lowerBound.y) / Constants.CellSize);

@@ -11,6 +11,7 @@ using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.SceneManagement;
 using Infrastructure.Services.StaticData;
 using Infrastructure.Services.Timer;
+using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.GameStates.StatesMachine;
 using Infrastructure.States.LevelLoopStates.StatesMachine;
 using Soundtrack;
@@ -24,6 +25,7 @@ namespace Installers
 		{
 			RegisterInputService();
 			RegisterPersistentProgressServices();
+			RegisterTransientGameDataService();
 			RegisterAssetsProvider();
 			RegisterStaticDataService();
 			RegisterTimer();
@@ -62,6 +64,9 @@ namespace Installers
 
 		private void RegisterPersistentProgressServices() =>
 			Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();
+
+		private void RegisterTransientGameDataService() => 
+			Container.Bind<ITransientGameDataService>().To<TransientGameDataService>().AsSingle();
 
 		private void RegisterAssetsProvider() =>
 			Container.BindInterfacesAndSelfTo<AssetsProvider>().AsSingle();

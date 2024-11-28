@@ -1,9 +1,11 @@
 using Coin;
 using Data;
+using Data.Transient;
 using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.Services.Dialog;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UI.Services.Windows;
 using UI.Windows;
@@ -21,17 +23,17 @@ namespace Shop
 		private int _price;
 
 		private ICoinCounter _coinCounter;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IDialogService _dialogService;
 		private IWindowsService _windowsService;
 		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(ICoinCounter coinCounter, IPersistentProgressService persistentProgressService,
-			IDialogService dialogService, IWindowsService windowsService, IClickSoundEffectFactory clickSoundEffectFactory)
+		public void Constructor(ICoinCounter coinCounter, IDialogService dialogService, IWindowsService windowsService, 
+			IClickSoundEffectFactory clickSoundEffectFactory, ITransientGameDataService transientGameDataService)
 		{
 			_coinCounter = coinCounter;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_dialogService = dialogService;
 			_windowsService = windowsService;
 			_clickSoundEffectFactory = clickSoundEffectFactory;
@@ -48,14 +50,14 @@ namespace Shop
 
 		private void BuyItem()
 		{
-			if (_price > _persistentProgressService.Progress.CoinData.CurrentCoinCount)
+			if (_price > _transientGameDataService.Data.CoinData.CurrentCoinCount)
 			{
 				OpenDialogWindow("You have not enough coins");
 
 				return;
 			}
 
-			CharacterData characterData = _persistentProgressService.Progress.CharacterData;
+			CharacterData characterData = _transientGameDataService.Data.CharacterData;
 
 			if (_initializer.WeaponUpgradeType == WeaponUpgradeType.None)
 			{

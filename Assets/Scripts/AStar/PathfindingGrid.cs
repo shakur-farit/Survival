@@ -1,6 +1,8 @@
 using Infrastructure.Services.PersistentProgress;
 using StaticData;
 using Data;
+using Data.Transient;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utility;
@@ -19,12 +21,12 @@ namespace AStar
 		public int GridWidth => _gridWidth;
 		public int GridHeight => _gridHeight;
 
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 		private readonly INodeFactory _nodeFactory;
 
-		public PathfindingGrid(IPersistentProgressService persistentProgressService, INodeFactory nodeFactory)
+		public PathfindingGrid(ITransientGameDataService transientGameDataService, INodeFactory nodeFactory)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_nodeFactory = nodeFactory;
 		}
 
@@ -63,7 +65,7 @@ namespace AStar
 
 		private void InitializeGridSize()
 		{
-			RoomData roomData = _persistentProgressService.Progress.LevelData.RoomData;
+			RoomData roomData = _transientGameDataService.Data.LevelData.RoomData;
 
 			if (roomData == null)
 				return;
@@ -77,7 +79,7 @@ namespace AStar
 
 		private bool IsWalkableNode(Vector2 worldPosition)
 		{
-			LevelData levelData = _persistentProgressService.Progress.LevelData;
+			LevelData levelData = _transientGameDataService.Data.LevelData;
 			TilemapData movementTilemapData = levelData.RoomData.CollisionTilesList;
 
 			for (int i = 0; i < movementTilemapData.tilePositions.Length; i++)

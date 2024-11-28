@@ -1,4 +1,5 @@
 using Data;
+using Data.Persistent;
 
 namespace Infrastructure.Services.PersistentProgress
 {

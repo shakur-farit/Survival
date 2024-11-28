@@ -1,8 +1,10 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Data;
+using Data.Transient;
 using Effects.SoundEffects.Reload.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 
 namespace Character.Shooting
 {
@@ -13,18 +15,18 @@ namespace Character.Shooting
 
 		public bool IsReloading { get; private set; }
 
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 		private readonly IReloadSoundEffectFactory _soundEffect;
 
-		public WeaponReloader(IPersistentProgressService persistentProgressService, IReloadSoundEffectFactory soundEffect)
+		public WeaponReloader(ITransientGameDataService transientGameDataService, IReloadSoundEffectFactory soundEffect)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_soundEffect = soundEffect;
 		}
 
 		public async UniTask Reload()
 		{
-			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+			CharacterWeaponData weaponData = _transientGameDataService.Data.CharacterData.WeaponData;
 
 			if (IsReloading)
 				return;

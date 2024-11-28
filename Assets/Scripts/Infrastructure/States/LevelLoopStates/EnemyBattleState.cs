@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using Soundtrack;
 using Spawn;
 using StaticData;
@@ -10,14 +11,14 @@ namespace Infrastructure.States.LevelLoopStates
 	{
 		private readonly IEnemySpawner _enemySpawner;
 		private readonly IMusicSwitcher _musicSwitcher;
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 
-		public EnemyBattleState(IEnemySpawner enemySpawner, IMusicSwitcher musicSwitcher, 
-			IPersistentProgressService persistentProgressService)
+		public EnemyBattleState(IEnemySpawner enemySpawner, IMusicSwitcher musicSwitcher,
+			ITransientGameDataService transientGameDataService)
 		{
 			_enemySpawner = enemySpawner;
 			_musicSwitcher = musicSwitcher;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 		}
 
 		public void Enter()
@@ -36,7 +37,7 @@ namespace Infrastructure.States.LevelLoopStates
 
 		private async void SpawnEnemies()
 		{
-			LevelStaticData levelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
+			LevelStaticData levelStaticData = _transientGameDataService.Data.LevelData.CurrentLevelStaticData;
 
 			await _enemySpawner.Spawn(levelStaticData);
 		}

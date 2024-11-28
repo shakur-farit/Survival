@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -10,15 +11,15 @@ namespace Character
 		public SpriteRenderer Hand;
 		public SpriteRenderer HandNoWeapon;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) =>
-			_persistentProgressService = persistentProgressService;
+		public void Constructor(ITransientGameDataService transientGameDataService) =>
+			_transientGameDataService = transientGameDataService;
 
 		private void Awake()
 		{
-			CharacterStaticData currentCharacter = _persistentProgressService.Progress.CharacterData.CurrentCharacter;
+			CharacterStaticData currentCharacter = _transientGameDataService.Data.CharacterData.CurrentCharacter;
 
 			Hand.sprite = currentCharacter.HandSprite;
 			HandNoWeapon.sprite = currentCharacter.HandSprite;

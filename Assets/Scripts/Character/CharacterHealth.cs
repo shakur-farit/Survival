@@ -1,10 +1,11 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Data;
-using Effects.SoundEffects.Shot;
+using Data.Transient;
 using Effects.SoundEffects.TakeDamage.Factory;
 using Infrastructure.Services.Health;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Zenject;
 
@@ -18,15 +19,15 @@ namespace Character
 
 		private bool _canTakeDamage;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private ICharacterDeath _characterDeath;
 		private ITakeDamageSoundEffectFactory _takeDamageSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService progressService, ICharacterDeath characterDeath,
+		public void Constructor(ITransientGameDataService transientGameDataService, ICharacterDeath characterDeath,
 			ITakeDamageSoundEffectFactory takeDamageSoundEffectFactory)
 		{
-			_persistentProgressService = progressService;
+			_transientGameDataService = transientGameDataService;
 			_characterDeath = characterDeath;
 			_takeDamageSoundEffectFactory = takeDamageSoundEffectFactory;
 		}
@@ -36,7 +37,7 @@ namespace Character
 
 		private void SetupHealthDetails()
 		{
-			CharacterData character = _persistentProgressService.Progress.CharacterData;
+			CharacterData character = _transientGameDataService.Data.CharacterData;
 
 			character.CurrentHealth = character.CurrentCharacter.StartHealth;
 			character.MaxHealth = character.CurrentCharacter.MaxHealth;
@@ -47,7 +48,7 @@ namespace Character
 
 		public void TakeDamage(int damage)
 		{
-			CharacterData character = _persistentProgressService.Progress.CharacterData;
+			CharacterData character = _transientGameDataService.Data.CharacterData;
 
 			if (character.CurrentHealth <= 0)
 				return;
@@ -74,7 +75,7 @@ namespace Character
 
 		public void AddHealth(int value)
 		{
-			CharacterData character = _persistentProgressService.Progress.CharacterData;
+			CharacterData character = _transientGameDataService.Data.CharacterData;
 
 			character.CurrentHealth += value;
 
@@ -88,7 +89,7 @@ namespace Character
 
 		private async void TakeCooldown()
 		{
-			CharacterData character = _persistentProgressService.Progress.CharacterData;
+			CharacterData character = _transientGameDataService.Data.CharacterData;
 
 			_canTakeDamage = false;
 			await UniTask.Delay(character.DamageTakingCooldown);

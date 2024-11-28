@@ -1,6 +1,7 @@
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
 using System.Collections.Generic;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Utility;
 using Zenject;
@@ -11,13 +12,13 @@ namespace Hud
 	{
 		[SerializeField] private Transform _ammoIconsHolder;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IAmmoIconFactory _ammoIconFactory;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IAmmoIconFactory ammoIconFactory)
+		public void Constructor(ITransientGameDataService transientGameDataService, IAmmoIconFactory ammoIconFactory)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_ammoIconFactory = ammoIconFactory;
 		}
 
@@ -29,7 +30,7 @@ namespace Hud
 
 		public void UpdateAmmoIcons()
 		{
-			int currentAmmoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount;
+			int currentAmmoCount = _transientGameDataService.Data.CharacterData.WeaponData.CurrentAmmoCount;
 			
 			List<GameObject> ammoIcons = _ammoIconFactory.AmmoIcons;
 
@@ -41,7 +42,7 @@ namespace Hud
 		{
 			ClearIconsList();
 
-			int ammoCount = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount;
+			int ammoCount = _transientGameDataService.Data.CharacterData.WeaponData.CurrentAmmoCount;
 
 			Vector2 position = Vector2.zero;
 

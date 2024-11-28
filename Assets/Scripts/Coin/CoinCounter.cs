@@ -1,6 +1,8 @@
 using System;
 using Data;
+using Data.Transient;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 
 namespace Coin
 {
@@ -8,26 +10,26 @@ namespace Coin
 	{
 		public event Action CoinCountChanged;
 		
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 
-		public CoinCounter(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
+		public CoinCounter(ITransientGameDataService transientGameDataService) => 
+			_transientGameDataService = transientGameDataService;
 
 		public void AddCoin(int dropValue)
 		{
-			_persistentProgressService.Progress.CoinData.CurrentCoinCount += dropValue;
+			_transientGameDataService.Data.CoinData.CurrentCoinCount += dropValue;
 
 			CoinCountChanged?.Invoke();
 		}
 
 		public void RemoveCoin(int value)
 		{
-			ScoreData scoreData = _persistentProgressService.Progress.CoinData;
+			CoinData coinData = _transientGameDataService.Data.CoinData;
 
-			scoreData.CurrentCoinCount -= value;
+			coinData.CurrentCoinCount -= value;
 
-			if (scoreData.CurrentCoinCount < 0)
-				scoreData.CurrentCoinCount = 0;
+			if (coinData.CurrentCoinCount < 0)
+				coinData.CurrentCoinCount = 0;
 
 			CoinCountChanged?.Invoke();
 		}

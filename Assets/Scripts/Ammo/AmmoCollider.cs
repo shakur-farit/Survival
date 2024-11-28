@@ -1,7 +1,9 @@
 using Character.Shooting;
 using Data;
+using Data.Transient;
 using Enemy;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -15,13 +17,13 @@ namespace Ammo
 		private int _damage;
 		private bool _isCollided;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IAmmoDestroyer _ammoDestroyer;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IAmmoDestroyer ammoDestroyer)
+		public void Constructor(ITransientGameDataService transientGameDataService, IAmmoDestroyer ammoDestroyer)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_ammoDestroyer = ammoDestroyer;
 		}
 
@@ -30,7 +32,7 @@ namespace Ammo
 		{
 			_isCollided = false;
 
-			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+			CharacterWeaponData weaponData = _transientGameDataService.Data.CharacterData.WeaponData;
 			AmmoStaticData ammoData = weaponData.CurrentWeapon.Ammo;
 
 			_collider.radius = ammoData.ColliderRadius;

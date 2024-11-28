@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Character;
 using Data;
+using Data.Transient;
 using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,15 +25,15 @@ namespace Selector
 		private int _currentIndex;
 
 		private IStaticDataService _staticDataService;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(IStaticDataService staticDataService, IPersistentProgressService persistentProgressService,
+		public void Constructor(IStaticDataService staticDataService, ITransientGameDataService transientGameDataService,
 			IClickSoundEffectFactory clickSoundEffectFactory)
 		{
 			_staticDataService = staticDataService;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_clickSoundEffectFactory = clickSoundEffectFactory;
 		}
 
@@ -84,7 +86,7 @@ namespace Selector
 
 		private void InitializeCharacter(CharacterType type)
 		{
-			CharacterWeaponData characterWeaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+			CharacterWeaponData characterWeaponData = _transientGameDataService.Data.CharacterData.WeaponData;
 
 
 			CharacterStaticData selectedCharacter = _charactersList
@@ -92,16 +94,13 @@ namespace Selector
 
 			if (selectedCharacter != null)
 			{
-				_persistentProgressService.Progress.CharacterData.CurrentCharacter = selectedCharacter;
+				_transientGameDataService.Data.CharacterData.CurrentCharacter = selectedCharacter;
 				InitializeWeapon(selectedCharacter, characterWeaponData);
 			}
 		}
 
 		private void InitializeWeapon(CharacterStaticData character, CharacterWeaponData characterWeaponData)
 		{
-			if (_persistentProgressService.IsNew == false)
-				return;
-
 			WeaponStaticData selectedWeapon = _staticDataService.WeaponsListStaticData.WeaponsList
 				.FirstOrDefault(weapon => character.DefaultWeapon == weapon.Type);
 

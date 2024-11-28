@@ -11,6 +11,7 @@ using DropLogic.Mediator;
 using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Drop.Coin.Factory;
 using Effects.SoundEffects.Drop.Health.Factory;
+using Effects.SoundEffects.Hit.Factory;
 using Effects.SoundEffects.Reload.Factory;
 using Effects.SoundEffects.Shot.Factory;
 using Effects.SoundEffects.TakeDamage.Factory;

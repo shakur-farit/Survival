@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Hud.Factory;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Utility;
 using Zenject;
@@ -12,13 +13,13 @@ namespace Hud
 		[SerializeField] private Transform _heartIconsHolder;
 
 		private IHeartIconFactory _heartIconsFactory;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		[Inject]
-		public void Constructor(IHeartIconFactory heartIconFactory, IPersistentProgressService persistentProgressService)
+		public void Constructor(IHeartIconFactory heartIconFactory, ITransientGameDataService transientGameDataService)
 		{
 			_heartIconsFactory = heartIconFactory;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 		}
 
 		private void Start()
@@ -33,7 +34,7 @@ namespace Hud
 
 		public void UpdateHearthIcons()
 		{
-			int currentHealth = _persistentProgressService.Progress.CharacterData.CurrentHealth;
+			int currentHealth = _transientGameDataService.Data.CharacterData.CurrentHealth;
 			List<GameObject> hearts = _heartIconsFactory.HeartIcons;
 
 			for (int i = 0; i < hearts.Count; i++)
@@ -46,7 +47,7 @@ namespace Hud
 
 			Vector2 position = Vector2.zero;
 
-			for (int i = 0; i < _persistentProgressService.Progress.CharacterData.MaxHealth; i++)
+			for (int i = 0; i < _transientGameDataService.Data.CharacterData.MaxHealth; i++)
 			{
 				CreateHearthIcon(position);
 

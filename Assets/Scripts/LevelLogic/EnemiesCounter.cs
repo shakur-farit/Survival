@@ -1,25 +1,26 @@
 using System.Linq;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 
 namespace LevelLogic
 {
 	public class EnemiesCounter : IEnemiesCounter
 	{
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 
-		public EnemiesCounter(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
+		public EnemiesCounter(ITransientGameDataService transientGameDataService) => 
+			_transientGameDataService = transientGameDataService;
 
 		public void SetEnemiesNumberInLevel()
 		{
-			LevelStaticData currentLevelStaticData = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData;
+			LevelStaticData currentLevelStaticData = _transientGameDataService.Data.LevelData.CurrentLevelStaticData;
 
 			int enemiesNumberInLevel = currentLevelStaticData.WavesOnLevel
 				.SelectMany(wave => wave.EnemiesInWave)
 				.Sum(enemyInfo => enemyInfo.Number);
 
-			_persistentProgressService.Progress.LevelData.EnemiesNumberInLevele = enemiesNumberInLevel;
+			_transientGameDataService.Data.LevelData.EnemiesNumberInLevele = enemiesNumberInLevel;
 		}
 	}
 }

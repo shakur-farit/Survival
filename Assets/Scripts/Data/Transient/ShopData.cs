@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Shop;
 using Weapon;
 
-namespace Data
+namespace Data.Transient
 {
 	[Serializable]
 	public class ShopData

@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -10,18 +11,18 @@ namespace Effects.SpecialEffects.Shot
 		[SerializeField] private ShotSpecialEffectData _data;
 		[SerializeField] private ShotSpecialEffectView _view;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
+		public void Constructor(ITransientGameDataService transientGameDataService) => 
+			_transientGameDataService = transientGameDataService;
 
 		private void OnEnable() => 
 			InitializeSpecialEffect();
 
 		private void InitializeSpecialEffect()
 		{
-			ShotSpecialEffectStaticData staticData = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.ShotSpecialEffect;
+			ShotSpecialEffectStaticData staticData = _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.ShotSpecialEffect;
 
 			_data.Initialize(staticData);
 			_view.Initialize(staticData);

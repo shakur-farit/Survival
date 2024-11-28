@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using Soundtrack;
 using UI.Services.Windows;
 using UI.Windows;
@@ -8,14 +9,14 @@ namespace Infrastructure.States.GameStates
 	public class LevelCompleteState : IGameState
 	{
 		private readonly IWindowsService _windowService;
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 		private readonly IMusicSwitcher _musicSwitcher;
 
-		public LevelCompleteState(IWindowsService windowService, IPersistentProgressService persistentProgressService, 
+		public LevelCompleteState(IWindowsService windowService, ITransientGameDataService transientGameDataService, 
 			IMusicSwitcher musicSwitcher)
 		{
 			_windowService = windowService;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_musicSwitcher = musicSwitcher;
 		}
 
@@ -33,6 +34,6 @@ namespace Infrastructure.States.GameStates
 			_windowService.Open(WindowType.LevelComplete);
 
 		private void ClearShopUsedWeaponTypesList() => 
-			_persistentProgressService.Progress.ShopData.UsedWeaponTypes.Clear();
+			_transientGameDataService.Data.ShopData.UsedWeaponTypes.Clear();
 	}
 }

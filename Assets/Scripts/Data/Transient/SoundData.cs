@@ -1,6 +1,6 @@
 using System;
 
-namespace Data
+namespace Data.Transient
 {
 	[Serializable]
 	public class SoundData

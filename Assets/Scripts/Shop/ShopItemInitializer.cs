@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
 using Data;
+using Data.Transient;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
 using Infrastructure.Services.StaticData;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using Weapon;
@@ -17,7 +19,7 @@ namespace Shop
 
 		private IRandomService _randomizer;
 		private IStaticDataService _staticDataService;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		public WeaponStaticData WeaponStaticData
 		{
@@ -34,11 +36,11 @@ namespace Shop
 
 		[Inject]
 		public void Constructor(IRandomService randomizer, IStaticDataService staticDataService,
-			IPersistentProgressService persistentProgressService)
+			ITransientGameDataService transientGameDataService)
 		{
 			_randomizer = randomizer;
 			_staticDataService = staticDataService;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 		}
 
 		private void OnDisable() =>
@@ -47,14 +49,14 @@ namespace Shop
 		private WeaponStaticData GetRandomWeaponStaticData()
 		{
 			WeaponStaticData weaponStaticData = null;
-			ShopData shopData = _persistentProgressService.Progress.ShopData;
+			ShopData shopData = _transientGameDataService.Data.ShopData;
 
 			while (weaponStaticData == null)
 			{
 				WeaponType randomWeaponType = GetRandomWeaponType();
 				WeaponUpgradeType randomUpgradeType = GetRandomUpgradeType();
 
-				if(randomWeaponType == _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Type && 
+				if(randomWeaponType == _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.Type && 
 				   randomUpgradeType == WeaponUpgradeType.None)
 					continue;
 

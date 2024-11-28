@@ -1,6 +1,7 @@
 using Infrastructure.Services.PauseService;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Zenject;
 
@@ -11,15 +12,15 @@ namespace Ammo
 		private float _movementSpeed;
 		private float _spread;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IRandomService _randomizer;
 		private IPauseService _pauseService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IRandomService randomizer,
+		public void Constructor(ITransientGameDataService transientGameDataService, IRandomService randomizer,
 			IPauseService pauseService)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_randomizer = randomizer;
 			_pauseService = pauseService;
 		}
@@ -32,7 +33,7 @@ namespace Ammo
 		}
 
 		private void SetupMovementSpeed() => 
-			_movementSpeed = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.MovementSpeed;
+			_movementSpeed = _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.Ammo.MovementSpeed;
 
 		private void Update() =>
 			TryMove();
@@ -50,8 +51,8 @@ namespace Ammo
 
 		private void SetupSpread()
 		{
-			float spreadMin = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.SpreadMin;
-			float spreadMax = _persistentProgressService.Progress.CharacterData.WeaponData.Spread;
+			float spreadMin = _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.SpreadMin;
+			float spreadMax = _transientGameDataService.Data.CharacterData.WeaponData.Spread;
 
 			int spreadToggle = _randomizer.Next(0, 2) * 2 - 1; // Get a random spread toggle 1 or -1
 

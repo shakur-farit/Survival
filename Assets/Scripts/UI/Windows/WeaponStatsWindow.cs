@@ -1,7 +1,9 @@
 using Data;
+using Data.Transient;
 using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using TMPro;
 using UI.Services.Windows;
 using UnityEngine;
@@ -23,14 +25,14 @@ namespace UI.Windows
 		[SerializeField] private TextMeshProUGUI _accuracyValueText;
 
 		private IWindowsService _windowsService;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IClickSoundEffectFactory _clickSoundEffectFactory;
 
 		[Inject]
-		public void Constructor(IWindowsService windowsService, IPersistentProgressService persistentProgressService)
+		public void Constructor(IWindowsService windowsService, ITransientGameDataService transientGameDataService)
 		{
 			_windowsService = windowsService;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 		}
 
 		protected override void OnAwake()
@@ -40,7 +42,7 @@ namespace UI.Windows
 			_informationButton.onClick.AddListener(OpenInformationWindow);
 			_informationButton.onClick.AddListener(MakeClickSound);
 
-			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+			CharacterWeaponData weaponData = _transientGameDataService.Data.CharacterData.WeaponData;
 
 			UpdateWeapon(weaponData);
 

@@ -5,6 +5,7 @@ using Enemy;
 using Enemy.Factory;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Randomizer;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -19,22 +20,22 @@ namespace Spawn
 
 		private readonly IRandomService _randomService;
 		private readonly IEnemyFactory _enemyFactory;
-		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly ITransientGameDataService _transientGameDataService;
 
 		public EnemySpawner(IRandomService randomService, IEnemyFactory enemyFactory,
-				IPersistentProgressService persistentProgressService)
+			ITransientGameDataService transientGameDataService)
 		{
 			_randomService = randomService;
 			_enemyFactory = enemyFactory;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 		}
 
 		public async UniTask Spawn(LevelStaticData levelStaticData)
 		{
 			_canSpawn = true;
 
-			Vector2 safeZoneCenter = _persistentProgressService.Progress.LevelData.RoomData.CharacterSpawnPosition;
-			float safeZoneRadius = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData.StartSafeZonaRadius;
+			Vector2 safeZoneCenter = _transientGameDataService.Data.LevelData.RoomData.CharacterSpawnPosition;
+			float safeZoneRadius = _transientGameDataService.Data.LevelData.CurrentLevelStaticData.StartSafeZonaRadius;
 
 			InitializeValidSpawnPositions(safeZoneCenter, safeZoneRadius);
 
@@ -55,9 +56,9 @@ namespace Spawn
 
 		private void InitializeValidSpawnPositions(Vector2 safeZoneCenter, float safeZoneRadius)
 		{
-			var roomData = _persistentProgressService.Progress.LevelData.RoomData;
+			var roomData = _transientGameDataService.Data.LevelData.RoomData;
 			var tilemapData = roomData.CollisionTilesList;
-			var requiredTile = _persistentProgressService.Progress.LevelData.CurrentLevelStaticData.EnemySpawnTile;
+			var requiredTile = _transientGameDataService.Data.LevelData.CurrentLevelStaticData.EnemySpawnTile;
 
 			float minX = roomData.TilemapLowerBounds.x;
 			float maxX = roomData.TilemapUpperBounds.x;

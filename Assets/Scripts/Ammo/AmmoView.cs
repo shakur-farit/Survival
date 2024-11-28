@@ -1,4 +1,5 @@
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Zenject;
 
@@ -8,19 +9,19 @@ namespace Ammo
 	{
 		[SerializeField] private SpriteRenderer _spriteRenderer;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService) => 
-			_persistentProgressService = persistentProgressService;
+		public void Constructor(ITransientGameDataService transientGameDataService) => 
+			_transientGameDataService = transientGameDataService;
 
 		private void OnEnable() => 
 			SetupView();
 
 		private void SetupView()
 		{
-			_spriteRenderer.sprite = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.Sprite;
-			_spriteRenderer.material = _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Ammo.Material;
+			_spriteRenderer.sprite = _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.Ammo.Sprite;
+			_spriteRenderer.material = _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.Ammo.Material;
 		}
 	}
 }

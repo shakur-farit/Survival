@@ -2,10 +2,12 @@ using System;
 using Ammo.Factory;
 using Cysharp.Threading.Tasks;
 using Data;
+using Data.Transient;
 using Effects.SoundEffects.Shot.Factory;
 using Effects.SpecialEffects.Shot.Factory;
 using Infrastructure.Services.Input;
 using Infrastructure.Services.PersistentProgress;
+using Infrastructure.Services.TransientGameData;
 using UnityEngine;
 using Zenject;
 
@@ -24,7 +26,7 @@ namespace Character.Shooting
 
 		private IFireInputService _fireInputSystem;
 		private IAmmoFactory _ammoFactory;
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IShootSpecialEffectsFactory _sfxFactory;
 		private IWeaponReloader _weaponReloader;
 		private IShotSoundEffectFactory _shotSoundEffect;
@@ -33,12 +35,12 @@ namespace Character.Shooting
 
 		[Inject]
 		public void Constructor(IFireInputService fireInputSystem, IAmmoFactory ammoFactory,
-			IPersistentProgressService persistentProgressService, IShootSpecialEffectsFactory sfxFactory,
+			ITransientGameDataService transientGameDataService, IShootSpecialEffectsFactory sfxFactory,
 			IWeaponReloader weaponReloader, IShotSoundEffectFactory shotSoundEffect)
 		{
 			_fireInputSystem = fireInputSystem;
 			_ammoFactory = ammoFactory;
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_sfxFactory = sfxFactory;
 			_weaponReloader = weaponReloader;
 			_shotSoundEffect = shotSoundEffect;
@@ -48,7 +50,7 @@ namespace Character.Shooting
 		{
 			_fireInputSystem.RegisterFireInputAction();
 
-			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+			CharacterWeaponData weaponData = _transientGameDataService.Data.CharacterData.WeaponData;
 
 			_shootInterval = weaponData.ShootsInterval;
 			weaponData.CurrentAmmoCount = weaponData.MagazineSize;
@@ -66,7 +68,7 @@ namespace Character.Shooting
 			if ( _isShoot || _weaponReloader.IsReloading)
 				return;
 
-			if (_persistentProgressService.Progress.CharacterData.WeaponData.CurrentAmmoCount <= 0 && _infinityAmmo == false)
+			if (_transientGameDataService.Data.CharacterData.WeaponData.CurrentAmmoCount <= 0 && _infinityAmmo == false)
 			{
 				await ReloadWeapon();
 
@@ -82,7 +84,7 @@ namespace Character.Shooting
 
 		private async UniTask Shoot()
 		{
-			CharacterWeaponData weaponData = _persistentProgressService.Progress.CharacterData.WeaponData;
+			CharacterWeaponData weaponData = _transientGameDataService.Data.CharacterData.WeaponData;
 
 			int ammoAmount = weaponData.CurrentWeapon.AmmoAmount;
 			int spawnInterval = weaponData.CurrentWeapon.AmmoSpawnInterval;

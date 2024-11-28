@@ -1,5 +1,6 @@
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using Infrastructure.Services.TransientGameData;
 using StaticData;
 using UnityEngine;
 using Zenject;
@@ -10,13 +11,13 @@ namespace Weapon
 	{
 		[SerializeField] private SpriteRenderer _weaponSpriteRenderer;
 
-		private IPersistentProgressService _persistentProgressService;
+		private ITransientGameDataService _transientGameDataService;
 		private IStaticDataService _staticDataService;
 
 		[Inject]
-		public void Constructor(IPersistentProgressService persistentProgressService, IStaticDataService staticDataService)
+		public void Constructor(ITransientGameDataService transientGameDataService, IStaticDataService staticDataService)
 		{
-			_persistentProgressService = persistentProgressService;
+			_transientGameDataService = transientGameDataService;
 			_staticDataService = staticDataService;
 		}
 
@@ -24,9 +25,9 @@ namespace Weapon
 		{
 			foreach (WeaponStaticData weapon in _staticDataService.WeaponsListStaticData.WeaponsList)
 			{
-				if (weapon.Type == _persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon.Type)
+				if (weapon.Type == _transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon.Type)
 				{
-					_persistentProgressService.Progress.CharacterData.WeaponData.CurrentWeapon = weapon;
+					_transientGameDataService.Data.CharacterData.WeaponData.CurrentWeapon = weapon;
 
 					_weaponSpriteRenderer.sprite = weapon.Sprite;
 				}
