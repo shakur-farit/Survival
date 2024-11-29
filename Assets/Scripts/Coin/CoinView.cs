@@ -1,4 +1,3 @@
-using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.TransientGameData;
 using TMPro;
 using UnityEngine;

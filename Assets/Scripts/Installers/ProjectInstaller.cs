@@ -31,6 +31,7 @@ namespace Installers
 			RegisterTimer();
 			RegisterRandomizer();
 			RegisterDialogService();
+			RegisterCoinCounter();
 			RegisterScoreCounter();
 			RegisterScenesService();
 			RegisterPauseService();
@@ -59,8 +60,11 @@ namespace Installers
 		private void RegisterPauseService() => 
 			Container.Bind<IPauseService>().To<PauseService>().AsSingle();
 
-		private void RegisterScoreCounter() => 
+		private void RegisterCoinCounter() => 
 			Container.Bind<ICoinCounter>().To<CoinCounter>().AsSingle();
+
+		private void RegisterScoreCounter() => 
+			Container.Bind<IScoreCounter>().To<ScoreCounter>().AsSingle();
 
 		private void RegisterPersistentProgressServices() =>
 			Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();

@@ -30,6 +30,7 @@ namespace Enemy.Mediator
 		{
 			_view.SetupSprite(enemyStaticData);
 			_health.SetupHealth(enemyStaticData);
+			_health.SetupStaticData(enemyStaticData);
 			_mover.SetupSpeed(enemyStaticData);
 			_damager.SetupDamage(enemyStaticData);
 			_animator.SetupAnimator(enemyStaticData);

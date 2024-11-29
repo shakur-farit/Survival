@@ -69,9 +69,6 @@ namespace Pool
 
 			newObject.transform.position = position;
 
-			if(pooledObjectType == PooledObjectType.HitSpecialEffect)
-				Debug.Log(newObject.transform.position);
-
 			newObject.SetActive(true);
 
 			return newObject;
@@ -113,7 +110,7 @@ namespace Pool
 			_pools.ClearPools();
 
 		public void DestroyPoolsGroup() => 
-			Object.Destroy(_poolsGroupTransform);
+			Object.Destroy(_poolsGroupTransform.gameObject);
 
 		private GameObject CreateNewObject(GameObject prefab)
 		{

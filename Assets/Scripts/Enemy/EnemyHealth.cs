@@ -9,6 +9,7 @@ namespace Enemy
 	public class EnemyHealth : MonoBehaviour, IHealth
 	{
 		private int _current;
+		private EnemyStaticData _enemyStaticData;
 
 		private IEnemyHealthMediator _mediator;
 		private IEnemyDeath _enemyDeath;
@@ -31,10 +32,13 @@ namespace Enemy
 			_current -= damage;
 
 			if( _current <= 0 )
-				_enemyDeath.Die(gameObject, transform.position);
+				_enemyDeath.Die(gameObject, transform.position, _enemyStaticData);
 		}
 
 		public void SetupHealth(EnemyStaticData enemyStaticData) => 
 			_current = enemyStaticData.CurrentHealth;
+
+		public void SetupStaticData(EnemyStaticData enemyStaticData) => 
+			_enemyStaticData = enemyStaticData;
 	}
 }
