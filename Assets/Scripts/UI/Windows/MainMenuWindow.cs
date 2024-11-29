@@ -1,5 +1,4 @@
-using Effects.SoundEffects.Click.Factory;
-using Infrastructure.Services.PersistentProgress;
+using Effects.SoundEffects.Click;
 using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
@@ -13,16 +12,16 @@ namespace UI.Windows
 		private ITransientGameDataService _transientGameDataService;
 		private IGameStatesSwitcher _gameStatesSwitcher;
 		private IWindowsService _windowsService;
-		private IClickSoundEffectFactory _clickSoundFactory;
+		private IDoorsOpeningSoundEffectFactory _doorsOpeningSoundFactory;
 
 		[Inject]
 		public void Constructor(ITransientGameDataService transientGameDataService, IGameStatesSwitcher gameStatesSwitcher,
-			IWindowsService windowsService, IClickSoundEffectFactory clickSoundFactory)
+			IWindowsService windowsService, IDoorsOpeningSoundEffectFactory doorsOpeningSoundEffectFactory)
 		{
 			_transientGameDataService = transientGameDataService;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_windowsService = windowsService;
-			_clickSoundFactory = clickSoundFactory;
+			_doorsOpeningSoundFactory = doorsOpeningSoundEffectFactory;
 		}
 
 		protected override void OnAwake()
@@ -48,6 +47,6 @@ namespace UI.Windows
 		}
 
 		private void MakeClickSound() => 
-			_clickSoundFactory.Create();
+			_doorsOpeningSoundFactory.Create();
 	}
 }

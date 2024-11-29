@@ -1,3 +1,4 @@
+using Effects.SoundEffects.Click;
 using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Shot;
 using Infrastructure.States.GameStates;
@@ -20,16 +21,16 @@ namespace UI.Windows
 		private IGameStatesSwitcher _statesSwitcher;
 		private IWindowsService _windowsService;
 		private IShopItemFactory _shopItemFactory;
-		private IClickSoundEffectFactory _clickSoundEffectFactory;
+		private IDoorsOpeningSoundEffectFactory _doorsOpeningSoundEffectFactory;
 
 		[Inject]
 		public void Constructor(IGameStatesSwitcher statesSwitcher, IWindowsService windowsService, IShopItemFactory shopItemFactory,
-			IClickSoundEffectFactory clickSoundEffectFactory)
+			IDoorsOpeningSoundEffectFactory doorsOpeningSoundEffectFactory)
 		{
 			_statesSwitcher = statesSwitcher;
 			_windowsService = windowsService;
 			_shopItemFactory = shopItemFactory;
-			_clickSoundEffectFactory = clickSoundEffectFactory;
+			_doorsOpeningSoundEffectFactory = doorsOpeningSoundEffectFactory;
 		}
 
 		private void OnDisable()
@@ -83,6 +84,6 @@ namespace UI.Windows
 		}
 
 		private void MakeClickSound() =>
-			_clickSoundEffectFactory.Create();
+			_doorsOpeningSoundEffectFactory.Create();
 	}
 }

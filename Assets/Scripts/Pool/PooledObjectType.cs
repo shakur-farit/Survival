@@ -20,6 +20,7 @@ namespace Pool
 		VirtualCamera,
 		Room,
 		ClickSoundEffect,
-		TakeDamageSoundEffect
+		TakeDamageSoundEffect,
+		DoorsOpeningSoundEffect
 	}
 }

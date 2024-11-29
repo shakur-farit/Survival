@@ -8,6 +8,7 @@ using Character.Shooting;
 using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
+using Effects.SoundEffects.Click;
 using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.Drop.Coin.Factory;
 using Effects.SoundEffects.Drop.Health.Factory;
@@ -153,6 +154,7 @@ namespace Installers
 			Container.Bind<IClickSoundEffectFactory>().To<ClickSoundEffectFactory>().AsSingle();
 			Container.Bind<IHitSoundEffectFactory>().To<HitSoundEffectFactory>().AsSingle();
 			Container.Bind<ITakeDamageSoundEffectFactory>().To<TakeDamageSoundEffectFactory>().AsSingle();
+			Container.Bind<IDoorsOpeningSoundEffectFactory>().To<DoorsOpeningSoundEffectFactory>().AsSingle();
 		}
 
 		private void RegisterBulletIconsFactory() =>

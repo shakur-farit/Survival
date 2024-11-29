@@ -85,3 +85,7 @@ MonoBehaviour:
     PoolSize: 5
     PooledPrefabAddress: HitSoundEffect
     CanPoolIncrease: 1
+  - pooledObjectType: 19
+    PoolSize: 1
+    PooledPrefabAddress: DoorsOpeningSoundEffect
+    CanPoolIncrease: 1

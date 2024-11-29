@@ -67,8 +67,11 @@ namespace Infrastructure.States.GameStates
 		private void PlayMainMenuMusic() => 
 			_musicSwitcher.PlayMainMenu();
 
-		private async UniTask CreateClickSoundEffectsPool() => 
+		private async UniTask CreateClickSoundEffectsPool()
+		{
 			await _poolFactory.CreatePool(PooledObjectType.ClickSoundEffect);
+			await _poolFactory.CreatePool(PooledObjectType.DoorsOpeningSoundEffect);
+		}
 
 		private void DestroySelector() => 
 			_characterSelectorFactory.Destroy();
