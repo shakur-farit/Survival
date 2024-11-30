@@ -1,5 +1,6 @@
 using System;
 using Infrastructure.Services.PersistentProgress;
+using Utility;
 
 namespace Coin
 {
@@ -23,5 +24,8 @@ namespace Coin
 
 			ScoreChanged?.Invoke();
 		}
+
+		public void ResetScore() => 
+			Score = Constants.Zero;
 	}
 }

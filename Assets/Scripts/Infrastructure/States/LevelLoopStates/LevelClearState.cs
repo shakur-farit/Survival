@@ -1,9 +1,10 @@
 using Camera.Factory;
 using Character.Factory;
 using DropLogic.Factory;
+using Enemy.Factory;
 using Hud.Factory;
-using Infrastructure.States.GameStates.StatesMachine;
 using Room.Factory;
+using Spawn;
 using UnityEngine;
 
 namespace Infrastructure.States.LevelLoopStates
@@ -15,26 +16,24 @@ namespace Infrastructure.States.LevelLoopStates
 		private readonly IDropFactory _dropFactory;
 		private readonly IRoomFactory _roomFactory;
 		private readonly IVirtualCameraFactory _cameraFactory;
-		private readonly IGameStatesSwitcher _statesSwitcher;
+		private readonly IEnemyFactory _enemyFactory;
+		private readonly IEnemySpawner _enemySpawner;
 
 		public LevelClearState(ICharacterFactory characterFactory, IHudFactory hudFactory,
 			IDropFactory dropFactory, IRoomFactory roomFactory, IVirtualCameraFactory cameraFactory, 
-			IGameStatesSwitcher statesSwitcher)
+			IEnemyFactory enemyFactory, IEnemySpawner enemySpawner)
 		{
 			_characterFactory = characterFactory;
 			_hudFactory = hudFactory;
 			_dropFactory = dropFactory;
 			_roomFactory = roomFactory;
 			_cameraFactory = cameraFactory;
-			_statesSwitcher = statesSwitcher;
+			_enemyFactory = enemyFactory;
+			_enemySpawner = enemySpawner;
 		}
 
-		public void Enter()
-		{
-			Debug.Log(GetType());
-
+		public void Enter() => 
 			DestroyObjects();
-		}
 
 		public void Exit()
 		{ 
@@ -43,10 +42,21 @@ namespace Infrastructure.States.LevelLoopStates
 		private void DestroyObjects()
 		{
 			DestroyHud();
+			DestroyEnemies();
 			DestroyCharacter();
 			DestroyDrops();
 			DestroyRoom();
 			DestroyCamera();
+		}
+
+		private void DestroyEnemies()
+		{
+			StopEnemiesSpawn();
+
+			foreach (GameObject enemy in _enemyFactory.EnemiesList)
+				_enemyFactory.Destroy(enemy);
+
+			_enemyFactory.EnemiesList.Clear();
 		}
 
 		private void DestroyCharacter() =>
@@ -68,5 +78,8 @@ namespace Infrastructure.States.LevelLoopStates
 
 		private void DestroyCamera() =>
 			_cameraFactory.Destroy();
+
+		private void StopEnemiesSpawn() =>
+			_enemySpawner.StopSpawn();
 	}
 }

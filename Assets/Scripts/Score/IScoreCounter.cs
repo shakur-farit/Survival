@@ -7,5 +7,6 @@ namespace Coin
 		event Action ScoreChanged;
 		int Score { get; }
 		void AddScore(int scoreAmount);
+		void ResetScore();
 	}
 }

@@ -1,10 +1,8 @@
 using Cysharp.Threading.Tasks;
-using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.LevelLoopStates.StatesMachine;
 using Soundtrack;
-using UnityEngine;
 
 namespace Infrastructure.States.LevelLoopStates
 {
@@ -27,7 +25,6 @@ namespace Infrastructure.States.LevelLoopStates
 		public async void Enter()
 		{
 			_timer.Completed += SwitchToEnemyBattleState;
-			Debug.Log(GetType());
 
 			_musicSwitcher.PlayClearedRoom();
 

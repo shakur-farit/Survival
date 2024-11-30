@@ -50,6 +50,9 @@ namespace Soundtrack
 
 			while (elapsedTime < Constants.MusicFadeDuration)
 			{
+				if(_audioSource == null)
+					return;
+
 				_audioSource.volume = Mathf.Lerp(initialVolume, 0, elapsedTime / Constants.MusicFadeDuration);
 				elapsedTime += Time.deltaTime;
 				await UniTask.Yield();
@@ -65,6 +68,9 @@ namespace Soundtrack
 
 			while (elapsedTime < Constants.MusicFadeDuration)
 			{
+				if (_audioSource == null)
+					return;
+
 				_audioSource.volume = Mathf.Lerp(0, initialVolume, elapsedTime / Constants.MusicFadeDuration);
 				elapsedTime += Time.deltaTime;
 				await UniTask.Yield();

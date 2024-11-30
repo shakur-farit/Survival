@@ -21,7 +21,8 @@ namespace Effects.SoundEffects.Click
 		{
 			await UniTask.Delay(Constants.SoundsLifetime);
 
-			_soundEffect.Destroy(gameObject);
+			if (this != null) 
+				_soundEffect.Destroy(gameObject);
 		}
 	}
 }

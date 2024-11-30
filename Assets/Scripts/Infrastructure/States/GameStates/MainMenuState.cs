@@ -37,6 +37,8 @@ namespace Infrastructure.States.GameStates
 
 		public async void Enter()
 		{
+			Debug.Log(GetType());
+
 			await SwitchToMainMenuScene();
 			await CreateUIRoot();
 			await OpenMainMenuWindow();

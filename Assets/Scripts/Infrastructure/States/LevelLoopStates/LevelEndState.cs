@@ -31,8 +31,6 @@ namespace Infrastructure.States.LevelLoopStates
 
 		public void Enter()
 		{
-			Debug.Log(GetType());
-
 			_timer.Completed += SwitchState;
 
 			StartTimer();

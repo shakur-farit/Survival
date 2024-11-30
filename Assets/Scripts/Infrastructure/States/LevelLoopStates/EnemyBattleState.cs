@@ -23,12 +23,8 @@ namespace Infrastructure.States.LevelLoopStates
 
 		public void Enter()
 		{
-			Debug.Log(GetType());
-
-
 			SpawnEnemies();
 			PlayEnemyBattleMusic();
-
 		}
 
 		public void Exit()

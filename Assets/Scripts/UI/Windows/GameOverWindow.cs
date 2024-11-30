@@ -1,8 +1,8 @@
 using Effects.SoundEffects.Click.Factory;
-using Effects.SoundEffects.Shot;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
 using UI.Services.Windows;
+using UnityEngine;
 using Zenject;
 
 namespace UI.Windows
@@ -25,18 +25,21 @@ namespace UI.Windows
 		protected override void OnAwake()
 		{
 			base.OnAwake();
-			
+
 			CloseButton.onClick.AddListener(RestartGame);
-			CloseButton.onClick.AddListener(MakeClickSound);
 		}
 
 		protected override void CloseWindow() => 
 			_windowService.Close(WindowType.GameOver);
 
+		private void RestartGame()
+		{
+			MakeClickSound();
+
+			_gameStateMachine.SwitchState<MainMenuState>();
+		}
+
 		private void MakeClickSound() => 
 			_clickSoundEffectFactory.Create();
-
-		private void RestartGame() => 
-			_gameStateMachine.SwitchState<MainMenuState>();
 	}
 }
