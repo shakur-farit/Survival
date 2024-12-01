@@ -15,6 +15,7 @@ using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.GameStates.StatesMachine;
 using Infrastructure.States.LevelLoopStates.StatesMachine;
 using Soundtrack;
+using UI.Windows;
 using Zenject;
 
 namespace Installers

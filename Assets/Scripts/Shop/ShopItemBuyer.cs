@@ -57,7 +57,7 @@ namespace Shop
 				return;
 			}
 
-			CharacterData characterData = _transientGameDataService.Data.CharacterData;
+			CharacterTransientData characterData = _transientGameDataService.Data.CharacterData;
 
 			if (_initializer.WeaponUpgradeType == WeaponUpgradeType.None)
 			{
@@ -82,7 +82,7 @@ namespace Shop
 			BuyUpgrade(characterData);
 		}
 
-		private void BuyUpgrade(CharacterData characterData)
+		private void BuyUpgrade(CharacterTransientData characterData)
 		{
 			switch (_initializer.WeaponUpgradeType)
 			{
@@ -112,19 +112,19 @@ namespace Shop
 			}
 		}
 
-		private void UpgradeRange(CharacterData characterData)
+		private void UpgradeRange(CharacterTransientData characterData)
 		{
 			characterData.WeaponData.Range += characterData.WeaponData.CurrentWeapon.RangeUpgrade;
 			RemoveScore();
 		}
 
-		private void UpgradeDamage(CharacterData characterData)
+		private void UpgradeDamage(CharacterTransientData characterData)
 		{
 			characterData.WeaponData.Damage += characterData.WeaponData.CurrentWeapon.DamageUpgrade;
 			RemoveScore();
 		}
 
-		private void UpgradeShootsInterval(CharacterData characterData)
+		private void UpgradeShootsInterval(CharacterTransientData characterData)
 		{
 			if (characterData.WeaponData.ShootsInterval <= 0)
 			{
@@ -141,13 +141,13 @@ namespace Shop
 			RemoveScore();
 		}
 
-		private void UpgradeMagazineSize(CharacterData characterData)
+		private void UpgradeMagazineSize(CharacterTransientData characterData)
 		{
 			characterData.WeaponData.MagazineSize += characterData.WeaponData.CurrentWeapon.MagazineSizeUpgrade;
 			RemoveScore();
 		}
 
-		private void UpgradeReloadTime(CharacterData characterData)
+		private void UpgradeReloadTime(CharacterTransientData characterData)
 		{
 			if (characterData.WeaponData.ReloadTime <= 0)
 			{
@@ -164,7 +164,7 @@ namespace Shop
 			RemoveScore();
 		}
 
-		private void UpgradeSpread(CharacterData characterData)
+		private void UpgradeSpread(CharacterTransientData characterData)
 		{
 			if (characterData.WeaponData.Spread <= 0)
 			{
@@ -182,7 +182,7 @@ namespace Shop
 			RemoveScore();
 		}
 
-		private void BuyNewWeapon(CharacterData characterData)
+		private void BuyNewWeapon(CharacterTransientData characterData)
 		{
 			characterData.WeaponData.CurrentWeapon = _initializer.WeaponStaticData;
 

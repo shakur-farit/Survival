@@ -6,5 +6,6 @@ namespace Data.Persistent
 	public class Progress
 	{
 		public ScoreData ScoreData = new();
+		public CharacterPersistentData CharacterData = new();
 	}
 }

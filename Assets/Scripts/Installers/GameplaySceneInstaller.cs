@@ -33,6 +33,7 @@ using Soundtrack.Factory;
 using Spawn;
 using UI.Factory;
 using UI.Services.Windows;
+using UI.Windows;
 using Zenject;
 
 namespace Installers
@@ -54,6 +55,7 @@ namespace Installers
 			RegisterDropStaticDataInitializer();
 			RegisterDropAnimator();
 			RegisterPathfinding();
+
 		}
 
 		private void RegisterFactories()
@@ -75,6 +77,7 @@ namespace Installers
 			RegisterTilemapFactory();
 			RegisterNodeFactory();
 			RegisterMusicSourceFactory();
+			RegisterNameValidatorService();
 		}
 
 		private void RegisterMediators()
@@ -195,5 +198,8 @@ namespace Installers
 
 		private void RegisterNodeFactory() => 
 			Container.Bind<INodeFactory>().To<NodeFactory>().AsSingle();
+
+		private void RegisterNameValidatorService() =>
+			Container.Bind<INameValidatorService>().To<NameValidatorService>().AsSingle();
 	}
 }

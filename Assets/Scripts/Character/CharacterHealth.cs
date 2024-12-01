@@ -37,7 +37,7 @@ namespace Character
 
 		private void SetupHealthDetails()
 		{
-			CharacterData character = _transientGameDataService.Data.CharacterData;
+			CharacterTransientData character = _transientGameDataService.Data.CharacterData;
 
 			character.CurrentHealth = character.CurrentCharacter.StartHealth;
 			character.MaxHealth = character.CurrentCharacter.MaxHealth;
@@ -48,7 +48,7 @@ namespace Character
 
 		public void TakeDamage(int damage)
 		{
-			CharacterData character = _transientGameDataService.Data.CharacterData;
+			CharacterTransientData character = _transientGameDataService.Data.CharacterData;
 
 			if (character.CurrentHealth <= 0)
 				return;
@@ -75,7 +75,7 @@ namespace Character
 
 		public void AddHealth(int value)
 		{
-			CharacterData character = _transientGameDataService.Data.CharacterData;
+			CharacterTransientData character = _transientGameDataService.Data.CharacterData;
 
 			character.CurrentHealth += value;
 
@@ -89,7 +89,7 @@ namespace Character
 
 		private async void TakeCooldown()
 		{
-			CharacterData character = _transientGameDataService.Data.CharacterData;
+			CharacterTransientData character = _transientGameDataService.Data.CharacterData;
 
 			_canTakeDamage = false;
 			await UniTask.Delay(character.DamageTakingCooldown);
