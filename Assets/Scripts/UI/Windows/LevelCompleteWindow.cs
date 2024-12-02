@@ -1,6 +1,4 @@
-using Effects.SoundEffects.Click;
-using Effects.SoundEffects.Click.Factory;
-using Effects.SoundEffects.Shot;
+using Effects.SoundEffects.DoorsOpening.Factory;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
 using Shop.Factory;

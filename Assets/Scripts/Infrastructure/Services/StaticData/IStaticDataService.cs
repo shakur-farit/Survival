@@ -14,6 +14,7 @@ namespace Infrastructure.Services.StaticData
 		ShopItemStaticData ShopItemStaticData { get; }
 		ObjectsPoolStaticData ObjectsPoolStaticData { get; }
 		SoundtrackStaticData SoundtrackStaticData { get; }
+		LeaderboardStaticData LeaderboardStaticData { get; }
 
 		UniTask Load();
 		UniTask WarmUp();

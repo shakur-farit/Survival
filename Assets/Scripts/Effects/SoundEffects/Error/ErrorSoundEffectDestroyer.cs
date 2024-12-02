@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Effects.SoundEffects.Error.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Click
+namespace Effects.SoundEffects.Error
 {
 	public class ErrorSoundEffectDestroyer : MonoBehaviour
 	{

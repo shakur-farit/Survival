@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
+using Effects.SoundEffects.DoorsOpening.Factory;
 using UnityEngine;
 using Utility;
 using Zenject;
 
-namespace Effects.SoundEffects.Click
+namespace Effects.SoundEffects.DoorsOpening
 {
 	public class DoorsOpeningSoundEffectDestroyer : MonoBehaviour
 	{

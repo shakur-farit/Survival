@@ -22,6 +22,7 @@ namespace Pool
 		ClickSoundEffect,
 		TakeDamageSoundEffect,
 		DoorsOpeningSoundEffect,
-		ErrorSoundEffect
+		ErrorSoundEffect,
+		LeaderboardItem
 	}
 }

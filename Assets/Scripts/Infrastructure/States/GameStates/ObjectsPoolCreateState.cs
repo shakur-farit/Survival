@@ -52,8 +52,9 @@ namespace Infrastructure.States.GameStates
 			await CreateHeartIconsPool();
 			await CreateCharacterPool();
 			await CreateShopItemsPool();
-			await CreteVirtualCamera();
-			await CreteRoom();
+			await CreteVirtualCameraPool();
+			await CreteRoomPool();
+			await CreateLeaderboardItemsPool();
 		}
 
 		private async UniTask CreateEnemiesPool() => 
@@ -101,11 +102,14 @@ namespace Infrastructure.States.GameStates
 		private async UniTask CreateShopItemsPool() =>
 			await _poolFactory.CreatePool(PooledObjectType.ShopItem);
 
-		private async UniTask CreteVirtualCamera() => 
+		private async UniTask CreteVirtualCameraPool() => 
 			await _poolFactory.CreatePool(PooledObjectType.VirtualCamera);
 
-		private async UniTask CreteRoom() => 
+		private async UniTask CreteRoomPool() => 
 			await _poolFactory.CreatePool(PooledObjectType.Room);
+
+		private async UniTask CreateLeaderboardItemsPool() => 
+			await _poolFactory.CreatePool(PooledObjectType.LeaderboardItem);
 
 		private void SwitchToLoadLevelState() => 
 			_gameStatesSwitcher.SwitchState<LoadLevelState>();

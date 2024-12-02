@@ -2,7 +2,7 @@ using System;
 using Infrastructure.Services.PersistentProgress;
 using Utility;
 
-namespace Coin
+namespace Score
 {
 	public class ScoreCounter : IScoreCounter
 	{

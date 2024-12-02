@@ -1,8 +1,9 @@
 using Infrastructure.Services.Dialog;
 using Infrastructure.Services.PersistentProgress;
 using UI.Services.Windows;
+using UI.Windows;
 
-namespace UI.Windows
+namespace Infrastructure.Services.NameValidator
 {
 	public class NameValidatorService : INameValidatorService
 	{

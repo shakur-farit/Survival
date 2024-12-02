@@ -2,7 +2,7 @@ using Soundtrack;
 using UnityEngine;
 using Zenject;
 
-namespace Effects.SoundEffects.Click
+namespace Effects.SoundEffects.DoorsOpening
 {
 	public class DoorsOpeningSoundEffect : MonoBehaviour
 	{

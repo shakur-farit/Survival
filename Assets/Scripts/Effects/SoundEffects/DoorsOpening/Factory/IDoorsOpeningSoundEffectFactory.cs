@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Effects.SoundEffects.Click
+namespace Effects.SoundEffects.DoorsOpening.Factory
 {
 	public interface IDoorsOpeningSoundEffectFactory
 	{

@@ -10,8 +10,10 @@ using DropLogic.Factory;
 using DropLogic.Mediator;
 using Effects.SoundEffects.Click;
 using Effects.SoundEffects.Click.Factory;
+using Effects.SoundEffects.DoorsOpening.Factory;
 using Effects.SoundEffects.Drop.Coin.Factory;
 using Effects.SoundEffects.Drop.Health.Factory;
+using Effects.SoundEffects.Error.Factory;
 using Effects.SoundEffects.Hit.Factory;
 using Effects.SoundEffects.Reload.Factory;
 using Effects.SoundEffects.Shot.Factory;
@@ -22,8 +24,10 @@ using Enemy;
 using Enemy.Factory;
 using Enemy.Mediator;
 using Hud.Factory;
+using Infrastructure.Services.NameValidator;
 using Infrastructure.Services.ObjectCreator;
 using Infrastructure.States.Factory;
+using Leaderboard;
 using LevelLogic;
 using Pool;
 using Room.Factory;
@@ -55,7 +59,7 @@ namespace Installers
 			RegisterDropStaticDataInitializer();
 			RegisterDropAnimator();
 			RegisterPathfinding();
-
+			RegisterNameValidatorService();
 		}
 
 		private void RegisterFactories()
@@ -77,7 +81,7 @@ namespace Installers
 			RegisterTilemapFactory();
 			RegisterNodeFactory();
 			RegisterMusicSourceFactory();
-			RegisterNameValidatorService();
+			RegisterLeaderboardItemFactory();
 		}
 
 		private void RegisterMediators()
@@ -178,6 +182,9 @@ namespace Installers
 
 		private void RegisterMusicSourceFactory() => 
 			Container.Bind<IMusicSourceFactory>().To<MusicSourceFactory>().AsSingle();
+
+		private void RegisterLeaderboardItemFactory() => 
+			Container.Bind<ILeaderboardItemFactory>().To<LeaderboardItemFactory>().AsSingle();
 
 		private void RegisterObjectsCreator() => 
 			Container.Bind<IObjectCreatorService>().To<ObjectCreatorService>().AsSingle();

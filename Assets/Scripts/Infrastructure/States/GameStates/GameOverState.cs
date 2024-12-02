@@ -2,6 +2,7 @@ using Coin;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Services.TransientGameData;
 using Pool;
+using Score;
 using Soundtrack;
 using Soundtrack.Factory;
 using UI.Factory;

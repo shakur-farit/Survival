@@ -15,6 +15,7 @@ namespace Infrastructure.Services.StaticData
 		private const string ShopItemStaticDataAddress = "Shop Item Static Data";
 		private const string ObjectsPoolStaticDataAddress = "Objects Pool Static Data";
 		private const string SoundsStaticDataAddress = "Sounds Static Data";
+		private const string LeaderboardStaticDataAddress = "Leaderboard Static Data";
 
 		private readonly IAssetsProvider _assetsProvider;
 
@@ -26,6 +27,7 @@ namespace Infrastructure.Services.StaticData
 		public ShopItemStaticData ShopItemStaticData { get; private set; }
 		public ObjectsPoolStaticData ObjectsPoolStaticData { get; private set; }
 		public SoundtrackStaticData SoundtrackStaticData { get; private set; }
+		public LeaderboardStaticData LeaderboardStaticData { get; private set; }
 
 		public StaticDataService(IAssetsProvider assetsProvider) =>
 			_assetsProvider = assetsProvider;
@@ -40,6 +42,7 @@ namespace Infrastructure.Services.StaticData
 			ShopItemStaticData = await _assetsProvider.Load<ShopItemStaticData>(ShopItemStaticDataAddress);
 			ObjectsPoolStaticData = await _assetsProvider.Load<ObjectsPoolStaticData>(ObjectsPoolStaticDataAddress);
 			SoundtrackStaticData  = await _assetsProvider.Load<SoundtrackStaticData>(SoundsStaticDataAddress);
+			LeaderboardStaticData  = await _assetsProvider.Load<LeaderboardStaticData>(LeaderboardStaticDataAddress);
 		}
 
 		public async UniTask WarmUp()
@@ -52,6 +55,7 @@ namespace Infrastructure.Services.StaticData
 			await _assetsProvider.Load<ShopItemStaticData>(ShopItemStaticDataAddress);
 			await _assetsProvider.Load<ObjectsPoolStaticData>(ObjectsPoolStaticDataAddress);
 			await _assetsProvider.Load<SoundtrackStaticData>(SoundsStaticDataAddress);
+			await _assetsProvider.Load<LeaderboardStaticData>(LeaderboardStaticDataAddress);
 		}
 	}
 }

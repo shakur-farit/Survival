@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace Coin
+namespace Score
 {
 	public class ScoreView : MonoBehaviour
 	{

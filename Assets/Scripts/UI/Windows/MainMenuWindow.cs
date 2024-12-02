@@ -1,4 +1,7 @@
 using Effects.SoundEffects.Click;
+using Effects.SoundEffects.DoorsOpening.Factory;
+using Effects.SoundEffects.Error.Factory;
+using Infrastructure.Services.NameValidator;
 using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;

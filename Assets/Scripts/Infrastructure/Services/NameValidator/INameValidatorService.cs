@@ -1,4 +1,4 @@
-namespace UI.Windows
+namespace Infrastructure.Services.NameValidator
 {
 	public interface INameValidatorService
 	{

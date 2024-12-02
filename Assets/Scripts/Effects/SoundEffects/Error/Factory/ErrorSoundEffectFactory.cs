@@ -1,7 +1,7 @@
 using Pool;
 using UnityEngine;
 
-namespace Effects.SoundEffects.Click
+namespace Effects.SoundEffects.Error.Factory
 {
 	public class ErrorSoundEffectFactory : IErrorSoundEffectFactory
 	{
