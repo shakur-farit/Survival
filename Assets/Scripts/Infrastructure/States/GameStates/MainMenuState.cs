@@ -73,6 +73,7 @@ namespace Infrastructure.States.GameStates
 		{
 			await _poolFactory.CreatePool(PooledObjectType.ClickSoundEffect);
 			await _poolFactory.CreatePool(PooledObjectType.DoorsOpeningSoundEffect);
+			await _poolFactory.CreatePool(PooledObjectType.ErrorSoundEffect);
 		}
 
 		private void DestroySelector() => 

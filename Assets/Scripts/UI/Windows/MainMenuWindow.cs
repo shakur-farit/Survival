@@ -18,17 +18,19 @@ namespace UI.Windows
 		private IWindowsService _windowsService;
 		private IDoorsOpeningSoundEffectFactory _doorsOpeningSoundFactory;
 		private INameValidatorService _nameValidatorService;
+		private IErrorSoundEffectFactory _errorSoundEffectFactory;
 
 		[Inject]
 		public void Constructor(ITransientGameDataService transientGameDataService, IGameStatesSwitcher gameStatesSwitcher,
 			IWindowsService windowsService, IDoorsOpeningSoundEffectFactory doorsOpeningSoundEffectFactory,
-			INameValidatorService nameValidatorService)
+			IErrorSoundEffectFactory errorSoundEffectFactory,INameValidatorService nameValidatorService)
 		{
 			_transientGameDataService = transientGameDataService;
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_windowsService = windowsService;
 			_doorsOpeningSoundFactory = doorsOpeningSoundEffectFactory;
 			_nameValidatorService = nameValidatorService;
+			_errorSoundEffectFactory = errorSoundEffectFactory;
 		}
 
 		protected override void OnAwake() => 
@@ -36,8 +38,11 @@ namespace UI.Windows
 
 		private void StartGame()
 		{
-			if(CanStartGame() == false)
+			if (CanStartGame() == false)
+			{
+				MakeErrorSound();
 				return;
+			}
 
 			MakeClickSound();
 
@@ -67,5 +72,8 @@ namespace UI.Windows
 
 		private void SwitchToObjectsPoolCreateState() => 
 			_gameStatesSwitcher.SwitchState<ObjectsPoolCreateState>();
+
+		private void MakeErrorSound() => 
+			_errorSoundEffectFactory.Create();
 	}
 }

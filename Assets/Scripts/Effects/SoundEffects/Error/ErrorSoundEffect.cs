@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Effects.SoundEffects.Click
 {
-	public class DoorsOpeningSoundEffect : MonoBehaviour
+	public class ErrorSoundEffect : MonoBehaviour
 	{
 		[SerializeField] private AudioSource _audioSource;
 

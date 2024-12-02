@@ -89,3 +89,7 @@ MonoBehaviour:
     PoolSize: 1
     PooledPrefabAddress: DoorsOpeningSoundEffect
     CanPoolIncrease: 1
+  - pooledObjectType: 20
+    PoolSize: 1
+    PooledPrefabAddress: ErrorSoundEffetc
+    CanPoolIncrease: 1

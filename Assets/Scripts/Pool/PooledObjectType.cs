@@ -21,6 +21,7 @@ namespace Pool
 		Room,
 		ClickSoundEffect,
 		TakeDamageSoundEffect,
-		DoorsOpeningSoundEffect
+		DoorsOpeningSoundEffect,
+		ErrorSoundEffect
 	}
 }

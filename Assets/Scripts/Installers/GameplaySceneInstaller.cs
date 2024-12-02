@@ -158,6 +158,7 @@ namespace Installers
 			Container.Bind<IHitSoundEffectFactory>().To<HitSoundEffectFactory>().AsSingle();
 			Container.Bind<ITakeDamageSoundEffectFactory>().To<TakeDamageSoundEffectFactory>().AsSingle();
 			Container.Bind<IDoorsOpeningSoundEffectFactory>().To<DoorsOpeningSoundEffectFactory>().AsSingle();
+			Container.Bind<IErrorSoundEffectFactory>().To<ErrorSoundEffectFactory>().AsSingle();
 		}
 
 		private void RegisterBulletIconsFactory() =>
