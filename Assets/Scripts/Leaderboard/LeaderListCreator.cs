@@ -36,18 +36,16 @@ namespace Leaderboard
 
 			List<LeaderboardItemInfo> leaderboardList = _persistentProgressService.Progress.LeaderboardData.LeaderboardList;
 
-			string name = String.Empty;
-			string score = String.Empty;
-
 			for (int i = 0; i < _staticDataService.LeaderboardStaticData.LeadersAmount; i++)
 			{
+				string name = String.Empty;
+				string score = String.Empty;
+
 				if (leaderboardList.Count > 0 && i < leaderboardList.Count)
 				{
 					name = leaderboardList[i].Name;
 					score = leaderboardList[i].Score;
 				}
-
-				Debug.Log($"{name} / {score}");
 
 				_itemSetuper.SetupItemValues(name, score);
 

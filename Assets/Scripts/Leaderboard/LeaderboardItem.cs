@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -16,7 +15,7 @@ namespace Leaderboard
 		public void Constructor(ILeaderboardItemInitializer itemInitializer) => 
 			_itemInitializer = itemInitializer;
 
-		private void Awake() => 
+		private void OnEnable() => 
 			SetupItem();
 
 		private void SetupItem()

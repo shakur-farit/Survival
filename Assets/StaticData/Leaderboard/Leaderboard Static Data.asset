@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeadersAmount: 5
   SpawningStep: 70
-  SpawningStartPosition: {x: -300, y: 135}
+  SpawningStartPosition: {x: 0, y: 135}

@@ -31,7 +31,7 @@ namespace Character
 
 			list.Add(newItem);
 
-			list = list
+			_persistentProgressService.Progress.LeaderboardData.LeaderboardList = list
 				.OrderByDescending(item => item.Score)
 				.ToList();
 		}
