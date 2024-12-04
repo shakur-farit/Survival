@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a7d7db4a389be4a9b9041de8c9d9cc, type: 3}
   m_Name: Leaderboard Static Data
   m_EditorClassIdentifier: 
-  LeadersAmount: 0
-  SpawningStep: 0
-  SpawningStartPosition: {x: 0, y: 0}
+  LeadersAmount: 5
+  SpawningStep: 70
+  SpawningStartPosition: {x: -300, y: 135}

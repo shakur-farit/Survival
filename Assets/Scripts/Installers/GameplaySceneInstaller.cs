@@ -8,7 +8,6 @@ using Character.Shooting;
 using DropLogic;
 using DropLogic.Factory;
 using DropLogic.Mediator;
-using Effects.SoundEffects.Click;
 using Effects.SoundEffects.Click.Factory;
 using Effects.SoundEffects.DoorsOpening.Factory;
 using Effects.SoundEffects.Drop.Coin.Factory;
@@ -37,7 +36,6 @@ using Soundtrack.Factory;
 using Spawn;
 using UI.Factory;
 using UI.Services.Windows;
-using UI.Windows;
 using Zenject;
 
 namespace Installers
@@ -60,6 +58,7 @@ namespace Installers
 			RegisterDropAnimator();
 			RegisterPathfinding();
 			RegisterNameValidatorService();
+			RegisterLeaderboardItemInitializer();
 		}
 
 		private void RegisterFactories()
@@ -82,6 +81,7 @@ namespace Installers
 			RegisterNodeFactory();
 			RegisterMusicSourceFactory();
 			RegisterLeaderboardItemFactory();
+			RegisterLeaderboardInitializer();
 		}
 
 		private void RegisterMediators()
@@ -209,5 +209,10 @@ namespace Installers
 
 		private void RegisterNameValidatorService() =>
 			Container.Bind<INameValidatorService>().To<NameValidatorService>().AsSingle();
+
+		private void RegisterLeaderboardItemInitializer() => 
+			Container.BindInterfacesAndSelfTo<LeaderboardItemInitializer>().AsSingle();
+		private void RegisterLeaderboardInitializer() =>
+			Container.BindInterfacesAndSelfTo<LeaderboardInitializer>().AsSingle();
 	}
 }

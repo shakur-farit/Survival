@@ -93,3 +93,7 @@ MonoBehaviour:
     PoolSize: 1
     PooledPrefabAddress: ErrorSoundEffetc
     CanPoolIncrease: 1
+  - pooledObjectType: 21
+    PoolSize: 1
+    PooledPrefabAddress: LeaderboardItem
+    CanPoolIncrease: 1

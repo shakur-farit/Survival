@@ -222,6 +222,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98b338924dd689141a9c45f6fdb16cc2
+    m_Address: Leaderboard Static Data
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 565ee542df022504ab91ed8cbc13453f
+    m_Address: LeaderboardItem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 53e9e2f32e8d6c84d8f1e59d6f24ea32, type: 2}
   m_SchemaSet:

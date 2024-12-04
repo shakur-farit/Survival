@@ -1,36 +1,39 @@
-using System;
-using Infrastructure.Services.StaticData;
-using UnityEngine;
-using Zenject;
+using System.Collections.Generic;
+using System.Linq;
+using Data.Persistent;
+using Infrastructure.Services.PersistentProgress;
+using Score;
 
-namespace Leaderboard
+namespace Character
 {
-	public class LeaderboardInitializer : MonoBehaviour
+	public class LeaderboardInitializer : ILeaderboardInitializer
 	{
-		[SerializeField] private Transform _leaderboardItemsParent;
+		private readonly IPersistentProgressService _persistentProgressService;
+		private readonly IScoreCounter _scoreCounter;
 
-		private ILeaderboardItemFactory _leaderboardItemFactory;
-		private IStaticDataService _staticDataService;
-
-		[Inject]
-		public void Constructor(ILeaderboardItemFactory leaderboardItemFactory, IStaticDataService staticDataService)
+		public LeaderboardInitializer(IPersistentProgressService persistentProgressService, IScoreCounter scoreCounter)
 		{
-			_leaderboardItemFactory = leaderboardItemFactory;
-			_staticDataService = staticDataService;
+			_persistentProgressService = persistentProgressService;
+			_scoreCounter = scoreCounter;
 		}
 
-		private void Awake() => 
-			CreateLeaderList();
-
-		private void CreateLeaderList()
+		public void Initialize()
 		{
-			Vector2 spawnPosition = _staticDataService.LeaderboardStaticData.SpawningStartPosition;
+			string name = _persistentProgressService.Progress.CharacterData.Name;
+			string score = _scoreCounter.Score.ToString();
+			List<LeaderboardItemInfo> list = _persistentProgressService.Progress.LeaderboardData.LeaderboardList;
 
-			for (int i = 0; i < _staticDataService.LeaderboardStaticData.LeadersAmount; i++)
+			LeaderboardItemInfo newItem = new LeaderboardItemInfo()
 			{
-				_leaderboardItemFactory.Create(spawnPosition, _leaderboardItemsParent);
-				spawnPosition.y -= _staticDataService.LeaderboardStaticData.SpawningStep;
-			}
+				Name = name,
+				Score = score
+			};
+
+			list.Add(newItem);
+
+			list = list
+				.OrderByDescending(item => item.Score)
+				.ToList();
 		}
 	}
 }

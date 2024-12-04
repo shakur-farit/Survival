@@ -19,8 +19,8 @@ namespace Score
 		{
 			Score += scoreAmount;
 
-			if(Score > _persistentProgressService.Progress.ScoreData.BestScore)
-				_persistentProgressService.Progress.ScoreData.BestScore = Score;
+			//if(Score > _persistentProgressService.Progress.ScoreData.BestScore)
+			//	_persistentProgressService.Progress.ScoreData.BestScore = Score;
 
 			ScoreChanged?.Invoke();
 		}
