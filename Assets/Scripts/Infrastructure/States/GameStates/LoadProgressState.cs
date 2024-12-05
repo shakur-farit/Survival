@@ -1,5 +1,6 @@
 using Data;
 using Data.Persistent;
+using Infrastructure.Services.Dialog;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
 using Infrastructure.States.GameStates.StatesMachine;
@@ -11,18 +12,20 @@ namespace Infrastructure.States.GameStates
 		private readonly IGameStatesSwitcher _gameStatesSwitcher;
 		private readonly IPersistentProgressService _persistentProgressService;
 		private readonly IStaticDataService _staticDataService;
+		private readonly ILoadService _loadService;
 
 		public LoadProgressState(IGameStatesSwitcher gameStatesSwitcher, IPersistentProgressService persistentProgressService, 
-			IStaticDataService staticDataService)
+			IStaticDataService staticDataService, ILoadService loadService)
 		{
 			_gameStatesSwitcher = gameStatesSwitcher;
 			_persistentProgressService = persistentProgressService;
 			_staticDataService = staticDataService;
+			_loadService = loadService;
 		}
 
 		public void Enter()
 		{
-			InitializeNewProgress();
+			InitializeProgress();
 
 			EnterToLoadSceneState();
 		}
@@ -31,9 +34,9 @@ namespace Infrastructure.States.GameStates
 		{
 		}
 
-		private void InitializeNewProgress()
+		private void InitializeProgress()
 		{
-			_persistentProgressService.Progress = new Progress();
+			_persistentProgressService.Progress = _loadService.LoadProgress();
 			_persistentProgressService.IsNew = true;
 		}
 

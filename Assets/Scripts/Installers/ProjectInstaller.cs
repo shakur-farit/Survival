@@ -39,6 +39,7 @@ namespace Installers
 			RegisterPauseService();
 			RegisterStatesMachines();
 			RegisterSoundtrackServices();
+			RegisterSaveLoadService();
 		}
 
 		private void RegisterTimer() => 
@@ -94,5 +95,8 @@ namespace Installers
 			Container.BindInterfacesAndSelfTo<VolumeController>().AsSingle();
 			Container.Bind<IMusicSwitcher>().To<MusicSwitcher>().AsSingle();
 		}
+
+		private void RegisterSaveLoadService() => 
+			Container.BindInterfacesAndSelfTo<SaveLoadService>().AsSingle();
 	}
 }

@@ -1,4 +1,5 @@
 using Character.Factory;
+using Infrastructure.Services.Dialog;
 using Infrastructure.States.GameStates;
 using Infrastructure.States.GameStates.StatesMachine;
 using Infrastructure.States.LevelLoopStates;
@@ -12,14 +13,17 @@ namespace Character
 		private readonly IGameStatesSwitcher _gameStateSwitcher;
 		private readonly ILevelLoopStatesSwitcher _levelLoopStatesSwitcher;
 		private readonly ILeaderboardInitializer _leaderboardInitializer;
+		private readonly ISaveService _saveService;
 
 		public CharacterDeath(ICharacterFactory characterFactory, IGameStatesSwitcher gameStateSwitcher,
-			ILevelLoopStatesSwitcher levelLoopStatesSwitcher, ILeaderboardInitializer leaderboardInitializer)
+			ILevelLoopStatesSwitcher levelLoopStatesSwitcher, ILeaderboardInitializer leaderboardInitializer, 
+			ISaveService saveService)
 		{
 			_characterFactory = characterFactory;
 			_gameStateSwitcher = gameStateSwitcher;
 			_levelLoopStatesSwitcher = levelLoopStatesSwitcher;
 			_leaderboardInitializer = leaderboardInitializer;
+			_saveService = saveService;
 		}
 
 		public void Die()
@@ -27,6 +31,7 @@ namespace Character
 			_characterFactory.Destroy();
 			_levelLoopStatesSwitcher.SwitchState<LevelClearState>();
 			_leaderboardInitializer.Initialize();
+			_saveService.SaveProgress();
 			_gameStateSwitcher.SwitchState<GameOverState>();
 		}
 	}
