@@ -32,8 +32,12 @@ namespace Infrastructure.States.LevelLoopStates
 			_enemySpawner = enemySpawner;
 		}
 
-		public void Enter() => 
+		public void Enter()
+		{
+			Debug.Log(GetType());
+
 			DestroyObjects();
+		}
 
 		public void Exit()
 		{ 

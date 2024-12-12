@@ -1,6 +1,4 @@
-using Data.Persistent;
-
-namespace Infrastructure.Services.Dialog
+namespace Infrastructure.Services.SaveLoad
 {
 	public interface ISaveService
 	{

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Leaderboard
+namespace Leaderboard.Factory
 {
 	public interface ILeaderboardItemFactory
 	{

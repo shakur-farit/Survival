@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data.Persistent;
 using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.StaticData;
+using Leaderboard.Factory;
 using UnityEngine;
 using Zenject;
 

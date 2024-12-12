@@ -1,4 +1,4 @@
-namespace Character
+namespace Leaderboard
 {
 	public interface ILeaderboardInitializer
 	{

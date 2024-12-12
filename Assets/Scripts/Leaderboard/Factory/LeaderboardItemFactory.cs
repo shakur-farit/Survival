@@ -1,7 +1,7 @@
 using Pool;
 using UnityEngine;
 
-namespace Leaderboard
+namespace Leaderboard.Factory
 {
 	public class LeaderboardItemFactory : ILeaderboardItemFactory
 	{

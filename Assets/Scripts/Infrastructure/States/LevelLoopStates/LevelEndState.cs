@@ -31,6 +31,8 @@ namespace Infrastructure.States.LevelLoopStates
 
 		public void Enter()
 		{
+			Debug.Log(GetType());
+
 			_timer.Completed += SwitchState;
 
 			StartTimer();
@@ -56,6 +58,8 @@ namespace Infrastructure.States.LevelLoopStates
 			_musicSwitcher.PlayClearedRoom();
 
 			_timer.Start(_transientGameDataService.Data.LevelData.CurrentLevelStaticData.TimeToCompleteLevel);
+
+			Debug.Log("Timer is complete");
 		}
 
 		private void EnterToClearState() => 

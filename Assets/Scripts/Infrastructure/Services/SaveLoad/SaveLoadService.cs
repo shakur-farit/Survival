@@ -4,7 +4,7 @@ using Data.Persistent;
 using Infrastructure.Services.PersistentProgress;
 using UnityEngine;
 
-namespace Infrastructure.Services.Dialog
+namespace Infrastructure.Services.SaveLoad
 {
 	public class SaveLoadService : ISaveService, ILoadService
 	{

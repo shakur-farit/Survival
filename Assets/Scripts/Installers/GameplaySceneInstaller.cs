@@ -27,6 +27,7 @@ using Infrastructure.Services.NameValidator;
 using Infrastructure.Services.ObjectCreator;
 using Infrastructure.States.Factory;
 using Leaderboard;
+using Leaderboard.Factory;
 using LevelLogic;
 using Pool;
 using Room.Factory;

@@ -4,7 +4,7 @@ using Data.Persistent;
 using Infrastructure.Services.PersistentProgress;
 using Score;
 
-namespace Character
+namespace Leaderboard
 {
 	public class LeaderboardInitializer : ILeaderboardInitializer
 	{
