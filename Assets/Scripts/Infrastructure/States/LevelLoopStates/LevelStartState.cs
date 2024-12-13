@@ -24,15 +24,19 @@ namespace Infrastructure.States.LevelLoopStates
 
 		public async void Enter()
 		{
-			_timer.Completed += SwitchToEnemyBattleState;
+	//		_timer.Completed += SwitchToEnemyBattleState;
 
-			_musicSwitcher.PlayClearedRoom();
+		//	_musicSwitcher.PlayClearedRoom();
 
-			await StartTimer();
+			SwitchToEnemyBattleState();
+
+			//await StartTimer();
 		}
 
-		public void Exit() => 
-			_timer.Completed -= SwitchToEnemyBattleState;
+		public void Exit()
+		{
+//			_timer.Completed -= SwitchToEnemyBattleState;
+		}
 
 		private async UniTask StartTimer() =>
 			await _timer.Start(_transientGameDataService.Data.LevelData.CurrentLevelStaticData.TimeToStart);

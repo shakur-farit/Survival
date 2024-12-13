@@ -1,4 +1,3 @@
-using Infrastructure.Services.PersistentProgress;
 using Infrastructure.Services.Timer;
 using Infrastructure.Services.TransientGameData;
 using Infrastructure.States.GameStates;
@@ -33,24 +32,34 @@ namespace Infrastructure.States.LevelLoopStates
 		{
 			Debug.Log(GetType());
 
-			_timer.Completed += SwitchState;
+			//_timer.Completed += SwitchState;
 
-			StartTimer();
+			//StartTimer();
+
+			SwitchState();
 		}
 
-		public void Exit() => 
-			_timer.Completed -= SwitchState;
+		public void Exit()
+		{
+			//_timer.Completed -= SwitchState;
+		}
 
 		private void SwitchState()
 		{
+			Debug.Log("In Switch");
+
 			SetupNextLevel();
 
 			EnterToClearState();
 			EnterToLevelCompleteState();
 		}
 
-		private void SetupNextLevel() =>
+		private void SetupNextLevel()
+		{
 			_transientGameDataService.Data.LevelData.PreviousLevel += Constants.NextLevelStep;
+			Debug.Log("Level setuped");
+
+		}
 
 
 		private void StartTimer()
@@ -62,10 +71,16 @@ namespace Infrastructure.States.LevelLoopStates
 			Debug.Log("Timer is complete");
 		}
 
-		private void EnterToClearState() => 
+		private void EnterToClearState()
+		{
 			_levelLoopStatesSwitcher.SwitchState<LevelClearState>();
+			Debug.Log("Enter to clear");
+		}
 
-		private void EnterToLevelCompleteState() => 
+		private void EnterToLevelCompleteState()
+		{
 			_gameStatesSwitcher.SwitchState<LevelCompleteState>();
+			Debug.Log("Enter to complete");
+		}
 	}
 }
